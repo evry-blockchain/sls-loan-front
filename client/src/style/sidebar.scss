@@ -1,0 +1,41 @@
+.sidebar {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: $sidebar-background-color;
+  top:0;
+  bottom:0;
+
+  ul {
+    padding: 20% 0;
+    height: 100%;
+
+    li {
+      height: 25%;
+      min-height: 100px;
+      display: block;
+      text-align: center;
+
+      a {
+        color: #fff;
+        &:hover {
+          text-decoration: none;
+        }
+
+        i {
+          display: block;
+          
+          &:before {
+            font-size: 48px;
+          }
+        }
+        span {
+          display: block;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

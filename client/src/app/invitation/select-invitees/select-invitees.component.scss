@@ -1,0 +1,42 @@
+.invitation-search-holder {
+  padding: 40px 0;
+  position: relative;
+
+  input {
+    &::-moz-placeholder {
+      opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+      font-style: italic;
+    }
+    &:-ms-input-placeholder {
+      font-style: italic;
+    } // Internet Explorer 10+
+    &::-webkit-input-placeholder  {
+      font-style: italic;
+    } // Safari and Chrome
+
+    padding-right: 3rem;
+  }
+
+  &:after {
+    content: '\f002';
+    font-family: 'FontAwesome';
+    display: block;
+    position: absolute;
+    right: 15px;
+    color: #d8d8d8;
+    font-size: 2rem;
+    top: 50%;
+    margin-top:-1.5rem;
+
+  }
+}
+
+.invitation-review-holder {
+  padding: 40px 10%;
+  
+  .btn-default {
+    background-color: #54a2a2;
+    color: #fff;
+    width: 100%;
+  }
+}

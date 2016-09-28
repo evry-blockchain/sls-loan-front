@@ -1,16 +1,38 @@
 {
-	"name": "NodejsStarterApp",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node app.js"
-	},
-	"dependencies": {
-		"express": "4.13.x",
-		"cfenv": "1.0.x"
-	},
-	"repository": {},
-	"engines": {
-		"node": "4.x"
-	} 
+  "name": "loopback-sls-blockchain",
+  "version": "0.0.1",
+  "description": "Responsible for REST api and connecting to blockchain",
+  "main": "server/server.js",
+  "scripts": {
+    "pretest": "jshint .",
+    "start": "node .",
+    "test": "tape tests/**/*.js"
+  },
+  "dependencies": {
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "deep-extend": "^0.4.1",
+    "errorhandler": "^1.1.1",
+    "hfc": "^0.6.2",
+    "ibm-blockchain-js": "^1.2.8",
+    "install": "^0.8.1",
+    "loopback": "^2.14.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-datasource-juggler": "^2.19.0",
+    "npm": "^3.10.8",
+    "serve-favicon": "^2.0.1",
+    "winston": "^2.2.0"
+  },
+  "optionalDependencies": {
+    "loopback-component-explorer": "^2.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6",
+    "tape": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT"
 }

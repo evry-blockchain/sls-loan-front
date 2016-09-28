@@ -1,0 +1,20 @@
+<div class="invitation">
+    <invitation-header></invitation-header>
+    <div class="col-md-6 offset-md-3">
+        <div class="invitation-search-holder">
+            <input type="text" placeholder="Search for finance partners" class="form-control form-control-lg"/>
+        </div>
+    </div>
+    <ul>
+        <li *ngFor="let partner of partners">
+            {{partner}}
+        </li>
+    </ul>
+
+    <div class="col-md-6 offset-md-3">
+        <div class="invitation-review-holder">
+            <button class="btn btn-default btn-lg">Review</button>
+        </div>
+    </div>
+    <invitation-footer></invitation-footer>
+</div>

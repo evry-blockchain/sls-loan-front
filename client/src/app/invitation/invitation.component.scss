@@ -1,0 +1,12 @@
+.component-section {
+
+  .section-content, .section-head {
+    border-bottom: 2px solid #bfdede;
+  }
+
+  .panel-open {
+    .section-head {
+      border: none;
+    }
+  }
+}
