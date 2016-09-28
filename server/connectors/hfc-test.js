@@ -4,6 +4,15 @@ var fs = require('fs');
 // Create a client chain.
 var chain = hfc.newChain("targetChain");
 
+process.env['GRPC_SSL_CIPHER_SUITES'] = 'ECDHE-RSA-AES128-GCM-SHA256:' +
+    'ECDHE-RSA-AES128-SHA256:' +
+    'ECDHE-RSA-AES256-SHA384:' +
+    'ECDHE-RSA-AES256-GCM-SHA384:' +
+    'ECDHE-ECDSA-AES128-GCM-SHA256:' +
+    'ECDHE-ECDSA-AES128-SHA256:' +
+    'ECDHE-ECDSA-AES256-SHA384:' +
+    'ECDHE-ECDSA-AES256-GCM-SHA384';
+
 // Configure the KeyValStore which is used to store sensitive keys
 // as so it is important to secure this storage.
 chain.setKeyValStore(hfc.newFileKeyValStore('keyValStore-5874db24'));
