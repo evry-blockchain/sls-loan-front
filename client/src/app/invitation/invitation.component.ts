@@ -11,7 +11,7 @@ console.log('`Invitation` component loaded asynchronously');
 
 @Component({
     selector: 'invitation-component',
-    styles: [ require('./invitation.component.scss')],
+    stylesUrls: ['./invitation.component.scss'],
     templateUrl: './invitation.template.html'
 })
 export class InvitationComponent {

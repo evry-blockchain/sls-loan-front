@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 /*
  * We're loading this component asynchronously
@@ -11,9 +11,9 @@ console.log('`Invitation-footer` component loaded asynchronously');
 @Component({
     selector: 'invitation-footer',
     templateUrl: './invitation-footer.template.html',
-    styles: [ require('./invitation-footer.component.scss')],
+    stylesUrls: ['./invitation-footer.component.scss'],
 })
-export class InvitationFooterComponent {
+export class InvitationFooterComponent implements OnInit {
     localState;
 
     constructor(public route:ActivatedRoute) {
