@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'invitation-header',
     templateUrl: './invitation-header.template.html',
-    stylesUrls: ['./invitation-header.component.scss'],
+    styleUrls: ['./invitation-header.component.scss'],
 })
 export class InvitationHeaderComponent {
 

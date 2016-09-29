@@ -14,4 +14,4 @@ const routes:Routes = [
     }
 ];
 
-export const invitationRouting = RouterModule.forRoot(routes);
+export const invitationRouting = RouterModule.forChild(routes);
