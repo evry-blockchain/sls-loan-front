@@ -22,7 +22,7 @@ app.start = function () {
 };
 
 // app.connector('hfc', require('./connectors/hfc'));
-app.connector('ibm-blockchain', require('./connectors/ibm-blockchain'));
+// app.connector('ibm-blockchain', require('./connectors/ibm-blockchain'));
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.

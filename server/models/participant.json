@@ -1,0 +1,13 @@
+{
+  "name": "Participant",
+  "plural": "Participants",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "methods": {}
+}
