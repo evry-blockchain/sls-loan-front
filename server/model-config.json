@@ -8,11 +8,6 @@
     ]
   },
   "Participant": {
-    "dataSource": null,
-    "public": true
-  },
-  "ACL": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": null
   }
 }

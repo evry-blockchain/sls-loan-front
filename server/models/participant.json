@@ -6,7 +6,23 @@
   "options": {
     "validateUpsert": false
   },
-  "properties": {},
+  "properties": {
+    "ParticipantKey": {
+      "type": "String",
+      "required": false,
+      "length": null
+    },
+    "ParticipantName": {
+      "type": "String",
+      "required": false,
+      "length": null
+    },
+    "ParticipantType": {
+      "type": "String",
+      "required": false,
+      "length": null
+    }
+  },
   "validations": [],
   "relations": {},
   "methods": {}

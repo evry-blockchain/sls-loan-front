@@ -1,10 +1,10 @@
-var chaincode = require('../connectors/chaincode');
+import chaincode from '../connectors/chaincode';
 
-module.exports = function (Participant) {
-  Participant.getList = function (cb) {
-    chaincode(function (cc) {
-      cc.query.getParticipantsList([], 'WebAppAdmin', function (err, data) {
-        cb(null, JSON.parse(data));
+module.exports  = Participant => {
+  Participant.getList = cb => {
+    chaincode(cc => {
+      cc.query.getParticipantsList([], 'WebAppAdmin', (err, data) => {
+        cb(err, JSON.parse(data));
       });
     });
   };
@@ -14,6 +14,6 @@ module.exports = function (Participant) {
       path: '/',
       verb: 'get'
     },
-    returns: {type: 'array', root: true}
+    returns: {type: 'Participant', root: true}
   })
 };
