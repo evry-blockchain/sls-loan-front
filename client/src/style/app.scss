@@ -4,6 +4,8 @@
 @import "./header";
 @import "./sidebar";
 @import "./font-awesome/scss/font-awesome";
+@import "./custom/custom-table.css";
+@import "./custom/custom-table.scss";
 
 .container-fluid {
   .main {
@@ -34,4 +36,15 @@ section {
 
 .component-section {
 
+}
+
+.btn-green {
+  color: #fff;
+  background-color: $greeny-blue;
+  border-color: $greeny-blue;
+}
+.btn-red {
+  color: #fff;
+  background-color: $dark-red;
+  border-color: $dark-red;
 }
