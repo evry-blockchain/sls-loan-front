@@ -1,0 +1,29 @@
+{
+  "name": "Participant",
+  "plural": "Participants",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "ParticipantKey": {
+      "type": "String",
+      "required": false,
+      "length": null
+    },
+    "ParticipantName": {
+      "type": "String",
+      "required": false,
+      "length": null
+    },
+    "ParticipantType": {
+      "type": "String",
+      "required": false,
+      "length": null
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "methods": {}
+}

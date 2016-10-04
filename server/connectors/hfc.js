@@ -8,7 +8,7 @@ var testChaincodeID = '9c48ad77840a3872a068e40085f4fa072fff2e2f942958045a5882f41
 // Create a client blockchin.
 var chain = hfc.newChain("targetChain");
 var ccPath = '';
-chain.setECDSAModeForGRPC(false);
+// chain.setECDSAModeForGRPC(false);
 
 // Creating an environment variable for ciphersuites
 process.env['GRPC_SSL_CIPHER_SUITES'] = 'ECDHE-RSA-AES128-GCM-SHA256:' +
@@ -23,9 +23,9 @@ process.env['GRPC_SSL_CIPHER_SUITES'] = 'ECDHE-RSA-AES128-GCM-SHA256:' +
 // Read and process the credentials.json
 var network;
 try {
-    network = JSON.parse(fs.readFileSync(__dirname + '/../mycreds.json', 'utf8'))['ibm-blockchain-5-prod'][0];
+    network = JSON.parse(fs.readFileSync(__dirname + '/../mycreds-1.json', 'utf8'))['ibm-blockchain-5-prod'][0];
 } catch (err) {
-    console.log("mycreds.json is missing, Rerun once the file is available");
+    console.log("mycreds-1.json is missing, Rerun once the file is available");
     process.exit();
 }
 
@@ -121,10 +121,10 @@ function enrollAndRegisterUsers() {
 
     // Enroll a 'admin' who is already registered because it is
     // listed in fabric/membersrvc/membersrvc.yaml with it's one time password.
-    chain.enroll(users[0].username, users[0].secret, function (err, admin) {
+    chain.enroll(users[2].username, users[2].secret, function (err, admin) {
         if (err) {
             console.log(err);
-            throw Error("\nERROR: failed to enroll admin : " + users[0].username + users[0].secret);
+            throw Error("\nERROR: failed to enroll admin : " + users[2].username + users[2].secret);
         }
 
         console.log("\nEnrolled admin sucecssfully");
