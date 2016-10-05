@@ -6,21 +6,6 @@ import {Injectable} from "@angular/core";
 import {CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router} from "@angular/router";
 import {AuthService} from "../service/auth.service";
 
-// @Injectable()
-// export class LoggedInGuard implements CanActivate {
-//   isLogged: boolean;
-//   constructor(private authService: AuthService) {
-//
-//     authService.isLoggedIn$.subscribe((data : boolean) => {
-//         this.isLogged = data;
-//     });
-//   }
-//
-//   canActivate() {
-//     return this.isLogged;
-//   }
-// }
-
 @Injectable()
 export class AuthGuard implements CanActivate {
   isLoggedIn;

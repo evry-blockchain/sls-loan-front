@@ -41,10 +41,8 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.login(<Login> this.loginForm.getRawValue()).subscribe(() => {
-        console.log('here');
         this.router.navigate([this.authService.redirectUrl]);
     }, (data) => {
-      console.log("here");
       this.wrongCredentials = true;
     });
   }
