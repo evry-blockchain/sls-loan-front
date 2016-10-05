@@ -8,8 +8,8 @@ import { ColumnMode, TableOptions } from "angular2-data-table";
 
 @Component({
   selector: 'my-payments-table',
-  templateUrl: './payments-table.html',
-  styleUrls: ['./payments-table.scss']
+  templateUrl: './payments-table.component.html',
+  styleUrls: ['./payments-table.component.scss']
 
 })
 export class PaymentsTableComponent implements OnInit {

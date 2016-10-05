@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'my-payments-footer',
-    templateUrl: './payments-footer.html',
-    styleUrls: ['./payments-footer.scss'],
+    templateUrl: './payments-footer.component.html',
+    styleUrls: ['./payments-footer.component.scss'],
 })
 export class PaymentsFooterComponent implements OnInit {
     constructor() { }
