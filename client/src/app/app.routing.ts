@@ -2,11 +2,12 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
+import {AuthGuard} from "./auth/guard/auth.guard";
 // import {invitationRouting} from './invitation/invitation.routing';
 
 const routes:Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'about', component: AboutComponent},
+    {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
 
     // ...invitationRouting
 ];

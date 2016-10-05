@@ -3,9 +3,10 @@
  */
 import { Routes, RouterModule } from '@angular/router';
 import { PaymentsComponent } from './payments.component';
+import { AuthGuard } from "../auth/guard/auth.guard";
 
 const routes: Routes = [
-  { path: 'payments', component: PaymentsComponent }
+  { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] }
 ];
 
 export const paymentsRouting = RouterModule.forChild(routes);

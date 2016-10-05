@@ -12,6 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentsHeaderComponent } from "./header/payments-header.component";
 import { SharedModule } from "../shared/shared.module";
 import { PaymentsTableComponent } from "./table/payments-table.component";
+import {AuthModule} from "../auth/auth.module";
+import { AuthGuard } from "../auth/guard/auth.guard";
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { PaymentsTableComponent } from "./table/payments-table.component";
     PaymentsHeaderComponent,
     PaymentsTableComponent
   ],
+  providers: [
+  ]
 })
 
 export class PaymentsModule {

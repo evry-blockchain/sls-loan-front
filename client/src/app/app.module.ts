@@ -1,20 +1,23 @@
-import {NgModule, ApplicationRef} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {HttpModule} from '@angular/http';
-import {FormsModule} from '@angular/forms';
+import { NgModule, ApplicationRef} from '@angular/core';
+import { BrowserModule} from '@angular/platform-browser';
+import { HttpModule} from '@angular/http';
+import { FormsModule} from '@angular/forms';
 
 
-import {InvitationModule} from './invitation/invitation.module';
+import { InvitationModule} from './invitation/invitation.module';
 
-import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-import {AboutComponent} from './about/about.component';
-import {ApiService} from './shared';
-import {routing} from './app.routing';
+import { AppComponent} from './app.component';
+import { HomeComponent} from './home/home.component';
+import { AboutComponent} from './about/about.component';
+import { ApiService} from './shared';
+import { routing} from './app.routing';
 
-import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
-import {PaymentsModule} from "./payments/payments.module";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { removeNgStyles, createNewHosts} from '@angularclass/hmr';
+import { PaymentsModule} from './payments/payments.module';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AuthModule} from './auth/auth.module';
+import {AuthGuard} from "./auth/guard/auth.guard";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
     imports: [
@@ -24,7 +27,9 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
       routing,
       InvitationModule,
       PaymentsModule,
-      NgbModule
+      NgbModule,
+      AuthModule,
+      SharedModule
     ],
     declarations: [
         AppComponent,
@@ -32,7 +37,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         AboutComponent
     ],
     providers: [
-        ApiService
+        ApiService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

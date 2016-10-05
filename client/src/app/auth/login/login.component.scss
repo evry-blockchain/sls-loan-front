@@ -1,0 +1,47 @@
+.login {
+  background-color: #113d57;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  .logo {
+    color: white;
+    margin-top: 14%;
+
+    font-family: 'BigCaslon-Medium', 'Times New Roman';
+    font-size: 144px;
+    font-size: 14vw;
+    text-align: center
+  }
+
+  .login-btn {
+    padding: 0;
+    background: url(assets/drawable-mdpi/add.png);
+    width: 82px;
+    height: 43px;
+  }
+}
+@media (min-width: 2000px) {
+
+  .login {
+
+    .logo {
+      margin-top: 0%;
+    }
+    .login-btn {
+      padding: 0;
+      background: url(assets/drawable-hdpi/add.png);
+      width: 123px;
+      height: 65px;
+    }
+  }
+}
+
+.white-two {
+  color: #d8d8d8;
+}
+
+

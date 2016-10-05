@@ -1,0 +1,22 @@
+<section class="login">
+  <div class="col-md-5 offset-md-4 logo">
+    <span class="white-two">SL</span>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="col-md-5 offset-md-4">
+      <label for="name" style="color: white">USER NAME</label>
+      <div class="input-group">
+        <input type="text" id="name" name="name" class="form-control" placeholder="User name" formControlName="userName"
+               aria-describedby="basic-addon1">
+      </div>
+      <br>
+      <label for="password" style="color: white">PASSWORD</label>
+      <div class="input-group">
+        <input id="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" formControlName="password">
+      </div>
+    </div>
+    <div class="offset-md-8 col-md-1 m-t-2">
+      <button class="btn login-btn pull-right" type="submit" style="background-size: cover;"></button>
+    </div>
+  </form>
+</section>
