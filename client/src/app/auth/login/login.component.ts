@@ -8,6 +8,8 @@ import { AuthService } from "../service/auth.service";
 import {Login} from "../model/login.model";
 import {Router} from "@angular/router";
 
+import 'rxjs/add/operator/catch';
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -16,6 +18,8 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   loginForm : FormGroup;
+  formSubmitted: boolean = false;
+  wrongCredentials: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -31,8 +35,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.formSubmitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.authService.login(<Login> this.loginForm.getRawValue()).subscribe(() => {
+        console.log('here');
         this.router.navigate([this.authService.redirectUrl]);
+    }, (data) => {
+      console.log("here");
+      this.wrongCredentials = true;
     });
   }
 }
