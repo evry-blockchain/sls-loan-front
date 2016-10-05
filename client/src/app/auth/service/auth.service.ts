@@ -9,13 +9,13 @@ import {BehaviorSubject, Subject} from "rxjs";
 @Injectable()
 export class AuthService {
 
-  isLoggedIn$: Subject = new BehaviorSubject(false);
+  isLoggedIn$: Subject<any> = new BehaviorSubject(false);
   isLoggedIn: boolean;
   redirectUrl: string = '';
   constructor() {}
 
   login(data: Login) {
-    if (data.userName == 1 && data.password == 1) {
+    if (data.userName === '1' && data.password === '1') {
         this.isLoggedIn$.next(true);
     } else {
        this.isLoggedIn$.next(false);
