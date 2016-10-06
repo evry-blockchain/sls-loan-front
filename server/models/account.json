@@ -1,0 +1,24 @@
+{
+  "name": "Account",
+  "plural": "Accounts",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "AccountID": {
+      "type": "string",
+      "id": true
+    },
+    "ParticipantID": {
+      "type": "string",
+      "id": "true"
+    },
+    "Amount": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

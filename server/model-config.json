@@ -9,5 +9,41 @@
   },
   "Participant": {
     "dataSource": null
+  },
+  "LoanShare": {
+    "dataSource": null,
+    "public": true
+  },
+  "Loan": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanRequest": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanInvitation": {
+    "dataSource": null,
+    "public": true
+  },
+  "Transaction": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanReturn": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanSale": {
+    "dataSource": null,
+    "public": true
+  },
+  "Account": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanNegotiation": {
+    "dataSource": null,
+    "public": true
   }
 }

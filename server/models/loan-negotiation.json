@@ -1,0 +1,24 @@
+{
+  "name": "LoanNegotiation",
+  "plural": "LoanNegotiations",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "LoanNegotiationID": {
+      "type": "string",
+      "id": "true"
+    },
+    "LoanInvitationID": "string",
+    "ParticipantBankID": "string",
+    "Amount": "string",
+    "NegotiationStatus": "string",
+    "ParticipantBankComment": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

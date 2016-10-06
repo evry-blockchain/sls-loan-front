@@ -1,0 +1,22 @@
+{
+  "name": "LoanReturn",
+  "plural": "LoanReturns",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "LoanReturnID": {
+      "type": "string",
+      "id": "true"
+    },
+    "LoanID": "string",
+    "Amount": "string",
+    "ReturnDate": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

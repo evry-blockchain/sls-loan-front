@@ -1,0 +1,25 @@
+{
+  "name": "Transaction",
+  "plural": "Transactions",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "TransactionID": {
+      "type": "string",
+      "id": "true"
+    },
+    "FromAccountID": "string",
+    "ToAccountID": "string",
+    "Date": "string",
+    "TransactionType": "string",
+    "TransactionRelatedEntityID": "string",
+    "Amount": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

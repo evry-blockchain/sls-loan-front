@@ -1,0 +1,23 @@
+{
+  "name": "LoanShare",
+  "plural": "LoanShares",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "LoanShareId": {
+      "type": "string",
+      "id": "true"
+    },
+    "LoanId": "string",
+    "ParticipantBankId": "string",
+    "Amount": "string",
+    "NegotiationStatus": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

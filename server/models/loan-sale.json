@@ -1,0 +1,22 @@
+{
+  "name": "LoanSale",
+  "plural": "LoanSales",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "LoanSaleID": {
+      "type": "string",
+      "id": "true"
+    },
+    "FromLoanSaleID": "string",
+    "ToParticipantID": "string",
+    "AmountSold": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
