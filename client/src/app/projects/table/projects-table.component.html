@@ -1,0 +1,19 @@
+
+<section class="row">
+  <div class="offset-md-1 col-md-10 m-t-2">
+    <table class="table" style="background-color: #84a6b6; border-spacing: 0 1em;">
+      <thead>
+      <tr>
+        <th>Project</th>
+        <th>Role</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let project of projects" [projects-table-row]="project">
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>

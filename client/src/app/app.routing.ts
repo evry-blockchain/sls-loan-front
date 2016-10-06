@@ -6,10 +6,11 @@ import {AuthGuard} from "./auth/guard/auth.guard";
 // import {invitationRouting} from './invitation/invitation.routing';
 
 const routes:Routes = [
-    {path: '', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
 
     // ...invitationRouting
 ];
+// {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+
 
 export const routing = RouterModule.forRoot(routes);

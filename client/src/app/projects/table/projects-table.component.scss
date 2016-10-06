@@ -1,0 +1,45 @@
+tr th {
+  border: 0;
+  color: white;
+  font-family: Avenir-Medium;
+}
+
+//tr:before {
+//  content: '';
+//    position: absolute;
+//    top: -1px;
+//    bottom: -2px;
+//    width: 100vw;
+//    display: block;
+//    background: inherit;
+//    border: inherit;
+//}
+
+//.table td:first-child,
+//.table th:first-child,
+//.table td:last-child,
+//.table th:last-child {
+//  position: relative;
+//}
+//
+//.table td:first-child:before,
+//.table th:first-child:before,
+//.table td:last-child:after,
+//.table th:last-child:after {
+//  content: '';
+//  position: absolute;
+//  top: -1px;
+//  bottom: -2px;
+//  width: 100vw;
+//  display: block;
+//  background: inherit;
+//  border: inherit;
+//}
+//.table td:first-child:before,
+//.table th:first-child:before {
+//  right: 100%;
+//}
+//.table td:last-child:after,
+//.table th:last-child:after {
+//  left: 100%
+//}

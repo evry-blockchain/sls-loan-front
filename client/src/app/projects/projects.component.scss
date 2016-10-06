@@ -1,0 +1,65 @@
+.payments {
+  background-color: #113d57;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  h3 {
+    margin-top: 7.12890625%;
+    padding-left: 20px;
+    //margin-left: 9.9609375%
+  }
+  .my-settings {
+    padding: 0;
+    border: 0;
+    background: url(assets/projectSettings/drawable-mdpi/my_settings.png);
+    width: 30px;
+    height: 30px;
+  }
+  .add-btn {
+    padding: 0;
+    border: 0;
+    background: url(assets/add/drawable-mdpi/add_project.png);
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .payments {
+    .my-settings {
+      padding: 0;
+      border: 0;
+      background: url(assets/projectSettings/drawable-hdpi/my_settings.png);
+      width: 45px;
+      height: 45px;
+      //#607D8B
+    }
+    .add-btn {
+      padding: 0;
+      border: 0;
+      background: url(assets/add/drawable-hdpi/add_project.png);
+      width: 45px;
+      height: 45px;
+    }
+  }
+}
+div.modal-content {
+  background-color: #fbfbfb;
+  margin-top: 25%;
+  .modal-header {
+    border: 0;
+  }
+  .modal-body {
+    label {
+      font-family: Avenir-Medium;
+      color: #4a4a4a;
+      margin-top: 5px;
+    }
+  }
+  .modal-footer {
+    border: 0;
+  }
+}

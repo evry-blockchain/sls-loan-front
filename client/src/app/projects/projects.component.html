@@ -1,0 +1,126 @@
+<section class="payments">
+  <div class="row">
+    <h3 style="color: white" class="offset-md-1 col-md-3">MY PROJECTS</h3>
+    <div class="offset-md-6 col-md-1" style="margin-top: 9.12890625%">
+      <button class="my-settings  pull-right"></button>
+    </div>
+  </div>
+    <projects-table></projects-table>
+  <div class="row">
+    <div class="offset-md-10 col-md-1">
+      <!--<button class="add-btn pull-right" (click)="open(content)">-->
+      <!--</button>-->
+
+      <button class="add-btn pull-right" (click)="lgModal.show()">
+      </button>
+    </div>
+  </div>
+</section>
+<!--<button class="btn btn-primary" (click)="lgModal.show()">Large modal</button>-->
+
+
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add new Project (my role: Arranger Bank)</h4>
+      </div>
+      <form [formGroup]="projectForm" (ngSubmit)="save()">
+      <div class="modal-body">
+          <label for="borrower">Borrower</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="borrower" formControlName="borrower">
+          </div>
+
+          <label for="project-name">Project Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="project-name" formControlName="projectName">
+          </div>
+          <label for="contact-person">Contact Person</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="contact-person" formControlName="contactPerson">
+          </div>
+          <label for="amount">Amount</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="amount" formControlName="amount">
+          </div>
+          <label for="market-industry">Market & Industry</label>
+          <div class="input-group">
+            <textarea type="text" class="form-control" id="market-industry" formControlName="marketIndustry">
+            </textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn" style="background-color: #a3c0c0">
+          <span style="color: white">Add</span>
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--<template #content let-c="close" let-d="dismiss" id="nice" >-->
+  <!--<div class="modal-content">-->
+    <!--<div class="modal-header">-->
+      <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">-->
+        <!--<span aria-hidden="true">&times;</span>-->
+      <!--</button>-->
+      <!--<h4 class="modal-title">Add new Project (my role: Arranger Bank)</h4>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+      <!--<form [formGroup]="">-->
+        <!--<label for="borrower">Borrower</label>-->
+        <!--<div class="input-group">-->
+          <!--<input type="text" class="form-control" id="borrower">-->
+        <!--</div>-->
+
+        <!--<label for="project-name">Project Name</label>-->
+        <!--<div class="input-group">-->
+          <!--<input type="text" class="form-control" id="project-name">-->
+        <!--</div>-->
+        <!--<label for="contact-person">Contact Person</label>-->
+        <!--<div class="input-group">-->
+          <!--<input type="text" class="form-control" id="contact-person">-->
+        <!--</div>-->
+        <!--<label for="amount">Amount</label>-->
+        <!--<div class="input-group">-->
+          <!--<input type="text" class="form-control" id="amount">-->
+        <!--</div>-->
+        <!--<label for="market-industry">Market & Industry</label>-->
+        <!--<div class="input-group">-->
+        <!--<textarea type="text" class="form-control" id="market-industry">-->
+
+        <!--</textarea>-->
+        <!--</div>-->
+      <!--</form>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+      <!--<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>-->
+    <!--</div>-->
+  <!--</div>-->
+
+
+
+
+
+
+  <!--<div class="modal-header">-->
+    <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">-->
+      <!--<span aria-hidden="true">&times;</span>-->
+    <!--</button>-->
+    <!--<h4 class="modal-title">Modal title</h4>-->
+  <!--</div>-->
+  <!--<div class="modal-body">-->
+    <!--<p>One fine body&hellip;</p>-->
+  <!--</div>-->
+  <!--<div class="modal-footer">-->
+    <!--<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>-->
+  <!--</div>-->
+
+
+<!--</template>-->

@@ -1,4 +1,4 @@
-import { NgModule, ApplicationRef} from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
 import { HttpModule} from '@angular/http';
 import { FormsModule} from '@angular/forms';
@@ -16,8 +16,10 @@ import { removeNgStyles, createNewHosts} from '@angularclass/hmr';
 import { PaymentsModule} from './payments/payments.module';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule} from './auth/auth.module';
-import {AuthGuard} from "./auth/guard/auth.guard";
-import {SharedModule} from "./shared/shared.module";
+import { AuthGuard } from "./auth/guard/auth.guard";
+import { SharedModule } from "./shared/shared.module";
+import { ProjectsModule } from "./projects/projects.module";
+import { ModalModule } from "ng2-bootstrap/ng2-bootstrap";
 
 @NgModule({
     imports: [
@@ -29,7 +31,9 @@ import {SharedModule} from "./shared/shared.module";
       PaymentsModule,
       NgbModule,
       AuthModule,
-      SharedModule
+      SharedModule,
+      ProjectsModule,
+      ModalModule
     ],
     declarations: [
         AppComponent,
@@ -43,8 +47,12 @@ import {SharedModule} from "./shared/shared.module";
     bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(public appRef:ApplicationRef) {
+
+  constructor(public appRef:ApplicationRef) {
     }
+
+
+
 
     hmrOnInit(store) {
         console.log('HMR store', store);

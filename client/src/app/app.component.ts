@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 
 import {ApiService} from './shared';
 
@@ -11,8 +11,11 @@ import '../style/app.scss';
 })
 export class AppComponent {
     url = 'https://github.com/preboot/angular2-webpack';
+  private viewContainerRef: ViewContainerRef;
 
-    constructor(private api:ApiService) {
-        // Do something with api
-    }
+  public constructor(viewContainerRef:ViewContainerRef) {
+    // You need this small hack in order to catch application root view container ref
+    this.viewContainerRef = viewContainerRef;
+  }
+
 }
