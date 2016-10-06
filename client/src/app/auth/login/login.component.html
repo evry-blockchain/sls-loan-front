@@ -9,11 +9,18 @@
         <input type="text" id="name" name="name" class="form-control" placeholder="User name" formControlName="userName"
                aria-describedby="basic-addon1">
       </div>
+      <div class="pull-right error-message" *ngIf="formSubmitted && !!loginForm.controls.userName.errors && !wrongCredentials">PLEASE ENTER YOUR USER NAME</div>
+      <div class="pull-right error-message" *ngIf="wrongCredentials">ARE YOU SURE THAT THIS IS YOUR USER NAME?</div>
+
       <br>
+
       <label for="password" style="color: white">PASSWORD</label>
       <div class="input-group">
         <input id="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" formControlName="password">
       </div>
+
+      <div  class="pull-right error-message" *ngIf="formSubmitted && !!loginForm.controls.password.errors && !wrongCredentials">PLEASE ENTER YOUR USER PASSWORD</div>
+      <div  class="pull-right error-message" *ngIf="wrongCredentials">ARE YOU SURE THAT THIS IS YOUR PASSWORD?</div>
     </div>
     <div class="offset-md-8 col-md-1 m-t-2">
       <button class="btn login-btn pull-right" type="submit" style="background-size: cover;"></button>
