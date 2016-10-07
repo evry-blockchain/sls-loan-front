@@ -4,15 +4,20 @@
             <input type="text" placeholder="Search for finance partners" class="form-control form-control-lg"/>
         </div>
     </div>
-    <ul>
-        <li *ngFor="let partner of partners">
-            {{partner}}
-        </li>
-    </ul>
+    <div *ngFor="let partner of partners" class="col-md-12" style="background-color: white; margin-bottom: 10px; text-align: center; line-height: 70px;">
+      <span style="vertical-align: middle; position: relative">{{partner}}</span>
 
-    <div class="col-md-6 offset-md-3">
-        <div class="invitation-review-holder">
-            <button class="btn btn-default btn-lg">Review</button>
-        </div>
     </div>
+    <!--<ul>-->
+    <!---->
+        <!--<li *ngFor="let partner of partners" class="col-md-12" style="background-color: white">-->
+            <!--{{partner}}-->
+        <!--</li>-->
+    <!--</ul>-->
+
+    <!--<div class="col-md-6 offset-md-3">-->
+        <!--<div class="invitation-review-holder">-->
+            <!--<button class="btn btn-default btn-lg">Review</button>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>

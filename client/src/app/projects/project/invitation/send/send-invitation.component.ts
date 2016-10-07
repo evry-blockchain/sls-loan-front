@@ -9,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: 'send-invitation.component.html'
 })
 export class SendInvitationComponent implements OnInit {
-    constructor() { }
+  project;
+  constructor() { }
 
-    ngOnInit() { }
+  ngOnInit() {
+    this.project = {
+      borrower: 'Statoil',
+      projectName: 'USD 100m Statoil',
+      contactPerson: 'Per Person',
+      loanAmount: '500m USD',
+      marketIndustry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.'
+
+    }
+  }
 
 }

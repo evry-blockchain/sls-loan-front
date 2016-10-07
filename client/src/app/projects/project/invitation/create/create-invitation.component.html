@@ -2,30 +2,58 @@
   <accordion [closeOthers]="true">
     <accordion-group #group [isOpen]="true">
       <div accordion-heading>
-        <h2 class="section-head">Financing</h2>
+        <h2 class="section-head">Project Information</h2>
       </div>
       <div class="section-content">
         <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="">Company</label>
-              <input type="text" class="form-control"/>
-            </div>
-          </div>
+          <dt class="col-md-2">
+            Borrower
+          </dt>
+          <dd class="col-md-4">
+            {{project.borrower}}
+          </dd>
         </div>
+
         <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="">Contact person</label>
-              <input class="form-control" type="text"/>
-            </div>
-          </div>
+          <dt class="col-md-2">
+            Project Name
+          </dt>
+          <dd class="col-md-4">
+            {{project.projectName}}
+          </dd>
         </div>
+
         <div class="row">
-          <div class="col-md-6">
+          <dt class="col-md-2">
+            Contact Person
+          </dt>
+          <dd class="col-md-4">
+            {{project.contactPerson}}
+          </dd>
+        </div>
+
+        <div class="row">
+          <dt class="col-md-2">
+            Market & Industry
+          </dt>
+          <dd class="col-md-4">
+            {{project.marketIndustry}}
+          </dd>
+        </div>
+      </div>
+    </accordion-group>
+    <accordion-group #group>
+      <div accordion-heading>
+        <h2 class="section-head">Additional Info</h2>
+      </div>
+      <div class="section-content">
+        <div class="row">
+          <div class="col-md-8">
             <div class="form-group">
-              <label for="">Loan Amount</label>
-              <input class="form-control" type="number"/>
+              <!--<label for="additional-info">Additional Info</label>-->
+              <textarea id="additional-info" class="form-control" rows="20">
+
+              </textarea>
             </div>
           </div>
         </div>
@@ -37,7 +65,7 @@
       </div>
       <div class="section-content">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-10">
             <div class="form-group">
               <label for="">Assets</label>
               <input type="text" class="form-control"/>
@@ -53,11 +81,12 @@
           </div>
         </div>
       </div>
-    </accordion-group>
-    <accordion-group #group>
-      <div accordion-heading>
-        <h2 class="section-head bordered">Market & Industry</h2>
+      <div class="offset-md-11 col-md-1">
+        <button class="btn btn-primate btn-lg m-b-2" style="background-color: #a3c0c0"><span style="color: white">Next</span></button>
       </div>
     </accordion-group>
   </accordion>
 </section>
+
+
+
