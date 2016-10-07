@@ -1,0 +1,27 @@
+{
+  "name": "Loan",
+  "plural": "Loans",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "LoanID": {
+      "type": "string",
+      "id": "true"
+    },
+    "ArrangerBank": "string",
+    "BorrowerID": "string",
+    "Amount": "string",
+    "InterestRate": "string",
+    "InterestTerm": "string",
+    "Fee": "string",
+    "AgreementDate": "string",
+    "NegotiationStatus": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

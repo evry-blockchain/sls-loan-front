@@ -27,7 +27,7 @@ module.exports = Participant => {
 
   Participant.getByType = (type, cb) => {
     chaincode(cc => {
-      cc.query.getParticipantsByType([type], 'WebAppAdmin', (err, data) => {
+      cc.query.getParticipantsByType(type, 'WebAppAdmin', (err, data) => {
         cb(err, JSON.parse(data));
       });
     });
