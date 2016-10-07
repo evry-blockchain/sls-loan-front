@@ -19,6 +19,7 @@ import { InvitationProjectInformationComponent } from "./shared/invitation-proje
 import { InvitationAdditionalInformationComponent } from "./shared/invitation-additional-info.component";
 import { InvitationTermsConditionsComponent } from "./shared/invitation-terms-conditions.component";
 import { CreateInvitationTabComponent } from "./create/tab/create/create-invitation-tab.component";
+import { ParticipantInvitationTimerComponent } from "./participant/time/participant-timer.component";
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { CreateInvitationTabComponent } from "./create/tab/create/create-invitat
       InvitationProjectInformationComponent,
       InvitationAdditionalInformationComponent,
       InvitationTermsConditionsComponent,
-      CreateInvitationTabComponent
+      CreateInvitationTabComponent,
+      ParticipantInvitationTimerComponent
+
 
     ],
     exports: [

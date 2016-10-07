@@ -12,7 +12,7 @@ import { Input } from "@angular/core";
     styleUrls: ['invitation-header.component.scss'],
 })
 export class InvitationHeaderComponent {
-
+  @Input() customBackground;
     constructor() {
 
     }
