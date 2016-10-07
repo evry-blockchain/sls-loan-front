@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'my-payments',
-    templateUrl: './payments.component.html'
+    templateUrl: 'payments.component.html'
 })
 export class PaymentsComponent implements OnInit {
 

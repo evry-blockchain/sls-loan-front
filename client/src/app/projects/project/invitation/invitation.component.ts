@@ -1,18 +1,23 @@
 import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
  * see https://github.com/gdi2290/es6-promise-loader for more info
  */
 
-@Component({
-    selector: 'invitation-header',
-    templateUrl: './invitation-header.template.html',
-    styleUrls: ['./invitation-header.component.scss'],
-})
-export class InvitationHeaderComponent {
+console.log('`Invitation` component loaded asynchronously');
 
-    constructor() {
+@Component({
+    selector: 'invitation-component',
+    styleUrls: ['invitation.component.scss'],
+    templateUrl: 'invitation.template.html'
+})
+export class InvitationComponent {
+    localState;
+
+    constructor(public route:ActivatedRoute) {
 
     }
 

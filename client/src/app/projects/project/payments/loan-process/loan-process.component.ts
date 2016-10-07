@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'my-loan-process',
-  templateUrl: './loan-process.component.html',
-  styleUrls: ['./loan-process.component.scss']
+  templateUrl: 'loan-process.component.html',
+  styleUrls: ['loan-process.component.scss']
 })
 export class PaymentsLoanProcessComponent implements OnInit {
     constructor() { }

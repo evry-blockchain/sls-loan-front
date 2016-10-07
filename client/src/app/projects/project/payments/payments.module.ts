@@ -10,15 +10,12 @@ import { PaymentsFooterComponent } from "./footer/payments-footer.component";
 import { PaymentsLoanProcessComponent } from "./loan-process/loan-process.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentsHeaderComponent } from "./header/payments-header.component";
-import { SharedModule } from "../shared/shared.module";
 import { PaymentsTableComponent } from "./table/payments-table.component";
-import {AuthModule} from "../auth/auth.module";
-import { AuthGuard } from "../auth/guard/auth.guard";
+import { SharedModule } from "../../../shared/shared.module";
 
 
 @NgModule({
   imports: [
-    paymentsRouting,
     NgbModule,
     SharedModule
   ],

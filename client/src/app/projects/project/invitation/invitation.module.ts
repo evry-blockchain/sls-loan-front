@@ -11,16 +11,14 @@ import {SelectInviteesComponent}    from './select-invitees/select-invitees.comp
 import {AccordionModule}            from 'ng2-bootstrap/ng2-bootstrap';
 
 import {invitationRouting}           from './invitation.routing';
-import {SharedModule} from "../shared/shared.module";
+import { SharedModule } from "../../../shared/shared.module";
 
 
 @NgModule({
     imports: [
       RouterModule,
       AccordionModule,
-      invitationRouting,
       SharedModule
-
     ],
     declarations: [
         InvitationComponent,

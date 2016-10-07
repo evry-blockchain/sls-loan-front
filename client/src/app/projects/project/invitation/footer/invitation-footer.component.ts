@@ -10,8 +10,8 @@ console.log('`Invitation-footer` component loaded asynchronously');
 
 @Component({
     selector: 'invitation-footer',
-    templateUrl: './invitation-footer.template.html',
-    styleUrls: ['./invitation-footer.component.scss'],
+    templateUrl: 'invitation-footer.template.html',
+    styleUrls: ['invitation-footer.component.scss'],
 })
 export class InvitationFooterComponent implements OnInit {
     localState;
