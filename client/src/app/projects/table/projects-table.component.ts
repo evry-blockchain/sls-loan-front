@@ -3,6 +3,7 @@
  */
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'projects-table',
@@ -13,8 +14,12 @@ export class ProjectsTableComponent implements OnInit {
 
   @Input() projects;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
+
+  goToProject(project) {
+      this.router.navigate(['/projects', 1]);
+    }
 
 }

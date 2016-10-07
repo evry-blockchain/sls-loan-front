@@ -12,6 +12,8 @@ import {AccordionModule}            from 'ng2-bootstrap/ng2-bootstrap';
 
 import {invitationRouting}           from './invitation.routing';
 import { SharedModule } from "../../../shared/shared.module";
+import { SendInvitationComponent } from "./send/send-invitation.component";
+import { CreateInvitationComponent } from "./create/create-invitation.component";
 
 
 @NgModule({
@@ -21,10 +23,12 @@ import { SharedModule } from "../../../shared/shared.module";
       SharedModule
     ],
     declarations: [
-        InvitationComponent,
-        InvitationFooterComponent,
-        InvitationHeaderComponent,
-        SelectInviteesComponent
+      InvitationComponent,
+      InvitationFooterComponent,
+      InvitationHeaderComponent,
+      SelectInviteesComponent,
+      SendInvitationComponent,
+      CreateInvitationComponent
     ],
     exports: [
     ]

@@ -16,7 +16,7 @@ import { AddUserSettingsModalComponent } from "./modal/add-user-settings/add-use
 import { ProjectModule } from "./project/project.module";
 
 @NgModule({
-  imports: [ projectsRouting, SharedModule, ReactiveFormsModule, ModalModule, ProjectModule],
+  imports: [ projectsRouting, SharedModule, ReactiveFormsModule, ModalModule, ProjectModule ],
   declarations: [ ProjectsComponent,
     ProjectsTableComponent,
     ProjectsTableRowComponent,

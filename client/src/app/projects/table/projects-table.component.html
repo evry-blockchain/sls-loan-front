@@ -10,7 +10,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let project of projects" [projects-table-row]="project">
+      <tr *ngFor="let project of projects" [projects-table-row]="project" (click)="goToProject()">
       </tr>
       </tbody>
     </table>

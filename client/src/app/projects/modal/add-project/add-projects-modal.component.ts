@@ -46,7 +46,9 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.createService.unsubscribe();
+    if(!!this.createService) {
+      this.createService.unsubscribe();
+    }
   }
 
 }

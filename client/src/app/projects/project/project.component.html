@@ -3,25 +3,43 @@
     <div class="col-sm-2 col-md-1 sidebar">
       <ul class="nav nav-sidebar">
         <li>
-          <a [routerLink]=" ['./overview'] ">
+          <a [routerLink]=" ['/projects']">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <span>My Projects</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]=" ['./overview'] "  routerLinkActive="active">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>
             <span>Overview</span>
           </a>
         </li>
         <li>
-          <a [routerLink]=" ['./invitation'] ">
+          <a [routerLink]=" ['./invitation']"  routerLinkActive="active">
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
             <span>Invitation</span>
           </a>
         </li>
         <li>
-          <a [routerLink]=" ['./detail'] ">
+          <a [routerLink]=" ['./detail'] "  routerLinkActive="active">
             <i class="fa fa-comment-o" aria-hidden="true"></i>
             <span>Chat</span>
           </a>
         </li>
         <li>
-          <a [routerLink]=" ['./payments'] ">
+          <a [routerLink]=" ['./detail'] "  routerLinkActive="active">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            <span>Terms & Conditions</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]=" ['./contract']"  routerLinkActive="active">
+            <i class="fa fa-files-o fa-flip-horizontal"></i>
+            <span>Contract</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]=" ['./payments']"  routerLinkActive="active">
             <i class="fa fa-university" aria-hidden="true"></i>
             <span>Payment</span>
           </a>
