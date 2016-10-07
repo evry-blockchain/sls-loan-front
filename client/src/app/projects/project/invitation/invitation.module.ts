@@ -14,6 +14,11 @@ import {invitationRouting}           from './invitation.routing';
 import { SharedModule } from "../../../shared/shared.module";
 import { SendInvitationComponent } from "./send/send-invitation.component";
 import { CreateInvitationComponent } from "./create/create-invitation.component";
+import { ParticipantInvitationComponent } from "./participant/participant-invitation.component";
+import { InvitationProjectInformationComponent } from "./shared/invitation-project-information.component";
+import { InvitationAdditionalInformationComponent } from "./shared/invitation-additional-info.component";
+import { InvitationTermsConditionsComponent } from "./shared/invitation-terms-conditions.component";
+import { CreateInvitationTabComponent } from "./create/tab/create/create-invitation-tab.component";
 
 
 @NgModule({
@@ -28,7 +33,14 @@ import { CreateInvitationComponent } from "./create/create-invitation.component"
       InvitationHeaderComponent,
       SelectInviteesComponent,
       SendInvitationComponent,
-      CreateInvitationComponent
+      CreateInvitationComponent,
+      ParticipantInvitationComponent,
+
+      InvitationProjectInformationComponent,
+      InvitationAdditionalInformationComponent,
+      InvitationTermsConditionsComponent,
+      CreateInvitationTabComponent
+
     ],
     exports: [
     ]

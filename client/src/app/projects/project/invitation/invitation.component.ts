@@ -17,6 +17,8 @@ console.log('`Invitation` component loaded asynchronously');
 export class InvitationComponent {
     localState;
 
+    value = 1;
+
     constructor(public route:ActivatedRoute) {
 
     }

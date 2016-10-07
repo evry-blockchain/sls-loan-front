@@ -1,29 +1,8 @@
-<section class="container-fluid">
-  <div>
-    <h3>Project Information</h3>
-    <div class="row">
-      <dt class="col-md-2">Borrower</dt>
-      <dd class="col-md-10">{{project.borrower}}</dd>
-      <dt class="col-md-2">Project name</dt>
-      <dd class="col-md-10">{{project.projectName}}</dd>
-      <dt class="col-md-2">Amount</dt>
-      <dd class="col-md-10">{{project.loanAmount}}</dd>
-      <dt class="col-md-2">Market & Industry</dt>
-      <dd class="col-md-10">{{project.marketIndustry}}</dd>
-    </div>
-  </div>
+<section class="">
+  <invitation-project-information [project]="project"></invitation-project-information>
+  <invitation-additional-information [project]="project" ></invitation-additional-information>
+  <invitation-terms-conditions [project]="project"></invitation-terms-conditions>
 
-  <div class="row">
-    <h4 class="offset-md-1 col-md-1">Additional Info</h4>
-    <span class="col-md-9"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, tenetur.</span>
-  </div>
-  <div class="row">
-    <h4 class="offset-md-1 col-md-1">Terms & Conditions</h4>
-    <dl class="row">
-      <dt class="col-md-2">Assets</dt>
-      <dd class="col-md-10">Lorem ipsum dolor sit amet, consectetur</dd>
-    </dl>
-  </div>
   <div class="row">
     <div>Invitees</div>
     <span *ngFor="let company of companies">

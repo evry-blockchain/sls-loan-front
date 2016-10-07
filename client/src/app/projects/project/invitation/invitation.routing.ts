@@ -5,6 +5,8 @@ import {SelectInviteesComponent} from './select-invitees/select-invitees.compone
 import { AuthGuard } from "../../../auth/guard/auth.guard";
 import { SendInvitationComponent } from "./send/send-invitation.component";
 import { CreateInvitationComponent } from "./create/create-invitation.component";
+import { ParticipantInvitationComponent } from "./participant/participant-invitation.component";
+import { CreateInvitationTabComponent } from "./create/tab/create/create-invitation-tab.component";
 
 const routes:Routes = [
   {
@@ -12,16 +14,20 @@ const routes:Routes = [
     component: InvitationComponent,
     children: [
       {
-        path: '', redirectTo: 'create',
+        path: 'create', component: CreateInvitationComponent, children: [
+        {
+          path: '', component: CreateInvitationTabComponent,
+        },
+        {
+          path: 'select', component: SelectInviteesComponent
+        },
+        {
+          path: 'send', component: SendInvitationComponent
+        },
+      ]
       },
       {
-        path: 'create', component: CreateInvitationComponent,
-      },
-      {
-        path: 'select', component: SelectInviteesComponent
-      },
-      {
-        path: 'send', component: SendInvitationComponent
+        path: 'participant', component: ParticipantInvitationComponent
       }
     ]
   }
