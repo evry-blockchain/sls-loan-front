@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="modal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">My Settings </h4>
+    </div>
+    <form [formGroup]="settingsForm" (ngSubmit)="save()">
+      <div class="modal-body">
+        <label for="borrower">Company name</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="borrower" formControlName="companyName">
+        </div>
+
+        <label for="project-name">Display name</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="project-name" formControlName="displayName">
+        </div>
+        <label for="contact-person">Contact Person</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="contact-person" formControlName="contactPerson">
+        </div>
+        <label for="amount">Email</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="amount" formControlName="email">
+        </div>
+        <label for="preferredIndustries">Preferred Industries</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="preferredIndustries" formControlName="preferredIndustries">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn" style="background-color: #a3c0c0">
+          <span style="color: white">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
