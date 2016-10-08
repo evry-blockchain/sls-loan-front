@@ -3,6 +3,41 @@
     <span style="font-family: Avenir-Medium; color: #9b9b9b">TIME LEFT:</span> <b style="color: #9b9b9b; font-family: Avenir-Black">{{time}}</b>
   </div>
   <div class="offset-md-4 col-md-4">
-    <button class="btn btn-block" style="background-color: #84a6b6;line-height: 300%"><span style="color: white"  >Reply</span></button>
+    <button class="btn btn-block" style="background-color: #84a6b6;line-height: 300%" (click)="replyModal.show()"><span style="color: white" class="h3">Reply</span></button>
+  </div>
+</div>
+
+<!--<button class="btn btn-primary" (click)="lgModal.show()">Large modal</button>-->
+
+<div bsModal #replyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-circle" (click)="replyModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title h3">Reply to the Invitation</h3>
+        <h5 class="h5" style="font-family: Avenir-Roman; color:#9b9b9b">Replies will be sent to the Arranger Bank</h5>
+      </div>
+      <div class="modal-body">
+        <div class="com-md-12">
+          <h5 class="h5">Comments/thoughts?</h5>
+        </div>
+        <textarea id="comments" class="col-md-12" rows="10" style="resize: none" #textarea>
+
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <button class="btn btn-block offset-md-1 col-md-4 pull-left" style="background-color: #d8d8d8; line-height: 4vh" (click)="notInterested(replyModal)"><span style="color: white;">NOT INTERESTED</span></button>
+          <button  class="btn btn-block offset-md-7 col-md-4" style="background-color: #84a6b6; line-height: 4vh" (click)="interested(replyModal)">
+            <span style="color: white">
+              INTERESTED
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
