@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
@@ -10,7 +11,8 @@ import {Component} from '@angular/core';
 export class SelectInviteesComponent {
     partners = [];
 
-    constructor() {
+    constructor(private router: Router,
+                private route: ActivatedRoute) {
         this.partners = [
             'Bank of Associates & Companies LTD',
             'Bank of Associates & Companies LTD',
@@ -18,6 +20,10 @@ export class SelectInviteesComponent {
             'Bank of Paper, Wilson & Bluemine LTD',
             'Bank of Housing Construction Inc'
         ];
+    }
+
+    nextTab() {
+      this.router.navigate(['../send'], {relativeTo: this.route});
     }
 
 }

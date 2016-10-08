@@ -45,3 +45,15 @@
   background-color: #fbfbfb;
   border: 4px solid #84a6b6;
 }
+
+.invitation-next-holder {
+  padding: 40px 0;
+  position: relative;
+  button {
+    line-height: 33px;
+    background-color: #a3c0c0;
+    span {
+      color: #fff;
+    }
+  }
+}

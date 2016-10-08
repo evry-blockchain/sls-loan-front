@@ -1,9 +1,19 @@
 <div class="invitation">
+  <div class="row">
     <div class="col-md-6 offset-md-3">
-        <div class="invitation-search-holder">
-            <input type="text" placeholder="Search for finance partners" class="form-control form-control-lg"/>
-        </div>
+      <div class="invitation-search-holder">
+        <input type="text" placeholder="Search for finance partners" class="form-control form-control-lg"/>
+      </div>
     </div>
+    <div class="col-md-1">
+      <div class="invitation-next-holder">
+        <button class="btn btn-block" (click)="nextTab()"><span>Next</span></button>
+      </div>
+
+    </div>
+  </div>
+
+
     <div *ngFor="let partner of partners" class="col-md-12" style="background-color: white; margin-bottom: 10px; text-align: center; line-height: 70px;">
       <span style="vertical-align: middle; position: relative">{{partner}}</span>
 
