@@ -1,6 +1,6 @@
 <section class="component-section">
   <accordion [closeOthers]="true">
-    <accordion-group #group [isOpen]="true">
+    <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
       <div accordion-heading>
         <h2 class="section-head">Project Information</h2>
       </div>
@@ -76,14 +76,17 @@
           <div class="col-md-10">
             <div class="form-group">
               <label for="">Convenants</label>
-              <textarea class="form-control"></textarea>
+              <textarea class="form-control" rows="20"></textarea>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="offset-md-11 col-md-1 panel" >
+            <button class="btn btn-block  btn-lg m-b-2" style="background-color: #a3c0c0"><span style="color: white">Next</span></button>
+          </div>
+        </div>
       </div>
-      <div class="offset-md-11 col-md-1">
-        <button class="btn btn-primate btn-lg m-b-2" style="background-color: #a3c0c0"><span style="color: white">Next</span></button>
-      </div>
+
     </accordion-group>
   </accordion>
 </section>

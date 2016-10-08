@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'create-invitation-tab',
-  templateUrl: './create-invitation-tab.component.html'
+  templateUrl: './create-invitation-tab.component.html',
+  styleUrls: ['./create-invitation-tab.component.scss']
 })
 export class CreateInvitationTabComponent implements OnInit {
 
