@@ -39,7 +39,7 @@ export class SelectInviteesComponent {
 
   removeSelectedInvitee(invitee) {
     this.selectedInvitees = this.selectedInvitees.filter((data) => {
-      return data === invitee;
+      return data !== invitee;
     });
   }
 }
