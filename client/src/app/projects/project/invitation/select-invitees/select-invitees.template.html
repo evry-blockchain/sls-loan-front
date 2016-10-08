@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-1">
       <div class="invitation-next-holder">
-        <button class="btn btn-block" (click)="nextTab()"><span>Next</span></button>
+        <button class="btn btn-block" (click)="nextTab(noInviteeModal)"><span>Next</span></button>
       </div>
 
     </div>
@@ -15,7 +15,7 @@
 
 
     <div *ngFor="let partner of partners">
-      <select-invitees-partner [partner]="partner"></select-invitees-partner>
+      <select-invitees-partner (selectInvitee)="addSelectedInvitee($event)" (unselectInvitee)="removeSelectedInvitee($event)" [partner]="partner"></select-invitees-partner>
     </div>
     <!--<ul>-->
     <!---->
@@ -29,4 +29,30 @@
             <!--<button class="btn btn-default btn-lg">Review</button>-->
         <!--</div>-->
     <!--</div>-->
+</div>
+
+
+<!-- Large modal -->
+
+<div bsModal #noInviteeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="margin-top: 50%">
+      <div class="modal-body">
+        <div class="container">
+          <div class="offset-md-2 col-md-8" style="text-align: center">
+            <h4 class="h4" style="color: #4a4a4a">
+              You can not send the invitation without choosing one or more participating banks
+            </h4>
+          </div>
+        </div>
+        <div class="offset-md-5 col-md-2 m-t-2">
+          <button class="btn btn-default btn-block" style="background-color: #db4c63; line-height: 3vh" (click)="noInviteeModal.hide()">
+            <span style="color: white">
+              Ok
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
