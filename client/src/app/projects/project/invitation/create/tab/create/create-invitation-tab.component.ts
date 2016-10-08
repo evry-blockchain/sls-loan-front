@@ -35,7 +35,6 @@ export class CreateInvitationTabComponent implements OnInit {
 
   nextTab() {
     this.router.navigate(['./select'], {relativeTo: this.route});
-
   }
 
 }
