@@ -1,0 +1,17 @@
+.invitees-row {
+  background-color: white;
+  border: 5px solid #84a6b6;
+  border-top: none;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  h4 {
+    color: #9b9b9b;
+    font-family: Avenir-Medium;
+    margin-bottom: 10px;
+  }
+  dt {
+    span {
+      margin-left: 10%;
+    }
+  }
+}

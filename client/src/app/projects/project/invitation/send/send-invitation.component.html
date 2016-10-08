@@ -1,16 +1,20 @@
-<section class="">
+<section class="send-invitation container-fluid">
   <invitation-project-information [project]="project"></invitation-project-information>
   <invitation-additional-information [project]="project" ></invitation-additional-information>
   <invitation-terms-conditions [project]="project"></invitation-terms-conditions>
 
-  <div class="row">
-    <div>Invitees</div>
-    <span *ngFor="let company of companies">
-      {{company}}
-    </span>
-    <button class="btn btn-default">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </button>
+  <div class="row invitees-row">
+    <div class="offset-md-1 col-md-1">
+      <h4>Invitees</h4>
+      <span *ngFor="let company of companies">
+        {{company}}
+      </span>
+    </div>
+    <div class="m-l-1">
+      <button class="btn btn-default">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
   <div class="col-md-6 offset-md-3">
    <div class="invitation-review-holder">

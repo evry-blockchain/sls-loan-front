@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'send-invitation',
-    templateUrl: 'send-invitation.component.html'
+    templateUrl: 'send-invitation.component.html',
+    styleUrls: ['./send-invitation.component.scss']
 })
 export class SendInvitationComponent implements OnInit {
   project;
