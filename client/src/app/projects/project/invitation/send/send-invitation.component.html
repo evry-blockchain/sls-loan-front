@@ -6,8 +6,10 @@
   <div class="row invitees-row">
     <div class="offset-md-1 col-md-1">
       <h4>Invitees</h4>
+    </div>
+    <div>
       <span *ngFor="let company of companies">
-        {{company}}
+        <img height="48px" width="48px" [src]="company.image" (click)="removeCompany(company)">
       </span>
     </div>
     <div class="m-l-1">
