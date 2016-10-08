@@ -14,9 +14,8 @@
   </div>
 
 
-    <div *ngFor="let partner of partners" class="col-md-12" style="background-color: white; margin-bottom: 10px; text-align: center; line-height: 70px;">
-      <span style="vertical-align: middle; position: relative">{{partner}}</span>
-
+    <div *ngFor="let partner of partners">
+      <select-invitees-partner [partner]="partner"></select-invitees-partner>
     </div>
     <!--<ul>-->
     <!---->
