@@ -3,7 +3,9 @@
  */
 
 
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy, ElementRef
+} from '@angular/core';
 import { Input } from "@angular/core";
 import { Observable } from "rxjs";
 import * as moment from 'moment/moment'
@@ -16,20 +18,29 @@ import { ViewChild } from "@angular/core";
 export class ParticipantInvitationTimerComponent implements OnInit, OnDestroy {
 
   private numbers;
-  private timer = moment();
+  private timer = moment().hour(2).minute(0).second(10);
   time = this.timer.format();
+
+  @ViewChild('timeLeft') timeLeft: ElementRef;
+  @ViewChild('timeLeftLabel') timeLeftLabel: ElementRef;
   @Input() project;
   @ViewChild('textarea') textarea: ElementRef;
+
+  isShowAnimation: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    console.log('tih', this.textarea);
     this.textarea.nativeElement.focus();
     this.numbers = Observable.timer(0, 1000).subscribe((x) => {
       this.time = this.timer.subtract(1, 'seconds').format('h:mm:ss');
+      if (!this.isShowAnimation && (this.timer.diff(moment({hour: 2, minute: 0, second: 0})) < 0) ) {
+        this.timeLeft.nativeElement.style.color = 'red';
+        this.timeLeftLabel.nativeElement.style.color = 'red';
+        this.isShowAnimation = true;
+      }
+
     });
-    // this.numbers.subscribe(x => console.log(x));
   }
 
   ngOnDestroy(): void {
