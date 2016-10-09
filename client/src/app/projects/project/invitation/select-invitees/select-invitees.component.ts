@@ -19,7 +19,7 @@ export class SelectInviteesComponent {
       this.partners = [
         {
           name: 'Bank of Associates & Companies LTD',
-          image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/64/bank-of-america-icon.png'
+          image: 'https://media.glassdoor.com/sql/23198/dnb-nor-squarelogo-1448458669964.png'
         },
         {
           name: 'Bank of America',
