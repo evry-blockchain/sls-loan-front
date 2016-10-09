@@ -1,5 +1,4 @@
 
-
 import { Routes } from '@angular/router';
 import { InvitationFeedbackComponent } from "./invitationFeedback/invitation-feedback.component";
 import { TermsConditionsComponent } from "./termsConditions/terms-conditions.component";
