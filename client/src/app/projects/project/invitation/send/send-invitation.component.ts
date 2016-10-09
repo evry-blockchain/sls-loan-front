@@ -3,6 +3,8 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { ToastyService, ToastOptions, ToastData } from "ng2-toasty";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'send-invitation',
@@ -30,7 +32,9 @@ export class SendInvitationComponent implements OnInit {
       image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
     }
   ];
-  constructor() { }
+  constructor(private toastyService: ToastyService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.project = {
@@ -46,6 +50,28 @@ export class SendInvitationComponent implements OnInit {
     this.companies = this.companies.filter(data => {
       return data !== company;
     })
+  }
+
+  sendInvitation() {
+    // [routerLink]="['../../../overview'];
+
+
+    this.router.navigate(['../../../overview'], {relativeTo: this.route});
+
+    var toastOptions:ToastOptions = {
+      title: "Success",
+      msg: "Invitations has been sent",
+      showClose: true,
+      timeout: 5000,
+      theme: 'default',
+      onAdd: (toast:ToastData) => {
+      },
+      onRemove: function(toast:ToastData) {
+      }
+    };
+
+    this.toastyService.success(toastOptions);
+
   }
 
 }

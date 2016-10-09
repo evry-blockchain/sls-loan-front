@@ -20,6 +20,7 @@ import { AuthGuard } from "./auth/guard/auth.guard";
 import { SharedModule } from "./shared/shared.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { ModalModule } from "ng2-bootstrap/ng2-bootstrap";
+import { ToastyModule } from "ng2-toasty";
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import { ModalModule } from "ng2-bootstrap/ng2-bootstrap";
       AuthModule,
       SharedModule,
       ProjectsModule,
-      ModalModule
+      ModalModule,
+      ToastyModule.forRoot()
     ],
     declarations: [
         AppComponent,
