@@ -62,7 +62,7 @@ export class SendInvitationComponent implements OnInit {
       title: "Success",
       msg: "Invitations has been sent",
       showClose: true,
-      timeout: 5000,
+      timeout: 10000,
       theme: 'default',
       onAdd: (toast:ToastData) => {
       },
