@@ -3,6 +3,7 @@ import { ProjectOverviewComponent } from "./overview/project-overview.component"
 import { ProjectComponent } from "./project.component";
 import { paymentsRouting } from "./payments/payments.routing";
 import { invitationRouting } from "./invitation/invitation.routing";
+import { chatRouting } from "./chat/chat.routing";
 /**
  * Created by Oleksandr.Khymenko on 07.10.2016.
  */
@@ -16,7 +17,8 @@ const routes: Routes = [
       path: 'overview',  component: ProjectOverviewComponent
     },
     ...paymentsRouting,
-    ...invitationRouting
+    ...invitationRouting,
+    ...chatRouting
   ]}
   // { path: 'projects/id', component: ProjectOverviewComponent }
 ];
