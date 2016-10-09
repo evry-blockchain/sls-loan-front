@@ -8,6 +8,8 @@ import { InvitationFeedbackComponent } from "./invitationFeedback/invitation-fee
 import { ContractComponent } from "./contract/contract.component";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { ChatHeaderComponent } from "./partial/header/chat-header.component";
+import { ChatFooterComponent } from "./partial/footer/chat-footer.component";
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { RouterModule } from "@angular/router";
   declarations: [
     TermsConditionsComponent,
     InvitationFeedbackComponent,
-    ContractComponent
+    ContractComponent,
+    ChatHeaderComponent,
+    ChatFooterComponent
   ],
 })
 export class ChatModule {
