@@ -14,25 +14,6 @@ export class SelectInviteesComponent {
 
   selectedInvitees = [];
 
-  companies = [
-    {
-      name: 'Bank of Associates & Companies LTD',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/64/bank-of-america-icon.png'
-    },
-    {
-      name: 'Bank of America',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
-    },
-    {
-      name: 'Connected Collborators Bank',
-      image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
-    },
-    {
-      name: 'Bank of Paper, Wilson & Bluemine LTD',
-      image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
-    }
-  ];
-
   constructor(private router: Router,
               private route: ActivatedRoute) {
       this.partners = [
