@@ -16,8 +16,8 @@
       <h4>Selected Invitees</h4>
     </div>
     <div>
-      <span *ngFor="let company of companies">
-        <img height="48px" width="48px" [src]="company.image" (click)="removeCompany(company)">
+      <span *ngFor="let company of selectedInvitees">
+        <img height="48px" width="48px" [src]="company.image" (click)="removeSelectedInvitee(company)">
       </span>
     </div>
   </div>

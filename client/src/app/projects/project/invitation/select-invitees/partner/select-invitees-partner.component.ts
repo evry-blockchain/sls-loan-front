@@ -16,7 +16,7 @@ export class SelectInviteesPartnerComponent implements OnInit {
   @Input() partner;
   @Output() selectInvitee = new EventEmitter();
   @Output() unselectInvitee = new EventEmitter();
-  private selected: boolean = false;
+  selected: boolean = false;
 
   constructor() { }
 
