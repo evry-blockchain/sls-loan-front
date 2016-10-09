@@ -9,7 +9,16 @@
       <div class="invitation-next-holder">
         <button class="btn btn-block" (click)="nextTab(noInviteeModal)"><span>Next</span></button>
       </div>
-
+    </div>
+  </div>
+  <div class="row invitees-row">
+    <div class="offset-md-1 col-md-1">
+      <h4>Selected Invitees</h4>
+    </div>
+    <div>
+      <span *ngFor="let company of companies">
+        <img height="48px" width="48px" [src]="company.image" (click)="removeCompany(company)">
+      </span>
     </div>
   </div>
 
@@ -17,6 +26,8 @@
     <div *ngFor="let partner of partners">
       <select-invitees-partner (selectInvitee)="addSelectedInvitee($event)" (unselectInvitee)="removeSelectedInvitee($event)" [partner]="partner"></select-invitees-partner>
     </div>
+
+
     <!--<ul>-->
     <!---->
         <!--<li *ngFor="let partner of partners" class="col-md-12" style="background-color: white">-->
