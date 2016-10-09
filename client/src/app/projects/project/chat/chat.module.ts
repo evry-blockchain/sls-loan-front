@@ -10,6 +10,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { ChatHeaderComponent } from "./partial/header/chat-header.component";
 import { ChatFooterComponent } from "./partial/footer/chat-footer.component";
+import { ChatComponent } from "./chat.component";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ChatFooterComponent } from "./partial/footer/chat-footer.component";
     RouterModule
   ],
   declarations: [
+    ChatComponent,
     TermsConditionsComponent,
     InvitationFeedbackComponent,
     ContractComponent,
