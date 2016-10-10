@@ -9,7 +9,7 @@
 
   .logo {
     color: white;
-    margin-top: 14%;
+    margin-top: 14vh;
 
     font-family: 'BigCaslon-Medium', 'Times New Roman';
     font-size: 144px;
@@ -27,10 +27,6 @@
 @media (min-width: 2000px) {
 
   .login {
-
-    .logo {
-      margin-top: 0%;
-    }
     .login-btn {
       padding: 0;
       background: url(assets/login/drawable-hdpi/add.png);
