@@ -1,3 +1,4 @@
+
 .login {
   background-color: #113d57;
   height: 100vh;
@@ -13,20 +14,11 @@
   }
 
   .login-btn {
-    padding: 0;
-    background: url(assets/login/drawable-mdpi/add.png);
-    width: 82px;
-    height: 43px;
-  }
-}
-@media (min-width: 2000px) {
+    background: #a3c0c0;
 
-  .login {
-    .login-btn {
-      padding: 0;
-      background: url(assets/login/drawable-hdpi/add.png);
-      width: 123px;
-      height: 65px;
+    span {
+      color: white;
+      font-family: Avenir-Black;
     }
   }
 }
