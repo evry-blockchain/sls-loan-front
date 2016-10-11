@@ -16,7 +16,7 @@ var ibc = new Ibc1(logger);             //you can pass a logger such as winston 
 module.exports = function (app) {
   var AccessToken = app.models.AccessToken;
 
-  app.post('/login', function (req, res) {
+  app.post('/api/login', function (req, res) {
     //parse user credentials from request body
     let userCredentials = {
       "username": req.body.username,
