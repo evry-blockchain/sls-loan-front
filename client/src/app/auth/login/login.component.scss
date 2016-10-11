@@ -1,34 +1,33 @@
+@import '../../../style/app.variables';
 
 .login {
-  background-color: #113d57;
+  background-color: $color-light_navy;
   height: 100vh;
 
   .logo {
-    color: white;
+    color: $color-white;
     padding-top: 18.48vmin;
-
-    font-family: 'BigCaslon-Medium', 'Times New Roman';
-    font-size: 144px;
+    font-family: $font-family-big-caslon-medium;
     font-size: 15.1vw;
-    text-align: center
+    text-align: center;
+
+    span {
+      color: $color-white-two;
+    }
   }
 
   .login-btn {
-    background: #a3c0c0;
+    background: $color-bluey-grey;
 
     span {
-      color: white;
-      font-family: Avenir-Black;
+      color: $color-white;
+      font-family: $font-family-avenir-black;
     }
   }
 }
 
-.white-two {
-  color: #d8d8d8;
-}
-
 .error-message {
-  color: #db4c63;
-  font-family: Avenir-Black;
+  color: $color-darkish-pink;
+  font-family: $font-family-avenir-black;
 }
 
