@@ -1,36 +1,42 @@
-import chaincode from '../connectors/chaincode';
+var user;
+import beforeRemote from '../utils/cc-before-remote-init';
 
 module.exports = Loan => {
+  Loan.beforeRemote('*', (context, unused, next) => {
+    beforeRemote(context, (userInstance) => {
+      user = userInstance;
+      if (!user) {
+        context.res.status(401).json({"error": "Login failed! Either ou provided wrong credentials, or your access token is expired."});
+      } else {
+        next();
+      }
+    });
+  });
+
   Loan.getList = cb => {
-    chaincode(cc => {
-      cc.query.getLoansList([], 'WebAppAdmin', (err, data) => {
-        cb(err, JSON.parse(data));
-      });
+    user.cc.query.getLoansList([], user.username, (err, data) => {
+      cb(err, JSON.parse(data));
     });
   };
 
   Loan.count = cb => {
-    chaincode(cc => {
-      cc.query.getLoansQuantity([], 'WebAppAdmin', (err, data) => {
-        cb(err, JSON.parse(data));
-      });
+    user.cc.query.getLoansQuantity([], user.username, (err, data) => {
+      cb(err, JSON.parse(data));
     });
   };
 
   Loan.add = (loan, cb)=> {
-    chaincode(cc => {
-      cc.invoke.addLoan([
-        loan.ArrangerBank,
-        loan.BorrowerID,
-        loan.Amount,
-        loan.InterestRate,
-        loan.InterestTerm,
-        loan.Fee,
-        loan.AgreementDate,
-        loan.NegotiationStatus
-      ], 'WebAppAdmin', (err, data) => {
-        cb(err, data);
-      });
+    user.cc.invoke.addLoan([
+      loan.ArrangerBank,
+      loan.BorrowerID,
+      loan.Amount,
+      loan.InterestRate,
+      loan.InterestTerm,
+      loan.Fee,
+      loan.AgreementDate,
+      loan.NegotiationStatus
+    ], user.username, (err, data) => {
+      cb(err, data);
     });
   };
 

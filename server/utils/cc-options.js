@@ -1,19 +1,6 @@
-var Ibc1 = require('ibm-blockchain-js');
-var winston = require('winston');
 var fs = require('fs');
 var deepExtend = require("deep-extend");
-
-var callback;
-
-var logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)(),
-    new (winston.transports.File)({filename: 'sls-loan-strongloop-connector.log'})
-  ]
-});
-var ibc = new Ibc1(logger);             //you can pass a logger such as winston here - optional
-// ibc.clear();
-var chaincode;
+var util = require('util');
 
 var config = JSON.parse(fs.readFileSync(__dirname + '/../mycreds.json', 'utf8'));
 
@@ -42,7 +29,6 @@ var options = {
   }
 };
 
-
 config['ibm-blockchain-5-prod'][0].credentials.peers.forEach(function (peer) {
   options.network.peers.push({
     "api_host": peer.api_host,
@@ -52,28 +38,4 @@ config['ibm-blockchain-5-prod'][0].credentials.peers.forEach(function (peer) {
   });
 });
 
-config['ibm-blockchain-5-prod'][0].credentials.users.forEach(function (user) {
-  options.network.users.push({
-    "enrollId": user.enrollId,
-    "enrollSecret": user.enrollSecret
-  });
-});
-
-ibc.load(options, function (err, cc) {
-  if (err) {
-    console.log(err);
-  } else {
-    chaincode = cc;
-    if( typeof callback == 'function' ) {
-      callback(chaincode, ibc);
-    }
-  }
-});
-
-module.exports = function(cb) {
-  if(typeof chaincode != 'undefined') {
-    cb(chaincode, ibc);
-  } else {
-    callback = cb;
-  }
-};
+module.exports = options;

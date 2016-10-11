@@ -1,40 +1,47 @@
-import chaincode from '../connectors/chaincode';
+var user;
+import beforeRemote from '../utils/cc-before-remote-init';
 
 module.exports = LoanRequest => {
+
+  LoanRequest.beforeRemote('*', (context, unused, next) => {
+    beforeRemote(context, (userInstance) => {
+      user = userInstance;
+      if (!user) {
+        context.res.status(401).json({"error": "Login failed! Either ou provided wrong credentials, or your access token is expired."});
+      } else {
+        next();
+      }
+    });
+  });
+
   LoanRequest.getList = cb => {
-    chaincode(cc => {
-      cc.query.getLoanRequestsList([], 'WebAppAdmin', (err, data) => {
-        cb(err, JSON.parse(data));
-      });
+    user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
+      cb(err, JSON.parse(data));
     });
   };
 
   LoanRequest.count = cb => {
-    chaincode(cc => {
-      cc.query.getLoanRequestsQuantity([], 'WebAppAdmin', (err, data) => {
-        cb(err, JSON.parse(data));
-      });
+    user.cc.query.getLoanRequestsQuantity([], user.username, (err, data) => {
+      cb(err, JSON.parse(data));
     });
   };
 
   LoanRequest.add = (loanRequest, cb)=> {
-    chaincode(cc => {
-      cc.invoke.addLoanRequest([
-        loanRequest.BorrowerID,
-        loanRequest.ArrangerBankID,
-        loanRequest.LoanSharesAmount,
-        loanRequest.ProjectRevenue,
-        loanRequest.ProjectName,
-        loanRequest.ProjectInformation,
-        loanRequest.Company,
-        loanRequest.Website,
-        loanRequest.ContactPersonName,
-        loanRequest.ContactPersonSurname,
-        loanRequest.RequestDate,
-        loanRequest.Status
-      ], 'WebAppAdmin', (err, data) => {
-        cb(err, data);
-      });
+    user.cc.invoke.addLoanRequest([
+      loanRequest.BorrowerID,
+      loanRequest.ArrangerBankID,
+      loanRequest.LoanSharesAmount,
+      loanRequest.ProjectRevenue,
+      loanRequest.ProjectName,
+      loanRequest.ProjectInformation,
+      loanRequest.Company,
+      loanRequest.Website,
+      loanRequest.ContactPersonName,
+      loanRequest.ContactPersonSurname,
+      loanRequest.RequestDate,
+      loanRequest.Status
+    ], user.username, (err, data) => {
+      cb(err, data);
     });
   };
 

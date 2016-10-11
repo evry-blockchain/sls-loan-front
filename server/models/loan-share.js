@@ -1,34 +1,41 @@
-import chaincode from '../connectors/chaincode';
+var user;
+import beforeRemote from '../utils/cc-before-remote-init';
 
 module.exports = LoanShare => {
+
+  LoanShare.beforeRemote('*', (context, unused, next) => {
+    beforeRemote(context, (userInstance) => {
+      user = userInstance;
+      if (!user) {
+        context.res.status(401).json({"error": "Login failed! Either ou provided wrong credentials, or your access token is expired."});
+      } else {
+        next();
+      }
+    });
+  });
+
   LoanShare.getList = cb => {
-    chaincode(cc => {
-      cc.query.getLoanSharesList([], 'WebAppAdmin', (err, data) => {
+      user.cc.query.getLoanSharesList([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
       });
-    });
   };
 
   LoanShare.count = cb => {
-    chaincode(cc => {
-      cc.query.getLoanSharesQuantity([], 'WebAppAdmin', (err, data) => {
+      user.cc.query.getLoanSharesQuantity([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
-      });
     });
   };
 
   LoanShare.add = (loanShare, cb)=> {
-    chaincode(cc => {
-      cc.invoke.addLoanShare([
+      user.cc.invoke.addLoanShare([
         loanShare.LoanShareId,
         loanShare.LoanId,
         loanShare.ParticipantBankId,
         loanShare.Amount,
         loanShare.NegotiationStatus
-      ], 'WebAppAdmin', (err, data) => {
+      ], user.username, (err, data) => {
         cb(err, data);
       });
-    });
   };
 
   LoanShare.remoteMethod('getList', {

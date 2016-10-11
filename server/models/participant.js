@@ -1,35 +1,40 @@
-import chaincode from '../connectors/chaincode';
+var user;
+import beforeRemote from '../utils/cc-before-remote-init';
 
 module.exports = Participant => {
+
+  Participant.beforeRemote('*', (context, unused, next) => {
+    beforeRemote(context, (userInstance) => {
+      user = userInstance;
+      if (!user) {
+        context.res.status(401).json({"error": "Login failed! Either ou provided wrong credentials, or your access token is expired."});
+      } else {
+        next();
+      }
+    });
+  });
+
   Participant.getList = cb => {
-    chaincode(cc => {
-      cc.query.getParticipantsList([], 'WebAppAdmin', (err, data) => {
+      user.cc.query.getParticipantsList([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
-      });
     });
   };
 
   Participant.count = cb => {
-    chaincode(cc => {
-      cc.query.getParticipantsQuantity([], 'WebAppAdmin', (err, data) => {
+      user.cc.query.getParticipantsQuantity([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
-      });
     });
   };
 
   Participant.add = (participant, cb)=> {
-    chaincode(cc => {
-      cc.invoke.addParticipant([participant.ParticipantName, participant.ParticipantType], 'WebAppAdmin', (err, data) => {
+      user.cc.invoke.addParticipant([participant.ParticipantName, participant.ParticipantType], user.username, (err, data) => {
         cb(err, data);
-      });
     });
   };
 
   Participant.getByType = (type, cb) => {
-    chaincode(cc => {
-      cc.query.getParticipantsByType(type, 'WebAppAdmin', (err, data) => {
+      user.cc.query.getParticipantsByType(type, user.username, (err, data) => {
         cb(err, JSON.parse(data));
-      });
     });
   };
 
