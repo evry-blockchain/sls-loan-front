@@ -9,9 +9,9 @@ import {BehaviorSubject, Subject, Observable} from "rxjs";
 @Injectable()
 export class AuthService {
 
-  isLoggedIn$: Subject<any> = new BehaviorSubject(false);
-  isLoggedIn: boolean;
-  redirectUrl: string = '';
+  public isLoggedIn$: Subject<any> = new BehaviorSubject(false);
+  public redirectUrl: string = '';
+
   constructor() {}
 
   login(data: Login): Observable<any> {
@@ -22,5 +22,4 @@ export class AuthService {
       return Observable.throw(new Error('error!'))
     }
   }
-
 }

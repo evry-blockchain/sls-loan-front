@@ -1,4 +1,8 @@
 // styles applied on :host are applied on the current component, "app" in this case
+body, main {
+  min-height: 100vh;
+}
+
 :host {
   display: block;
 }
