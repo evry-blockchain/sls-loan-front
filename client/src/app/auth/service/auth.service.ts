@@ -20,9 +20,12 @@ export class AuthService {
 
   login(data: Login): Observable<any> {
     return this.http.post('api/login', data)
-      .do((data) => {
-        localStorage.setItem('bc.token', JSON.stringify(data['token']));
-        this.isLoggedIn$.next(true);
-      });
+      .map((res) => {
+      return res['json']();
+    }).do((data) => {
+      localStorage.setItem('bc.token', JSON.stringify(data['token']));
+      this.isLoggedIn$.next(true);
+    });
+
   }
 }

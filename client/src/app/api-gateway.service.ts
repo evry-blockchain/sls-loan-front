@@ -114,13 +114,14 @@ export class ApiGateway {
     options.headers = (options.headers || {});
     options.params = (options.params || {});
     options.data = (options.data || {});
-
+    console.log("here112")
     this.interpolateUrl(options);
     // this.addXsrfToken(options);
     // this.addEvryToken(options);
     // this.addClientName(options);
     this.addToken(options);
     this.addContentType(options);
+    console.log("here444");
 
     let requestOptions = new RequestOptions();
     requestOptions.method = options.method;
@@ -192,13 +193,15 @@ export class ApiGateway {
   private addToken(options: ApiGatewayOptions) {
     var userId = this.getTokenFromLocalStorage();
     if(!!userId) {
-      options.headers['token'] = userId;
+      console.log('userId', userId);
+      options.headers['access_token'] = userId;
     }
   }
 
   private getTokenFromLocalStorage(): string {
     var matches = localStorage.getItem('bc.token');
     if(!!matches) {
+      // console.log('matches', matches);
       return JSON.parse(matches);
     }
     return '';
