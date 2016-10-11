@@ -22,5 +22,4 @@ export class AuthService {
       return Observable.throw(new Error('error!'))
     }
   }
-
 }

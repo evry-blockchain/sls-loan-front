@@ -8,7 +8,9 @@ import {AuthService} from "../service/auth.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  isLoggedIn;
+
+  private isLoggedIn: boolean;
+
   constructor(private authService: AuthService, private router: Router) {
     authService.isLoggedIn$.subscribe((data) => {
       this.isLoggedIn = data;
@@ -25,9 +27,6 @@ export class AuthGuard implements CanActivate {
     if (this.isLoggedIn) {
       return true;
     }
-    // if (this.authService.isLoggedIn) {
-    //   return true;
-    // }
 
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
