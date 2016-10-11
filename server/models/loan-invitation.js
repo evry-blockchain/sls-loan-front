@@ -1,4 +1,5 @@
-import chaincode from '../connectors/chaincode';
+var user;
+import beforeRemote from '../utils/cc-before-remote-init';
 
 module.exports = LoanInvitation => {
   LoanInvitation.beforeRemote('*', (context, unused, next) => {
