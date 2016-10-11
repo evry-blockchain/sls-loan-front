@@ -3,11 +3,17 @@
  */
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
+import { ApiGateway } from "../../api-gateway.service";
 
 @Injectable()
 export class ProjectsService {
 
-    constructor() { }
+    constructor(private http: ApiGateway) { }
+
+
+    query(): Observable<any> {
+      return this.http.get('/api/loans')
+    }
 
     create(project): Observable<any> {
       console.log('project', project);

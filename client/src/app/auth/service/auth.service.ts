@@ -4,22 +4,28 @@
 
 import { Injectable } from '@angular/core';
 import { Login } from "../model/login.model";
-import {BehaviorSubject, Subject, Observable} from "rxjs";
+import { BehaviorSubject, Subject, Observable} from "rxjs";
+import { ApiGateway } from "../../api-gateway.service";
+import { Http } from "@angular/http";
 
 @Injectable()
 export class AuthService {
 
   public isLoggedIn$: Subject<any> = new BehaviorSubject(false);
+
   public redirectUrl: string = '';
 
-  constructor() {}
+
+  constructor(private http: Http) {}
 
   login(data: Login): Observable<any> {
-    if (data.userName === '1' && data.password === '1') {
-        this.isLoggedIn$.next(true);
-      return this.isLoggedIn$.asObservable();
-    } else {
-      return Observable.throw(new Error('error!'))
-    }
+    return this.http.post('api/login', data)
+      .map((res) => {
+      return res['json']();
+    }).do((data) => {
+      localStorage.setItem('bc.token', JSON.stringify(data['token']));
+      this.isLoggedIn$.next(true);
+    });
+
   }
 }

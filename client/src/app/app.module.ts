@@ -21,6 +21,9 @@ import { SharedModule } from "./shared/shared.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { ModalModule } from "ng2-bootstrap/ng2-bootstrap";
 import { ToastyModule } from "ng2-toasty";
+import { ApiGateway } from "./api-gateway.service";
+import { WaitingSpinnerComponent } from "./utils/waitingSpinner/waitingSpinner.component";
+import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerService";
 
 @NgModule({
     imports: [
@@ -38,13 +41,16 @@ import { ToastyModule } from "ng2-toasty";
       ToastyModule.forRoot()
     ],
     declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent
+      AppComponent,
+      HomeComponent,
+      AboutComponent,
+      WaitingSpinnerComponent
     ],
     providers: [
-        ApiService,
-        AuthGuard
+      ApiGateway,
+      ApiService,
+      AuthGuard,
+      WaitingSpinnerService
     ],
     bootstrap: [AppComponent]
 })
@@ -52,9 +58,6 @@ export class AppModule {
 
   constructor(public appRef:ApplicationRef) {
     }
-
-
-
 
     hmrOnInit(store) {
         console.log('HMR store', store);

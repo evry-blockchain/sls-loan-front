@@ -11,10 +11,10 @@
                name="name"
                class="form-control"
                placeholder="User name"
-               formControlName="userName"
+               formControlName="username"
                aria-describedby="basic-addon1">
       </div>
-      <div class="pull-right error-message" *ngIf="formSubmitted && !!loginForm.controls.userName.errors && !wrongCredentials">PLEASE ENTER YOUR USER NAME</div>
+      <div class="pull-right error-message" *ngIf="formSubmitted && !!loginForm.controls.username.errors && !wrongCredentials">PLEASE ENTER YOUR USER NAME</div>
       <div class="pull-right error-message" *ngIf="wrongCredentials">ARE YOU SURE THAT THIS IS YOUR USER NAME?</div>
 
       <br>
