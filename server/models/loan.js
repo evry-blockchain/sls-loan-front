@@ -1,5 +1,6 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
+import prepareListData from '../utils/prepare-list-data';
 
 module.exports = Loan => {
   Loan.beforeRemote('*', (context, unused, next) => {
@@ -15,7 +16,7 @@ module.exports = Loan => {
 
   Loan.getList = cb => {
     user.cc.query.getLoansList([], user.username, (err, data) => {
-      cb(err, JSON.parse(data));
+      cb(err, prepareListData(data));
     });
   };
 

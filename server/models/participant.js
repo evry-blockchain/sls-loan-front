@@ -1,5 +1,6 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
+import prepareListData from '../utils/prepare-list-data';
 
 module.exports = Participant => {
 
@@ -16,7 +17,7 @@ module.exports = Participant => {
 
   Participant.getList = cb => {
       user.cc.query.getParticipantsList([], user.username, (err, data) => {
-        cb(err, JSON.parse(data));
+        cb(err, prepareListData(data));
     });
   };
 
@@ -34,7 +35,7 @@ module.exports = Participant => {
 
   Participant.getByType = (type, cb) => {
       user.cc.query.getParticipantsByType(type, user.username, (err, data) => {
-        cb(err, JSON.parse(data));
+        cb(err, prepareListData(data));
     });
   };
 
