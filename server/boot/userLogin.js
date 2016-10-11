@@ -30,7 +30,7 @@ module.exports = function (app) {
 
     ibc.load(options, function (err, cc) {
       if (err) {
-        console.log(err);
+        res.status(401).json({"error": err});
       } else {
         AccessToken.createAccessTokenId(function (err, token) {
           if (!err) {
