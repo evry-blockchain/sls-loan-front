@@ -21,9 +21,15 @@ export class ProjectsService {
               @Inject('ApiEndpoint') private apiEndpoint) {
     this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
 
-    this.projectsSource = this.http.get(this.requestMapping);
+    this.projectsSource = this.http.get(this.requestMapping)
+                          .mergeMap((projects) => {
+                            return Observable.from(projects);
+                          });
 
-    this.projects$ = this.projectsSource;
+    this.projects$ = this.projectsSource.merge(this.addProjectSource)
+      .scan(function(accum, x) {
+        return accum.concat(x);
+      }, []);
   }
 
   query(): Observable<any> {
