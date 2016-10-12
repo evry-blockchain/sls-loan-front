@@ -15,21 +15,13 @@ import { ProjectsService } from "./service/projects.service";
 })
 export class ProjectsComponent implements OnInit {
 
-  public projects = [];
 
-  constructor(private modalService: NgbModal,
-              private formBuilder: FormBuilder,
-              private projectService: ProjectsService) { }
+  constructor() { }
 
 
   ngOnInit() {
-    this.projectService.query().subscribe((data) => {
-      this.projects = data;
-    })
+
   }
 
-  saved(project) {
-    this.projects.push(project);
-  }
 
 }

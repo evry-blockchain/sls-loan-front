@@ -24,7 +24,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
 
   @Input() lgModal;
-  @Output() saved  = new EventEmitter<any>();
 
 
   ngOnInit() {
@@ -39,7 +38,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   save() {
     this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe((value) => {
-        this.saved.emit(value);
         this.lgModal.hide();
     });
 

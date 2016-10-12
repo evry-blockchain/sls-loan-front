@@ -2,7 +2,7 @@
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
 import { Injectable, Inject } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { ApiGateway } from "../../api-gateway.service";
 
 @Injectable()
@@ -11,6 +11,8 @@ export class ProjectsService {
   public projects$;
 
   private projectsSource;
+  private addProjectSource = new Subject();
+
   private requestMapping: string;
 
 
@@ -29,7 +31,11 @@ export class ProjectsService {
   }
 
   create(project): Observable<any> {
-    return this.http.post(this.requestMapping, project);
+    return this.http.post(this.requestMapping, project)
+      .do(() => {
+       this.addProjectSource.next(project);
+    });
+
   }
 
 }
