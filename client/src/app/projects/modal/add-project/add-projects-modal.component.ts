@@ -22,24 +22,21 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectsService) { }
 
-
   @Input() lgModal;
-  @Output() saved  = new EventEmitter<any>();
 
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      borrower: [''],
+      borrowerId: [''],
       projectName: [''],
-      contactPerson: [''],
+      contactPersonName: [''],
       amount: [''],
       marketIndustry: ['']
     });
   }
 
   save() {
-    this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe((value) => {
-        this.saved.emit(value);
+    this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe(() => {
         this.lgModal.hide();
     });
 

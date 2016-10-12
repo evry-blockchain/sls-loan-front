@@ -49,7 +49,7 @@ export class ApiGateway {
 
   // I perform a GET request to the API, appending the given params
   // as URL search parameters. Returns a stream.
-  get(url: string, params?: any): Observable<Response> {
+  get(url: string, params?: any): Observable<any> {
     let options = new ApiGatewayOptions();
     options.method = RequestMethod.Get;
     options.url = url;

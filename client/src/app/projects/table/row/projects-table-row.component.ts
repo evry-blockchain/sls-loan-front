@@ -12,12 +12,11 @@ import { Input } from "@angular/core";
   }
 })
 export class ProjectsTableRowComponent implements OnInit {
+
   @Input('projects-table-row') project;
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.project);
-  }
+  ngOnInit() {}
 
 }

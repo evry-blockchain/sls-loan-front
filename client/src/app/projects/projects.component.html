@@ -5,7 +5,7 @@
       <button class="my-settings pull-right" (click)="userSettings.show()"></button>
     </div>
   </div>
-    <projects-table [projects]="projects"></projects-table>
+    <projects-table></projects-table>
   <div class="row">
     <div class="offset-md-10 col-md-1">
       <button class="add-btn pull-right" (click)="lgModal.show()">
@@ -15,7 +15,7 @@
 </section>
 
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <add-project-modal [lgModal]="lgModal" (saved)="saved($event)"></add-project-modal>
+  <add-project-modal [lgModal]="lgModal"></add-project-modal>
 </div>
 
 

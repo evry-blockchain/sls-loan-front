@@ -38,7 +38,7 @@ import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerServ
       SharedModule,
       ProjectsModule,
       ModalModule,
-      ToastyModule.forRoot()
+      ToastyModule.forRoot(),
     ],
     declarations: [
       AppComponent,
@@ -50,7 +50,8 @@ import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerServ
       ApiGateway,
       ApiService,
       AuthGuard,
-      WaitingSpinnerService
+      WaitingSpinnerService,
+      { provide: 'ApiEndpoint', useValue: '/api'},
     ],
     bootstrap: [AppComponent]
 })

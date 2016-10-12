@@ -1,9 +1,9 @@
 /**
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Input } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
+import { ProjectsService } from "../service/projects.service";
 
 @Component({
   selector: 'projects-table',
@@ -12,14 +12,17 @@ import { Router } from "@angular/router";
 })
 export class ProjectsTableComponent implements OnInit {
 
-  @Input() projects;
+  public projects;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private projectService: ProjectsService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.projects = this.projectService.projects$
+  }
 
   goToProject(project) {
-      this.router.navigate(['/projects', 1]);
-    }
+    this.router.navigate(['/projects', 1]);
+  }
 
 }
