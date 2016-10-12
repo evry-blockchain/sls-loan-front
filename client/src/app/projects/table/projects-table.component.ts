@@ -10,23 +10,15 @@ import { ProjectsService } from "../service/projects.service";
   templateUrl: 'projects-table.component.html',
   styleUrls: ['./projects-table.component.scss']
 })
-export class ProjectsTableComponent implements OnInit, OnDestroy {
+export class ProjectsTableComponent implements OnInit {
 
   public projects;
-
-  private projectSubs;
 
   constructor(private router: Router,
               private projectService: ProjectsService) { }
 
   ngOnInit() {
-    this.projectSubs = this.projectService.projects$.subscribe((projects) => {
-        this.projects = projects
-    })
-  }
-
-  ngOnDestroy(): void {
-    this.projectSubs.unsubscribe();
+    this.projects = this.projectService.projects$
   }
 
   goToProject(project) {
