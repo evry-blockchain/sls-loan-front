@@ -27,7 +27,7 @@ export class SelectInviteesPartnerComponent implements OnInit {
 
     if (!this.selected) {
       this.selectInvitee.emit(this.partner);
-      partner.style.backgroundColor = ' #a3c0c0';
+      partner.style.backgroundColor = 'rgba(163, 192, 192, 0.3)';
     } else {
       this.unselectInvitee.emit(this.partner);
       partner.style.backgroundColor = '#fff';
