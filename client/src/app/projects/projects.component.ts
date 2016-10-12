@@ -14,29 +14,22 @@ import { ProjectsService } from "./service/projects.service";
 
 })
 export class ProjectsComponent implements OnInit {
-  projectForm: FormGroup;
+
+  public projects = [];
+
   constructor(private modalService: NgbModal,
               private formBuilder: FormBuilder,
               private projectService: ProjectsService) { }
-  projects = [
-    // { projectName: 'USD 100M TO STATOIL', role: 'Arranger Bank', status: 'Invitation Sent' },
-    // { projectName: 'USD 65M TO BOHAUG SHIPPING', role: 'Participant', status: 'Invitation Received' },
-    // { projectName: 'USD 80M TO TELENOR', role: 'Arranger Bank', status: 'Contract Negotiation' },
-    // { projectName: 'USD 90M TO BEERENBERG', role: 'Participant', status: 'Time Left: 01:04:32' },
-  ];
+
 
   ngOnInit() {
     this.projectService.query().subscribe((data) => {
-      // console.log('data', data);
-
       this.projects = data;
-      // this.projects = data;
     })
   }
 
-  saved(nice) {
-    this.projects.push(nice);
-    console.log('trololo', nice);
+  saved(project) {
+    this.projects.push(project);
   }
 
 }
