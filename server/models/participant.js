@@ -42,6 +42,12 @@ module.exports = Participant => {
     });
   };
 
+  Participant.delete = (id, cb) => {
+    user.invoke.deleteRow(['Participants', id], user.username, (err,data) => {
+      cb(err, data);
+    });
+  };
+
   Participant.remoteMethod('getList', {
     http: {
       path: '/',
@@ -74,5 +80,14 @@ module.exports = Participant => {
     },
     accepts: {arg: 'type', type: 'string'},
     returns: {type: 'Participant', root: true}
+  });
+
+  Participant.remoteMethod('delete', {
+    http: {
+      path: '/:id',
+      verb: 'delete'
+    },
+    accepts: {arg: 'id', type: 'string', required: true},
+    returns: {type: 'object', root: true}
   });
 };

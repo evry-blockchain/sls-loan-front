@@ -5,6 +5,10 @@
 
 import loopback from 'loopback';
 import boot from 'loopback-boot';
+import Ibc1 from 'ibm-blockchain-js';
+
+var ibc = new Ibc1();
+ibc.clear(() => { console.info('Removing cached cc')});
 
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);

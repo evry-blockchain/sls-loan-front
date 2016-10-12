@@ -1,6 +1,7 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
+import prepareSingleData from '../utils/prepare-single-data';
 
 module.exports = LoanRequest => {
 
@@ -18,6 +19,12 @@ module.exports = LoanRequest => {
   LoanRequest.getList = cb => {
     user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
       cb(err, prepareListData(data));
+    });
+  };
+
+  LoanRequest.get = (id, cb) => {
+    user.cc.query.getLoanRequestByKey([id], user.username, (err, data) => {
+      cb(err, prepareSingleData(data));
     });
   };
 
@@ -51,6 +58,15 @@ module.exports = LoanRequest => {
       path: '/',
       verb: 'get'
     },
+    returns: {type: 'LoanRequest', root: true}
+  });
+
+  LoanRequest.remoteMethod('get', {
+    http: {
+      path: '/:id',
+      verb: 'get'
+    },
+    accepts: {arg: 'id', type: 'string', required: true},
     returns: {type: 'LoanRequest', root: true}
   });
 
