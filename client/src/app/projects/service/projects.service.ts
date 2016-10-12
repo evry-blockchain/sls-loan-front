@@ -12,7 +12,7 @@ export class ProjectsService {
 
 
     query(): Observable<any> {
-      return this.http.get('/api/loans')
+      return this.http.get('/api/LoanRequests')
     }
 
     create(project): Observable<any> {

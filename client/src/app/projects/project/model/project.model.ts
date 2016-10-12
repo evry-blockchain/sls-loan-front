@@ -4,13 +4,17 @@
 
 
 export class Project {
-  loanID: string;
-  arrangerBank: string;
+  loanRequestID: string;
   borrowerID: string;
-  amount: string;
-  interestRate: string;
-  InterestTerm: string;
-  fee: string;
-  agreementDate: string;
-  NegotiationStatus: string;
+  arrangerBankID: string;
+  loanSharesAmount: string;
+  projectRevenue: string;
+  projectName: string;
+  projectInformation: string;
+  company: string;
+  website: string;
+  contactPersonName: string;
+  contactPersonSurname: string;
+  requestDate: string;
+  status: string;
 }

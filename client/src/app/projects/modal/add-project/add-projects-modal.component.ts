@@ -29,9 +29,9 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      borrower: [''],
+      borrowerId: [''],
       projectName: [''],
-      contactPerson: [''],
+      contactPersonName: [''],
       amount: [''],
       marketIndustry: ['']
     });
