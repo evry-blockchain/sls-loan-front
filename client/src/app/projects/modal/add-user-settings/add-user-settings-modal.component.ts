@@ -30,7 +30,6 @@ export class AddUserSettingsModalComponent implements OnInit {
 
   save() {
     this.modal.hide();
-    console.log(this.settingsForm.getRawValue());
   }
 
 }

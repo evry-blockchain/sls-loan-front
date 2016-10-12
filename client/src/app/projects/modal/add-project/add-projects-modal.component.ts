@@ -22,7 +22,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectsService) { }
 
-
   @Input() lgModal;
 
 
@@ -37,7 +36,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe((value) => {
+    this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe(() => {
         this.lgModal.hide();
     });
 
