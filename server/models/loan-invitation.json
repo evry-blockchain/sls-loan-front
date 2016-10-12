@@ -7,15 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
-    "LoanInvitationID": {"type": "string", "id": "true"},
-    "ArrangerBankID": "string",
-    "BorrowerID": "string",
-    "LoanRequestID": "string",
-    "LoanTerm": "string",
-    "Amount": "string",
-    "InterestRate": "string",
-    "Info": "string",
-    "Status": "string"
+    "loanInvitationID": {"type": "string", "id": "true"},
+    "arrangerBankID": "string",
+    "borrowerID": "string",
+    "loanRequestID": "string",
+    "loanTerm": "string",
+    "amount": "string",
+    "interestRate": "string",
+    "info": "string",
+    "status": "string"
   },
   "validations": [],
   "relations": {},

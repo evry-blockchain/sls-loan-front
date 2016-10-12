@@ -28,11 +28,11 @@ module.exports = LoanNegotiation => {
 
   LoanNegotiation.add = (loanNegotiation, cb)=> {
     user.cc.invoke.addLoanNegotiation([
-      loanNegotiation.LoanInvitationID,
-      loanNegotiation.ParticipantBankID,
-      loanNegotiation.Amount,
-      loanNegotiation.NegotiationStatus,
-      loanNegotiation.ParticipantBankComment
+      loanNegotiation.loanInvitationID,
+      loanNegotiation.participantBankID,
+      loanNegotiation.amount,
+      loanNegotiation.negotiationStatus,
+      loanNegotiation.participantBankComment
     ], user.username, (err, data) => {
       cb(err, data);
     });

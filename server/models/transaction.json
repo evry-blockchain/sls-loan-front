@@ -7,16 +7,13 @@
     "validateUpsert": false
   },
   "properties": {
-    "TransactionID": {
-      "type": "string",
-      "id": "true"
-    },
-    "FromAccountID": "string",
-    "ToAccountID": "string",
-    "Date": "string",
-    "TransactionType": "string",
-    "TransactionRelatedEntityID": "string",
-    "Amount": "string"
+    "transactionID": { "type": "string",  "id": "true" },
+    "fromAccountID": "string",
+    "toAccountID": "string",
+    "date": "string",
+    "transactionType": "string",
+    "transactionRelatedEntityID": "string",
+    "amount": "string"
   },
   "validations": [],
   "relations": {},

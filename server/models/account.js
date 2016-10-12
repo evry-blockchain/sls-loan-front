@@ -29,13 +29,13 @@ module.exports = Account => {
   };
 
   Account.add = (account, cb)=> {
-    user.cc.invoke.addAccount([account.ParticipantID, account.Amount], user.username, (err, data) => {
+    user.cc.invoke.addAccount([account.participantID, account.amount], user.username, (err, data) => {
       cb(err, data);
     });
   };
 
   Account.update = (account, cb)=> {
-    user.cc.invoke.updateAccountAmount([account.AccountID, account.Amount], user.username, (err, data) => {
+    user.cc.invoke.updateAccountAmount([account.accountID, account.amount], user.username, (err, data) => {
       cb(err, data);
     });
   };

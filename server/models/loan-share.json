@@ -7,14 +7,11 @@
     "validateUpsert": false
   },
   "properties": {
-    "LoanShareId": {
-      "type": "string",
-      "id": "true"
-    },
-    "LoanId": "string",
-    "ParticipantBankId": "string",
-    "Amount": "string",
-    "NegotiationStatus": "string"
+    "loanShareId": { "type": "string",  "id": "true" },
+    "loanId": "string",
+    "participantBankId": "string",
+    "amount": "string",
+    "negotiationStatus": "string"
   },
   "validations": [],
   "relations": {},

@@ -7,21 +7,9 @@
     "validateUpsert": false
   },
   "properties": {
-    "ParticipantKey": {
-      "type": "String",
-      "required": false,
-      "length": null
-    },
-    "ParticipantName": {
-      "type": "String",
-      "required": false,
-      "length": null
-    },
-    "ParticipantType": {
-      "type": "String",
-      "required": false,
-      "length": null
-    }
+    "participantKey": { "type": "string",  "id": "true" },
+    "participantName": { "type": "string" },
+    "participantType": { "type": "string" }
   },
   "validations": [],
   "relations": {},

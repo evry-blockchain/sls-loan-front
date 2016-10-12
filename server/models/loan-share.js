@@ -29,11 +29,11 @@ module.exports = LoanShare => {
 
   LoanShare.add = (loanShare, cb)=> {
       user.cc.invoke.addLoanShare([
-        loanShare.LoanShareId,
-        loanShare.LoanId,
-        loanShare.ParticipantBankId,
-        loanShare.Amount,
-        loanShare.NegotiationStatus
+        loanShare.loanShareId,
+        loanShare.loanId,
+        loanShare.participantBankId,
+        loanShare.amount,
+        loanShare.negotiationStatus
       ], user.username, (err, data) => {
         cb(err, data);
       });

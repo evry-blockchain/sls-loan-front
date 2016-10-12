@@ -29,9 +29,9 @@ module.exports = LoanSale => {
 
   LoanSale.add = (loanSale, cb)=> {
       user.cc.invoke.addLoanSale([
-        loanSale.FromLoanSaleID,
-        loanSale.ToParticipantID,
-        loanSale.AmountSold
+        loanSale.fromLoanSaleID,
+        loanSale.toParticipantID,
+        loanSale.amountSold
       ], user.username, (err, data) => {
         cb(err, data);
       });

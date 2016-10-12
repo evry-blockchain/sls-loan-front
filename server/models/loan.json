@@ -7,18 +7,18 @@
     "validateUpsert": false
   },
   "properties": {
-    "LoanID": {
+    "loanID": {
       "type": "string",
       "id": "true"
     },
-    "ArrangerBank": "string",
-    "BorrowerID": "string",
-    "Amount": "string",
-    "InterestRate": "string",
-    "InterestTerm": "string",
-    "Fee": "string",
-    "AgreementDate": "string",
-    "NegotiationStatus": "string"
+    "arrangerBank": "string",
+    "borrowerID": "string",
+    "amount": "string",
+    "interestRate": "string",
+    "interestTerm": "string",
+    "fee": "string",
+    "agreementDate": "string",
+    "negotiationStatus": "string"
   },
   "validations": [],
   "relations": {},

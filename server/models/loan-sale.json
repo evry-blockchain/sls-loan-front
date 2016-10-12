@@ -7,13 +7,10 @@
     "validateUpsert": false
   },
   "properties": {
-    "LoanSaleID": {
-      "type": "string",
-      "id": "true"
-    },
-    "FromLoanSaleID": "string",
-    "ToParticipantID": "string",
-    "AmountSold": "string"
+    "loanSaleID": { "type": "string",  "id": "true" },
+    "fromLoanSaleID": "string",
+    "toParticipantID": "string",
+    "amountSold": "string"
   },
   "validations": [],
   "relations": {},

@@ -29,18 +29,18 @@ module.exports = LoanRequest => {
 
   LoanRequest.add = (loanRequest, cb)=> {
     user.cc.invoke.addLoanRequest([
-      loanRequest.BorrowerID,
-      loanRequest.ArrangerBankID,
-      loanRequest.LoanSharesAmount,
-      loanRequest.ProjectRevenue,
-      loanRequest.ProjectName,
-      loanRequest.ProjectInformation,
-      loanRequest.Company,
-      loanRequest.Website,
-      loanRequest.ContactPersonName,
-      loanRequest.ContactPersonSurname,
-      loanRequest.RequestDate,
-      loanRequest.Status
+      loanRequest.borrowerID,
+      loanRequest.arrangerBankID,
+      loanRequest.loanSharesAmount,
+      loanRequest.projectRevenue,
+      loanRequest.projectName,
+      loanRequest.projectInformation,
+      loanRequest.company,
+      loanRequest.website,
+      loanRequest.contactPersonName,
+      loanRequest.contactPersonSurname,
+      loanRequest.requestDate,
+      loanRequest.status
     ], user.username, (err, data) => {
       cb(err, data);
     });

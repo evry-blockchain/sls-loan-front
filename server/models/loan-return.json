@@ -7,13 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
-    "LoanReturnID": {
-      "type": "string",
-      "id": "true"
-    },
-    "LoanID": "string",
-    "Amount": "string",
-    "ReturnDate": "string"
+    "loanReturnID": { "type": "string",  "id": "true" },
+    "loanID": "string",
+    "amount": "string",
+    "returnDate": "string"
   },
   "validations": [],
   "relations": {},

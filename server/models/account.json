@@ -7,15 +7,15 @@
     "validateUpsert": false
   },
   "properties": {
-    "AccountID": {
+    "accountID": {
       "type": "string",
       "id": true
     },
-    "ParticipantID": {
+    "participantID": {
       "type": "string",
       "id": "true"
     },
-    "Amount": "string"
+    "amount": "string"
   },
   "validations": [],
   "relations": {},

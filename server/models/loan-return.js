@@ -29,9 +29,9 @@ module.exports = LoanReturn => {
 
   LoanReturn.add = (loanReturn, cb)=> {
       user.cc.invoke.addLoanReturn([
-        loanReturn.LoanID,
-        loanReturn.Amount,
-        loanReturn.ReturnDate,
+        loanReturn.loanID,
+        loanReturn.amount,
+        loanReturn.returnDate,
       ], user.username, (err, data) => {
         cb(err, data);
     });

@@ -29,12 +29,12 @@ module.exports = Transaction => {
 
   Transaction.add = (transaction, cb)=> {
       user.cc.invoke.addTransaction([
-        transaction.FromAccountID,
-        transaction.ToAccountID,
-        transaction.Date,
-        transaction.TransactionType,
-        transaction.TransactionRelatedEntityID,
-        transaction.Amount
+        transaction.fromAccountID,
+        transaction.toAccountID,
+        transaction.date,
+        transaction.transactionType,
+        transaction.transactionRelatedEntityID,
+        transaction.amount
       ], user.username, (err, data) => {
         cb(err, data);
     });

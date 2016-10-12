@@ -28,14 +28,14 @@ module.exports = Loan => {
 
   Loan.add = (loan, cb)=> {
     user.cc.invoke.addLoan([
-      loan.ArrangerBank,
-      loan.BorrowerID,
-      loan.Amount,
-      loan.InterestRate,
-      loan.InterestTerm,
-      loan.Fee,
-      loan.AgreementDate,
-      loan.NegotiationStatus
+      loan.arrangerBank,
+      loan.borrowerID,
+      loan.amount,
+      loan.interestRate,
+      loan.interestTerm,
+      loan.fee,
+      loan.agreementDate,
+      loan.negotiationStatus
     ], user.username, (err, data) => {
       cb(err, data);
     });

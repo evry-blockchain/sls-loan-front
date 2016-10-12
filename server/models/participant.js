@@ -16,26 +16,29 @@ module.exports = Participant => {
   });
 
   Participant.getList = cb => {
-      user.cc.query.getParticipantsList([], user.username, (err, data) => {
-        cb(err, prepareListData(data));
+    user.cc.query.getParticipantsList([], user.username, (err, data) => {
+      cb(err, prepareListData(data));
     });
   };
 
   Participant.count = cb => {
-      user.cc.query.getParticipantsQuantity([], user.username, (err, data) => {
-        cb(err, JSON.parse(data));
+    user.cc.query.getParticipantsQuantity([], user.username, (err, data) => {
+      cb(err, JSON.parse(data));
     });
   };
 
   Participant.add = (participant, cb)=> {
-      user.cc.invoke.addParticipant([participant.ParticipantName, participant.ParticipantType], user.username, (err, data) => {
-        cb(err, data);
+    user.cc.invoke.addParticipant([
+      participant.participantName,
+      participant.participantType
+    ], user.username, (err, data) => {
+      cb(err, data);
     });
   };
 
   Participant.getByType = (type, cb) => {
-      user.cc.query.getParticipantsByType(type, user.username, (err, data) => {
-        cb(err, prepareListData(data));
+    user.cc.query.getParticipantsByType(type, user.username, (err, data) => {
+      cb(err, prepareListData(data));
     });
   };
 
