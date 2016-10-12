@@ -1,25 +1,36 @@
 /**
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Input } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
+import { ProjectsService } from "../service/projects.service";
 
 @Component({
   selector: 'projects-table',
   templateUrl: 'projects-table.component.html',
   styleUrls: ['./projects-table.component.scss']
 })
-export class ProjectsTableComponent implements OnInit {
+export class ProjectsTableComponent implements OnInit, OnDestroy {
 
-  @Input() projects;
+  public projects;
 
-  constructor(private router: Router) { }
+  private projectSubs;
 
-  ngOnInit() { }
+  constructor(private router: Router,
+              private projectService: ProjectsService) { }
+
+  ngOnInit() {
+    this.projectSubs = this.projectService.projects$.subscribe((projects) => {
+        this.projects = projects
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.projectSubs.unsubscribe();
+  }
 
   goToProject(project) {
-      this.router.navigate(['/projects', 1]);
-    }
+    this.router.navigate(['/projects', 1]);
+  }
 
 }

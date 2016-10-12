@@ -8,11 +8,20 @@ import { ApiGateway } from "../../api-gateway.service";
 @Injectable()
 export class ProjectsService {
 
+  public projects$;
+
+  private projectsSource;
   private requestMapping: string;
+
+
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
-    this.requestMapping = `${this.apiEndpoint}/LoanRequests`
+    this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
+
+    this.projectsSource = this.http.get(this.requestMapping);
+
+    this.projects$ = this.projectsSource;
   }
 
   query(): Observable<any> {
