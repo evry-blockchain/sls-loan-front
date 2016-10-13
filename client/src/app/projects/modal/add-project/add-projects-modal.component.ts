@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { Input } from "@angular/core";
 import { ProjectsService } from "../../service/projects.service";
 import { ParticipantService } from "../../../participants/service/participants.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'add-project-modal',
@@ -25,7 +26,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   @Input() lgModal;
 
-  public borrowers;
+  public borrowers = [];
 
   public nice = [ {
     value: 'a',
@@ -49,9 +50,18 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
       marketIndustry: ['']
     });
 
-    this.participantService.participants$.subscribe(borrowers => {
-      console.log('borrowers', borrowers);
-      this.borrowers = borrowers;
+    this.participantService.participants$.flatMap((projects) => {
+      return Observable.from(projects);
+    }).filter(item => {
+      return item.participantType === 'Borrower';
+    }).map((item) => {
+      var newItem = {
+        value: item.participantKey,
+        label: item.participantName
+      };
+      return newItem;
+    }).toArray().subscribe(borrowers => {
+      this.borrowers = borrowers
     })
   }
 
@@ -59,17 +69,12 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
     this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe(() => {
         this.lgModal.hide();
     });
-
   }
 
   ngOnDestroy(): void {
     if(!!this.createService) {
       this.createService.unsubscribe();
     }
-  }
-
-  selected(item) {
-    console.log('here', item);
   }
 
 }
