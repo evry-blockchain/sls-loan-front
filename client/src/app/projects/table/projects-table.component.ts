@@ -1,9 +1,10 @@
 /**
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { ProjectsService } from "../service/projects.service";
+import { Project } from "../project/model/project.model";
 
 @Component({
   selector: 'projects-table',
@@ -21,8 +22,8 @@ export class ProjectsTableComponent implements OnInit {
     this.projects = this.projectService.projects$
   }
 
-  goToProject(project) {
-    this.router.navigate(['/projects', 1]);
+  goToProject(project: Project) {
+    this.router.navigate(['/projects', project.loanRequestID]);
   }
 
 }

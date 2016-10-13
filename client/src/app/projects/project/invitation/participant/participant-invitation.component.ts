@@ -4,6 +4,8 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { ProjectsService } from "../../../service/projects.service";
+import { ActivatedRoute, Router, Params } from "@angular/router";
 
 @Component({
   selector: 'participant-invitation',
@@ -16,9 +18,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParticipantInvitationComponent implements OnInit {
   project;
-  constructor() { }
+
+  constructor(private projectsService: ProjectsService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+
+    // this.project = this.projectsService.get()
 
     this.project = {
       borrower: 'Statoil',

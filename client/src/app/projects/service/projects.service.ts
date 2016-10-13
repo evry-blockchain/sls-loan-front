@@ -12,10 +12,7 @@ export class ProjectsService {
 
   private projectsSource;
   private addProjectSource = new Subject();
-
   private requestMapping: string;
-
-
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
@@ -32,16 +29,15 @@ export class ProjectsService {
       }, []);
   }
 
-  query(): Observable<any> {
-    return this.http.get(this.requestMapping)
-  }
-
   create(project): Observable<any> {
     return this.http.post(this.requestMapping, project)
       .do(() => {
        this.addProjectSource.next(project);
     });
+  }
 
+  get(id) {
+    return this.http.get(`${this.requestMapping}/${id}`);
   }
 
 }

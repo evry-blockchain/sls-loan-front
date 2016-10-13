@@ -4,6 +4,8 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { ProjectsService } from "../../../service/projects.service";
 
 @Component({
   selector: 'create-invitation',
@@ -15,9 +17,17 @@ export class CreateInvitationComponent implements OnInit {
   project;
 
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private projectService: ProjectsService ) { }
 
   ngOnInit() {
+    this.route.parent.parent.params.forEach((params) => {
+      let id = +params['id']; // (+) converts string 'id' to a number
+      this.projectService.get(id).subscribe(data => {
+        this.project = data;
+      })
+    });
   }
 
 }

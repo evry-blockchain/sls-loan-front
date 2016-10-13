@@ -4,6 +4,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'project',
@@ -11,8 +12,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit {
-    constructor() { }
+    constructor(private route: ActivatedRoute) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 
 }

@@ -10,7 +10,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let project of (projects | async)" [projects-table-row]="project" (click)="goToProject()">
+      <tr *ngFor="let project of (projects | async)" [projects-table-row]="project" (click)="goToProject(project)">
       </tr>
       </tbody>
     </table>
