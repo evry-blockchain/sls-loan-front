@@ -24,6 +24,8 @@ import { ToastyModule } from "ng2-toasty";
 import { ApiGateway } from "./api-gateway.service";
 import { WaitingSpinnerComponent } from "./utils/waitingSpinner/waitingSpinner.component";
 import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerService";
+import { ParticipantService } from "./participants/service/participants.service";
+
 
 @NgModule({
     imports: [
@@ -51,6 +53,7 @@ import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerServ
       ApiService,
       AuthGuard,
       WaitingSpinnerService,
+      ParticipantService,
       { provide: 'ApiEndpoint', useValue: '/api'},
     ],
     bootstrap: [AppComponent]

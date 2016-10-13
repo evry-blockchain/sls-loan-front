@@ -10,7 +10,9 @@
       <div class="modal-body">
         <label for="borrower">Borrower</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="borrower" formControlName="borrowerId">
+          <ng-select style="width: 100%"
+            [options]="nice">
+          </ng-select>
         </div>
 
         <label for="project-name">Project Name</label>

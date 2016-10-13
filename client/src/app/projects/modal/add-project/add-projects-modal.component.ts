@@ -5,7 +5,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { Input } from "@angular/core";
 import { ProjectsService } from "../../service/projects.service";
-import { Observable } from "rxjs";
+import { ParticipantService } from "../../../participants/service/participants.service";
 
 @Component({
   selector: 'add-project-modal',
@@ -20,10 +20,25 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
 
   constructor(private formBuilder: FormBuilder,
-              private projectService: ProjectsService) { }
+              private projectService: ProjectsService,
+              private participantService: ParticipantService) { }
 
   @Input() lgModal;
 
+  public borrowers;
+
+  public nice = [ {
+    value: 'a',
+    label: 'Alpha'
+  },
+    {
+      value: 'b',
+      label: 'Beta'
+    },
+    {
+      value: 'c',
+      label: 'Gamma'
+    }];
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
@@ -33,6 +48,11 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
       loanSharesAmount: [''],
       marketIndustry: ['']
     });
+
+    this.participantService.participants$.subscribe(borrowers => {
+      console.log('borrowers', borrowers);
+      this.borrowers = borrowers;
+    })
   }
 
   save() {
@@ -46,6 +66,10 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
     if(!!this.createService) {
       this.createService.unsubscribe();
     }
+  }
+
+  selected(item) {
+    console.log('here', item);
   }
 
 }

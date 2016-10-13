@@ -14,9 +14,10 @@ import { ModalModule } from "ng2-bootstrap/ng2-bootstrap";
 import { ProjectsService } from "./service/projects.service";
 import { AddUserSettingsModalComponent } from "./modal/add-user-settings/add-user-settings-modal.component";
 import { ProjectModule } from "./project/project.module";
+import { SelectModule } from "angular2-select";
 
 @NgModule({
-  imports: [ projectsRouting, SharedModule, ReactiveFormsModule, ModalModule, ProjectModule ],
+  imports: [ projectsRouting, SharedModule, ReactiveFormsModule, ModalModule, ProjectModule, SelectModule],
   declarations: [ ProjectsComponent,
     ProjectsTableComponent,
     ProjectsTableRowComponent,
