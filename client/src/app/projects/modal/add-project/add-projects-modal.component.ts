@@ -30,7 +30,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
       borrowerId: [''],
       projectName: [''],
       contactPersonName: [''],
-      amount: [''],
+      loanSharesAmount: [''],
       marketIndustry: ['']
     });
   }

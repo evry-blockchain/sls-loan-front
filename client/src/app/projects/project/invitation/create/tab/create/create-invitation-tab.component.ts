@@ -26,6 +26,7 @@ export class CreateInvitationTabComponent implements OnInit {
     this.route.parent.parent.parent.params.forEach((params) => {
       let id = +params['id']; // (+) converts string 'id' to a number
       this.projectsService.get(id).subscribe(project => {
+        console.log('project', project)
         this.project = project;
         this.project['marketIndustry'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.';
       })
