@@ -28,19 +28,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   public borrowers = [];
 
-  public nice = [ {
-    value: 'a',
-    label: 'Alpha'
-  },
-    {
-      value: 'b',
-      label: 'Beta'
-    },
-    {
-      value: 'c',
-      label: 'Gamma'
-    }];
-
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
       borrowerId: [''],
