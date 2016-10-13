@@ -11,7 +11,7 @@
         <label for="borrower">Borrower</label>
         <div class="input-group">
           <ng-select id="borrower" style="width: 100%"
-                     [options]="(borrowers | async)"
+                     [options]="borrowers"
                      formControlName="borrowerId">
           </ng-select>
         </div>
