@@ -22,4 +22,10 @@ export class ParticipantService {
     return this.http.get(this.requestMapping);
   }
 
+  getParticipantName(id, participants) {
+    return participants.find((item) => {
+        return item['participantKey'] === id;
+    })['participantName'];
+  }
+
 }
