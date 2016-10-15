@@ -1,3 +1,62 @@
 <project-overview-header></project-overview-header>
+<section class="component-section">
+  <accordion [closeOthers]="true">
+    <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
+      <div accordion-heading>
+        <h2 class="section-head">Project Information</h2>
+      </div>
+      <overview-project-information></overview-project-information>
+    </accordion-group>
+    <accordion-group #group>
+      <div accordion-heading>
+        <h2 class="section-head">Additional Info</h2>
+      </div>
+      <div class="section-content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <textarea id="additional-info" class="form-control" rows="20">
+
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+    <accordion-group #group>
+      <div accordion-heading>
+        <h2 class="section-head">Terms & Conditions</h2>
+      </div>
+      <div class="section-content">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="">Assets</label>
+              <input type="text" class="form-control"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="">Convenants</label>
+              <textarea class="form-control" rows="20"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-md-11 col-md-1 panel" >
+            <button class="btn btn-block  btn-lg m-b-2" style="background-color: #a3c0c0" (click)="nextTab()"><span style="color: white">Next</span></button>
+          </div>
+        </div>
+      </div>
+
+    </accordion-group>
+  </accordion>
+</section>
+
+
+
+
 
 PROJECT OVERVIEW WILL BE HERE SOON

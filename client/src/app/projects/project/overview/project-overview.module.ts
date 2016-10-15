@@ -6,14 +6,18 @@ import { NgModule } from '@angular/core';
 import { ProjectOverviewComponent } from "./project-overview.component";
 import { ProjectOverviewHeaderComponent } from "./header/project-overview-header.component";
 import { CommonModule } from "@angular/common";
+import { OverviewProjectInformationComponent } from "./accordion/project-information/overview-project-information.component";
+import { AccordionModule } from "ng2-bootstrap";
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AccordionModule
   ],
   declarations: [
     ProjectOverviewComponent,
-    ProjectOverviewHeaderComponent
+    ProjectOverviewHeaderComponent,
+    OverviewProjectInformationComponent
   ],
 })
 export class ProjectOverviewModule {

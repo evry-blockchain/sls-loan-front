@@ -33,7 +33,6 @@ import { ParticipantService } from "./participants/service/participants.service"
       HttpModule,
       FormsModule,
       routing,
-      InvitationModule,
       PaymentsModule,
       NgbModule,
       AuthModule,
