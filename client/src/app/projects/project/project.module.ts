@@ -8,10 +8,11 @@ import { projectRouting } from "./project.routing";
 import { CommonModule } from "@angular/common";
 import { PaymentsModule } from "./payments/payments.module";
 import { ChatModule } from "./chat/chat.module";
+import { ProjectOverviewModule } from "./overview/project-overview.module";
 
 @NgModule({
-  imports: [ CommonModule, projectRouting, PaymentsModule, ChatModule ],
-  declarations: [ProjectComponent, ProjectOverviewComponent],
+  imports: [ CommonModule, projectRouting, PaymentsModule, ChatModule, ProjectOverviewModule ],
+  declarations: [ProjectComponent],
 })
 export class ProjectModule {
 }

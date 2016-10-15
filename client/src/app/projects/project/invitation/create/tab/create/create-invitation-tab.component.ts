@@ -7,6 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProjectsService } from "../../../../../service/projects.service";
+import { ParticipantService } from "../../../../../../participants/service/participants.service";
 
 @Component({
   selector: 'create-invitation-tab',
@@ -20,15 +21,17 @@ export class CreateInvitationTabComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private projectsService: ProjectsService) { }
+              private projectsService: ProjectsService,
+              private participantService: ParticipantService) { }
 
   ngOnInit() {
     this.route.parent.parent.parent.params.forEach((params) => {
       let id = +params['id']; // (+) converts string 'id' to a number
-      this.projectsService.get(id).subscribe(project => {
-        console.log('project', project)
+      this.projectsService.get(id).map((item) => {
+        item.project['marketIndustry'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.';
+        return item;
+      }).subscribe(project => {
         this.project = project;
-        this.project['marketIndustry'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.';
       })
     });
   }
