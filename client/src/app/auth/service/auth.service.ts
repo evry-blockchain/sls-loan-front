@@ -7,6 +7,7 @@ import { Login } from "../model/login.model";
 import { BehaviorSubject, Subject, Observable} from "rxjs";
 import { ApiGateway } from "../../api-gateway.service";
 import { Http } from "@angular/http";
+import { WaitingSpinnerService } from "../../utils/waitingSpinner/waitingSpinnerService";
 
 @Injectable()
 export class AuthService {
@@ -16,16 +17,20 @@ export class AuthService {
   public redirectUrl: string = '';
 
 
-  constructor(private http: Http) {}
+  constructor(private http: Http,
+              private spinnerService: WaitingSpinnerService) {}
 
   login(data: Login): Observable<any> {
+    this.spinnerService.startLoading$.next(true);
     return this.http.post('api/login', data)
       .map((res) => {
       return res['json']();
     }).do((data) => {
       localStorage.setItem('bc.token', JSON.stringify(data['token']));
       this.isLoggedIn$.next(true);
-    });
+    }).finally(() => {
+        this.spinnerService.stopLoading$.next('');
+      });
 
   }
 }
