@@ -2,6 +2,8 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { ProjectsService } from "../../../../service/projects.service";
 
 @Component({
   selector: 'overview-project-information',
@@ -12,8 +14,17 @@ export class OverviewProjectInformationComponent implements OnInit {
 
   project = {};
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private projectService: ProjectsService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.route.parent.params.subscribe(data => {
+      let id = +data['id'];
+      this.projectService.get(id).subscribe((project) => {
+        this.project = project;
+      });
+    });
+  }
 
 }
