@@ -16,7 +16,10 @@ export class ParticipantService {
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
     this.requestMapping = `${this.apiEndpoint}/participants`;
-    this.participants$ = this.http.get(this.requestMapping);
+  }
+
+  query() {
+    return this.http.get(this.requestMapping);
   }
 
 }

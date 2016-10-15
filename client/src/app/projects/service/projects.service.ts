@@ -8,7 +8,6 @@ import { ApiGateway } from "../../api-gateway.service";
 @Injectable()
 export class ProjectsService {
 
-  public projects$;
 
   private projectsSource;
   private addProjectSource = new Subject();
@@ -17,16 +16,6 @@ export class ProjectsService {
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
     this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
-
-    this.projectsSource = this.http.get(this.requestMapping)
-                          .mergeMap((projects) => {
-                            return Observable.from(projects);
-                          });
-
-    this.projects$ = this.projectsSource.merge(this.addProjectSource)
-      .scan(function(accum, x) {
-        return accum.concat(x);
-      }, []);
   }
 
   create(project): Observable<any> {
@@ -38,6 +27,18 @@ export class ProjectsService {
 
   get(id) {
     return this.http.get(`${this.requestMapping}/${id}`);
+  }
+
+  query() {
+    this.projectsSource = this.http.get(this.requestMapping)
+                          .mergeMap((projects) => {
+                            return Observable.from(projects);
+                          });
+
+    return this.projectsSource.merge(this.addProjectSource)
+      .scan(function(accum, x) {
+        return accum.concat(x);
+      }, []);
   }
 
 }

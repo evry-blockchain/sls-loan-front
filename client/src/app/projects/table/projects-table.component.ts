@@ -19,7 +19,7 @@ export class ProjectsTableComponent implements OnInit {
               private projectService: ProjectsService) { }
 
   ngOnInit() {
-    this.projects = this.projectService.projects$
+    this.projects = this.projectService.query();
   }
 
   goToProject(project: Project) {

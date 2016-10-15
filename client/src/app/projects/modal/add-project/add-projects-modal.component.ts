@@ -37,14 +37,14 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
       marketIndustry: ['']
     });
 
-    this.participantService.participants$.flatMap((projects) => {
+    this.participantService.query().flatMap((projects) => {
       return Observable.from(projects);
     }).filter(item => {
-      return item.participantType === 'Borrower';
+      return item['participantType'] === 'Borrower';
     }).map((item) => {
       var newItem = {
-        value: item.participantKey,
-        label: item.participantName
+        value: item['participantKey'],
+        label: item['participantName']
       };
       return newItem;
     }).toArray().subscribe(borrowers => {
