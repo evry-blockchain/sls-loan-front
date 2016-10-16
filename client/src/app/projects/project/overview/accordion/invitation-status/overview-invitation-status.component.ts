@@ -10,27 +10,27 @@ export class OverviewInvitationStatusComponent implements OnInit {
 
   rows = [
     {
-      'participant': 'Marino Nice Comp.',
-      'status': 'NOT_PAID',
-      'invoiceAmount': '200 M USD',
+      'participantBank': 'Marino Nice Comp.',
+      'status': 'COMMITED',
+      'sharesCommitted': '200 M USD',
       'date': new Date().toLocaleDateString(),
     },
     {
-      'participant': 'Dashmi Incorporated Inc.',
-      'status': 'PAID',
-      'invoiceAmount': '200 M USD',
+      'participantBank': 'Dashmi Incorporated Inc.',
+      'status': 'INTERESTED',
+      'sharesCommitted': '200 M USD',
       'date': new Date().toLocaleDateString(),
     },
     {
-      'participant': 'Arfor Liability Enterprise LC.',
-      'status': 'PAID',
-      'invoiceAmount': '200 M USD',
+      'participantBank': 'Arfor Liability Enterprise LC.',
+      'status': 'INVITED',
+      'sharesCommitted': '200 M USD',
       'date': new Date().toLocaleDateString(),
     },
     {
-      'participant': 'Incada Financial services.',
-      'status': 'PAID',
-      'invoiceAmount': '200 M USD',
+      'participantBank': 'Incada Financial services.',
+      'status': 'DECLINED',
+      'sharesCommitted': '200 M USD',
       'date': new Date().toLocaleDateString(),
     }
   ];
@@ -44,5 +44,5 @@ export class OverviewInvitationStatusComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
-    
+
 }
