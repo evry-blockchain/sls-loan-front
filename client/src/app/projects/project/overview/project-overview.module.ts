@@ -10,13 +10,15 @@ import { AccordionModule, ModalModule } from "ng2-bootstrap";
 import { ProjectsSharedModule } from "../../shared/project-shared.module";
 import { SharedModule } from "../../../shared/shared.module";
 import { OverviewInvitationStatusComponent } from "./accordion/invitation-status/overview-invitation-status.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   imports: [
     AccordionModule,
     ModalModule,
     ProjectsSharedModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   declarations: [
     ProjectOverviewComponent,
