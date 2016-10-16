@@ -33,14 +33,14 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes['project'] && !!this.projectForm) {
-      this.projectForm.patchValue(changes['project'].currentValue);
-      this.projectForm.controls['borrowerId'].patchValue(4);
+      // this.projectForm.patchValue(changes['project'].currentValue);
+      // this.projectForm.controls['borrowerId'].patchValue(4);
     }
   }
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      borrowerId: [''],
+      borrowerID: [''],
       projectName: [''],
       contactPersonName: [''],
       loanSharesAmount: [''],

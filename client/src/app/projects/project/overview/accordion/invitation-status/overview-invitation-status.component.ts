@@ -22,7 +22,7 @@ export class OverviewInvitationStatusComponent implements OnInit {
       'date': new Date().toLocaleDateString(),
     },
     {
-      'participantBank': 'Arfor Liability Enterprise LC.',
+      'participantBank': 'Arfor Liability ',
       'status': 'INVITED',
       'sharesCommitted': '200 M USD',
       'date': new Date().toLocaleDateString(),
