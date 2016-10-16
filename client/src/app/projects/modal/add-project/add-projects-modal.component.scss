@@ -13,5 +13,10 @@ div.modal-content {
   }
   .modal-footer {
     border: 0;
+    button {
+      span {
+        color: #fff;
+      }
+    }
   }
 }

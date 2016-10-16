@@ -4,7 +4,7 @@
       <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="modal-title">Add new Project <small>(my role: Arranger Bank)</small> </h4>
+      <h4 class="modal-title" [innerHtml]="title"></h4>
     </div>
     <form [formGroup]="projectForm" (ngSubmit)="save()">
       <div class="modal-body">
@@ -34,9 +34,24 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn" style="background-color: #a3c0c0">
-          <span style="color: white">Add</span>
-        </button>
+        <div [ngSwitch]="!!isUpdateMode">
+          <div *ngSwitchCase="true">
+            <div class="row">
+              <div class="offset-md-1 col-md-5">
+                <button  class="btn btn-success btn-block"><span>Terminate</span></button>
+              </div>
+              <div class="col-md-5">
+                <button class="btn btn-danger btn-block"><span>Update</span></button>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="false">
+            <button type="submit" class="btn" style="background-color: #a3c0c0">
+              <span style="color: white">Add</span>
+            </button>
+          </div>
+        </div>
+
       </div>
     </form>
   </div>
