@@ -1,7 +1,7 @@
 /**
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { Input } from "@angular/core";
 import { ProjectsService } from "../../service/projects.service";
@@ -14,7 +14,8 @@ import { Observable } from "rxjs";
   styleUrls: ['add-projects-modal.component.scss']
 
 })
-export class AddProjectModalComponent implements OnInit, OnDestroy {
+export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
+
 
   projectForm: FormGroup;
   private createService;
@@ -26,7 +27,16 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   @Input() lgModal;
 
+  @Input() project;
+
   public borrowers = [];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!!changes['project'] && !!this.projectForm) {
+      this.projectForm.patchValue(changes['project'].currentValue);
+      this.projectForm.controls['borrowerId'].patchValue(4);
+    }
+  }
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
@@ -37,7 +47,10 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
       marketIndustry: ['']
     });
 
-    this.participantService.query().flatMap((projects) => {
+    this.participantService.query();
+
+
+    this.participantService.participants$.flatMap((projects) => {
       return Observable.from(projects);
     }).filter(item => {
       return item['participantType'] === 'Borrower';
@@ -47,7 +60,10 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
         label: item['participantName']
       };
       return newItem;
-    }).toArray().subscribe(borrowers => {
+    }).distinctKey('value')
+      .scan((acc, v) => {
+      return acc.concat(v);
+    }, []).subscribe(borrowers => {
       this.borrowers = borrowers
     })
   }
