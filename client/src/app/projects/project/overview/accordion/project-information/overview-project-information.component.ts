@@ -10,7 +10,10 @@ import { Observable } from "rxjs";
 @Component({
   selector: 'overview-project-information',
   templateUrl: './overview-project-information.component.html',
-  styleUrls: [ './overview-project-information.component.scss' ]
+  styleUrls: [ './overview-project-information.component.scss' ],
+  host: {
+    'class': '"section-content"'
+  }
 })
 export class OverviewProjectInformationComponent implements OnInit {
 
