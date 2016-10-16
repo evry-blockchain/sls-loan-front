@@ -9,6 +9,7 @@ import { OverviewProjectInformationComponent } from "./accordion/project-informa
 import { AccordionModule, ModalModule } from "ng2-bootstrap";
 import { ProjectsSharedModule } from "../../shared/project-shared.module";
 import { SharedModule } from "../../../shared/shared.module";
+import { OverviewInvitationStatusComponent } from "./accordion/invitation-status/overview-invitation-status.component";
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { SharedModule } from "../../../shared/shared.module";
     ProjectOverviewComponent,
     ProjectOverviewHeaderComponent,
     OverviewProjectInformationComponent,
+    OverviewInvitationStatusComponent
   ],
 })
 export class ProjectOverviewModule {

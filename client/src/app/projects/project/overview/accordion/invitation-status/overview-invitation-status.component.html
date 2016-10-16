@@ -1,0 +1,39 @@
+<section class="payments-table">
+  <div>
+    <datatable
+      class='material striped overview-datatable'
+      [rows]='rows'
+      [options]='options'>
+      <datatable-column name="Participant">
+        <template let-value="value">
+          {{value}}
+        </template>
+      </datatable-column>
+      <datatable-column name="Status">
+
+        <template let-row="row" let-value="value">
+          <div [ngSwitch]="value">
+            <div *ngSwitchCase="'NOT_PAID'">
+              <button  class="btn btn-red btn-custom">Not Paid</button>
+            </div>
+            <div *ngSwitchCase="'PAID'">
+              <button class="btn btn-green btn-custom">Paid</button>
+            </div>
+          </div>
+        </template>
+      </datatable-column>
+      <datatable-column name="Invoice Amount">
+        <template let-value="value">
+          {{value}}
+        </template>
+      </datatable-column>
+      <datatable-column name="Date">
+        <template let-value="value">
+          {{value | date: 'dd/MM/yyyy'}}
+        </template>
+      </datatable-column>
+    </datatable>
+
+
+  </div>
+</section>
