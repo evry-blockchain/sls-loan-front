@@ -15,6 +15,7 @@ var ibc = new Ibc1(logger);
 module.exports = function (context, cb) {
   let token = context.req.headers.access_token;
   let user = storage.get(token);
+
   if (!user) {
     //no user in storage, try to re-initialize from session
     user = context.req.session[token];
