@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "version": "0.0.0",
+  "name": "sls-loan-front",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "clean": "rimraf node_modules doc dist && npm cache clean",
@@ -20,8 +20,7 @@
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "npm run server",
-    "start:hmr": "npm run server -- --hot",
-    "postinstall": "npm run webdriver-update"
+    "start:hmr": "npm run server -- --hot"
   },
   "dependencies": {
     "@angular/common": "2.1.0-rc.0",
@@ -37,6 +36,8 @@
     "angular2-select": "^1.0.0-alpha.10",
     "bootstrap": "^4.0.0-alpha.4",
     "core-js": "^2.4.1",
+    "express": "^4.14.0",
+    "http": "0.0.0",
     "moment": "^2.15.1",
     "ng2-bootstrap": "^1.1.5",
     "ng2-toasty": "^2.1.0",
