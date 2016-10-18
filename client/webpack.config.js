@@ -255,7 +255,7 @@ module.exports = function makeWebpackConfig() {
     historyApiFallback: true,
     proxy: {
       '/api/**': {
-        target: 'http://195.250.62.53',
+        target: 'http://195.250.62.73',
         secure: false
         // changeOrigin: true
       }
