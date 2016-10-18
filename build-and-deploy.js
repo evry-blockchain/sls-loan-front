@@ -22,7 +22,7 @@ rimraf('.tmp', () => {
   exec('slc build -p');
 
   //deploy here
-  exec('slc deploy -s sls-loan-node http://vagrant:vagrant@195.250.62.53:8701');
+  exec('slc deploy -s sls-loan-node http://vagrant:vagrant@195.250.62.73:8701');
 
   console.log('Done');
 });
