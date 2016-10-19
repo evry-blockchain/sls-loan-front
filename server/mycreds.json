@@ -4,52 +4,16 @@
       "credentials": {
         "peers": [
           {
-            "discovery_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp0.us.blockchain.ibm.com",
-            "discovery_port": 30303,
-            "api_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp0.us.blockchain.ibm.com",
-            "api_port_tls": 443,
-            "api_port": 443,
+            "discovery_host": "195.250.62.68",
+            "discovery_port": "7050",
+            "api_host": "195.250.62.68",
+            "api_port_tls": "433",
+            "api_port": "7050",
             "type": "peer",
-            "network_id": "13f12279-5f98-4c7a-b476-9be108606f74",
-            "container_id": "7ff3905730d4020c21b547a3475a0836f03cb95abd28ed028ae48d26a30ba176",
-            "id": "13f12279-5f98-4c7a-b476-9be108606f74_vp0",
-            "api_url": "http://13f12279-5f98-4c7a-b476-9be108606f74_vp0.us.blockchain.ibm.com:443"
-          },
-          {
-            "discovery_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp1.us.blockchain.ibm.com",
-            "discovery_port": 30303,
-            "api_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp1.us.blockchain.ibm.com",
-            "api_port_tls": 443,
-            "api_port": 443,
-            "type": "peer",
-            "network_id": "13f12279-5f98-4c7a-b476-9be108606f74",
-            "container_id": "b3c678796bc93419f1dc8a0f16ff912363cbe5d4a480d429185b1742b7075371",
-            "id": "13f12279-5f98-4c7a-b476-9be108606f74_vp1",
-            "api_url": "http://13f12279-5f98-4c7a-b476-9be108606f74_vp1.us.blockchain.ibm.com:443"
-          },
-          {
-            "discovery_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp2.us.blockchain.ibm.com",
-            "discovery_port": 30303,
-            "api_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp2.us.blockchain.ibm.com",
-            "api_port_tls": 443,
-            "api_port": 443,
-            "type": "peer",
-            "network_id": "13f12279-5f98-4c7a-b476-9be108606f74",
-            "container_id": "65ae7a6bf45f2a659f10c4eaec4d816bf981660b4efe2f40856df3c801d6ab66",
-            "id": "13f12279-5f98-4c7a-b476-9be108606f74_vp2",
-            "api_url": "http://13f12279-5f98-4c7a-b476-9be108606f74_vp2.us.blockchain.ibm.com:443"
-          },
-          {
-            "discovery_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp3.us.blockchain.ibm.com",
-            "discovery_port": 30303,
-            "api_host": "13f12279-5f98-4c7a-b476-9be108606f74_vp3.us.blockchain.ibm.com",
-            "api_port_tls": 443,
-            "api_port": 443,
-            "type": "peer",
-            "network_id": "13f12279-5f98-4c7a-b476-9be108606f74",
-            "container_id": "0b7bceea842cdf40e1daa0851ea75f11228df0730962303cbb560a753ec58d58",
-            "id": "13f12279-5f98-4c7a-b476-9be108606f74_vp3",
-            "api_url": "http://13f12279-5f98-4c7a-b476-9be108606f74_vp3.us.blockchain.ibm.com:443"
+            "network_id": "195.250.62.68",
+            "container_id": "bPQualueIzyu/9zRA6eUXGgfEjQ3VfdoQn3tNyjhZ1k=",
+            "id": "vp1",
+            "api_url": "http://195.250.62.68:7050"
           }
         ],
         "ca": {
@@ -68,15 +32,15 @@
         "users": [
           {
             "username": "admin",
-            "secret": "2f2cceb668",
+            "secret": "Xurw3yU9zI0l",
             "enrollId": "admin",
-            "enrollSecret": "2f2cceb668"
+            "enrollSecret": "Xurw3yU9zI0l"
           },
           {
             "username": "WebAppAdmin",
-            "secret": "201eaa9103",
+            "secret": "DJY27pEnl16d",
             "enrollId": "WebAppAdmin",
-            "enrollSecret": "201eaa9103"
+            "enrollSecret": "DJY27pEnl16d"
           }
         ],
         "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert"

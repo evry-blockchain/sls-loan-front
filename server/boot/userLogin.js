@@ -32,18 +32,20 @@ module.exports = function (app) {
       if (err) {
         res.status(401).json({"error": err});
       } else {
-        AccessToken.createAccessTokenId(function (err, token) {
-          if (!err) {
-            userCredentials.cc = cc;
-            req.session[token] = userCredentials;
-            storage.store(token, userCredentials);
-            res.json({
-              token: token,
-              ttl: 86400
-            });
-          } else {
-            console.log(err);
-          }
+        ibc.register(0, userCredentials.username, userCredentials.password, 3, () => {
+          AccessToken.createAccessTokenId(function (err, token) {
+            if (!err) {
+              userCredentials.cc = cc;
+              req.session[token] = userCredentials;
+              storage.store(token, userCredentials);
+              res.json({
+                token: token,
+                ttl: 86400
+              });
+            } else {
+              console.log(err);
+            }
+          });
         });
       }
     });
