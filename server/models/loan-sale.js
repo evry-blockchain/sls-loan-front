@@ -15,9 +15,9 @@ module.exports = LoanSale => {
     });
   });
 
-  LoanSale.getList = cb => {
+  LoanSale.getList = (filter, cb) => {
       user.cc.query.getLoanSalesList([], user.username, (err, data) => {
-        cb(err, prepareListData(data));
+        cb(err, prepareListData(data, filter));
       });
   };
 
@@ -42,6 +42,7 @@ module.exports = LoanSale => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'LoanSale', root: true}
   });
 

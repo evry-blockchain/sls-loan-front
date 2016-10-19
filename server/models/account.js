@@ -15,9 +15,9 @@ module.exports = Account => {
     });
   });
 
-  Account.getList = cb => {
+  Account.getList = (filter, cb) => {
     user.cc.query.getAccountsList([], user.username, (err, data) => {
-      cb(err, prepareListData(data));
+      cb(err, prepareListData(data, filter));
     });
 
   };
@@ -45,6 +45,7 @@ module.exports = Account => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'Account', root: true}
   });
 

@@ -1,8 +1,8 @@
-module.exports = function(data) {
+module.exports = function(data, filter) {
   if(data === ']') {
     return JSON.parse("[]")
   } else {
-    return JSON.parse(data).map((item) => {
+    var result = JSON.parse(data).map((item) => {
       var temp = {};
       for (var i in item) {
         temp[i.charAt(0).toLowerCase() + i.slice(1)] = item[i];
@@ -10,5 +10,17 @@ module.exports = function(data) {
 
       return temp;
     });
+
+    if(filter && result.length) {
+      result = result.filter(item => {
+        for(var i in filter) {
+          if(item[i] != filter[i])
+            return false;
+        }
+
+        return true;
+      });
+    }
+    return result;
   }
 };

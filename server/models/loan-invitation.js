@@ -14,9 +14,9 @@ module.exports = LoanInvitation => {
     });
   });
 
-  LoanInvitation.getList = cb => {
+  LoanInvitation.getList = (filter, cb) => {
     user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
-      cb(err, prepareListData(data));
+      cb(err, prepareListData(data, filter));
     });
   };
 
@@ -51,6 +51,7 @@ module.exports = LoanInvitation => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'LoanInvitation', root: true}
   });
 

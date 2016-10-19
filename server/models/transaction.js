@@ -15,9 +15,9 @@ module.exports = Transaction => {
     });
   });
 
-  Transaction.getList = cb => {
+  Transaction.getList = (filter, cb) => {
       user.cc.query.getTransactionsList([], user.username, (err, data) => {
-        cb(err, prepareListData(data));
+        cb(err, prepareListData(data, filter));
     });
   };
 
@@ -45,6 +45,7 @@ module.exports = Transaction => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'Transaction', root: true}
   });
 

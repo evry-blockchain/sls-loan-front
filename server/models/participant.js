@@ -15,9 +15,9 @@ module.exports = Participant => {
     });
   });
 
-  Participant.getList = cb => {
+  Participant.getList = (filter, cb) => {
     user.cc.query.getParticipantsList([], user.username, (err, data) => {
-      cb(err, prepareListData(data));
+      cb(err, prepareListData(data, filter));
     });
   };
 
@@ -53,6 +53,7 @@ module.exports = Participant => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'Participant', root: true}
   });
 
