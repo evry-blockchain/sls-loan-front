@@ -18,24 +18,8 @@ export class SendInvitationComponent implements OnInit {
 
   public invitation;
 
-  companies = [
-    {
-      name: 'Bank of America',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/64/bank-of-america-icon.png'
-    },
-    {
-      name: 'Bank of America',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
-    },
-    {
-      name: 'Bank of America',
-      image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
-    },
-    {
-      name: 'Bank of America',
-      image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
-    }
-  ];
+  companies;
+
   constructor(private toastyService: ToastyService,
               private router: Router,
               private route: ActivatedRoute,
@@ -55,12 +39,11 @@ export class SendInvitationComponent implements OnInit {
 
     this.projectService.invitation$.subscribe(data => {
       this.invitation = data;
-    })
+    });
 
     this.projectService.selectedInvitees$.subscribe(data => {
-      console.log(data);
       this.companies = data;
-    })
+    });
 
   }
 

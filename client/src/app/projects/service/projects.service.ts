@@ -19,14 +19,14 @@ export class ProjectsService {
 
   public project$ = this.projectSource.asObservable();
   public invitation$ = this.invitationSource.asObservable();
-  public selectedInvitees$ = this.selectedInviteeSource.asObservable().merge(this.deleteInviteeSource).scan((acc, v) => {
-    var elem = acc.find((elem) => {
+  public selectedInvitees$ = this.selectedInviteeSource.asObservable().merge(this.deleteInviteeSource).scan((acc: any[], v) => {
+    var elem = <any[]>acc.find((elem) => {
       return elem.participantKey === v.participantKey
     });
 
     if (!!elem) {
-      return acc.filter((acc) => {
-        return acc.participantKey !== elem.participantKey;
+      return <any[]>acc.filter((acc) => {
+        return acc['participantKey'] !== elem['participantKey'];
       })
     } else {
       return acc.concat(v);
