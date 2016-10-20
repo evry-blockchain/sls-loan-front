@@ -14,9 +14,9 @@ module.exports = LoanNegotiation => {
     });
   });
 
-  LoanNegotiation.getList = cb => {
+  LoanNegotiation.getList = (filter, cb) => {
     user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
-      cb(err, prepareListData(data));
+      cb(err, prepareListData(data, filter));
     });
   };
 
@@ -44,6 +44,7 @@ module.exports = LoanNegotiation => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'LoanNegotiation', root: true}
   });
 

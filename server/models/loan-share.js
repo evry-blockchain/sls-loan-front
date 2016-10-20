@@ -15,9 +15,9 @@ module.exports = LoanShare => {
     });
   });
 
-  LoanShare.getList = cb => {
+  LoanShare.getList = (filter, cb) => {
       user.cc.query.getLoanSharesList([], user.username, (err, data) => {
-        cb(err, prepareListData(data));
+        cb(err, prepareListData(data, filter));
       });
   };
 
@@ -44,6 +44,7 @@ module.exports = LoanShare => {
       path: '/',
       verb: 'get'
     },
+    accepts: {arg: 'filter', type: 'object'},
     returns: {type: 'LoanShare', root: true}
   });
 
