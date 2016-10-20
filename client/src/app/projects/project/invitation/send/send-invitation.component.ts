@@ -31,7 +31,6 @@ export class SendInvitationComponent implements OnInit {
       .combineLatest(this.participantService.participants$)
       .map(([project, participants]) => {
         project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
-        project['marketIndustry'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.';
         return project
       }).subscribe((project) => {
       this.project = project;
