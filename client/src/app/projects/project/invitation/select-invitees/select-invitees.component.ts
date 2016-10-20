@@ -11,18 +11,11 @@ import { Observable } from "rxjs";
     templateUrl: 'select-invitees.template.html'
 })
 
-export class SelectInviteesComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    // this.lol.unsubscribe();
-  }
-
-
-  partners = [];
+export class SelectInviteesComponent implements OnInit {
 
   selectedInvitees;
 
   participants$;
-  lol;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -32,7 +25,6 @@ export class SelectInviteesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.projectsService.selectedInvitees$.connect();
     this.projectsService.selectedInvitees$.connect();
 
     this.projectsService.selectedInvitees$
@@ -54,14 +46,9 @@ export class SelectInviteesComponent implements OnInit, OnDestroy {
   addSelectedInvitee(invitee) {
     invitee.selected = true;
     this.projectsService.addSelectedInvitation(invitee);
-    // this.selectedInvitees.push(invitee)
   }
 
   removeSelectedInvitee(invitee) {
     this.projectsService.removeInvitee(invitee);
-  }
-
-  removePartner() {
-
   }
 }
