@@ -5,6 +5,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastyService, ToastOptions, ToastData } from "ng2-toasty";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ProjectsService } from "../../../service/projects.service";
+import { ParticipantService } from "../../../../participants/service/participants.service";
 
 @Component({
     selector: 'send-invitation',
@@ -34,16 +36,32 @@ export class SendInvitationComponent implements OnInit {
   ];
   constructor(private toastyService: ToastyService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private projectService: ProjectsService,
+              private participantService: ParticipantService) { }
 
   ngOnInit() {
-    this.project = {
-      borrower: 'Statoil',
-      projectName: 'USD 100m Statoil',
-      contactPerson: 'Per Person',
-      loanAmount: '500m USD',
-      marketIndustry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.'
-    }
+    this.projectService.project$
+      .combineLatest(this.participantService.participants$)
+      .map(([project, participants]) => {
+        project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
+        project['marketIndustry'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.';
+        return project
+      }).subscribe((project) => {
+      this.project = project;
+    });
+
+    this.projectService.project$.subscribe((project) => {
+      console.log('project', project);
+      this.project = project;
+    })
+    // this.project = {
+    //   borrower: 'Statoil',
+    //   projectName: 'USD 100m Statoil',
+    //   contactPerson: 'Per Person',
+    //   loanAmount: '500m USD',
+    //   marketIndustry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.'
+    // }
   }
 
   removeCompany(company) {
