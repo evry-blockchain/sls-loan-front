@@ -13,8 +13,12 @@ export class ProjectsService {
   private addProjectSource = new Subject();
   private requestMapping: string;
   private projectSource = new BehaviorSubject([]);
+  private invitationSource = new BehaviorSubject({});
 
-  public  project$ = this.projectSource.asObservable();
+  public project$ = this.projectSource.asObservable();
+  public invitation$ = this.invitationSource.asObservable();
+
+
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
@@ -46,6 +50,10 @@ export class ProjectsService {
       .scan(function(accum, x) {
         return accum.concat(x);
       }, []);
+  }
+
+  updateInvitation(data) {
+    this.invitationSource.next(data);
   }
 
 }

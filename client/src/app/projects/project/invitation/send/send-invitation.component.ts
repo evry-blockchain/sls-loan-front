@@ -14,7 +14,9 @@ import { ParticipantService } from "../../../../participants/service/participant
     styleUrls: ['./send-invitation.component.scss']
 })
 export class SendInvitationComponent implements OnInit {
-  project;
+  public project;
+
+  public invitation;
 
   companies = [
     {
@@ -51,17 +53,10 @@ export class SendInvitationComponent implements OnInit {
       this.project = project;
     });
 
-    this.projectService.project$.subscribe((project) => {
-      console.log('project', project);
-      this.project = project;
+    this.projectService.invitation$.subscribe(data => {
+      this.invitation = data;
     })
-    // this.project = {
-    //   borrower: 'Statoil',
-    //   projectName: 'USD 100m Statoil',
-    //   contactPerson: 'Per Person',
-    //   loanAmount: '500m USD',
-    //   marketIndustry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus dolor doloremque doloribus dolorum ducimus fuga incidunt. Accusantium cumque molestiae nesciunt officia quisquam sunt tempore. Assumenda consequuntur excepturi nesciunt rerum.'
-    // }
+
   }
 
   removeCompany(company) {

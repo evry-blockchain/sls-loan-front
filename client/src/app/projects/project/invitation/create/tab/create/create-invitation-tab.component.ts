@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ProjectsService } from "../../../../../service/projects.service";
 import { ParticipantService } from "../../../../../../participants/service/participants.service";
 import { Observable } from "rxjs";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'create-invitation-tab',
@@ -19,13 +20,16 @@ export class CreateInvitationTabComponent implements OnInit {
 
   project = {};
 
+  invitationForm: FormGroup;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private projectsService: ProjectsService,
-              private participantService: ParticipantService) { }
+              private participantService: ParticipantService,
+              private builder: FormBuilder) { }
 
   ngOnInit() {
+    this.createForm()
 
     this.projectsService.project$
       .combineLatest(this.participantService.participants$)
@@ -36,11 +40,26 @@ export class CreateInvitationTabComponent implements OnInit {
       }).subscribe((project) => {
         this.project = project;
     });
+    this.projectsService.invitation$.take(1).subscribe((data) => {
+      this.invitationForm.patchValue(data);
+    })
   }
 
 
   nextTab() {
     this.router.navigate(['./select'], {relativeTo: this.route});
+  }
+
+  private createForm() {
+    this.invitationForm = this.builder.group({
+      assets: [''],
+      convenants: [''],
+      additionalInfo: ['']
+    });
+
+    this.invitationForm.valueChanges.subscribe(data => {
+      this.projectsService.updateInvitation(data);
+    })
   }
 
 }

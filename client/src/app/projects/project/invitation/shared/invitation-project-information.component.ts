@@ -13,8 +13,9 @@ import { Input } from '@angular/core';
 })
 export class InvitationProjectInformationComponent implements OnInit {
   @Input() project;
-    constructor() { }
 
-    ngOnInit() { }
+  constructor() { }
+
+  ngOnInit() { }
 
 }

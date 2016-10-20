@@ -9,9 +9,10 @@ import { Input } from '@angular/core';
 })
 export class InvitationTermsConditionsComponent implements OnInit {
 
-  @Input() project;
-    constructor() { }
+  @Input() invitation;
 
-    ngOnInit() { }
+  constructor() { }
+
+  ngOnInit() { }
 
 }

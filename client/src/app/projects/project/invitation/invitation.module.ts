@@ -21,6 +21,7 @@ import { InvitationTermsConditionsComponent } from "./shared/invitation-terms-co
 import { CreateInvitationTabComponent } from "./create/tab/create/create-invitation-tab.component";
 import { ParticipantInvitationTimerComponent } from "./participant/time/participant-timer.component";
 import { SelectInviteesPartnerComponent } from "./select-invitees/partner/select-invitees-partner.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SelectInviteesPartnerComponent } from "./select-invitees/partner/select
       RouterModule,
       AccordionModule,
       SharedModule,
-      ModalModule
+      ModalModule,
+      ReactiveFormsModule
     ],
     declarations: [
       InvitationComponent,

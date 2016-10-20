@@ -1,8 +1,8 @@
 <div class="participant-invitation container-fluid">
   <invitation-header [customBackground]="'#a3c0c0'"></invitation-header>
   <invitation-project-information [project]="project"></invitation-project-information>
-  <invitation-additional-information [project]="project" ></invitation-additional-information>
-  <invitation-terms-conditions [project]="project"></invitation-terms-conditions>
+  <invitation-additional-information [invitation]="invitation" ></invitation-additional-information>
+  <invitation-terms-conditions [invitation]="invitation"></invitation-terms-conditions>
   <participant-timer [project]="project"></participant-timer>
 </div>
 
