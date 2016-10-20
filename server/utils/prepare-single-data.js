@@ -1,5 +1,5 @@
 module.exports = function(data) {
-  if(data === ']') {
+  if(data === ']' || data === 'null' || data === null) {
     return JSON.parse("[]")
   } else {
     return JSON.parse(data).map((item) => {
