@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { ProjectsService } from "../service/projects.service";
 import { Project } from "../project/model/project.model";
+import { ParticipantService } from "../../participants/service/participants.service";
+import { UserService } from "../../user/user.service";
 
 @Component({
   selector: 'projects-table',
@@ -16,7 +18,8 @@ export class ProjectsTableComponent implements OnInit {
   public projects;
 
   constructor(private router: Router,
-              private projectService: ProjectsService) { }
+              private projectService: ProjectsService,
+              private participantService: ParticipantService) { }
 
   ngOnInit() {
     this.projects = this.projectService.query();

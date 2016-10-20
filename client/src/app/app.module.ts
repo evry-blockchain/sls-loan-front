@@ -25,6 +25,7 @@ import { ApiGateway } from "./api-gateway.service";
 import { WaitingSpinnerComponent } from "./utils/waitingSpinner/waitingSpinner.component";
 import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerService";
 import { ParticipantService } from "./participants/service/participants.service";
+import { UserService } from "./user/user.service";
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { ParticipantService } from "./participants/service/participants.service"
       AuthGuard,
       WaitingSpinnerService,
       ParticipantService,
+      UserService,
       { provide: 'ApiEndpoint', useValue: '/api'},
     ],
     bootstrap: [AppComponent]

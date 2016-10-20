@@ -4,6 +4,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from "rxjs";
 import { ApiGateway } from "../../api-gateway.service";
+import { UserService } from "../../user/user.service";
 
 @Injectable()
 export class ProjectsService {
@@ -35,7 +36,8 @@ export class ProjectsService {
 
 
   constructor(private http: ApiGateway,
-              @Inject('ApiEndpoint') private apiEndpoint) {
+              @Inject('ApiEndpoint') private apiEndpoint,
+              private userService: UserService) {
     this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
   }
 
@@ -61,6 +63,11 @@ export class ProjectsService {
                           });
 
     return this.projectsSource.merge(this.addProjectSource)
+      .combineLatest(this.userService.user$)
+      .map(([project, user]) => {
+        project['role'] = this.userService.getRole(project['arrangerBankID'], user);
+        return project;
+      })
       .scan(function(accum, x) {
         return accum.concat(x);
       }, []);
