@@ -256,6 +256,7 @@ module.exports = function makeWebpackConfig() {
     proxy: {
       '/api/**': {
         target: 'http://195.250.62.73',
+        // target: 'http://localhost:3000',
         secure: false
         // changeOrigin: true
       }

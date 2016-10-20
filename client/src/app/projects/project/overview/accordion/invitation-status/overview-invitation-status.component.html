@@ -4,12 +4,12 @@
       class='material striped overview-datatable'
       [rows]='rows'
       [options]='options'>
-      <datatable-column name="Participant Bank">
+      <datatable-column name="Participant Bank" prop="bankName">
         <template let-value="value">
           {{value}}
         </template>
       </datatable-column>
-      <datatable-column name="Status">
+      <datatable-column name="Status" prop="negotiationStatus">
 
         <template let-row="row" let-value="value">
           <div [ngSwitch]="value">
@@ -25,12 +25,15 @@
             <div *ngSwitchCase="'DECLINED'">
               <button class="btn btn-danger btn-custom">DECLINED</button>
             </div>
+            <div *ngSwitchCase="'Pending'">
+              <button class="btn btn-warning btn-custom">PENDING</button>
+            </div>
           </div>
         </template>
       </datatable-column>
-      <datatable-column name="Shares Committed">
+      <datatable-column name="Shares Committed" prop="amount">
         <template let-value="value">
-          {{value}}
+          {{value}} M USD
         </template>
       </datatable-column>
       <datatable-column name="Date">

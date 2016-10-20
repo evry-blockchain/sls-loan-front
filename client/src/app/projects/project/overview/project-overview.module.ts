@@ -11,6 +11,7 @@ import { ProjectsSharedModule } from "../../shared/project-shared.module";
 import { SharedModule } from "../../../shared/shared.module";
 import { OverviewInvitationStatusComponent } from "./accordion/invitation-status/overview-invitation-status.component";
 import { RouterModule } from "@angular/router";
+import { InvitationService } from "../invitation/service/invitation.service";
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { RouterModule } from "@angular/router";
     ProjectsSharedModule,
     SharedModule,
     RouterModule
+  ],
+  providers: [
+    InvitationService
   ],
   declarations: [
     ProjectOverviewComponent,

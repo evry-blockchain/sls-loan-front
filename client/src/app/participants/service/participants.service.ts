@@ -5,12 +5,12 @@
 
 import { Injectable, Inject } from '@angular/core';
 import { ApiGateway } from "../../api-gateway.service";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 @Injectable()
 export class ParticipantService {
 
-  private participantsSource = new BehaviorSubject([]);
+  private participantsSource = new Subject();
 
   public participants$ = this.participantsSource.asObservable();
 
@@ -22,22 +22,19 @@ export class ParticipantService {
   }
 
   query(): Observable<any> {
-    console.log('restasdfasdfasfdasart colksadfjmputer');
-    var query = this.http.get(this.requestMapping);
+    var query = this.http.get(this.requestMapping).cache();
 
     query.subscribe((projects) => {
-      console.log('here', projects);
       this.participantsSource.next(projects);
     });
+
     return query;
   }
 
   getParticipantName(id, participants) {
-    return participants.find((item) => {
-        return item['participantKey'] === id;
-    })['participantName'];
+    var obj =  participants.find((item) => {
+      return item['participantKey'] === id;
+    })
+    return !!obj ? obj['participantName'] : '';
   }
-
-
-
 }

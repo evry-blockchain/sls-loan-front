@@ -10,15 +10,19 @@ import { PaymentsModule } from "./payments/payments.module";
 import { ChatModule } from "./chat/chat.module";
 import { ProjectOverviewModule } from "./overview/project-overview.module";
 import { InvitationModule } from "./invitation/invitation.module";
+import { ProjectNegotiationService } from "./service/project-negotiation.service";
 
 @NgModule({
-  imports: [ 
+  imports: [
     CommonModule,
-    projectRouting, 
+    projectRouting,
     PaymentsModule,
-    ChatModule, 
+    ChatModule,
     ProjectOverviewModule,
     InvitationModule
+  ],
+  providers: [
+    ProjectNegotiationService
   ],
   declarations: [ProjectComponent],
 })

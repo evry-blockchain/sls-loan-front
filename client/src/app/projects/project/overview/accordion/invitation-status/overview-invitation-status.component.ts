@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnMode, TableOptions } from "angular2-data-table";
+import { InvitationService } from "../../../invitation/service/invitation.service";
+import { ProjectNegotiationService } from "../../../service/project-negotiation.service";
+import { Observable } from "rxjs";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ProjectsService } from "../../../../service/projects.service";
+import { ParticipantService } from "../../../../../participants/service/participants.service";
 
 @Component({
   selector: 'overview-invitation-status',
@@ -8,32 +14,7 @@ import { ColumnMode, TableOptions } from "angular2-data-table";
 })
 export class OverviewInvitationStatusComponent implements OnInit {
 
-  rows = [
-    {
-      'participantBank': 'Marino Nice Comp.',
-      'status': 'COMMITED',
-      'sharesCommitted': '200 M USD',
-      'date': new Date().toLocaleDateString(),
-    },
-    {
-      'participantBank': 'Dashmi Incorporated Inc.',
-      'status': 'INTERESTED',
-      'sharesCommitted': '200 M USD',
-      'date': new Date().toLocaleDateString(),
-    },
-    {
-      'participantBank': 'Arfor Liability ',
-      'status': 'INVITED',
-      'sharesCommitted': '200 M USD',
-      'date': new Date().toLocaleDateString(),
-    },
-    {
-      'participantBank': 'Incada Financial services.',
-      'status': 'DECLINED',
-      'sharesCommitted': '200 M USD',
-      'date': new Date().toLocaleDateString(),
-    }
-  ];
+  rows = [];
 
   options = new TableOptions({
     columnMode: ColumnMode.force,
@@ -41,8 +22,31 @@ export class OverviewInvitationStatusComponent implements OnInit {
     footerHeight: 0,
     rowHeight: 'auto'
   });
-  constructor() { }
+  constructor(private invitationService: InvitationService,
+              private negotiationService: ProjectNegotiationService,
+              private participantsService: ParticipantService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private projectService: ProjectsService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
 
+    this.negotiationService.negotiations$
+      .mergeMap((data) => {
+        return Observable.from(<any[]> data)
+      })
+      .combineLatest(this.participantsService.participants$)
+      .map(([negotiation, participants]) => {
+        negotiation['bankName'] = this.participantsService.getParticipantName(negotiation['participantBankID'], participants);
+        return negotiation;
+      }).scan((acc, value) => {
+        return <any[]>acc.concat(value);
+    }, [])
+      .subscribe((negotiations) => {
+        this.rows = negotiations;
+      });
+
+    this.negotiationService.query();
+
+  }
 }
