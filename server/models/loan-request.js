@@ -18,7 +18,7 @@ module.exports = LoanRequest => {
 
   LoanRequest.getList = (filter, cb) => {
     user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
-      cb(err, prepareListData(dat, filter));
+      cb(err, prepareListData(data, filter));
     });
   };
 
