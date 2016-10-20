@@ -49,8 +49,6 @@ export class ParticipantService {
 
   public participants$ = this.participantsSource.asObservable().map((participants) => {
     participants.forEach((participant, index) => {
-      console.log('participant', participant);
-      console.log('index', index);
       participant.image = !!this.partners[index] ? this.partners[index]['image'] : this.partners[1]['image'];
     });
     return participants;
