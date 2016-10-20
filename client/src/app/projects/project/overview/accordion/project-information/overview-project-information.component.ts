@@ -24,15 +24,13 @@ export class OverviewProjectInformationComponent implements OnInit {
               private participantService: ParticipantService) { }
 
   ngOnInit() {
-
-    this.route.parent.params.subscribe(data => {
-      let id = +data['id'];
-
-      Observable.forkJoin(this.projectService.get(id), this.participantService.query())
-        .subscribe(([project, participants]) => {
-          this.project = project;
-          this.project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
-        });
+    this.projectService.project$
+      .combineLatest(this.participantService.participants$)
+      .map(([project, participants]) => {
+        project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
+        return project;
+      }).subscribe((project) => {
+      this.project = project;
     });
   }
 

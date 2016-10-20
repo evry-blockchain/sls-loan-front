@@ -12,9 +12,9 @@ export class ProjectsService {
   private projectsSource;
   private addProjectSource = new Subject();
   private requestMapping: string;
-  private projectSource = new Subject();
+  private projectSource = new BehaviorSubject([]);
 
-  public project$ = this.projectSource.asObservable();
+  public  project$ = this.projectSource.asObservable();
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {

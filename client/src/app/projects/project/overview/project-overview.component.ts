@@ -3,6 +3,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { ProjectsService } from "../../service/projects.service";
+import { ParticipantService } from "../../../participants/service/participants.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'project-overview',
@@ -10,8 +13,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: [ 'project-overview.component.scss']
 })
 export class ProjectOverviewComponent implements OnInit {
-    constructor() { }
+    constructor(private projectService: ProjectsService,
+                private participantService: ParticipantService,
+                private route: ActivatedRoute) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+
+      this.route.parent.params.subscribe(data => {
+        let id = +data['id'];
+        console.log(data);
+        this.projectService.get(id);
+      });
+
+      this.participantService.query();
+      // this.projectService.query();
+      // this.participantService.query()
+    }
 
 }

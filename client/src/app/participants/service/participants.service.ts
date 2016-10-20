@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 @Injectable()
 export class ParticipantService {
 
-  private participantsSource = new Subject();
+  private participantsSource = new BehaviorSubject([]);
 
   public participants$ = this.participantsSource.asObservable();
 

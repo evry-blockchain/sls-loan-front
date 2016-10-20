@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import { ParticipantService } from "../../../participants/service/participants.service";
+import { ProjectsService } from "../../service/projects.service";
 
 /*
  * We're loading this component asynchronously
@@ -19,12 +21,18 @@ export class InvitationComponent {
 
     value = 1;
 
-    constructor(public route:ActivatedRoute) {
+    constructor(public route:ActivatedRoute,
+                private participantsService: ParticipantService,
+                private projectService: ProjectsService) {
 
     }
 
     ngOnInit() {
-        console.log('hello `InvitationComponent` component');
+      this.participantsService.query();
+      this.route.parent.params.subscribe(data => {
+        let id = +data['id'];
+        this.projectService.get(id);
+      });
         // static data that is bundled
         // var mockData = require('assets/mock-data/mock-data.json');
         // console.log('mockData', mockData);
