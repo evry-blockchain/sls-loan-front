@@ -29,7 +29,7 @@ export class CreateInvitationTabComponent implements OnInit {
               private builder: FormBuilder) { }
 
   ngOnInit() {
-    this.createForm()
+    this.createForm();
 
     this.projectsService.project$
       .combineLatest(this.participantService.participants$)
@@ -40,6 +40,7 @@ export class CreateInvitationTabComponent implements OnInit {
       }).subscribe((project) => {
         this.project = project;
     });
+
     this.projectsService.invitation$.take(1).subscribe((data) => {
       this.invitationForm.patchValue(data);
     })

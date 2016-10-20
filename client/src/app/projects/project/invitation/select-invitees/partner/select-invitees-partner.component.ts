@@ -2,7 +2,8 @@
  * Created by Oleksandr.Khymenko on 08.10.2016.
  */
 
-import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Input } from "@angular/core";
 
 @Component({
@@ -23,17 +24,14 @@ export class SelectInviteesPartnerComponent implements OnInit {
   ngOnInit() { }
 
 
-  selectUnselectPartner(partner) {
+  selectUnselectPartner() {
 
-    if (!this.selected) {
+    if (!this.partner.selected) {
       this.selectInvitee.emit(this.partner);
-      partner.style.backgroundColor = 'rgba(163, 192, 192, 0.3)';
     } else {
       this.unselectInvitee.emit(this.partner);
-      partner.style.backgroundColor = '#fff';
     }
 
-    this.selected = !this.selected;
   }
 
 }

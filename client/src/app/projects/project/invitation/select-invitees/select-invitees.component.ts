@@ -63,10 +63,12 @@ export class SelectInviteesComponent {
   }
 
   addSelectedInvitee(invitee) {
+    invitee.selected = true;
     this.selectedInvitees.push(invitee)
   }
 
   removeSelectedInvitee(invitee) {
+    invitee.selected = false;
     this.selectedInvitees = this.selectedInvitees.filter((data) => {
       return data !== invitee;
     });
