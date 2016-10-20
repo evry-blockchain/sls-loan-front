@@ -1,5 +1,8 @@
-import {Component} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { ProjectsService } from "../../../service/projects.service";
+import { ParticipantService } from "../../../../participants/service/participants.service";
+import { Observable } from "rxjs";
 
 
 @Component({
@@ -8,51 +11,37 @@ import { ActivatedRoute, Router } from "@angular/router";
     templateUrl: 'select-invitees.template.html'
 })
 
-export class SelectInviteesComponent {
+export class SelectInviteesComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    // this.lol.unsubscribe();
+  }
+
 
   partners = [];
 
-  selectedInvitees = [];
+  selectedInvitees;
+
+  participants$;
+  lol;
 
   constructor(private router: Router,
-              private route: ActivatedRoute) {
-      this.partners = [
-        {
-          name: 'Bank of Associates & Companies LTD',
-          image: 'https://media.glassdoor.com/sql/23198/dnb-nor-squarelogo-1448458669964.png'
-        },
-        {
-          name: 'Bank of America',
-          image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
-        },
-        {
-          name: 'Connected Collborators Bank',
-          image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
-        },
-        {
-          name: 'Bank of Paper, Wilson & Bluemine LTD',
-          image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
-        },
-        {
-          name: 'Bank of Associates & Companies LTD',
-          image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/64/bank-of-america-icon.png'
-        },
-        {
-          name: 'Bank of America',
-          image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
-        },
-        {
-          name: 'Connected Collborators Bank',
-          image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
-        },
-        {
-          name: 'Bank of Paper, Wilson & Bluemine LTD',
-          image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
-        }
-      ];
-
+              private route: ActivatedRoute,
+              private projectsService: ProjectsService,
+              private participants: ParticipantService) {
 
   }
+
+  ngOnInit(): void {
+    // this.projectsService.selectedInvitees$.connect();
+    this.projectsService.selectedInvitees$.connect();
+
+    this.projectsService.selectedInvitees$
+      .subscribe((invitees) => {
+        this.selectedInvitees = invitees;
+    });
+
+    this.participants$ = this.participants.participants$;
+    }
 
   nextTab(noInviteeModal) {
     if (this.selectedInvitees.length === 0) {
@@ -64,14 +53,16 @@ export class SelectInviteesComponent {
 
   addSelectedInvitee(invitee) {
     invitee.selected = true;
-    this.selectedInvitees.push(invitee)
+    this.projectsService.addSelectedInvitation(invitee);
+    // this.selectedInvitees.push(invitee)
   }
 
   removeSelectedInvitee(invitee) {
     invitee.selected = false;
-    this.selectedInvitees = this.selectedInvitees.filter((data) => {
-      return data !== invitee;
-    });
+    this.projectsService.removeInvitee(invitee);
+    // this.selectedInvitees = this.selectedInvitees.filter((data) => {
+    //   return data !== invitee;
+    // });
   }
 
   removePartner() {

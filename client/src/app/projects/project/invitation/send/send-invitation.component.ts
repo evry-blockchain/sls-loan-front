@@ -57,6 +57,11 @@ export class SendInvitationComponent implements OnInit {
       this.invitation = data;
     })
 
+    this.projectService.selectedInvitees$.subscribe(data => {
+      console.log(data);
+      this.companies = data;
+    })
+
   }
 
   removeCompany(company) {

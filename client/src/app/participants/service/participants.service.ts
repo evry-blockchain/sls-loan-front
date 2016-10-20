@@ -12,7 +12,49 @@ export class ParticipantService {
 
   private participantsSource = new BehaviorSubject([]);
 
-  public participants$ = this.participantsSource.asObservable();
+  private partners = [
+    {
+      name: 'Bank of Associates & Companies LTD',
+      image: 'https://media.glassdoor.com/sql/23198/dnb-nor-squarelogo-1448458669964.png'
+    },
+    {
+      name: 'Bank of America',
+      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
+    },
+    {
+      name: 'Connected Collborators Bank',
+      image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
+    },
+    {
+      name: 'Bank of Paper, Wilson & Bluemine LTD',
+      image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
+    },
+    {
+      name: 'Bank of Associates & Companies LTD',
+      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/64/bank-of-america-icon.png'
+    },
+    {
+      name: 'Bank of America',
+      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
+    },
+    {
+      name: 'Connected Collborators Bank',
+      image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
+    },
+    {
+      name: 'Bank of Paper, Wilson & Bluemine LTD',
+      image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
+    }
+  ];
+
+  public participants$ = this.participantsSource.asObservable().map((participants) => {
+    participants.forEach((participant, index) => {
+      console.log('participant', participant);
+      console.log('index', index);
+      participant.image = !!this.partners[index] ? this.partners[index]['image'] : this.partners[1]['image'];
+    });
+    return participants;
+  });
 
   public requestMapping;
 

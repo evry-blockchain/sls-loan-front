@@ -14,10 +14,24 @@ export class ProjectsService {
   private requestMapping: string;
   private projectSource = new BehaviorSubject([]);
   private invitationSource = new BehaviorSubject({});
+  private selectedInviteeSource = new BehaviorSubject([]);
+  private deleteInviteeSource = new Subject();
 
   public project$ = this.projectSource.asObservable();
   public invitation$ = this.invitationSource.asObservable();
+  public selectedInvitees$ = this.selectedInviteeSource.asObservable().merge(this.deleteInviteeSource).scan((acc, v) => {
+    var elem = acc.find((elem) => {
+      return elem.participantKey === v.participantKey
+    });
 
+    if (!!elem) {
+      return acc.filter((acc) => {
+        return acc.participantKey !== elem.participantKey;
+      })
+    } else {
+      return acc.concat(v);
+    }
+  }, []).publishReplay(1);
 
 
   constructor(private http: ApiGateway,
@@ -54,6 +68,16 @@ export class ProjectsService {
 
   updateInvitation(data) {
     this.invitationSource.next(data);
+  }
+
+  public addSelectedInvitation(invitation) {
+    this.selectedInviteeSource.next(invitation)
+  }
+
+  removeInvitee(invitee) {
+    this.deleteInviteeSource.next(invitee);
+    console.log('this one', this.selectedInviteeSource.getValue());
+    // this.selectedInviteeSource.getValue() = [];
   }
 
 }

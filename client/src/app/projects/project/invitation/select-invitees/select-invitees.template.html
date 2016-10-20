@@ -23,7 +23,7 @@
   </div>
 
 
-    <div *ngFor="let partner of partners">
+    <div *ngFor="let partner of (participants$ | async)">
       <select-invitees-partner (selectInvitee)="addSelectedInvitee($event)" (unselectInvitee)="removeSelectedInvitee($event)" [partner]="partner"></select-invitees-partner>
     </div>
 
