@@ -47,7 +47,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
       projectName: [''],
       contactPersonName: [''],
       loanSharesAmount: [''],
-      marketIndustry: ['']
+      marketAndIndustry: ['']
     });
 
     this.participantService.participants$.flatMap((projects) => {
