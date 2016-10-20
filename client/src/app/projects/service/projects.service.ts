@@ -75,9 +75,8 @@ export class ProjectsService {
   }
 
   removeInvitee(invitee) {
+    invitee.selected = false;
     this.deleteInviteeSource.next(invitee);
-    console.log('this one', this.selectedInviteeSource.getValue());
-    // this.selectedInviteeSource.getValue() = [];
   }
 
 }

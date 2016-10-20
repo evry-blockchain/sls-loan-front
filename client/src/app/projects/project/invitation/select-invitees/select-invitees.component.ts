@@ -58,11 +58,7 @@ export class SelectInviteesComponent implements OnInit, OnDestroy {
   }
 
   removeSelectedInvitee(invitee) {
-    invitee.selected = false;
     this.projectsService.removeInvitee(invitee);
-    // this.selectedInvitees = this.selectedInvitees.filter((data) => {
-    //   return data !== invitee;
-    // });
   }
 
   removePartner() {

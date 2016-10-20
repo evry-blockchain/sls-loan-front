@@ -65,9 +65,7 @@ export class SendInvitationComponent implements OnInit {
   }
 
   removeCompany(company) {
-    this.companies = this.companies.filter(data => {
-      return data !== company;
-    })
+    this.projectService.removeInvitee(company);
   }
 
   sendInvitation() {
