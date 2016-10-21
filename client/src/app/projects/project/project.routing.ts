@@ -4,12 +4,13 @@ import { ProjectComponent } from "./project.component";
 import { paymentsRouting } from "./payments/payments.routing";
 import { invitationRouting } from "./invitation/invitation.routing";
 import { chatRouting } from "./chat/chat.routing";
+import { AuthGuard } from "../../auth/guard/auth.guard";
 /**
  * Created by Oleksandr.Khymenko on 07.10.2016.
  */
 
 const routes: Routes = [
-  { path: 'projects/:id', component: ProjectComponent, children: [
+  { path: 'projects/:id', component: ProjectComponent, canActivate: [ AuthGuard ], children: [
     {
       path: '', redirectTo: 'overview',
     },

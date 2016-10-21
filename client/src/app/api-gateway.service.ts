@@ -5,12 +5,15 @@ import { Injectable, Inject } from "@angular/core";
 import { Http, Response, RequestOptions, RequestMethod, URLSearchParams, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
+import * as moment from 'moment';
 
 // Import the rxjs operators we need (in a production app you'll
 //  probably want to import only the operators you actually use)
 //
 import 'rxjs/Rx';
 import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerService";
+import { UserService } from "./user/user.service";
+import { AuthService } from "./auth/service/auth.service";
 
 export class ApiGatewayOptions {
   method: RequestMethod;
@@ -39,7 +42,8 @@ export class ApiGateway {
 
   constructor(
     private http: Http,
-    private waitingSpinner: WaitingSpinnerService
+    private waitingSpinner: WaitingSpinnerService,
+    private authService: AuthService
   ) {
     // Create our observables from the subjects
     this.errors$ = this.errorsSubject.asObservable();
@@ -197,7 +201,17 @@ export class ApiGateway {
   private getTokenFromLocalStorage(): string {
     var matches = localStorage.getItem('bc.token');
     if(!!matches) {
-      return JSON.parse(matches);
+      let object = JSON.parse(matches);
+      let dateString = moment(object.timestamp);
+      let  now = moment();
+      let diff = now.diff(dateString, 'hours');
+      let validHours = 15;
+      if (diff > validHours) {
+        this.authService.logout();
+        return;
+      }
+      // compareTime(dateString, now); //to implement
+      return object['token'];
     }
     return '';
   }

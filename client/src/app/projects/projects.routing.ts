@@ -7,7 +7,7 @@ import { projectRouting } from "./project/project.routing";
 
 const routes: Routes = [
   { path: '', redirectTo: '/projects', pathMatch: 'full'},
-  { path: 'projects', component: ProjectsComponent, canActivate: [ ],
+  { path: 'projects', component: ProjectsComponent, canActivate: [ AuthGuard ],
     // children: [
     //   {
     //     path: '', component: ProjectsComponent

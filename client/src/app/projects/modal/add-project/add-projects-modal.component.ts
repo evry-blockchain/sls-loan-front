@@ -89,9 +89,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
     } else {
       this.participantService.participants$.subscribe((participant) => {
-        console.log('vakye', this.projectForm.controls['borrowerName'].value);
         if (participant['participantName'] === this.projectForm.controls['borrowerName'].value) {
-          console.log('here??');
           let newProject = this.projectForm.getRawValue();
           newProject['borrowerID'] = participant['participantKey'];
           this.projectService.create(newProject).subscribe(() => {
@@ -110,9 +108,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
           });
         }
       }) ;
-      // this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe(() => {
-      //   this.lgModal.hide();
-      // });
     }
 
   }

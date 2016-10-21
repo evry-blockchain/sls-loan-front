@@ -26,11 +26,15 @@ export class AuthService {
       .map((res) => {
       return res['json']();
     }).do((data) => {
-      localStorage.setItem('bc.token', JSON.stringify(data['token']));
+      localStorage.setItem('bc.token', JSON.stringify({token: data['token'], timestamp: new Date().getTime()}));
       this.isLoggedIn$.next(true);
     }).finally(() => {
         this.spinnerService.stopLoading$.next('');
       });
-
   }
+
+  logout() {
+    this.isLoggedIn$.next(false);
+  }
+
 }
