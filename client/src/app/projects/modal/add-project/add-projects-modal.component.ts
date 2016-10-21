@@ -7,6 +7,7 @@ import { Input } from "@angular/core";
 import { ProjectsService } from "../../service/projects.service";
 import { ParticipantService } from "../../../participants/service/participants.service";
 import { Observable } from "rxjs";
+import { UserService } from "../../../user/user.service";
 
 @Component({
   selector: 'add-project-modal',
@@ -19,11 +20,19 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   projectForm: FormGroup;
 
   private createService;
+  private user;
 
 
+  //noinspection TypeScriptUnresolvedVariable
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectsService,
-              private participantService: ParticipantService) { }
+              private participantService: ParticipantService,
+              private userService: UserService) {
+    userService.user$.subscribe(data => {
+      console.log("user", data);
+      this.user = data
+    })
+  }
 
   @Input() lgModal;
 
@@ -43,29 +52,29 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      borrowerID: [''],
+      borrowerName: [''],
       projectName: [''],
       contactPersonName: [''],
       loanSharesAmount: [''],
       marketAndIndustry: ['']
     });
 
-    this.participantService.participants$.flatMap((projects) => {
-      return Observable.from(<any[]>projects);
-    }).filter(item => {
-      return item['participantType'] === 'Borrower';
-    }).map((item) => {
-      var newItem = {
-        value: item['participantKey'],
-        label: item['participantName']
-      };
-      return newItem;
-    }).distinctKey('value')
-      .scan((acc, v) => {
-      return acc.concat(v);
-    }, []).subscribe(borrowers => {
-      this.borrowers = borrowers
-    });
+    // this.participantService.participants$.flatMap((projects) => {
+    //   return Observable.from(<any[]>projects);
+    // }).filter(item => {
+    //   return item['participantType'] === 'Borrower';
+    // }).map((item) => {
+    //   var newItem = {
+    //     value: item['participantKey'],
+    //     label: item['participantName']
+    //   };
+    //   return newItem;
+    // }).distinctKey('value')
+    //   .scan((acc, v) => {
+    //   return acc.concat(v);
+    // }, []).subscribe(borrowers => {
+    //   this.borrowers = borrowers
+    // });
 
 
     if(this.isUpdateMode) {
@@ -76,9 +85,36 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   save() {
-    this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe(() => {
-        this.lgModal.hide();
-    });
+    if (this.isUpdateMode) {
+
+    } else {
+      this.participantService.participants$.subscribe((participant) => {
+        console.log('vakye', this.projectForm.controls['borrowerName'].value);
+        if (participant['participantName'] === this.projectForm.controls['borrowerName'].value) {
+          console.log('here??');
+          let newProject = this.projectForm.getRawValue();
+          newProject['borrowerID'] = participant['participantKey'];
+          this.projectService.create(newProject).subscribe(() => {
+            this.lgModal.hide();
+          });
+        } else {
+          let newProject = this.projectForm.getRawValue();
+          newProject['borrowerID'] = '5';
+          delete newProject['borrowerName'];
+          delete newProject['role'];
+          console.log('asdfasdfasdf', newProject);
+          newProject['arrangerBankID'] = this.user['participantKey'];
+
+          this.projectService.create(newProject).subscribe(() => {
+            this.lgModal.hide();
+          });
+        }
+      }) ;
+      // this.createService = this.projectService.create(this.projectForm.getRawValue()).subscribe(() => {
+      //   this.lgModal.hide();
+      // });
+    }
+
   }
 
   ngOnDestroy(): void {
