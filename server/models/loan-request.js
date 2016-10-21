@@ -47,7 +47,8 @@ module.exports = LoanRequest => {
       loanRequest.contactPersonName,
       loanRequest.contactPersonSurname,
       loanRequest.requestDate,
-      loanRequest.status = 'Pending'
+      loanRequest.status = 'Pending',
+      loanRequest.marketAndIndustry
     ], user.username, (err, data) => {
       cb(err, data);
     });
