@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./app.variables";
 @import "./mixins";
 @import '~bootstrap/scss/bootstrap.scss';
 @import "./header";
@@ -53,4 +54,11 @@ section {
 
 .white {
   color: #fff;
+}
+dt {
+  font-family: $font-family-avenir-black;
+}
+
+dd {
+  font-family: $font-family-athelas-regular;
 }

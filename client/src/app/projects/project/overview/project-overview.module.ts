@@ -12,6 +12,7 @@ import { SharedModule } from "../../../shared/shared.module";
 import { OverviewInvitationStatusComponent } from "./accordion/invitation-status/overview-invitation-status.component";
 import { RouterModule } from "@angular/router";
 import { InvitationService } from "../invitation/service/invitation.service";
+import { OverviewParticipantProjectInformationComponent } from "./participant/overview-participant-project.component";
 
 @NgModule({
   imports: [
@@ -28,7 +29,9 @@ import { InvitationService } from "../invitation/service/invitation.service";
     ProjectOverviewComponent,
     ProjectOverviewHeaderComponent,
     OverviewProjectInformationComponent,
-    OverviewInvitationStatusComponent
+    OverviewInvitationStatusComponent,
+    OverviewParticipantProjectInformationComponent
+
   ],
 })
 export class ProjectOverviewModule {

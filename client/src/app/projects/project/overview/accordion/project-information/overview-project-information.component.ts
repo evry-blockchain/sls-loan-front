@@ -6,6 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ProjectsService } from "../../../../service/projects.service";
 import { ParticipantService } from "../../../../../participants/service/participants.service";
 import { Observable } from "rxjs";
+import { Input } from "@angular/core";
 
 @Component({
   selector: 'overview-project-information',
@@ -18,6 +19,8 @@ import { Observable } from "rxjs";
 export class OverviewProjectInformationComponent implements OnInit {
 
   project = {};
+
+  @Input() isBankOwner;
 
   constructor(private route: ActivatedRoute,
               private projectService: ProjectsService,
