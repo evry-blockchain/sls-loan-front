@@ -1,9 +1,10 @@
+@import '../../../style/app.variables';
 .active {
   color: #fff;
 }
 nav {
   padding-right: 0;
-  background-color: #113d57;
+  background-color: $color-light_navy;
 
   ul {
     padding: 20% 0;
