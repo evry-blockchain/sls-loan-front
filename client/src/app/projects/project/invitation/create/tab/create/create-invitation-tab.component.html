@@ -1,101 +1,109 @@
 <section class="component-section">
   <accordion [closeOthers]="true">
-    <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
-      <div accordion-heading>
-        <h2 class="section-head">Project Information</h2>
-      </div>
-      <div class="section-content">
-        <div class="row">
-          <dt class="col-md-2">
-            Borrower
-          </dt>
-          <dd class="col-md-4">
-            {{project.borrower}}
-          </dd>
+    <div id="create-invitation-row" class="create-invitation-row">
+      <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true">
+        <div accordion-heading>
+          <h2 class="section-head">Project Information</h2>
         </div>
-
-        <div class="row">
-          <dt class="col-md-2">
-            Project Name
-          </dt>
-          <dd class="col-md-4">
-            {{project.projectName}}
-          </dd>
-        </div>
-
-        <div class="row">
-          <dt class="col-md-2">
-            Contact Person
-          </dt>
-          <dd class="col-md-4">
-            {{project.contactPersonName}}
-          </dd>
-        </div>
-
-        <div class="row">
-          <dt class="col-md-2">
-            Loan Amount
-          </dt>
-          <dd class="col-md-4">
-            {{project.loanSharesAmount}}
-          </dd>
-        </div>
-
-        <div class="row">
-          <dt class="col-md-2">
-            Market & Industry
-          </dt>
-          <dd class="col-md-4">
-            {{project.marketAndIndustry}}
-          </dd>
-        </div>
-      </div>
-    </accordion-group>
-    <form [formGroup]="invitationForm">
-      <accordion-group #group>
-      <div accordion-heading>
-        <h2 class="section-head">Additional Info</h2>
-      </div>
-      <div class="section-content">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="form-group">
-              <textarea id="additional-info" class="form-control" rows="20" formControlName="additionalInfo">
-
-              </textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </accordion-group>
-    <accordion-group #group>
-      <div accordion-heading>
-        <h2 class="section-head">Terms & Conditions</h2>
-      </div>
         <div class="section-content">
           <div class="row">
-            <div class="col-md-10">
-              <div class="form-group">
-                <label for="">Assets</label>
-                <input type="text" class="form-control" formControlName="assets"/>
-              </div>
-            </div>
+            <dt class="col-md-2">
+              Borrower
+            </dt>
+            <dd class="col-md-4">
+              {{project.borrower}}
+            </dd>
           </div>
+
           <div class="row">
-            <div class="col-md-10">
-              <div class="form-group">
-                <label for="">Convenants</label>
-                <textarea class="form-control" rows="20" formControlName="convenants"></textarea>
-              </div>
-            </div>
+            <dt class="col-md-2">
+              Project Name
+            </dt>
+            <dd class="col-md-4">
+              {{project.projectName}}
+            </dd>
           </div>
+
           <div class="row">
-            <div class="offset-md-11 col-md-1 panel" >
-              <button class="btn btn-block  btn-lg m-b-2" [routerLink]="['./select']" style="background-color: #a3c0c0"><span style="color: white">Next</span></button>
-            </div>
+            <dt class="col-md-2">
+              Contact Person
+            </dt>
+            <dd class="col-md-4">
+              {{project.contactPersonName}}
+            </dd>
+          </div>
+
+          <div class="row">
+            <dt class="col-md-2">
+              Loan Amount
+            </dt>
+            <dd class="col-md-4">
+              {{project.loanSharesAmount}}
+            </dd>
+          </div>
+
+          <div class="row">
+            <dt class="col-md-2">
+              Market & Industry
+            </dt>
+            <dd class="col-md-4">
+              {{project.marketAndIndustry}}
+            </dd>
           </div>
         </div>
       </accordion-group>
+    </div>
+
+    <form [formGroup]="invitationForm">
+      <div class="create-invitation-row">
+        <accordion-group #group [panelClass]="'create-invitation-row'">
+          <div accordion-heading>
+            <h2 class="section-head">Additional Info</h2>
+          </div>
+          <div class="section-content">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                <textarea id="additional-info" class="form-control" rows="20" formControlName="additionalInfo">
+
+                </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+      </div>
+
+      <div class="create-invitation-row">
+        <accordion-group #group [panelClass]="'create-invitation-row'">
+          <div accordion-heading>
+            <h2 class="section-head">Terms & Conditions</h2>
+          </div>
+          <div class="section-content">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="form-group">
+                  <label for="">Assets</label>
+                  <input type="text" class="form-control" formControlName="assets"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <div class="form-group">
+                  <label for="">Convenants</label>
+                  <textarea class="form-control" rows="20" formControlName="convenants"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-md-11 col-md-1 panel">
+                <button class="btn btn-success btn-lg m-b-2" [routerLink]="['./select']"><span>Next</span></button>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+      </div>
     </form>
   </accordion>
 </section>

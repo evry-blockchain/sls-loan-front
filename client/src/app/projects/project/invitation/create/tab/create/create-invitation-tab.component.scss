@@ -1,38 +1,21 @@
+@import '../../../../../../../style/app.variables.scss';
 accordion-group {
-  //margin-bottom: 10px;
   background-color: white;
 }
 
 .component-section {
-  background-color: #84a6b6;
+  background-color: $color-blue-grey;
 }
 
-//.create-invitation-row {
-//  background-color: white;
-//  margin-bottom: 10px;
-//  margin-left: 5px;
-//  margin-right: 5px;
-//  padding-top: 30px;
-//  padding-bottom: 30px;
-//  h4 {
-//    color: #9b9b9b;
-//    font-family: Avenir-Medium;
-//    margin-bottom: 10px;
-//  }
-//  dt {
-//    span {
-//      margin-left: 10%;
-//    }
-//  }
-//}
-
 .component-section {
-
+  .create-invitation-row {
+    border: 5px solid $color-blue-grey;
+    border-top: none;
+  }
   .section-content, .section-head {
-    border-bottom: 5px solid #84a6b6;
     background-color: white;
-    margin-left: 5px;
-    margin-right: 5px;
+    //margin-left: 5px;
+    //margin-right: 5px;
   }
 
   .panel-open {
