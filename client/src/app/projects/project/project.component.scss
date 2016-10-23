@@ -1,3 +1,38 @@
 .active {
   color: #fff;
 }
+nav {
+  padding-right: 0;
+  background-color: #113d57;
+
+  ul {
+    padding: 20% 0;
+    height: 100%;
+
+    li {
+      height: 16.6666666%;
+      min-height: 100px;
+      display: block;
+      text-align: center;
+
+      a {
+        color: #d8d8d8;
+        &:hover {
+          text-decoration: none;
+        }
+
+        i {
+          display: block;
+
+          &:before {
+            font-size: 48px;
+          }
+        }
+        span {
+          display: block;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
