@@ -9,9 +9,9 @@
       <button class="btn btn-success btn-lg" (click)="nextTab(noInviteeModal)"><span>Next</span></button>
     </div>
   </div>
-  <div class="row invitees-row">
-    <div class="offset-md-1 col-md-1">
-      <h4>Selected Invitees</h4>
+  <div class="row invitees-row flex-items-xs-middle">
+    <div class="col-md-2">
+      <h4 class="text-xs-right">Selected Invitees</h4>
     </div>
     <div class="col-md-10">
       <span *ngFor="let company of selectedInvitees">
