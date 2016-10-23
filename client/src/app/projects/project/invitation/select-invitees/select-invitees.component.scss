@@ -51,10 +51,12 @@
   border-bottom: 5px solid #84a6b6;
   padding-top: 30px;
   padding-bottom: 30px;
+  .image-container {
+    min-height: 48px;
+  }
   h4 {
     color: #9b9b9b;
     font-family: Avenir-Medium;
-    margin-bottom: 10px;
   }
   dt {
     span {

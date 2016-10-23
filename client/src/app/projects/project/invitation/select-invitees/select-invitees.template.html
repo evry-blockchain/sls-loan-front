@@ -13,9 +13,9 @@
     <div class="col-md-2">
       <h4 class="text-xs-right">Selected Invitees</h4>
     </div>
-    <div class="col-md-10">
-      <span *ngFor="let company of selectedInvitees">
-        <img height="48px" width="48px" [src]="company.image" (click)="removeSelectedInvitee(company)">
+    <div class="col-md-10" class="image-container">
+      <span *ngFor="let company of selectedInvitees" class="image-container">
+        <img height="48px" width="48px" class="img-fluid" [src]="company.image" (click)="removeSelectedInvitee(company)">
       </span>
     </div>
   </div>
