@@ -3,7 +3,8 @@
  */
 
 import {
-  Component, OnInit, Output, EventEmitter } from '@angular/core';
+  Component, OnInit, Output, EventEmitter, HostBinding
+} from '@angular/core';
 import { Input } from "@angular/core";
 
 @Component({
@@ -13,10 +14,10 @@ import { Input } from "@angular/core";
 
 })
 export class SelectInviteesPartnerComponent implements OnInit {
-
   @Input() partner;
   @Output() selectInvitee = new EventEmitter();
   @Output() unselectInvitee = new EventEmitter();
+  @HostBinding('class') hostClass = "row";
   selected: boolean = false;
 
   constructor() { }

@@ -1,4 +1,4 @@
-<div class="invitation">
+<div class="invitation container-fluid">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="invitation-search-holder">
@@ -15,7 +15,7 @@
     <div class="offset-md-1 col-md-1">
       <h4>Selected Invitees</h4>
     </div>
-    <div>
+    <div class="col-md-10">
       <span *ngFor="let company of selectedInvitees">
         <img height="48px" width="48px" [src]="company.image" (click)="removeSelectedInvitee(company)">
       </span>
