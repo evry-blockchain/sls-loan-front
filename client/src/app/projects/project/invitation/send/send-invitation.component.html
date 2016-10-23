@@ -3,20 +3,21 @@
   <invitation-additional-information [invitation]="invitation" ></invitation-additional-information>
   <invitation-terms-conditions [invitation]="invitation"></invitation-terms-conditions>
 
-  <div class="row invitees-row">
+  <div class="row invitees-row flex-items-xs-middle">
     <div class="offset-md-1 col-md-1">
       <h4>Invitees</h4>
     </div>
-    <div>
+    <div class="col-md-10 image-container">
       <span *ngFor="let company of companies">
         <img height="48px" width="48px" [src]="company.image" (click)="removeCompany(company)">
       </span>
+      <span class="m-l-1">
+        <button class="btn btn-default" [routerLink]="['../select']">
+          <i class="fa fa-plus" style="color: white" aria-hidden="true" ></i>
+        </button>
+      </span>
     </div>
-    <div class="m-l-1">
-      <button class="btn btn-default" [routerLink]="['../select']">
-        <i class="fa fa-plus" style="color: white" aria-hidden="true" ></i>
-      </button>
-    </div>
+
   </div>
   <div class="row invitees-row">
     <div class="col-md-2 offset-md-5">
