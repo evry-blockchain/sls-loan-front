@@ -1,7 +1,5 @@
 @import '../../../style/app.variables';
-.active {
-  color: #fff;
-}
+
 nav {
   padding-right: 0;
   background-color: $color-light_navy;
@@ -18,6 +16,9 @@ nav {
 
       a {
         color: #d8d8d8;
+        &.active {
+          color: #fff;
+        }
         &:hover {
           text-decoration: none;
         }
