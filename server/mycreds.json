@@ -18,14 +18,14 @@
         ],
         "ca": {
           "13f12279-5f98-4c7a-b476-9be108606f74_ca": {
-            "url": "13f12279-5f98-4c7a-b476-9be108606f74_ca.us.blockchain.ibm.com:30303",
-            "discovery_host": "13f12279-5f98-4c7a-b476-9be108606f74_ca.us.blockchain.ibm.com",
-            "discovery_port": 30303,
-            "api_host": "13f12279-5f98-4c7a-b476-9be108606f74_ca.us.blockchain.ibm.com",
-            "api_port_tls": 30303,
+            "url": "195.250.62.68:7050",
+            "discovery_host": "195.250.62.68",
+            "discovery_port": 7050,
+            "api_host": "195.250.62.68",
+            "api_port_tls": 7050,
             "api_port": 443,
             "type": "ca",
-            "network_id": "13f12279-5f98-4c7a-b476-9be108606f74",
+            "network_id": "195.250.62.68",
             "container_id": "4d4dec8459deaa676b98bbec9dba623a4eeb37234a0c7b1f786e0a7347fe4336"
           }
         },
@@ -41,6 +41,96 @@
             "secret": "DJY27pEnl16d",
             "enrollId": "WebAppAdmin",
             "enrollSecret": "DJY27pEnl16d"
+          },
+          {
+            "username": "lukas",
+            "secret": "NPKYL39uKbkj",
+            "enrollId": "lukas",
+            "enrollSecret": "NPKYL39uKbkj"
+          },
+          {
+            "username": "system_chaincode_invoker",
+            "secret": "DRJ20pEql15a",
+            "enrollId": "system_chaincode_invoker",
+            "enrollSecret": "DRJ20pEql15a"
+          },
+          {
+            "username": "diego",
+            "secret": "DRJ23pEQl16a",
+            "enrollId": "diego",
+            "enrollSecret": "DRJ23pEQl16a"
+          },
+          {
+            "username": "jim",
+            "secret": "6avZQLwcUe9b",
+            "enrollId": "jim",
+            "enrollSecret": "6avZQLwcUe9b"
+          },
+          {
+            "username": "binhn",
+            "secret": "7avZQLwcUe9q",
+            "enrollId": "binhn",
+            "enrollSecret": "7avZQLwcUe9q"
+          },
+          {
+            "username": "test_vp0",
+            "secret": "MwYpmSRjupbT",
+            "enrollId": "test_vp0",
+            "enrollSecret": "MwYpmSRjupbT"
+          },
+          {
+            "username": "test_vp1",
+            "secret": "5wgHK9qqYaPy",
+            "enrollId": "test_vp1",
+            "enrollSecret": "5wgHK9qqYaPy"
+          },
+          {
+            "username": "test_vp2",
+            "secret": "vQelbRvja7cJ",
+            "enrollId": "test_vp2",
+            "enrollSecret": "vQelbRvja7cJ"
+          },
+          {
+            "username": "test_vp3",
+            "secret": "9LKqKH5peurL",
+            "enrollId": "test_vp3",
+            "enrollSecret": "9LKqKH5peurL"
+          },
+          {
+            "username": "test_vp4",
+            "secret": "Pqh90CEW5juZ",
+            "enrollId": "test_vp4",
+            "enrollSecret": "Pqh90CEW5juZ"
+          },
+          {
+            "username": "test_vp5",
+            "secret": "FfdvDkAdY81P",
+            "enrollId": "test_vp5",
+            "enrollSecret": "FfdvDkAdY81P"
+          },
+          {
+            "username": "test_vp6",
+            "secret": "QiXJgHyV4t7A",
+            "enrollId": "test_vp6",
+            "enrollSecret": "QiXJgHyV4t7A"
+          },
+          {
+            "username": "test_vp7",
+            "secret": "twoKZouEyLyB",
+            "enrollId": "test_vp7",
+            "enrollSecret": "twoKZouEyLyB"
+          },
+          {
+            "username": "test_vp8",
+            "secret": "BxP7QNh778gI",
+            "enrollId": "test_vp8",
+            "enrollSecret": "BxP7QNh778gI"
+          },
+          {
+            "username": "test_vp9",
+            "secret": "wu3F1EwJWHvQ",
+            "enrollId": "test_vp9",
+            "enrollSecret": "wu3F1EwJWHvQ"
           }
         ],
         "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert"
