@@ -1,7 +1,7 @@
 import storage from './cc-user-storage';
 import options from './cc-options';
 
-import Ibc1 from 'ibm-blockchain-js';
+import Ibc1 from './ibm-blockchain-local';
 import winston from 'winston';
 
 var logger = new (winston.Logger)({

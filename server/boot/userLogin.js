@@ -1,4 +1,4 @@
-import Ibc1 from 'ibm-blockchain-js';
+import Ibc1 from '../utils/ibm-blockchain-local';
 import winston from 'winston';
 
 import storage from '../utils/cc-user-storage';
