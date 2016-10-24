@@ -46,7 +46,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    console.log(this.project);
     this.projectForm = this.formBuilder.group({
       borrower: [''],
       projectName: [''],
@@ -65,7 +64,10 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.isUpdateMode) {
-
+      var newProject = Object.assign({}, this.project, this.projectForm.getRawValue());
+      this.projectService.update(this.project['loanRequestID'], newProject).subscribe(() => {
+        this.lgModal.hide();
+      });
     } else {
       this.participantService.participants$.subscribe((participant) => {
         if (participant['participantName'] === this.projectForm.controls['borrower'].value) {
@@ -77,9 +79,8 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
         } else {
           let newProject = this.projectForm.getRawValue();
           newProject['borrowerID'] = '5';
-          delete newProject['borrowerName'];
+          delete newProject['borrower'];
           delete newProject['role'];
-          console.log('asdfasdfasdf', newProject);
           newProject['arrangerBankID'] = this.user['participantKey'];
 
           this.projectService.create(newProject).subscribe(() => {

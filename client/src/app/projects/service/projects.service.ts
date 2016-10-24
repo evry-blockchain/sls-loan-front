@@ -41,21 +41,6 @@ export class ProjectsService {
     this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
   }
 
-  create(project): Observable<any> {
-    return this.http.post(this.requestMapping, project)
-      .do(() => {
-       this.addProjectSource.next(project);
-    });
-  }
-
-  get(id) {
-    var obs = this.http.get(`${this.requestMapping}/${id}`).cache();
-    obs.subscribe(data => {
-      this.projectSource.next(data);
-    });
-    return obs;
-  }
-
   query() {
     this.projectsSource = this.http.get(this.requestMapping)
                           .mergeMap((projects) => {
@@ -72,6 +57,31 @@ export class ProjectsService {
       .scan(function(accum, x) {
         return accum.concat(x);
       }, []);
+  }
+
+  create(project): Observable<any> {
+    return this.http.post(this.requestMapping, project)
+      .do(() => {
+        this.addProjectSource.next(project);
+      });
+  }
+
+  get(id) {
+    var obs = this.http.get(`${this.requestMapping}/${id}`).cache();
+    obs.subscribe(data => {
+      this.projectSource.next(data);
+    });
+    return obs;
+  }
+
+  update(id, data) {
+    var obs = this.http.put(`${this.requestMapping}/${id}`, data);
+
+    obs.mergeMap(() => {
+      return this.get(id);
+    });
+
+    return  obs
   }
 
   updateInvitation(data) {
