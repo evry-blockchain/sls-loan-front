@@ -35,7 +35,7 @@ import { UserService } from "./user/user.service";
       FormsModule,
       routing,
       PaymentsModule,
-      NgbModule,
+      NgbModule.forRoot(),
       AuthModule,
       SharedModule,
       ProjectsModule,

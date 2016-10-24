@@ -17,12 +17,31 @@ export class SelectInviteesComponent implements OnInit {
 
   participants$;
 
+  public model: any;
+
+
+  search = (text$: Observable<any>)  => {
+    return text$
+      .debounceTime(200)
+      .distinctUntilChanged()
+      .combineLatest(this.participants$)
+      .map(([term, participants]) => {
+        return term.length < 1 ? []
+          : participants.filter(v => new RegExp(term, 'gi').test(v['participantName'])).splice(0, 10);
+      })
+  };
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private projectsService: ProjectsService,
-              private participants: ParticipantService) {
+              private participantService: ParticipantService) {}
 
-  }
+  participants;
+
+  formatter = (result: string) => {
+   return ''
+  };
+
 
   ngOnInit(): void {
     this.projectsService.selectedInvitees$.connect();
@@ -32,7 +51,7 @@ export class SelectInviteesComponent implements OnInit {
         this.selectedInvitees = invitees;
     });
 
-    this.participants$ = this.participants.participants$;
+    this.participants$ = this.participantService.participants$;
     }
 
   nextTab(noInviteeModal) {
@@ -41,6 +60,10 @@ export class SelectInviteesComponent implements OnInit {
     } else {
       this.router.navigate(['../send'], {relativeTo: this.route});
     }
+  }
+
+  selectParticipant(event) {
+    this.addSelectedInvitee(event['item']);
   }
 
   addSelectedInvitee(invitee) {

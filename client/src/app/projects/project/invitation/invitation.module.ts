@@ -1,6 +1,5 @@
 import {NgModule}                   from '@angular/core';
 import {RouterModule}               from '@angular/router';
-import {BrowserModule} from '@angular/platform-browser';
 
 
 import {InvitationComponent}        from './invitation.component';
@@ -10,7 +9,6 @@ import {SelectInviteesComponent}    from './select-invitees/select-invitees.comp
 
 import { AccordionModule, Ng2BootstrapModule, ModalModule }            from 'ng2-bootstrap/ng2-bootstrap';
 
-import {invitationRouting}           from './invitation.routing';
 import { SharedModule } from "../../../shared/shared.module";
 import { SendInvitationComponent } from "./send/send-invitation.component";
 import { CreateInvitationComponent } from "./create/create-invitation.component";
@@ -21,7 +19,8 @@ import { InvitationTermsConditionsComponent } from "./shared/invitation-terms-co
 import { CreateInvitationTabComponent } from "./create/tab/create/create-invitation-tab.component";
 import { ParticipantInvitationTimerComponent } from "./participant/time/participant-timer.component";
 import { SelectInviteesPartnerComponent } from "./select-invitees/partner/select-invitees-partner.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +29,9 @@ import { ReactiveFormsModule } from "@angular/forms";
       AccordionModule,
       SharedModule,
       ModalModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      FormsModule,
+      NgbModule
     ],
     declarations: [
       InvitationComponent,
