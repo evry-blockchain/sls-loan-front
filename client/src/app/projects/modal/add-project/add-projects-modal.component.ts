@@ -15,7 +15,7 @@ import { UserService } from "../../../user/user.service";
   styleUrls: ['add-projects-modal.component.scss']
 
 })
-export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
+export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   projectForm: FormGroup;
 
@@ -36,45 +36,24 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() lgModal;
 
-  @Input() project;
 
   @Input() isUpdateMode;
 
   public borrowers = [];
   public title;
+  public project = {};
+  private projectObs;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes['project'] && !!this.projectForm) {
-      // this.projectForm.patchValue(changes['project'].currentValue);
-      // this.projectForm.controls['borrowerId'].patchValue(4);
-    }
-  }
 
   ngOnInit() {
+    console.log(this.project);
     this.projectForm = this.formBuilder.group({
-      borrowerName: [''],
+      borrower: [''],
       projectName: [''],
       contactPersonName: [''],
       loanSharesAmount: [''],
       marketAndIndustry: ['']
     });
-
-    // this.participantService.participants$.flatMap((projects) => {
-    //   return Observable.from(<any[]>projects);
-    // }).filter(item => {
-    //   return item['participantType'] === 'Borrower';
-    // }).map((item) => {
-    //   var newItem = {
-    //     value: item['participantKey'],
-    //     label: item['participantName']
-    //   };
-    //   return newItem;
-    // }).distinctKey('value')
-    //   .scan((acc, v) => {
-    //   return acc.concat(v);
-    // }, []).subscribe(borrowers => {
-    //   this.borrowers = borrowers
-    // });
 
 
     if(this.isUpdateMode) {
@@ -89,7 +68,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
     } else {
       this.participantService.participants$.subscribe((participant) => {
-        if (participant['participantName'] === this.projectForm.controls['borrowerName'].value) {
+        if (participant['participantName'] === this.projectForm.controls['borrower'].value) {
           let newProject = this.projectForm.getRawValue();
           newProject['borrowerID'] = participant['participantKey'];
           this.projectService.create(newProject).subscribe(() => {
@@ -116,14 +95,28 @@ export class AddProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     if(!!this.createService) {
       this.createService.unsubscribe();
     }
+    if (!!this.projectObs) {
+      this.projectObs.unsubscribe();
+    }
   }
 
   private activateUpdateMode() {
     this.title = 'Edit the Project Information';
+    this.projectObs = this.projectService.project$
+      .combineLatest(this.participantService.participants$)
+      .map(([project, participants]) => {
+        project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
+        return project;
+      }).subscribe((project) => {
+      this.projectForm.patchValue(this.project);
+
+      this.project = project;
+    });
   }
 
   private activateCreateMode() {
-    this.title = 'Add new Project <small>(my role: Arranger Bank)</small>'
+    this.title = 'Add new Project <small>(my role: Arranger Bank)</small>';
+
   }
 
 }
