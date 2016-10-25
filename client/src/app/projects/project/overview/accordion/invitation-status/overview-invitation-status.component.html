@@ -1,5 +1,5 @@
 <section class="payments-table">
-  <div>
+  <div class="offset-md-1 col-md-10">
     <datatable
       class='material striped overview-datatable'
       [rows]='rows'
@@ -45,6 +45,4 @@
     </datatable>
   </div>
 </section>
-<div class="offset-md-4 mt-3">
-  <button class="btn col-md-4 btn-success send-invitation-btn" [routerLink]="['../invitation/create']"><span>SEND MORE INVITATIONS </span></button>
-</div>
+<button class="btn offset-md-4 col-md-4 btn-success send-invitation-btn mt-3" [routerLink]="['../invitation/create']"><span>SEND MORE INVITATIONS </span></button>
