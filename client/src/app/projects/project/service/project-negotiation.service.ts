@@ -19,7 +19,7 @@ export class ProjectNegotiationService {
   }
 
   query() {
-    var obs = this.http.get(`${this.requestMapping}/LoanNegotiations`).cache();
+    var obs = this.http.get(`${this.requestMapping}/LoanNegotiations`).share();
 
     obs.subscribe((data) => {
       this.negotiationSource.next(data);

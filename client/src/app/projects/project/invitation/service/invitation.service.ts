@@ -20,7 +20,7 @@ export class InvitationService {
   }
 
   query() {
-    var obs = this.http.get(`${this.requestMapping}/LoanInvitations`).cache();
+    var obs = this.http.get(`${this.requestMapping}/LoanInvitations`).share();
       obs.subscribe(data => {
         this.invitationSource.next(data);
       });

@@ -67,7 +67,7 @@ export class ProjectsService {
   }
 
   get(id) {
-    var obs = this.http.get(`${this.requestMapping}/${id}`).cache();
+    var obs = this.http.get(`${this.requestMapping}/${id}`).share();
     obs.subscribe(data => {
       this.projectSource.next(data);
     });
