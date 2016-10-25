@@ -16,14 +16,12 @@ export class ProjectOverviewHeaderComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('trololol', this.isBankOwner);
     if(!changes['isBankOwner']) {
       return;
     }
   }
 
   ngOnInit() {
-    console.log('trololol', this.isBankOwner);
   }
 
 }
