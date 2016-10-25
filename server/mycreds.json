@@ -131,6 +131,30 @@
             "secret": "wu3F1EwJWHvQ",
             "enrollId": "test_vp9",
             "enrollSecret": "wu3F1EwJWHvQ"
+          },
+          {
+            "username": "bank1",
+            "secret": "NOE63pEQbL01",
+            "enrollId": "bank1",
+            "enrollSecret": "NOE63pEQbL01"
+          },
+          {
+            "username": "bank2",
+            "secret": "NOE63pEQbL02",
+            "enrollId": "bank2",
+            "enrollSecret": "NOE63pEQbL02"
+          },
+          {
+            "username": "bank3",
+            "secret": "NOE63pEQbL03",
+            "enrollId": "bank3",
+            "enrollSecret": "NOE63pEQbL03"
+          },
+          {
+            "username": "bank4",
+            "secret": "NOE63pEQbL04",
+            "enrollId": "bank4",
+            "enrollSecret": "NOE63pEQbL04"
           }
         ],
         "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert"
