@@ -29,7 +29,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
               private participantService: ParticipantService,
               private userService: UserService) {
     userService.user$.subscribe(data => {
-      console.log("user", data);
       this.user = data
     })
   }
