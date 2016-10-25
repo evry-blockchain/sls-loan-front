@@ -1,5 +1,7 @@
+@import '../../../../../style/app.variables';
+
 .row {
-  background-color: white;
+  background-color: $color-white-three;
   border: 5px solid #84a6b6;
   border-top: none;
   padding-top: 30px;
