@@ -5,9 +5,7 @@
         <input type="text" [ngbTypeahead]="search" [inputFormatter]="formatter" (selectItem)="selectParticipant($event)" placeholder="Search for finance partners" [resultTemplate]="rt"  class="form-control form-control-lg"/>
       </div>
     </div>
-    <div class="col-md-1 flex-xs-middle">
-      <button class="btn btn-success btn-lg" (click)="nextTab(noInviteeModal)"><span>Next</span></button>
-    </div>
+    <button class="btn col-md-2 flex-xs-middle btn-success btn-lg" (click)="nextTab(noInviteeModal)"><span>Next</span></button>
   </div>
   <div class="row invitees-row flex-items-xs-middle">
     <div class="col-md-2">
