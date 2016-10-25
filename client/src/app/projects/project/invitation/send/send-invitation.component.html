@@ -4,10 +4,10 @@
   <invitation-terms-conditions [invitation]="invitation"></invitation-terms-conditions>
 
   <div class="row invitees-row flex-items-xs-middle">
-    <div class="offset-md-1 col-md-1">
+    <div class="offset-md-1 col-md-2">
       <h4>Invitees</h4>
     </div>
-    <div class="col-md-10 image-container">
+    <div class="col-md-9 image-container">
       <span *ngFor="let company of companies">
         <img height="48px" width="48px" [src]="company.image" (click)="removeCompany(company)">
       </span>
@@ -19,8 +19,8 @@
     </div>
 
   </div>
-  <div class="row invitees-row">
-    <button class="btn btn-success col-md" (click)="sendInvitation()">
+  <div class="row invitees-row  flex-items-xs-center" >
+    <button class="btn btn-success col-md-4" (click)="sendInvitation()">
      Finish and send Invitation
     </button>
   </div>
