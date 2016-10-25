@@ -1,14 +1,14 @@
 <section class="component">
-  <project-overview-header class="header"></project-overview-header>
-  <section class="content" [ngSwitch]="isBankOwner | async">
-    <div *ngSwitchCase="null">
+  <project-overview-header class="header" [isBankOwner]="isBankOwner"></project-overview-header>
+  <section class="content" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}" [ngSwitch]="isBankOwner | async">
+    <div *ngSwitchCase="true">
       <accordion [closeOthers]="true">
         <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
           <div accordion-heading>
             <h2 class="section-head">Project Information</h2>
           </div>
           <div class="section-content">
-            <overview-project-information ></overview-project-information>
+            <overview-project-information></overview-project-information>
           </div>
         </accordion-group>
         <accordion-group #group>
@@ -34,9 +34,7 @@
 
     <div *ngSwitchCase="false">
       <overview-participant-project-information></overview-participant-project-information>
-      <footer class="footer">
-
-      </footer>
+      <footer class="footer" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}"></footer>
     </div>
   </section>
 

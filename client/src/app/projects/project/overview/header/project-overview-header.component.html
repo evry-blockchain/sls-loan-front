@@ -1,4 +1,5 @@
-<header class="component-header">
+<header class="component-header" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}">
+  {{isBankOwner | async}}
   <h2>PROJECT OVERVIEW</h2>
   <span>Status</span>
 </header>

@@ -1,5 +1,11 @@
 @import "../../../../../style/app.variables";
 
 header {
-  background-color: $color-bluey-grey;
+  &.participant {
+    background-color: $color-bluey-grey;
+
+  }
+  &.bank-owner {
+    background-color: $color-blue-grey;
+  }
 }

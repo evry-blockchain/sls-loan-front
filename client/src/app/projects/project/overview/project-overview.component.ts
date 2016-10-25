@@ -19,7 +19,7 @@ export class ProjectOverviewComponent implements OnInit {
               private route: ActivatedRoute,
               private userService: UserService) { }
 
-   private isBankOwner;
+  private isBankOwner;
 
   ngOnInit() {
     this.route.parent.params.subscribe(data => {
