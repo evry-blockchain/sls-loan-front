@@ -34,9 +34,10 @@
 
     <div *ngSwitchCase="false">
       <overview-participant-project-information></overview-participant-project-information>
-      <footer class="footer" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}"></footer>
     </div>
   </section>
+  <footer *ngIf="!(isBankOwner | async)" class="footer" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}"></footer>
+
 
 </section>
 
