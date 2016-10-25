@@ -16,13 +16,14 @@ rimraf('.tmp', () => {
 
   cp('README.md', '.tmp/README.md');
   cp('package.json', '.tmp/package.json');
+  cp('node_modules', '.tmp/node_modules');
 
   cd('.tmp');
   console.log("Building archive and deploying the app...");
   exec('slc build -p');
 
   //deploy here
-  exec('slc deploy -s sls-loan-node http://vagrant:vagrant@195.250.62.73:8701');
+  exec('slc deploy -s sls-loan-node http://vagrant:oUVJ7ipL9U@195.250.62.73:8701');
 
   console.log('Done');
 });

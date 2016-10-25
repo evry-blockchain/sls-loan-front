@@ -28,18 +28,37 @@ module.exports = LoanInvitation => {
 
   LoanInvitation.add = (loanInvitation, cb)=> {
     user.cc.invoke.addLoanInvitation([
-      loanRequest.borrowerID,
-      loanRequest.arrangerBankID,
-      loanRequest.loanSharesAmount,
-      loanRequest.projectRevenue,
-      loanRequest.projectName,
-      loanRequest.projectInformation,
-      loanRequest.company,
-      loanRequest.website,
-      loanRequest.contactPersonName,
-      loanRequest.contactPersonSurname,
-      loanRequest.requestDate,
-      loanRequest.status
+      loanInvitation.borrowerID,
+      loanInvitation.arrangerBankID,
+      loanInvitation.loanSharesAmount,
+      loanInvitation.projectRevenue,
+      loanInvitation.projectName,
+      loanInvitation.projectInformation,
+      loanInvitation.company,
+      loanInvitation.website,
+      loanInvitation.contactPersonName,
+      loanInvitation.contactPersonSurname,
+      loanInvitation.requestDate,
+      loanInvitation.status
+    ], user.username, (err, data) => {
+      cb(err, data);
+    });
+
+  };LoanInvitation.add = (loanInvitation, cb)=> {
+    user.cc.invoke.addLoanInvitation([
+      loanInvitation.loanInvitationID,
+      loanInvitation.borrowerID,
+      loanInvitation.arrangerBankID,
+      loanInvitation.loanSharesAmount,
+      loanInvitation.projectRevenue,
+      loanInvitation.projectName,
+      loanInvitation.projectInformation,
+      loanInvitation.company,
+      loanInvitation.website,
+      loanInvitation.contactPersonName,
+      loanInvitation.contactPersonSurname,
+      loanInvitation.requestDate,
+      loanInvitation.status
     ], user.username, (err, data) => {
       cb(err, data);
     });
@@ -67,6 +86,19 @@ module.exports = LoanInvitation => {
     http: {
       path: '/',
       verb: 'post'
+    },
+    accepts: {
+      arg: 'data',
+      type: 'LoanInvitation',
+      http: {source: 'body'}
+    },
+    returns: {type: 'object', root: true}
+  });
+
+  LoanInvitation.remoteMethod('update', {
+    http: {
+      path: '/',
+      verb: 'put'
     },
     accepts: {
       arg: 'data',

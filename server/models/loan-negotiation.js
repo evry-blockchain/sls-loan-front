@@ -36,7 +36,19 @@ module.exports = LoanNegotiation => {
     ], user.username, (err, data) => {
       cb(err, data);
     });
+  };
 
+  LoanNegotiation.add = (loanNegotiation, cb)=> {
+    user.cc.invoke.addLoanNegotiation([
+      loanNegotiation.loanNegotiationID,
+      loanNegotiation.loanInvitationID,
+      loanNegotiation.participantBankID,
+      loanNegotiation.amount,
+      loanNegotiation.negotiationStatus,
+      loanNegotiation.participantBankComment
+    ], user.username, (err, data) => {
+      cb(err, data);
+    });
   };
 
   LoanNegotiation.remoteMethod('getList', {
@@ -60,6 +72,19 @@ module.exports = LoanNegotiation => {
     http: {
       path: '/',
       verb: 'post'
+    },
+    accepts: {
+      arg: 'data',
+      type: 'LoanNegotiation',
+      http: {source: 'body'}
+    },
+    returns: {type: 'object', root: true}
+  });
+
+  LoanNegotiation.remoteMethod('update', {
+    http: {
+      path: '/',
+      verb: 'put'
     },
     accepts: {
       arg: 'data',

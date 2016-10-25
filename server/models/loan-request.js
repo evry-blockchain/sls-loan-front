@@ -54,6 +54,27 @@ module.exports = LoanRequest => {
     });
   };
 
+  LoanRequest.update = (loanRequest, cb) => {
+    user.cc.invoke.updateLoanRequest([
+      loanRequest.loanRequestID,
+      loanRequest.borrowerID,
+      loanRequest.arrangerBankID,
+      loanRequest.loanSharesAmount,
+      loanRequest.projectRevenue,
+      loanRequest.projectName,
+      loanRequest.projectInformation,
+      loanRequest.company,
+      loanRequest.website,
+      loanRequest.contactPersonName,
+      loanRequest.contactPersonSurname,
+      loanRequest.requestDate,
+      loanRequest.status,
+      loanRequest.marketAndIndustry
+    ], user.username, (err, data) => {
+      cb(err, data);
+    });
+  };
+
   LoanRequest.remoteMethod('getList', {
     http: {
       path: '/',
@@ -90,6 +111,19 @@ module.exports = LoanRequest => {
       type: 'LoanRequest',
       http: {source: 'body'}
     },
+    returns: {type: 'object', root: true}
+  });
+
+  LoanRequest.remoteMethod('update', {
+    http: {
+      path: '/',
+      verb: 'put'
+    },
+    accepts: [{
+      arg: 'data',
+      type: 'LoanRequest',
+      http: {source: 'body'}
+    }],
     returns: {type: 'object', root: true}
   });
 
