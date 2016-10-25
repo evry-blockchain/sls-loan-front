@@ -1,7 +1,7 @@
 <section class="component">
   <project-overview-header class="header"></project-overview-header>
   <section class="content" [ngSwitch]="isBankOwner | async">
-    <div *ngSwitchCase="true">
+    <div *ngSwitchCase="null">
       <accordion [closeOthers]="true">
         <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
           <div accordion-heading>
@@ -29,15 +29,16 @@
 
         </accordion-group>
       </accordion>
+
     </div>
 
-    <div *ngSwitchCase="null">
+    <div *ngSwitchCase="false">
       <overview-participant-project-information></overview-participant-project-information>
+      <footer class="footer">
+
+      </footer>
     </div>
-
   </section>
-  <footer class="footer">
 
-  </footer>
 </section>
 
