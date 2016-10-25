@@ -7,10 +7,11 @@
 .component-section {
   .create-invitation-row {
     border: 5px solid $color-blue-grey;
+    background-color: $color-white-three;
     border-top: none;
   }
   .section-content, .section-head {
-    background-color: white;
+    //background-color: white;
   }
 
   .panel-open {
