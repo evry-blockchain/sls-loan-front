@@ -37,24 +37,32 @@ section {
   }
 }
 
-.component-section {
+.component {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  .header {
+    flex: 0 1 auto;
+  }
 
+  .content {
+    flex: 1 1 auto;
+    border: 5px solid $color-bluey-grey
+  }
+
+  .footer {
+    background-color: $color-bluey-grey;
+    flex: 0 1 90px;
+  }
 }
 
-.btn-green {
-  color: #fff;
-  background-color: $greeny-blue;
-  border-color: $greeny-blue;
-}
-.btn-red {
-  color: #fff;
-  background-color: $dark-red;
-  border-color: $dark-red;
-}
 
 .white {
   color: #fff;
 }
+
+
+
 //dt {
 //  font-family: $font-family-avenir-black;
 //}

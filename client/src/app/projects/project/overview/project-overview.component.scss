@@ -1,5 +1,14 @@
 
-.component-section {
+@import "../../../../style/app.variables";
+
+.component {
+  .content {
+    border: 5px solid $color-bluey-grey
+  }
+
+  .footer {
+    background-color: $color-bluey-grey;
+  }
 
   .section-content, .section-head {
     border-bottom: 5px solid #84a6b6;

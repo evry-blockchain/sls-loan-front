@@ -1,37 +1,43 @@
-<project-overview-header></project-overview-header>
-<section class="component-section" [ngSwitch]="isBankOwner | async">
-  <div *ngSwitchCase="true">
-    <accordion [closeOthers]="true">
-      <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
-        <div accordion-heading>
-          <h2 class="section-head">Project Information</h2>
-        </div>
-        <div class="section-content">
-          <overview-project-information ></overview-project-information>
-        </div>
-      </accordion-group>
-      <accordion-group #group>
-        <div accordion-heading>
-          <h2 class="section-head">Invitation Status</h2>
-        </div>
-        <div class="section-content">
-          <overview-invitation-status></overview-invitation-status>
-        </div>
-      </accordion-group>
-      <accordion-group #group>
-        <div accordion-heading>
-          <h2 class="section-head">Financial Status</h2>
-        </div>
-        <div class="section-content">
+<section class="component">
+  <project-overview-header class="header"></project-overview-header>
+  <section class="content" [ngSwitch]="isBankOwner | async">
+    <div *ngSwitchCase="true">
+      <accordion [closeOthers]="true">
+        <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
+          <div accordion-heading>
+            <h2 class="section-head">Project Information</h2>
+          </div>
+          <div class="section-content">
+            <overview-project-information ></overview-project-information>
+          </div>
+        </accordion-group>
+        <accordion-group #group>
+          <div accordion-heading>
+            <h2 class="section-head">Invitation Status</h2>
+          </div>
+          <div class="section-content">
+            <overview-invitation-status></overview-invitation-status>
+          </div>
+        </accordion-group>
+        <accordion-group #group>
+          <div accordion-heading>
+            <h2 class="section-head">Financial Status</h2>
+          </div>
+          <div class="section-content">
 
-        </div>
+          </div>
 
-      </accordion-group>
-    </accordion>
-  </div>
+        </accordion-group>
+      </accordion>
+    </div>
 
-  <div *ngSwitchCase="false">
-    <overview-participant-project-information></overview-participant-project-information>
-  </div>
+    <div *ngSwitchCase="null">
+      <overview-participant-project-information></overview-participant-project-information>
+    </div>
 
+  </section>
+  <footer class="footer">
+
+  </footer>
 </section>
+
