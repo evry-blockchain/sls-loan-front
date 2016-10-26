@@ -1,6 +1,6 @@
 require('shelljs/global');
 var rimraf = require('rimraf');
-// var conf = require('./package.json');
+var port = process.argv.slice(2)[0];
 
 console.log('Removing tmp and client dist folders...');
 
@@ -23,7 +23,7 @@ rimraf('.tmp', () => {
   exec('slc build -p');
 
   //deploy here
-  exec('slc deploy -s sls-loan-node http://vagrant:oUVJ7ipL9U@195.250.62.73:8701');
+  exec(`slc deploy -s sls-loan-node http://vagrant:oUVJ7ipL9U@195.250.62.${port}:8701`);
 
   console.log('Done');
 });

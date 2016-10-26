@@ -23,11 +23,6 @@ module.exports = function (app) {
       "password": req.body.password
     };
 
-    options.network.users.push({
-      "enrollId": userCredentials.username,
-      "enrollSecret": userCredentials.password
-    });
-
     ibc.load(options, function (err, cc) {
       if (err) {
         res.status(401).json({"error": err});

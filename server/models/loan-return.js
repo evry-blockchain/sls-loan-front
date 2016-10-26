@@ -18,13 +18,13 @@ module.exports = LoanReturn => {
   LoanReturn.getList = (filter, cb) => {
       user.cc.query.getLoanReturnsList([], user.username, (err, data) => {
         cb(err, prepareListData(data, filter));
-      });
+      }, ['bankid']);
   };
 
   LoanReturn.count = cb => {
       user.cc.query.getLoanReturnsQuantity([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   LoanReturn.add = (loanReturn, cb)=> {
@@ -34,7 +34,7 @@ module.exports = LoanReturn => {
         loanReturn.returnDate,
       ], user.username, (err, data) => {
         cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   LoanReturn.remoteMethod('getList', {

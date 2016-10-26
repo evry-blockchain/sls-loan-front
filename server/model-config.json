@@ -49,5 +49,9 @@
   "AccessToken": {
     "dataSource": null,
     "public": false
+  },
+  "Util": {
+    "dataSource": null,
+    "public": true
   }
 }

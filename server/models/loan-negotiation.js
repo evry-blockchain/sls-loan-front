@@ -17,13 +17,13 @@ module.exports = LoanNegotiation => {
   LoanNegotiation.getList = (filter, cb) => {
     user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
   };
 
   LoanNegotiation.count = cb => {
     user.cc.query.getLoanNegotiationsQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   LoanNegotiation.add = (loanNegotiation, cb)=> {
@@ -36,7 +36,7 @@ module.exports = LoanNegotiation => {
       loanNegotiation.date,
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   LoanNegotiation.add = (loanNegotiation, cb)=> {
@@ -49,7 +49,7 @@ module.exports = LoanNegotiation => {
       loanNegotiation.participantBankComment
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   LoanNegotiation.remoteMethod('getList', {
