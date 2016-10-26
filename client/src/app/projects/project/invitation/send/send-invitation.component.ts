@@ -73,6 +73,9 @@ export class SendInvitationComponent implements OnInit {
 
       Observable.forkJoin(invitations).subscribe(() => {
         this.projectService.updateInvitation({});
+        this.companies.forEach((company) => {
+          this.projectService.removeInvitee(company);
+        });
         this.router.navigate(['../../../overview'], {relativeTo: this.route});
       })
     });
