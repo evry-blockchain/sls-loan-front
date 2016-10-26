@@ -20,7 +20,9 @@
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "npm run server",
-    "start:hmr": "npm run server -- --hot"
+    "start:hmr": "npm run server -- --hot",
+    "deploy73": "node build-and-deploy.js 73",
+    "deploy68": "node build-and-deploy.js 68"
   },
   "dependencies": {
     "@angular/common": "2.2.0-beta.0",

@@ -8,7 +8,9 @@
     "start": "node .",
     "test": "tape tests/**/*.js",
     "build": "babel server -d dist",
-    "start-dev": "nodemon server/server.js --exec babel-node"
+    "start-dev": "nodemon server/server.js --exec babel-node",
+    "deploy73": "node build-and-deploy.js 73",
+    "deploy68": "node build-and-deploy.js 68"
   },
   "dependencies": {
     "cls-hooked": "^4.1.4",
