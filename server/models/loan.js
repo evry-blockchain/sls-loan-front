@@ -17,13 +17,13 @@ module.exports = Loan => {
   Loan.getList = (filter, cb) => {
     user.cc.query.getLoansList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
   };
 
   Loan.count = cb => {
     user.cc.query.getLoansQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   Loan.add = (loan, cb)=> {
@@ -38,7 +38,7 @@ module.exports = Loan => {
       loan.negotiationStatus
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   Loan.remoteMethod('getList', {

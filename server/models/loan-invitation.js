@@ -17,13 +17,13 @@ module.exports = LoanInvitation => {
   LoanInvitation.getList = (filter, cb) => {
     user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
   };
 
   LoanInvitation.count = cb => {
     user.cc.query.getLoanInvitationsQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   LoanInvitation.add = (loanInvitation, cb)=> {
@@ -42,7 +42,7 @@ module.exports = LoanInvitation => {
       loanInvitation.status
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
 
   };LoanInvitation.add = (loanInvitation, cb)=> {
     user.cc.invoke.addLoanInvitation([
@@ -61,7 +61,7 @@ module.exports = LoanInvitation => {
       loanInvitation.status
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
 
   };
 

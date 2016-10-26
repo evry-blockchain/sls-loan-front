@@ -18,13 +18,13 @@ module.exports = Transaction => {
   Transaction.getList = (filter, cb) => {
       user.cc.query.getTransactionsList([], user.username, (err, data) => {
         cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
   };
 
   Transaction.count = cb => {
       user.cc.query.getTransactionsQuantity([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   Transaction.add = (transaction, cb)=> {
@@ -37,7 +37,7 @@ module.exports = Transaction => {
         transaction.amount
       ], user.username, (err, data) => {
         cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   Transaction.remoteMethod('getList', {

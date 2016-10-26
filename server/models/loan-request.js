@@ -19,19 +19,19 @@ module.exports = LoanRequest => {
   LoanRequest.getList = (filter, cb) => {
     user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
   };
 
   LoanRequest.get = (id, cb) => {
     user.cc.query.getLoanRequestByKey([id], user.username, (err, data) => {
       cb(err, prepareSingleData(data));
-    });
+    }, ['bankid']);
   };
 
   LoanRequest.count = cb => {
     user.cc.query.getLoanRequestsQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   LoanRequest.add = (loanRequest, cb)=> {
@@ -51,7 +51,7 @@ module.exports = LoanRequest => {
       loanRequest.marketAndIndustry
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   LoanRequest.update = (loanRequest, cb) => {
@@ -72,7 +72,7 @@ module.exports = LoanRequest => {
       loanRequest.marketAndIndustry
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   LoanRequest.remoteMethod('getList', {

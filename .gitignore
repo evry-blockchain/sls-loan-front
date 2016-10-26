@@ -20,3 +20,4 @@ client/node_modules
 npm-debug.log
 dist
 .tmp
+server/utils/temp

@@ -18,13 +18,13 @@ module.exports = Participant => {
   Participant.getList = (filter, cb) => {
     user.cc.query.getParticipantsList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
   };
 
   Participant.count = cb => {
     user.cc.query.getParticipantsQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   Participant.add = (participant, cb)=> {
@@ -33,19 +33,19 @@ module.exports = Participant => {
       participant.participantType
     ], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   Participant.getByType = (type, cb) => {
     user.cc.query.getParticipantsByType(type, user.username, (err, data) => {
       cb(err, prepareListData(data));
-    });
+    }, ['bankid']);
   };
 
   Participant.delete = (id, cb) => {
     user.invoke.deleteRow(['Participants', id], user.username, (err,data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   Participant.remoteMethod('getList', {

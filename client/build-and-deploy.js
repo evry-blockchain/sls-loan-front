@@ -4,7 +4,6 @@ exec('npm run build');
 
 cp('server.js', 'dist/server.js');
 cp('package.json', 'dist/package.json');
-// exec('cp node_modules dist/node_modules -r');
 
 cd('dist');
 exec('slc build -p');

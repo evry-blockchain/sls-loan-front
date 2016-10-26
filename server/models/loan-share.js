@@ -18,13 +18,13 @@ module.exports = LoanShare => {
   LoanShare.getList = (filter, cb) => {
       user.cc.query.getLoanSharesList([], user.username, (err, data) => {
         cb(err, prepareListData(data, filter));
-      });
+      }, ['bankid']);
   };
 
   LoanShare.count = cb => {
       user.cc.query.getLoanSharesQuantity([], user.username, (err, data) => {
         cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   LoanShare.add = (loanShare, cb)=> {
@@ -36,7 +36,7 @@ module.exports = LoanShare => {
         loanShare.negotiationStatus
       ], user.username, (err, data) => {
         cb(err, data);
-      });
+      }, ['bankid']);
   };
 
   LoanShare.remoteMethod('getList', {

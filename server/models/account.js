@@ -18,26 +18,26 @@ module.exports = Account => {
   Account.getList = (filter, cb) => {
     user.cc.query.getAccountsList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
-    });
+    }, ['bankid']);
 
   };
 
   Account.count = cb => {
     user.cc.query.getAccountsQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
-    });
+    }, ['bankid']);
   };
 
   Account.add = (account, cb)=> {
     user.cc.invoke.addAccount([account.participantID, account.amount], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   Account.update = (account, cb)=> {
     user.cc.invoke.updateAccountAmount([account.accountID, account.amount], user.username, (err, data) => {
       cb(err, data);
-    });
+    }, ['bankid']);
   };
 
   Account.remoteMethod('getList', {
