@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ProjectsService } from "../../../service/projects.service";
 import { ParticipantService } from "../../../../participants/service/participants.service";
 import { ProjectNegotiationService } from "../../service/project-negotiation.service";
+import { Observable } from "rxjs";
 
 @Component({
     selector: 'send-invitation',
@@ -57,6 +58,7 @@ export class SendInvitationComponent implements OnInit {
     this.invitation['loanRequestID'] = this.project['loanRequestID'];
 
     this.projectService.saveLoanInvitation(this.invitation).subscribe(data => {
+      let invitations = [];
       this.companies.forEach(company => {
         let negotiation = {
           "loanInvitationID":  this.project['loanRequestID'],
@@ -66,9 +68,12 @@ export class SendInvitationComponent implements OnInit {
           'participantBankComment': '123',
           'date': '14-16-2018'
         };
-        this.negotiationService.saveLoanNegotiation(negotiation).subscribe((data) => {
-          this.router.navigate(['../../../overview'], {relativeTo: this.route});
-        })
+        invitations.push(this.negotiationService.saveLoanNegotiation(negotiation));
+      });
+
+      Observable.forkJoin(invitations).subscribe(() => {
+        this.projectService.updateInvitation({});
+        this.router.navigate(['../../../overview'], {relativeTo: this.route});
       })
     });
 
