@@ -7,6 +7,7 @@ import { ToastyService, ToastOptions, ToastData } from "ng2-toasty";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProjectsService } from "../../../service/projects.service";
 import { ParticipantService } from "../../../../participants/service/participants.service";
+import { ProjectNegotiationService } from "../../service/project-negotiation.service";
 
 @Component({
     selector: 'send-invitation',
@@ -24,7 +25,8 @@ export class SendInvitationComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private projectService: ProjectsService,
-              private participantService: ParticipantService) { }
+              private participantService: ParticipantService,
+              private negotiationService: ProjectNegotiationService) { }
 
   ngOnInit() {
     this.projectService.project$
@@ -51,10 +53,24 @@ export class SendInvitationComponent implements OnInit {
   }
 
   sendInvitation() {
-    // [routerLink]="['../../../overview'];
+    this.invitation['arrangerBankID'] = this.project['arrangerBankID'];
+    this.invitation['loanRequestID'] = this.project['loanRequestID'];
 
-
-    this.router.navigate(['../../../overview'], {relativeTo: this.route});
+    this.projectService.saveLoanInvitation(this.invitation).subscribe(data => {
+      this.companies.forEach(company => {
+        let negotiation = {
+          "loanInvitationID":  this.project['loanRequestID'],
+          "participantBankID": company['participantKey'],
+          "amount": "2000",
+          "negotiationStatus": 'Pending',
+          'participantBankComment': '123',
+          'date': '14-16-2018'
+        };
+        this.negotiationService.saveLoanNegotiation(negotiation).subscribe((data) => {
+          this.router.navigate(['../../../overview'], {relativeTo: this.route});
+        })
+      })
+    });
 
     var toastOptions:ToastOptions = {
       title: "Success",

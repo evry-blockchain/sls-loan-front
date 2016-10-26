@@ -28,4 +28,7 @@ export class ProjectNegotiationService {
     return obs;
   }
 
+  saveLoanNegotiation(negotiation) {
+    return this.http.post(`${this.apiEndpoint}/LoanNegotiations`, negotiation)
+  }
 }

@@ -32,7 +32,8 @@ module.exports = LoanNegotiation => {
       loanNegotiation.participantBankID,
       loanNegotiation.amount,
       loanNegotiation.negotiationStatus,
-      loanNegotiation.participantBankComment
+      loanNegotiation.participantBankComment,
+      loanNegotiation.date,
     ], user.username, (err, data) => {
       cb(err, data);
     });

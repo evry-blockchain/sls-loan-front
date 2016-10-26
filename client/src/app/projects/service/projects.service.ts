@@ -88,6 +88,10 @@ export class ProjectsService {
     this.invitationSource.next(data);
   }
 
+  saveLoanInvitation(invitation) {
+    return this.http.post(`${this.apiEndpoint}/LoanInvitations`, invitation);
+  }
+  
   public addSelectedInvitation(invitation) {
     this.selectedInviteeSource.next(invitation)
   }
