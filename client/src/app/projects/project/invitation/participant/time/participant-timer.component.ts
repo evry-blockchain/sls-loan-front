@@ -32,19 +32,19 @@ export class ParticipantInvitationTimerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.textarea.nativeElement.focus();
-    this.numbers = Observable.timer(0, 1000).subscribe((x) => {
-      this.time = this.timer.subtract(1, 'seconds').format('h:mm:ss');
-      if (!this.isShowAnimation && (this.timer.diff(moment({hour: 2, minute: 0, second: 0})) < 0) ) {
-        this.timeLeft.nativeElement.style.color = 'red';
-        this.timeLeftLabel.nativeElement.style.color = 'red';
-        this.isShowAnimation = true;
-      }
+    // this.numbers = Observable.timer(0, 1000).subscribe((x) => {
+    //   this.time = this.timer.subtract(1, 'seconds').format('h:mm:ss');
+    //   if (!this.isShowAnimation && (this.timer.diff(moment({hour: 2, minute: 0, second: 0})) < 0) ) {
+    //     this.timeLeft.nativeElement.style.color = 'red';
+    //     this.timeLeftLabel.nativeElement.style.color = 'red';
+    //     this.isShowAnimation = true;
+    //   }
 
-    });
+    // });
   }
 
   ngOnDestroy(): void {
-    this.numbers.unsubscribe();
+    // this.numbers.unsubscribe();
   }
 
   interested(modal) {

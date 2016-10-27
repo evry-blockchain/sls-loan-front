@@ -1,10 +1,10 @@
 <div class="component">
   <invitation-header class="header" [customBackground]="'#a3c0c0'"></invitation-header>
-  <section class="content container-fluid">
-    <invitation-project-information [project]="project" useClass="participant-row"></invitation-project-information>
-    <invitation-additional-information [invitation]="invitation" useClass="participant-row" ></invitation-additional-information>
-    <invitation-terms-conditions [invitation]="invitation" useClass="participant-row"></invitation-terms-conditions>
-    <participant-timer [project]="project"></participant-timer>
+  <section class="content container-fluid" style="display:flex; flex: 1 0 auto; flex-direction: column; justify-content: space-between">
+    <invitation-project-information style="flex: 1 0 auto; display: flex" [project]="project" useClass="participant-row"></invitation-project-information>
+    <invitation-additional-information style="flex: 1 0 auto; display: flex" [invitation]="invitation" useClass="participant-row" ></invitation-additional-information>
+    <invitation-terms-conditions style="flex: 1 0 auto; display: flex" [invitation]="invitation" useClass="participant-row"></invitation-terms-conditions>
+    <participant-timer  style="flex: 1 0 auto; display: flex" [project]="project"></participant-timer>
   </section>
 
   <footer class="footer"></footer>
