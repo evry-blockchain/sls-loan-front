@@ -6,7 +6,7 @@
   top: 0;
   width: 100%;
   opacity: 0.5;
-  z-index: 200;
+  z-index: 2000;
   background: #dcdcdc;
 }
 .spinner {
@@ -14,7 +14,7 @@
   top: 50%;
   width: 50%;
   position: fixed;
-  z-index: 200;
+  z-index: 2000;
   height: 48px;
   background: url("../img/spinner48-white.gif") no-repeat scroll left top;
 }
