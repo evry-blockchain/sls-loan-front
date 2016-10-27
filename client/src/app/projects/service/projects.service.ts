@@ -91,7 +91,7 @@ export class ProjectsService {
   saveLoanInvitation(invitation) {
     return this.http.post(`${this.apiEndpoint}/LoanInvitations`, invitation);
   }
-  
+
   public addSelectedInvitation(invitation) {
     this.selectedInviteeSource.next(invitation)
   }
@@ -99,6 +99,10 @@ export class ProjectsService {
   removeInvitee(invitee) {
     invitee.selected = false;
     this.deleteInviteeSource.next(invitee);
+  }
+
+  getInvitation(id): Observable<any> {
+    return this.http.post(`${this.apiEndpoint}/LoanInvitations/${id}`);
   }
 
 }
