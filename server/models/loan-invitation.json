@@ -15,7 +15,9 @@
     "amount": "string",
     "interestRate": "string",
     "info": "string",
-    "status": "string"
+    "status": "string",
+    "assets": "string",
+    "convenants": "string"
   },
   "validations": [],
   "relations": {},
