@@ -14,8 +14,12 @@ import { Input } from '@angular/core';
 export class InvitationProjectInformationComponent implements OnInit {
   @Input() project;
 
+  @Input() useClass;
+
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log('her234234e', this.useClass);
+  }
 
 }

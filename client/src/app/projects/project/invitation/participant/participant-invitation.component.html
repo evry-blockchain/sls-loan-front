@@ -1,9 +1,13 @@
-<div class="participant-invitation container-fluid">
-  <invitation-header [customBackground]="'#a3c0c0'"></invitation-header>
-  <invitation-project-information [project]="project"></invitation-project-information>
-  <invitation-additional-information [invitation]="invitation" ></invitation-additional-information>
-  <invitation-terms-conditions [invitation]="invitation"></invitation-terms-conditions>
-  <participant-timer [project]="project"></participant-timer>
+<div class="component">
+  <invitation-header class="header" [customBackground]="'#a3c0c0'"></invitation-header>
+  <section class="content container-fluid">
+    <invitation-project-information [project]="project" useClass="participant-row"></invitation-project-information>
+    <invitation-additional-information [invitation]="invitation" useClass="participant-row" ></invitation-additional-information>
+    <invitation-terms-conditions [invitation]="invitation" useClass="participant-row"></invitation-terms-conditions>
+    <participant-timer [project]="project"></participant-timer>
+  </section>
+
+  <footer class="footer"></footer>
 </div>
 
 

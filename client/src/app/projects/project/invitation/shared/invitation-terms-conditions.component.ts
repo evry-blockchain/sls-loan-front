@@ -11,6 +11,8 @@ export class InvitationTermsConditionsComponent implements OnInit {
 
   @Input() invitation;
 
+  @Input() useClass;
+  
   constructor() { }
 
   ngOnInit() { }

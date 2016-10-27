@@ -47,16 +47,16 @@ section {
 
   .content {
     flex: 1 1 auto;
-    border: 5px solid $color-bluey-grey
   }
 
   .footer {
-    background-color: $color-bluey-grey;
     flex: 0 1 90px;
   }
 }
 
-
+.participant-row {
+  border-color: $color-bluey_grey !important;
+}
 
 .white {
   color: #fff;
