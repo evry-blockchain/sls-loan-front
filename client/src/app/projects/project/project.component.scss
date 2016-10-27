@@ -17,7 +17,7 @@ nav {
       a {
         color: #d8d8d8;
         &.active {
-          color: #fff;
+          filter: brightness(100);
         }
         &:hover {
           text-decoration: none;
