@@ -1,6 +1,7 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
+import prepareSingleData from '../utils/prepare-single-data';
 
 module.exports = LoanInvitation => {
   LoanInvitation.beforeRemote('*', (context, unused, next) => {
