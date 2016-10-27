@@ -952,6 +952,8 @@ function build_invoke_func(name){
         logger.error('[ibc-js]', name, ' - failure:', statusCode, e);
         if(cb) cb(helper.eFmt('invoke() error', statusCode, e), null);
       };
+
+      console.log(name, body.params.ctorMsg.args);
       rest.post(options, '', body);
     };
   }

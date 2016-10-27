@@ -12,7 +12,8 @@
     "participantBankID": "string",
     "amount": "string",
     "negotiationStatus": "string",
-    "participantBankComment": "string"
+    "participantBankComment": "string",
+    "date": "string"
   },
   "validations": [],
   "relations": {},

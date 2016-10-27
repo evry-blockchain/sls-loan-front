@@ -30,21 +30,20 @@ module.exports = LoanInvitation => {
     user.cc.invoke.addLoanInvitation([
       loanInvitation.borrowerID,
       loanInvitation.arrangerBankID,
-      loanInvitation.loanSharesAmount,
-      loanInvitation.projectRevenue,
-      loanInvitation.projectName,
-      loanInvitation.projectInformation,
-      loanInvitation.company,
-      loanInvitation.website,
-      loanInvitation.contactPersonName,
-      loanInvitation.contactPersonSurname,
-      loanInvitation.requestDate,
-      loanInvitation.status
+      loanInvitation.loanRequestID,
+      loanInvitation.loanTerm,
+      loanInvitation.amount,
+      loanInvitation.interestRate,
+      loanInvitation.info,
+      loanInvitation.status,
+      loanInvitation.assets,
+      loanInvitation.convenants
     ], user.username, (err, data) => {
       cb(err, data);
     }, ['bankid']);
 
-  };LoanInvitation.add = (loanInvitation, cb)=> {
+  };
+  LoanInvitation.update = (loanInvitation, cb)=> {
     user.cc.invoke.addLoanInvitation([
       loanInvitation.loanInvitationID,
       loanInvitation.borrowerID,
@@ -82,6 +81,12 @@ module.exports = LoanInvitation => {
     returns: {arg: 'count', type: 'int'}
   });
 
+  LoanInvitation.get = (id, cb) => {
+    user.cc.query.getLoanInvitationByKey([id], user.username, (err, data) => {
+      cb(err, prepareSingleData(data));
+    }, ['bankid']);
+  };
+
   LoanInvitation.remoteMethod('add', {
     http: {
       path: '/',
@@ -108,4 +113,12 @@ module.exports = LoanInvitation => {
     returns: {type: 'object', root: true}
   });
 
+  LoanInvitation.remoteMethod('get', {
+    http: {
+      path: '/:id',
+      verb: 'get'
+    },
+    accepts: {arg: 'id', type: 'string', required: true},
+    returns: {type: 'LoanInvitation', root: true}
+  });
 };
