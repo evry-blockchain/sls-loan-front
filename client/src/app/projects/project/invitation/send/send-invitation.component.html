@@ -1,7 +1,7 @@
 <section class="send-invitation container-fluid">
-  <invitation-project-information [project]="project"></invitation-project-information>
-  <invitation-additional-information [invitation]="invitation" ></invitation-additional-information>
-  <invitation-terms-conditions [invitation]="invitation"></invitation-terms-conditions>
+  <invitation-project-information [project]="project" useClass="arranger-row"></invitation-project-information>
+  <invitation-additional-information [invitation]="invitation" useClass="arranger-row"></invitation-additional-information>
+  <invitation-terms-conditions [invitation]="invitation" useClass="arranger-row"></invitation-terms-conditions>
 
   <div class="row invitees-row flex-items-xs-middle">
     <div class="offset-md-1 col-md-2">
