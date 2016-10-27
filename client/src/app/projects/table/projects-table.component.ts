@@ -25,8 +25,8 @@ export class ProjectsTableComponent implements OnInit {
     this.projects = this.projectService.query();
   }
 
-  goToProject(project: Project) {
-    this.router.navigate(['/projects', project.loanRequestID]);
+  goToProject(id) {
+    this.router.navigate(['/projects', id]);
   }
 
 }

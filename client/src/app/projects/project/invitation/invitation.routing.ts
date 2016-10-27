@@ -11,8 +11,12 @@ import { CreateInvitationTabComponent } from "./create/tab/create/create-invitat
 const routes:Routes = [
   {
     path: 'invitation',
-    component: InvitationComponent,
     children: [
+      {
+        path: '',
+        component: InvitationComponent
+
+      },
       {
         path: 'create', component: CreateInvitationComponent, children: [
         {

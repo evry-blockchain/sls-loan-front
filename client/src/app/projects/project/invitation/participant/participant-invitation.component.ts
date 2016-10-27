@@ -18,13 +18,22 @@ import { ActivatedRoute, Router, Params } from "@angular/router";
 })
 export class ParticipantInvitationComponent implements OnInit {
   project;
-
+  invitation = {};
   constructor(private projectsService: ProjectsService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
+    this.route.parent.parent.params.subscribe(data => {
 
+
+      console.log('data', data);
+      let id = +data['id'];
+      // this.projectsService.getInvitation(id).subscribe((invitation) => {
+      //   this.invitation = invitation
+      // });
+
+    });
     // this.project = this.projectsService.get()
 
     this.project = {
