@@ -102,7 +102,7 @@ export class ProjectsService {
   }
 
   getInvitation(id): Observable<any> {
-    return this.http.post(`${this.apiEndpoint}/LoanInvitations/${id}`);
+    return this.http.get(`${this.apiEndpoint}/LoanInvitations/${id}`);
   }
 
 }
