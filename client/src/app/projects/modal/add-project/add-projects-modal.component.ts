@@ -6,8 +6,8 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { Input } from "@angular/core";
 import { ProjectsService } from "../../service/projects.service";
 import { ParticipantService } from "../../../participants/service/participants.service";
-import { Observable } from "rxjs";
 import { UserService } from "../../../user/user.service";
+import { Project } from "../../project/model/project.model";
 
 @Component({
   selector: 'add-project-modal',
@@ -46,7 +46,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      borrower: [''],
+      borrowerID: [''],
       projectName: [''],
       contactPersonName: [''],
       loanSharesAmount: [''],
@@ -68,25 +68,11 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
         this.lgModal.hide();
       });
     } else {
-      this.participantService.participants$.subscribe((participant) => {
-        if (participant['participantName'] === this.projectForm.controls['borrower'].value) {
-          let newProject = this.projectForm.getRawValue();
-          newProject['borrowerID'] = participant['participantKey'];
-          this.projectService.create(newProject).subscribe(() => {
-            this.lgModal.hide();
-          });
-        } else {
-          let newProject = this.projectForm.getRawValue();
-          newProject['borrowerID'] = '5';
-          delete newProject['borrower'];
-          delete newProject['role'];
-          newProject['arrangerBankID'] = this.user['participantKey'];
-
-          this.projectService.create(newProject).subscribe(() => {
-            this.lgModal.hide();
-          });
-        }
-      }) ;
+      let newProject = this.projectForm.getRawValue();
+      newProject['arrangerBankID'] = this.user['participantKey'];
+      this.projectService.create(<Project>newProject).subscribe(() => {
+        this.lgModal.hide();
+      });
     }
 
   }
@@ -103,11 +89,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   private activateUpdateMode() {
     this.title = 'Edit the Project Information';
     this.projectObs = this.projectService.project$
-      .combineLatest(this.participantService.participants$)
-      .map(([project, participants]) => {
-        project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
-        return project;
-      }).subscribe((project) => {
+      .subscribe((project) => {
       this.projectForm.patchValue(this.project);
 
       this.project = project;

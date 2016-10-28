@@ -5,6 +5,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from "rxjs";
 import { ApiGateway } from "../../api-gateway.service";
 import { UserService } from "../../user/user.service";
+import { Project } from "../project/model/project.model";
 
 @Injectable()
 export class ProjectsService {
@@ -59,9 +60,15 @@ export class ProjectsService {
       }, []);
   }
 
-  create(project): Observable<any> {
+  create(project: Project): Observable<any> {
     return this.http.post(this.requestMapping, project)
-      .do(() => {
+      .mergeMap(() => {
+        return this.getProjectCount();
+      })
+      .do((countLength) => {
+        console.log('countLength', countLength);
+        project.status = "Pending";
+        project.loanRequestID = countLength.count;
         this.addProjectSource.next(project);
       });
   }
@@ -82,6 +89,10 @@ export class ProjectsService {
     });
 
     return  obs
+  }
+
+  public getProjectCount() {
+    return this.http.get(`${this.requestMapping}/count`);
   }
 
   updateInvitation(data) {
