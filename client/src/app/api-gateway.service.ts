@@ -1,8 +1,11 @@
 /**
  * Created by Oleksandr.Khymenko on 11.10.2016.
  */
-import { Injectable, Inject } from "@angular/core";
-import { Http, Response, RequestOptions, RequestMethod, URLSearchParams, Headers } from "@angular/http";
+import { Injectable } from "@angular/core";
+import {
+  Http, Response, RequestMethod, URLSearchParams, Headers,
+  RequestOptionsArgs
+} from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import * as moment from 'moment';
@@ -48,99 +51,21 @@ export class ApiGateway {
     // Create our observables from the subjects
     this.errors$ = this.errorsSubject.asObservable();
     this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
-
   }
 
-  // I perform a GET request to the API, appending the given params
-  // as URL search parameters. Returns a stream.
-  get(url: string, params?: any): Observable<any> {
-    let options = new ApiGatewayOptions();
-    options.method = RequestMethod.Get;
-    options.url = url;
-    options.params = params;
+  get(url, params?) {
+    let requestParameters: RequestOptionsArgs = {};
 
-    return this.request(options);
-  }
-
-
-  // I perform a POST request to the API. If both the params and data
-  // are present, the params will be appended as URL search parameters
-  // and the data will be serialized as a JSON payload. If only the
-  // data is present, it will be serialized as a JSON payload. Returns
-  // a stream.
-  post(url: string, params?: any, data?: any): Observable<Response> {
-    if (!data) {
-      data = params;
-      params = {};
+    let headers = new Headers();
+    if (!!params) {
+      requestParameters.search = this.buildUrlSearchParams(params);
     }
-    let options = new ApiGatewayOptions();
-    options.method = RequestMethod.Post;
-    options.url = url;
-    options.params = params;
-    options.data = data;
+    this.createAuthorizationHeader(headers);
 
-    return this.request(options);
-  }
-
-  put(url: string, params: any, data?: any): Observable<Response> {
-    if (!data) {
-      data = params;
-      params = {};
-    }
-    let options = new ApiGatewayOptions();
-    options.method = RequestMethod.Put;
-    options.url = url;
-    options.params = params;
-    options.data = data;
-
-    return this.request(options);
-  }
-
-  delete(url: string, params?: any, data?: any): Observable<Response> {
-    if (!data) {
-      data = params;
-      params = {};
-    }
-    let options = new ApiGatewayOptions();
-    options.method = RequestMethod.Delete;
-    options.url = url;
-    options.params = params;
-    options.data = data;
-
-    return this.request(options);
-  }
-
-
-  private request(options: ApiGatewayOptions): Observable<any> {
-
-    options.method = (options.method || RequestMethod.Get);
-    options.url = (options.url || "");
-    options.headers = (options.headers || {});
-    options.params = (options.params || {});
-    options.data = (options.data || {});
-    this.interpolateUrl(options);
-    // this.addXsrfToken(options);
-    // this.addEvryToken(options);
-    // this.addClientName(options);
-    this.addToken(options);
-    this.addContentType(options);
-    let requestOptions = new RequestOptions();
-    requestOptions.method = options.method;
-    requestOptions.url = options.url;
-
-    requestOptions['headers'] = <Headers>options['headers'];
-    requestOptions.search = this.buildUrlSearchParams(options.params);
-    requestOptions.body = JSON.stringify(options.data);
-
-    let isCommand = (options.method !== RequestMethod.Get);
-
-    if (isCommand) {
-      this.pendingCommandsSubject.next(++this.pendingCommandCount);
-    }
+    requestParameters.headers = headers;
 
     this.waitingSpinner.startLoading$.next('');
-
-    let stream = this.http.request(options.url, requestOptions)
+    return this.http.get(url, requestParameters)
       .map(this.unwrapHttpValue)
       .catch((error: any) => {
         let unwrapError =  this.unwrapHttpError(error);
@@ -149,47 +74,67 @@ export class ApiGateway {
       })
       .finally(() => {
         this.waitingSpinner.stopLoading$.next('');
-        if (isCommand) {
-          this.pendingCommandsSubject.next(--this.pendingCommandCount);
-        }
+      });
+  }
+
+  post(url, data) {
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    this.waitingSpinner.startLoading$.next('');
+
+    return this.http.post(url, data, {
+        headers: headers
+      })
+      .map(this.unwrapHttpValue)
+      .catch((error: any) => {
+        let unwrapError =  this.unwrapHttpError(error);
+        this.errorsSubject.next(unwrapError);
+        return Observable.throw(unwrapError);
+      })
+      .finally(() => {
+        this.waitingSpinner.stopLoading$.next('');
       });
 
-    return stream;
   }
 
+  put(url, data) {
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
 
-  private addContentType(options: ApiGatewayOptions): ApiGatewayOptions {
-    if (options.method !== RequestMethod.Get) {
-      options.headers["Content-Type"] = "application/json; charset=UTF-8";
-    }
-    return options;
+    this.waitingSpinner.startLoading$.next('');
+
+    return this.http.put(url, data, {
+      headers: headers
+    }).map(this.unwrapHttpValue)
+      .catch((error: any) => {
+        let unwrapError =  this.unwrapHttpError(error);
+        this.errorsSubject.next(unwrapError);
+        return Observable.throw(unwrapError);
+      })
+      .finally(() => {
+        this.waitingSpinner.stopLoading$.next('');
+      });
   }
 
-  private extractValue(collection: any, key: string): any {
-    var value = collection[key];
-    delete (collection[key]);
-    return value;
+  delete(url) {
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+
+    this.waitingSpinner.startLoading$.next('');
+
+    return this.http.delete(url, {
+      headers: headers
+    }).map(this.unwrapHttpValue)
+      .catch((error: any) => {
+        let unwrapError =  this.unwrapHttpError(error);
+        this.errorsSubject.next(unwrapError);
+        return Observable.throw(unwrapError);
+      })
+      .finally(() => {
+        this.waitingSpinner.stopLoading$.next('');
+      });
   }
 
-  private addXsrfToken(options: ApiGatewayOptions): ApiGatewayOptions {
-    var xsrfToken = this.getXsrfCookie();
-    if (xsrfToken) {
-      options.headers["X-XSRF-TOKEN"] = xsrfToken;
-    }
-    return options;
-  }
-
-  private addEvryToken(options: ApiGatewayOptions): ApiGatewayOptions {
-    var evryClientAccessToken = this.getEvryClientCookie();
-    if (!!evryClientAccessToken) {
-      options.headers['X-EVRY-CLIENT-ACCESSTOKEN'] = evryClientAccessToken;
-    }
-    return options;
-  }
-
-  private addClientName(options: ApiGatewayOptions) {
-    options.headers['X-EVRY-CLIENT-CLIENTNAME'] = 'FUND_SPA';
-  }
 
   private addToken(options: ApiGatewayOptions) {
     var userId = this.getTokenFromLocalStorage();
@@ -214,6 +159,13 @@ export class ApiGateway {
       return object['token'];
     }
     return '';
+  }
+
+  private createAuthorizationHeader(headers: Headers) {
+    var token = this.getTokenFromLocalStorage();
+    if(!!token) {
+      headers.append('access_token', token);
+    }
   }
 
   private getXsrfCookie(): string {
@@ -246,31 +198,6 @@ export class ApiGateway {
       }
     }
     return searchParams;
-  }
-
-  private interpolateUrl(options: ApiGatewayOptions): ApiGatewayOptions {
-    options.url = options.url.replace(
-      /:([a-zA-Z]+[\w-]*)/g,
-      ($0, token) => {
-        // Try to move matching token from the params collection.
-        if (options.params.hasOwnProperty(token)) {
-          return (this.extractValue(options.params, token));
-        }
-        // Try to move matching token from the data collection.
-        if (options.data.hasOwnProperty(token)) {
-          return (this.extractValue(options.data, token));
-        }
-        // If a matching value couldn't be found, just replace
-        // the token with the empty string.
-        return ("");
-      }
-    );
-    // Clean up any repeating slashes.
-    options.url = options.url.replace(/\/{2,}/g, "/");
-    // Clean up any trailing slashes.
-    options.url = options.url.replace(/\/+$/g, "");
-
-    return options;
   }
 
   private unwrapHttpError(error: any): any {
