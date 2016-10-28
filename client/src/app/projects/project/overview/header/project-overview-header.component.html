@@ -1,4 +1,11 @@
-<header class="component-header" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}">
-  <h2>PROJECT OVERVIEW</h2>
-  <span>Status</span>
+<header class="component-header container-fluid" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>PROJECT OVERVIEW</h2>
+      <span>Status</span>
+    </div>
+  </div>
+  <div class="image">
+    <img width="250" height="169" src="img/background_header.png" />
+  </div>
 </header>
