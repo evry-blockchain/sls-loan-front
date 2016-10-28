@@ -1,9 +1,13 @@
-tr th {
-  border: 0;
-  color: white;
-  font-family: Avenir-Medium;
-}
+@import '../../../style/app.variables.scss';
 
+.list-group {
+  button {
+    span {
+      font-family: Avenir-Medium;
+      color: $color-warm-grey;
+    }
+  }
+}
 //tr:before {
 //  content: '';
 //    position: absolute;
@@ -43,3 +47,4 @@ tr th {
 //.table th:last-child:after {
 //  left: 100%
 //}
+
