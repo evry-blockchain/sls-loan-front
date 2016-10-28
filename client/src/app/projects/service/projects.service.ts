@@ -66,7 +66,6 @@ export class ProjectsService {
         return this.getProjectCount();
       })
       .do((countLength) => {
-        console.log('countLength', countLength);
         project.status = "Pending";
         project.loanRequestID = countLength['count'];
         this.addProjectSource.next(project);

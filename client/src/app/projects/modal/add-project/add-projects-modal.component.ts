@@ -2,7 +2,7 @@
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
 import { Component, OnInit, OnDestroy, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Input } from "@angular/core";
 import { ProjectsService } from "../../service/projects.service";
 import { ParticipantService } from "../../../participants/service/participants.service";
@@ -17,7 +17,8 @@ import { Project } from "../../project/model/project.model";
 })
 export class AddProjectModalComponent implements OnInit, OnDestroy {
 
-  projectForm: FormGroup;
+  public projectForm: FormGroup;
+  public isFormSubmitted: boolean = false;
 
   private createService;
   private user;
@@ -46,11 +47,11 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      borrowerID: [''],
-      projectName: [''],
-      contactPersonName: [''],
-      loanSharesAmount: [''],
-      marketAndIndustry: ['']
+      borrowerID: ['', Validators.required],
+      projectName: ['', Validators.required],
+      contactPersonName: ['', Validators.required],
+      loanSharesAmount: ['', Validators.required],
+      marketAndIndustry: ['', Validators.required]
     });
 
 
@@ -62,6 +63,14 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    if(!this.projectForm.valid) {
+      this.isFormSubmitted = true;
+      Object.keys(this.projectForm.controls).forEach((data) => {
+        this.projectForm.controls[data].markAsTouched();
+      });
+      return;
+    }
+
     if (this.isUpdateMode) {
       var newProject = Object.assign({}, this.project, this.projectForm.getRawValue());
       this.projectService.update(this.project['loanRequestID'], newProject).subscribe(() => {

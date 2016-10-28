@@ -1,0 +1,8 @@
+.ng-invalid:not(form).ng-touched  {
+  border: 2px solid $color-darkish-pink;
+}
+
+.error-message {
+  color: $color-darkish-pink;
+  font-family: $font-family-avenir-black;
+}

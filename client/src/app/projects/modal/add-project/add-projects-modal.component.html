@@ -12,23 +12,29 @@
         <div class="input-group">
           <input type="text" class="form-control" id="borrower" formControlName="borrowerID">
         </div>
+
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || projectForm.controls.borrowerID.touched) && !!projectForm.controls.borrowerID.errors">Borrower name is required</div>
         <label for="project-name">Project Name</label>
         <div class="input-group">
           <input type="text" class="form-control" id="project-name" formControlName="projectName">
         </div>
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || projectForm.controls.projectName.touched) && !!projectForm.controls.projectName.errors">Project name is required</div>
         <label for="contact-person">Contact Person</label>
         <div class="input-group">
           <input type="text" class="form-control" id="contact-person" formControlName="contactPersonName">
         </div>
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || projectForm.controls.contactPersonName.touched) && !!projectForm.controls.contactPersonName.errors">Contact name is required</div>
         <label for="amount">Amount</label>
         <div class="input-group">
           <input type="text" class="form-control" id="amount" formControlName="loanSharesAmount">
         </div>
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || projectForm.controls.loanSharesAmount.touched) && !!projectForm.controls.loanSharesAmount.errors">Amount is required</div>
         <label for="market-industry">Market & Industry</label>
         <div class="input-group">
             <textarea type="text" class="form-control" id="market-industry" formControlName="marketAndIndustry">
             </textarea>
         </div>
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || projectForm.controls.marketAndIndustry.touched) && !!projectForm.controls.marketAndIndustry.errors">Amount is required</div>
       </div>
       <div class="modal-footer">
         <div [ngSwitch]="!!isUpdateMode">
