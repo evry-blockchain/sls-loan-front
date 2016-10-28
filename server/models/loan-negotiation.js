@@ -41,7 +41,7 @@ module.exports = LoanNegotiation => {
   };
 
   LoanNegotiation.update = (loanNegotiation, cb)=> {
-    user.cc.invoke.addLoanNegotiation([
+    user.cc.invoke.updateLoanNegotiation([
       loanNegotiation.loanNegotiationID,
       loanNegotiation.loanInvitationID,
       loanNegotiation.participantBankID,
@@ -51,6 +51,12 @@ module.exports = LoanNegotiation => {
       loanNegotiation.date
     ], user.username, (err, data) => {
       cb(err, data);
+    }, ['bankid']);
+  };
+
+  LoanNegotiation.get = (id, cb) => {
+    user.cc.query.getLoanNegotiationByKey([id], user.username, (err, data) => {
+      cb(err, prepareSingleData(data));
     }, ['bankid']);
   };
 
@@ -95,5 +101,14 @@ module.exports = LoanNegotiation => {
       http: {source: 'body'}
     },
     returns: {type: 'object', root: true}
+  });
+
+  LoanNegotiation.remoteMethod('get', {
+    http: {
+      path: '/:id',
+      verb: 'get'
+    },
+    accepts: {arg: 'id', type: 'string', required: true},
+    returns: {type: 'LoanNegotiation', root: true}
   });
 };

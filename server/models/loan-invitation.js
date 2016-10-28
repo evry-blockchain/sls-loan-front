@@ -45,7 +45,7 @@ module.exports = LoanInvitation => {
 
   };
   LoanInvitation.update = (loanInvitation, cb)=> {
-    user.cc.invoke.addLoanInvitation([
+    user.cc.invoke.updateLoanInvitation([
       loanInvitation.loanInvitationID,
       loanInvitation.borrowerID,
       loanInvitation.arrangerBankID,

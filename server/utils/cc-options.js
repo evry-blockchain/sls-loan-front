@@ -23,7 +23,7 @@ var options = {
     unzip_dir: 'loan-blockchain-master',                                        //name/path to folder that contains the chaincode you want to deploy (path relative to unzipped root)
     git_url: 'https://github.com/evry-blockchain/loan-blockchain',             //git https URL. should point to the desired chaincode repo AND directory
 
-    deployed_name: "cad6146997e7f0fa3e047821fb7db1a7f10bf1676130076be3cabaf1740c606400bff7933a98324759dbcb5c2d4e797e7a65eb3675fc117ea3485c5c8dc4db09"
+    deployed_name: "6081c3b8b532804d0f0761ad586934e60721034373f5378ee52bc65bbc12ef94599c91fcda6b711533484ebca099380cdc79f29bc0461181763b48023c992283"
   }
 };
 
