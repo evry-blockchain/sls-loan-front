@@ -1,19 +1,43 @@
+  <div class="row" style="height: 70vh;">
+    <div class="offset-md-1 col-md-10 mt-2" style=" display:flex; z-index: 0; padding-right: 34px">
+      <div class="col-md-8" style=" background-color: #84a6b6; margin-right: 10px">
+        <h4  style="color: white" class="mt-1">Project</h4>
+      </div>
+      <div class="col-md-2" style=" background-color: #84a6b6; margin-right: 10px">
+        <h4 style="color: white" class="mt-1">Role</h4>
+      </div>
+      <div class="col-md-2" style=" background-color: #84a6b6; margin-right: 10px">
+        <h4  style="color: white" class="mt-1">Status</h4>
+      </div>
+    </div>
+    <div class="offset-md-1 col-md-10 mt-2" style=" position:absolute; height: 70vh; padding-left: 0;padding-right: 0; display:flex; z-index: 1">
+      <div class="list-group" style="display: flex;flex-direction: column; flex: 1 0; margin-top:60px">
+        <button type="button" class="list-group-item list-group-item-action" style="margin-bottom: 10px">
+          Cras justo odio
+        </button>
+        <button type="button" class="list-group-item list-group-item-action" style="margin-bottom: 10px">Dapibus ac facilisis in</button>
+        <button type="button" class="list-group-item list-group-item-action" style="margin-bottom: 10px">Morbi leo risus</button>
+        <button type="button" class="list-group-item list-group-item-action" style="margin-bottom: 10px">Porta ac consectetur ac</button>
+        <button type="button" class="list-group-item list-group-item-action" style="margin-bottom: 10px">Vestibulum at eros</button>
+      </div>
+    </div>
+    </div>
 
-<section class="row">
-  <div class="offset-md-1 col-md-10 mt-2">
-    <table class="table" style="background-color: #84a6b6; border-spacing: 0 1em;">
-      <thead>
-      <tr>
-        <th>Project</th>
-        <th>Role</th>
-        <th>Status</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let project of (projects | async)" [projects-table-row]="project" (click)="goToProject(project.loanRequestID)">
-      </tr>
-      </tbody>
-    </table>
-  </div>
+<!--<section class="row">-->
+  <!--<div class="offset-md-1 col-md-10 mt-2">-->
+    <!--<table class="table" style="background-color: #84a6b6; border-spacing: 0 1em;">-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>Project</th>-->
+        <!--<th>Role</th>-->
+        <!--<th>Status</th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr *ngFor="let project of (projects | async)" [projects-table-row]="project" (click)="goToProject(project.loanRequestID)">-->
+      <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
+  <!--</div>-->
 
-</section>
+<!--</section>-->

@@ -22,7 +22,7 @@ export class ProjectsTableComponent implements OnInit {
               private participantService: ParticipantService) { }
 
   ngOnInit() {
-    this.projects = this.projectService.query();
+    // this.projects = this.projectService.query();
   }
 
   goToProject(id) {
