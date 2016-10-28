@@ -16,7 +16,7 @@
                 *ngFor="let project of (projects | async); let i = index"
                 [hidden]="i > 7">
           <span class="row flex-items-xs-middle">
-            <span class="col-md-6">{{project.projectName}}</span>
+            <span class="col-md-6" style="padding-left: 25px">{{project.projectName}}</span>
             <span class="col-md-3">{{project.role}}</span>
             <span class="col-md-3">{{project.status}}</span>
           </span>
