@@ -1,4 +1,4 @@
-<header class="component-header container-fluid" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}">
+<header class="component-header container-fluid" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': (isBankOwner | async) === false}">
   <div class="row">
     <div class="col-md-3">
       <h2>PROJECT OVERVIEW</h2>
