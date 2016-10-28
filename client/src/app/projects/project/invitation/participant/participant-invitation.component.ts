@@ -6,6 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from "../../../service/projects.service";
 import { ActivatedRoute, Router, Params } from "@angular/router";
+import { ProjectNegotiationService } from "../../service/project-negotiation.service";
 
 @Component({
   selector: 'participant-invitation',
@@ -21,6 +22,7 @@ export class ParticipantInvitationComponent implements OnInit {
   invitation = {};
   constructor(private projectsService: ProjectsService,
               private route: ActivatedRoute,
+              private negotiationService: ProjectNegotiationService,
               private router: Router) { }
 
   ngOnInit() {
@@ -32,6 +34,10 @@ export class ParticipantInvitationComponent implements OnInit {
 
       this.projectsService.getInvitation(id).subscribe(invitation => {
         this.invitation = invitation;
+      });
+
+      this.negotiationService.getSpecificNegotiation({}).subscribe((data) => {
+        console.log('thisData', data);
       })
     });
   }
