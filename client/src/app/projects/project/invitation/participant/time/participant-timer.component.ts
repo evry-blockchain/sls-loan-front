@@ -23,7 +23,7 @@ export class ParticipantInvitationTimerComponent implements OnInit, OnDestroy {
 
   @ViewChild('timeLeft') timeLeft: ElementRef;
   @ViewChild('timeLeftLabel') timeLeftLabel: ElementRef;
-  @Input() project;
+  @Input() negotiation;
   @ViewChild('textarea') textarea: ElementRef;
 
   isShowAnimation: boolean = false;

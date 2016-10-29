@@ -20,6 +20,7 @@ import { ProjectNegotiationService } from "../../service/project-negotiation.ser
 export class ParticipantInvitationComponent implements OnInit {
   project = {};
   invitation = {};
+  negotiation = {}
   constructor(private projectsService: ProjectsService,
               private route: ActivatedRoute,
               private negotiationService: ProjectNegotiationService,
@@ -33,21 +34,20 @@ export class ParticipantInvitationComponent implements OnInit {
       });
 
       this.projectsService.getInvitation(id).subscribe(invitation => {
+        console.log(invitation);
         this.invitation = invitation;
       });
+
       var filter = {
         filter: {
-          // participantBankID: 1,
-          loanInvitationID: 1
+          participantBankID: id,
+          loanInvitationID: this.invitation['loanInvitationID']
         }
-      }
-      this.negotiationService.getSpecificNegotiation(filter).subscribe((data) => {
-        console.log('thisData', data);
-      })
+      };
 
-      this.negotiationService.query().subscribe(data => {
-        console.log('negotiationQuery', data);
-      })
+      this.negotiationService.getSpecificNegotiation(filter).subscribe((data: any[]) => {
+        this.negotiation = data.shift();
+      });
     });
   }
 
