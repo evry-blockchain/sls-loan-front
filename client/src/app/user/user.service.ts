@@ -3,20 +3,15 @@
  */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
+import { User } from "./model/user.model";
 
 @Injectable()
 export class UserService {
   private userSource = new BehaviorSubject({});
 
   user$ = this.userSource.asObservable();
-  constructor() {
-    this.userSource.next({
-      image: "http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png",
-      participantKey: "1",
-      participantName: "Bank of Associates & Companies LTD",
-      participantType: "Bank"
-    })
-  }
+
+  constructor() {}
 
 
   public getRole(id, user) {
@@ -25,6 +20,10 @@ export class UserService {
     } else {
       return 'Participant Bank'
     }
+  }
+
+  loginUser(user: User) {
+    this.userSource.next(user)
   }
 
 }

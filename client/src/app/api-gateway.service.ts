@@ -45,8 +45,7 @@ export class ApiGateway {
 
   constructor(
     private http: Http,
-    private waitingSpinner: WaitingSpinnerService,
-    private authService: AuthService
+    private waitingSpinner: WaitingSpinnerService
   ) {
     // Create our observables from the subjects
     this.errors$ = this.errorsSubject.asObservable();
@@ -152,7 +151,7 @@ export class ApiGateway {
       let diff = now.diff(dateString, 'hours');
       let validHours = 15;
       if (diff > validHours) {
-        this.authService.logout();
+        // this.authService.logout();
         return;
       }
       // compareTime(dateString, now); //to implement

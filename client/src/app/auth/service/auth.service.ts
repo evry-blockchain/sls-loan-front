@@ -2,7 +2,7 @@
  * Created by Oleksandr.Khymenko on 05.10.2016.
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Login } from "../model/login.model";
 import { BehaviorSubject, Subject, Observable} from "rxjs";
 import { ApiGateway } from "../../api-gateway.service";
@@ -12,12 +12,17 @@ import { WaitingSpinnerService } from "../../utils/waitingSpinner/waitingSpinner
 @Injectable()
 export class AuthService {
 
-  public isLoggedIn$: Subject<any> = new BehaviorSubject(false);
+  public isLoggedIn$ = new BehaviorSubject(false);
 
   public redirectUrl: string = '';
 
+  private userSource = new BehaviorSubject({});
+
+  public user$ = this.userSource.asObservable();
 
   constructor(private http: Http,
+              private apiGateway: ApiGateway,
+              @Inject('ApiEndpoint') private apiEndpoint,
               private spinnerService: WaitingSpinnerService) {}
 
   login(data: Login): Observable<any> {
@@ -30,6 +35,18 @@ export class AuthService {
       this.isLoggedIn$.next(true);
     }).finally(() => {
         this.spinnerService.stopLoading$.next('');
+      });
+  }
+
+  public auth() {
+    return this.apiGateway.get(`${this.apiEndpoint}/Utils/bankId`)
+      .flatMap(id => {
+        var filter = {
+          filter: {
+            participantKey: id
+          }
+        };
+        return this.apiGateway.get(`${this.apiEndpoint}/Participants`, filter);
       });
   }
 
