@@ -17,6 +17,7 @@ import 'rxjs/Rx';
 import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerService";
 import { UserService } from "./user/user.service";
 import { AuthService } from "./auth/service/auth.service";
+import { Router } from "@angular/router";
 
 export class ApiGatewayOptions {
   method: RequestMethod;
@@ -45,7 +46,8 @@ export class ApiGateway {
 
   constructor(
     private http: Http,
-    private waitingSpinner: WaitingSpinnerService
+    private waitingSpinner: WaitingSpinnerService,
+    private router: Router
   ) {
     // Create our observables from the subjects
     this.errors$ = this.errorsSubject.asObservable();
@@ -151,7 +153,7 @@ export class ApiGateway {
       let diff = now.diff(dateString, 'hours');
       let validHours = 15;
       if (diff > validHours) {
-        // this.authService.logout();
+        this.router.navigate(['/login']);
         return;
       }
       // compareTime(dateString, now); //to implement
