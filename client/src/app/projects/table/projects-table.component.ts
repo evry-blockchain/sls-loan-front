@@ -7,6 +7,7 @@ import { ProjectsService } from "../service/projects.service";
 import { Project } from "../project/model/project.model";
 import { ParticipantService } from "../../participants/service/participants.service";
 import { UserService } from "../../user/user.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'projects-table',
@@ -23,7 +24,11 @@ export class ProjectsTableComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
-    this.projects = this.userService.user$.mergeMap(user => {
+    this.projects = this.userService.user$
+      .mergeMap(user => {
+        if (Object.keys(user).length === 0 && user.constructor === Object) {
+          return Observable.from([])
+        }
       return this.projectService.query(user['participantKey']);
     })
   }

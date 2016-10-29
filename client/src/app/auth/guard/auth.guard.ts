@@ -6,7 +6,7 @@ import {Injectable} from "@angular/core";
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router, CanActivateChild } from "@angular/router";
 import {AuthService} from "../service/auth.service";
 import { Observable } from "rxjs";
-
+import * as moment from'moment';
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
 
@@ -14,12 +14,25 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private isLoggedIn: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
-    authService.isLoggedIn$.subscribe((data) => {
-      this.isLoggedIn = data;
-      if (this.isLoggedIn === false) {
+    var matches = localStorage.getItem('bc.token');
+    if(!!matches) {
+      let object = JSON.parse(matches);
+      let dateString = moment(object.timestamp);
+      let now = moment();
+      let diff = now.diff(dateString, 'hours');
+      let validHours = 15;
+      if (diff > validHours) {
         this.router.navigate(['/login']);
+        return;
       }
-    })
+      this.isLoggedIn = true;
+    }
+
+    // authService.isLoggedIn$.subscribe((data) => {
+    //   this.isLoggedIn = data;
+    //   if (this.isLoggedIn === false) {
+    //   }
+    // })
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
