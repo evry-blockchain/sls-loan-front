@@ -42,22 +42,69 @@ export class ProjectsService {
     this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
   }
 
-  query() {
-    this.projectsSource = this.http.get(this.requestMapping)
-                          .mergeMap((projects) => {
-                            return Observable.from(projects);
-                          });
+  query(id) {
 
-    return this.projectsSource
+    let filter = {
+      filter: {
+        participantBankID: id
+      }
+    };
+
+    let projectsFilter = {
+      filter: {
+        arrangerBankID: id
+      }
+    };
+
+    // let projectsSource = this.http.get(this.requestMapping, projectsFilter);
+
+    return this.http.get(`${this.apiEndpoint}/LoanNegotiations`, filter)
+      .mergeMap((data) => {
+        return Observable.from(data);
+      }).mergeMap(negotiation => {
+      let filter = {
+        filter: {
+          loanRequestID: negotiation['loanInvitationID']
+        }
+      };
+      return this.http.get(this.requestMapping, filter).mergeMap((projects) => {
+        return Observable.from(projects)
+      });
+    }).merge(this.http.get(this.requestMapping, projectsFilter)
+        .mergeMap((projects) => {
+          return Observable.from(projects);
+        }))
       .merge(this.addProjectSource)
       .combineLatest(this.userService.user$)
       .map(([project, user]) => {
         project['role'] = this.userService.getRole(project['arrangerBankID'], user);
         return project;
       })
-      .scan(function(accum, x) {
+      .scan((accum: any[], x) => {
         return accum.concat(x);
       }, []);
+    // delete this code ask Adrian for normal urls
+    // this.userService.user$.subscribe(user => {
+    //
+    //
+    //
+    // })
+
+    // this.projectsSource = this.http.get(this.requestMapping)
+    //                       .mergeMap((projects) => {
+    //                         return Observable.from(projects);
+    //                       });
+    //
+    // return this.projectsSource
+    //   .merge(this.addProjectSource)
+    //   .combineLatest(this.userService.user$)
+    //   .map(([project, user]) => {
+    //     project['role'] = this.userService.getRole(project['arrangerBankID'], user);
+    //     return project;
+    //   })
+    //   .scan(function(accum, x) {
+    //     return accum.concat(x);
+    //   }, []);
   }
 
   create(project: Project): Observable<any> {

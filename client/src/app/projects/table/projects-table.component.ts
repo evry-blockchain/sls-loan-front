@@ -19,10 +19,13 @@ export class ProjectsTableComponent implements OnInit {
 
   constructor(private router: Router,
               private projectService: ProjectsService,
-              private participantService: ParticipantService) { }
+              private participantService: ParticipantService,
+              private userService: UserService) { }
 
   ngOnInit() {
-    this.projects = this.projectService.query();
+    this.projects = this.userService.user$.mergeMap(user => {
+      return this.projectService.query(user['participantKey']);
+    })
   }
 
   goToProject(id) {
