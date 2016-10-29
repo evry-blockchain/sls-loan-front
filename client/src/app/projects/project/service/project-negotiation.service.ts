@@ -28,9 +28,14 @@ export class ProjectNegotiationService {
     return obs;
   }
 
+  update(negotiation) {
+    return this.http.put(`${this.apiEndpoint}/LoanNegotiations`, negotiation);
+  }
+
   saveLoanNegotiation(negotiation) {
     return this.http.post(`${this.apiEndpoint}/LoanNegotiations`, negotiation)
   }
+
 
   getSpecificNegotiation(filter) {
     console.log('here');

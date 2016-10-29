@@ -10,6 +10,9 @@ import { Input } from "@angular/core";
 import { Observable } from "rxjs";
 import * as moment from 'moment/moment'
 import { ViewChild } from "@angular/core";
+import { ProjectNegotiationService } from "../../../service/project-negotiation.service";
+import { ToastOptions, ToastData, ToastyService } from "ng2-toasty";
+import { FormControl } from "@angular/forms";
 @Component({
   selector: 'participant-timer',
   templateUrl: 'participant-timer.component.html',
@@ -26,9 +29,12 @@ export class ParticipantInvitationTimerComponent implements OnInit, OnDestroy {
   @Input() negotiation;
   @ViewChild('textarea') textarea: ElementRef;
 
+  commentsControl = new FormControl();
+
   isShowAnimation: boolean = false;
 
-  constructor() { }
+  constructor(private negotiationService: ProjectNegotiationService,
+              private toastyService: ToastyService) { }
 
   ngOnInit() {
     this.textarea.nativeElement.focus();
@@ -48,10 +54,34 @@ export class ParticipantInvitationTimerComponent implements OnInit, OnDestroy {
   }
 
   interested(modal) {
-      modal.hide()
+    this.negotiation.negotiationStatus = 'INTERESTED';
+    this.negotiation.participantBankComment = this.commentsControl.value
+    this.negotiationService.update(this.negotiation).subscribe(() => {
+      modal.hide();
+
+      var toastOptions:ToastOptions = {
+        title: "Success",
+        msg: "Your reply has been saved.",
+        showClose: true,
+        timeout: 10000,
+        theme: 'default',
+        onAdd: (toast:ToastData) => {
+        },
+        onRemove: function(toast:ToastData) {
+        }
+      };
+
+      this.toastyService.success(toastOptions);
+
+    })
   }
 
   notInterested(modal) {
-    modal.hide();
+    this.negotiation.negotiationStatus = 'DECLINED';
+    this.negotiation.participantBankComment = this.commentsControl.value;
+    this.negotiationService.update(this.negotiation).subscribe(() => {
+      modal.hide();
+
+    })
   }
 }
