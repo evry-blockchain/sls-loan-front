@@ -28,21 +28,17 @@ export class InvitationComponent {
               private router: Router,
               private participantsService: ParticipantService,
               private projectService: ProjectsService,
-              private participantService: ParticipantService,
               private userService: UserService) {}
 
   ngOnInit() {
     this.participantsService.query();
-    this.participantService.query();
     this.route.parent.parent.params.subscribe(data => {
       let id = +data['id'];
       console.log(id);
-      this.projectService.get(id);
       this.projectService.get(id).combineLatest(this.userService.user$)
         .map(([project, user]) => {
           return project['arrangerBankID'] === user['participantKey'];
         }).subscribe((bankOwner) => {
-          console.log('here234234234');
           if(bankOwner) {
             this.router.navigate(['./create'], {relativeTo: this.route})
           } else {
