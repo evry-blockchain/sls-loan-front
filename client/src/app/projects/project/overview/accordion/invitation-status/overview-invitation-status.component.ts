@@ -46,7 +46,16 @@ export class OverviewInvitationStatusComponent implements OnInit {
         this.rows = negotiations;
       });
 
-    this.negotiationService.query();
+    this.route.parent.params.subscribe(data => {
+      let id = +data['id'];
+      var filter = {
+        filter: {
+          loanInvitationID: id
+        }
+      };
+      this.negotiationService.query(filter);
+    });
+
 
   }
 }

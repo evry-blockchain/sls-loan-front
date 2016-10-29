@@ -18,8 +18,8 @@ export class ProjectNegotiationService {
     this.requestMapping = `${this.apiEndpoint}`
   }
 
-  query() {
-    var obs = this.http.get(`${this.requestMapping}/LoanNegotiations`).share();
+  query(filter) {
+    var obs = this.http.get(`${this.requestMapping}/LoanNegotiations`, filter).share();
 
     obs.subscribe((data) => {
       this.negotiationSource.next(data);
