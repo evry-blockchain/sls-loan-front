@@ -35,9 +35,18 @@ export class ParticipantInvitationComponent implements OnInit {
       this.projectsService.getInvitation(id).subscribe(invitation => {
         this.invitation = invitation;
       });
-
-      this.negotiationService.getSpecificNegotiation({}).subscribe((data) => {
+      var filter = {
+        filter: {
+          // participantBankID: 1,
+          loanInvitationID: 1
+        }
+      }
+      this.negotiationService.getSpecificNegotiation(filter).subscribe((data) => {
         console.log('thisData', data);
+      })
+
+      this.negotiationService.query().subscribe(data => {
+        console.log('negotiationQuery', data);
       })
     });
   }

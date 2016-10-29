@@ -194,11 +194,20 @@ export class ApiGateway {
           searchParams.append(key, data)
         });
       } else {
-        searchParams.append(key, params[key])
+        if (this.isJsObject(params[key])) {
+          searchParams.append(key, JSON.stringify(params[key]));
+        } else {
+          searchParams.append(key, params[key]);
+        }
       }
     }
     return searchParams;
   }
+
+  private isJsObject(o) {
+    return o !== null && (typeof o === 'function' || typeof o === 'object');
+  }
+
 
   private unwrapHttpError(error: any): any {
     try {
