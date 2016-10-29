@@ -73,7 +73,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
     if (this.isUpdateMode) {
       var newProject = Object.assign({}, this.project, this.projectForm.getRawValue());
-      this.projectService.update(this.project['loanRequestID'], newProject).subscribe(() => {
+      this.projectService.update(newProject).subscribe(() => {
         this.lgModal.hide();
       });
     } else {
@@ -99,7 +99,7 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
     this.title = 'Edit the Project Information';
     this.projectObs = this.projectService.project$
       .subscribe((project) => {
-      this.projectForm.patchValue(this.project);
+      this.projectForm.patchValue(project);
 
       this.project = project;
     });

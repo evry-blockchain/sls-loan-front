@@ -128,12 +128,11 @@ export class ProjectsService {
     return obs;
   }
 
-  update(id, data) {
-    var obs = this.http.put(`${this.requestMapping}/${id}`, data);
-
-    obs.mergeMap(() => {
-      return this.get(id);
-    });
+  update(data) {
+    var obs = this.http.put(`${this.requestMapping}`, data)
+      .do(() => {
+        this.projectSource.next(data);
+      });
 
     return  obs
   }

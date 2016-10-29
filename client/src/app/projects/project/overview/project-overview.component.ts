@@ -24,7 +24,6 @@ export class ProjectOverviewComponent implements OnInit {
   ngOnInit() {
     this.route.parent.params.subscribe(data => {
       let id = +data['id'];
-      console.log(data);
       this.isBankOwner = this.projectService.get(id).combineLatest(this.userService.user$)
         .map(([project, user]) => {
           return project['arrangerBankID'] === user['participantKey'];

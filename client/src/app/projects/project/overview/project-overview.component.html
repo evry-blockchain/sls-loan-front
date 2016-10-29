@@ -1,6 +1,6 @@
 <section class="component">
   <project-overview-header class="header" [isBankOwner]="isBankOwner"></project-overview-header>
-  <section class="content" [ngClass]="{'bank-owner': (isBankOwner | async), 'participant': !(isBankOwner | async)}" [ngSwitch]="isBankOwner | async">
+  <section class="content" [ngClass]="{'bank-owner': (isBankOwner | async) === true, 'participant': (isBankOwner | async) == false}" [ngSwitch]="isBankOwner | async">
     <div *ngSwitchCase="true">
       <accordion [closeOthers]="true">
         <accordion-group [panelClass]="'create-invitation-row'" #group [isOpen]="true" class="create-invitation-row">
