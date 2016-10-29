@@ -113,8 +113,9 @@ export class ProjectsService {
         return this.getProjectCount();
       })
       .do((countLength) => {
+        console.log(countLength);
         project.status = "Pending";
-        project.loanRequestID = countLength['count'];
+        project.loanRequestID = (+countLength['count'] + 1).toString();
         this.addProjectSource.next(project);
       });
   }
