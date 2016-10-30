@@ -15,6 +15,11 @@ export class OverviewFinancialStatusComponent implements OnInit {
   public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
   public pieChartData:number[] = [300, 500, 100];
   public pieChartType:string = 'pie';
+  public barChartOptions = {
+  scaleShowVerticalLines: false,
+  responsive: true,
+  maintainAspectRatio: false,
+};
 
   // events
   public chartClicked(e:any):void {
