@@ -12,6 +12,14 @@ import { ParticipantService } from "../../../../participants/service/participant
 export class OverviewParticipantProjectInformationComponent implements OnInit {
 
   public project;
+  public pieChartLabels:string[] = ["Your shares", 'Other Shares'];
+  public pieChartData:number[] = [180, 370];
+  public pieChartType:string = 'pie';
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: false,
+  };
 
   constructor(private projectService: ProjectsService,
               private participantService: ParticipantService) { }

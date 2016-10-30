@@ -16,10 +16,10 @@ export class OverviewFinancialStatusComponent implements OnInit {
   public pieChartData:number[] = [150, 300, 90, 100, 30];
   public pieChartType:string = 'pie';
   public barChartOptions = {
-  scaleShowVerticalLines: false,
-  responsive: true,
-  maintainAspectRatio: false,
-};
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: false,
+  };
 
   // events
   public chartClicked(e:any):void {
