@@ -57,11 +57,11 @@ export class SendInvitationComponent implements OnInit {
     this.invitation['arrangerBankID'] = this.project['arrangerBankID'];
     this.invitation['loanRequestID'] = this.project['loanRequestID'];
 
-    this.projectService.saveLoanInvitation(this.invitation).subscribe(data => {
+    this.projectService.getLoanInvitationByProjectId(this.project['loanRequestID']).subscribe(data => {
       let invitations = [];
       this.companies.forEach(company => {
         let negotiation = {
-          "loanInvitationID":  this.project['loanRequestID'],
+          "loanInvitationID":  data[0]['loanInvitationID'],
           "participantBankID": company['participantKey'],
           "amount": "2000",
           "negotiationStatus": 'Pending',
@@ -81,6 +81,7 @@ export class SendInvitationComponent implements OnInit {
     });
 
     var toastOptions:ToastOptions = {
+
       title: "Success",
       msg: "Invitations has been sent",
       showClose: true,
@@ -93,7 +94,5 @@ export class SendInvitationComponent implements OnInit {
     };
 
     this.toastyService.success(toastOptions);
-
   }
-
 }

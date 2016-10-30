@@ -24,7 +24,6 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   private user;
 
 
-  //noinspection TypeScriptUnresolvedVariable
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectsService,
               private participantService: ParticipantService,
@@ -79,11 +78,25 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
     } else {
       let newProject = this.projectForm.getRawValue();
       newProject['arrangerBankID'] = this.user['participantKey'];
-      this.projectService.create(<Project>newProject).subscribe(() => {
+      this.projectService.create(<Project>newProject)
+        .mergeMap(() => {
+          return this.projectService.getProjectCount()
+        })
+        .mergeMap((id) => {
+          var loanInvitation = {
+            loanRequestID: +id['count'] + 1,
+            arrangerBankID: this.user['participantKey']
+          };
+          return this.projectService.saveLoanInvitation(loanInvitation);
+        })
+        .subscribe(() => {
+
+          this.projectService.queryInvitations().subscribe((data) => {
+            console.log(data);
+          })
         this.lgModal.hide();
       });
     }
-
   }
 
   ngOnDestroy(): void {
@@ -107,7 +120,5 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
   private activateCreateMode() {
     this.title = 'Add new Project <small>(my role: Arranger Bank)</small>';
-
   }
-
 }

@@ -168,7 +168,11 @@ export class ProjectsService {
         loanRequestID: id
       }
     }
-    return this.http.get(`${this.apiEndpoint}/LoanInvitations/${id}`, filter)
+    return this.http.get(`${this.apiEndpoint}/LoanInvitations/`, filter)
+  }
+
+  queryInvitations() {
+    return this.http.get(`${this.apiEndpoint}/LoanInvitations/`);
   }
 
 }

@@ -48,12 +48,17 @@ export class OverviewInvitationStatusComponent implements OnInit {
 
     this.route.parent.params.subscribe(data => {
       let id = +data['id'];
-      var filter = {
-        filter: {
-          loanInvitationID: id
-        }
-      };
-      this.negotiationService.query(filter);
+
+      this.projectService.getLoanInvitationByProjectId(id).mergeMap((invitations) => {
+        var filter = {
+          filter: {
+            loanInvitationID: invitations[0]['loanInvitationID']
+          }
+        };
+        return this.negotiationService.query(filter);
+      }).take(1).subscribe(data => {
+        console.log(data);
+      })
     });
 
 
