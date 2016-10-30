@@ -1,6 +1,7 @@
 import 'core-js/client/shim';
 import 'reflect-metadata';
 require('zone.js/dist/zone');
+require('chart.js/dist/chart');
 
 import 'ts-helpers';
 
