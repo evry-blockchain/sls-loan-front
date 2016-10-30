@@ -12,8 +12,8 @@ export class OverviewFinancialStatusComponent implements OnInit {
     ngOnInit() { }
 
 
-  public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  public pieChartData:number[] = [300, 500, 100];
+  public pieChartLabels:string[] = ['Skandiabanken', 'Dashmi', 'Aus Inc', 'DNB', 'SMN'];
+  public pieChartData:number[] = [150, 300, 90, 100, 30];
   public pieChartType:string = 'pie';
   public barChartOptions = {
   scaleShowVerticalLines: false,
