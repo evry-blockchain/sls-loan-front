@@ -26,6 +26,7 @@ import { WaitingSpinnerComponent } from "./utils/waitingSpinner/waitingSpinner.c
 import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerService";
 import { ParticipantService } from "./participants/service/participants.service";
 import { UserService } from "./user/user.service";
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { UserService } from "./user/user.service";
       ProjectsModule,
       ModalModule,
       ToastyModule.forRoot(),
+      ChartsModule
     ],
     declarations: [
       AppComponent,

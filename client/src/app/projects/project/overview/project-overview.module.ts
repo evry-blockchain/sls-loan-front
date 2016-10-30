@@ -14,6 +14,7 @@ import { RouterModule } from "@angular/router";
 import { InvitationService } from "../invitation/service/invitation.service";
 import { OverviewParticipantProjectInformationComponent } from "./participant/overview-participant-project.component";
 import { OverviewFinancialStatusComponent } from "./accordion/financial-status/financial-status.component";
+import { ChartsModule } from "ng2-charts/ng2-charts";
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { OverviewFinancialStatusComponent } from "./accordion/financial-status/f
     ModalModule,
     ProjectsSharedModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ChartsModule
   ],
   providers: [
     InvitationService

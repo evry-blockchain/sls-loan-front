@@ -48,6 +48,44 @@
   <div class="col-md-2 mr-1">
     <h5>Loan Distribution</h5>
   </div>
+  <canvas
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="'pie'"
+    baseChart
+  ></canvas>
+
+  <!--<canvas-->
+  <!--class="chart"-->
+  <!--[datasets]="pieChartData"-->
+  <!--[labels]="pieChartLabels"-->
+  <!--[chartType]="pieChartType"-->
+  <!--baseChart-->
+  <!--&gt;</canvas>-->
+
+  <div style="display: block">
+    <!--<canvas baseChart-->
+            <!--[datasets]="pieChartData"-->
+            <!--[chartType]="pieChartType"-->
+            <!--(chartHover)="chartHovered($event)"-->
+            <!--(chartClick)="chartClicked($event)"></canvas>-->
+    <!--<canvas-->
+      <!--class="chart"-->
+      <!--[datasets]="pieChartData"-->
+      <!--[labels]="pieChartLabels"-->
+      <!--[chartType]="'line'"-->
+      <!--baseChart-->
+    <!--&gt;</canvas>-->
+  </div>
+  <!--<canvas-->
+    <!--class="chart"-->
+    <!--[datasets]="pieChartData"-->
+    <!--[labels]="labels"-->
+    <!--[options]="options"-->
+    <!--[chartType]="'line'"-->
+    <!--baseChart-->
+  <!--&gt;</canvas>-->
+
 
 </div>
 
