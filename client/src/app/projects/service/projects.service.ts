@@ -162,4 +162,13 @@ export class ProjectsService {
     return this.http.get(`${this.apiEndpoint}/LoanInvitations/${id}`);
   }
 
+  getLoanInvitationByProjectId(id) {
+    var filter = {
+      filter: {
+        loanRequestID: id
+      }
+    }
+    return this.http.get(`${this.apiEndpoint}/LoanInvitations/${id}`, filter)
+  }
+
 }
