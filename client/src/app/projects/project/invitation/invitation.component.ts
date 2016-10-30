@@ -34,7 +34,6 @@ export class InvitationComponent {
     this.participantsService.query();
     this.route.parent.parent.params.subscribe(data => {
       let id = +data['id'];
-      console.log(id);
       this.projectService.get(id).combineLatest(this.userService.user$)
         .map(([project, user]) => {
           return project['arrangerBankID'] === user['participantKey'];

@@ -44,6 +44,8 @@ export class SelectInviteesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.participantService.query();
+
     this.projectsService.selectedInvitees$.connect();
 
     this.projectsService.selectedInvitees$
