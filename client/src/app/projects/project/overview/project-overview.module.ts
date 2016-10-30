@@ -13,6 +13,7 @@ import { OverviewInvitationStatusComponent } from "./accordion/invitation-status
 import { RouterModule } from "@angular/router";
 import { InvitationService } from "../invitation/service/invitation.service";
 import { OverviewParticipantProjectInformationComponent } from "./participant/overview-participant-project.component";
+import { OverviewFinancialStatusComponent } from "./accordion/financial-status/financial-status.component";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { OverviewParticipantProjectInformationComponent } from "./participant/ov
     ProjectOverviewHeaderComponent,
     OverviewProjectInformationComponent,
     OverviewInvitationStatusComponent,
-    OverviewParticipantProjectInformationComponent
+    OverviewParticipantProjectInformationComponent,
+    OverviewFinancialStatusComponent
 
   ],
 })

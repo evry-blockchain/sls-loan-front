@@ -19,7 +19,7 @@ import { ProjectNegotiationService } from "./service/project-negotiation.service
     PaymentsModule,
     ChatModule,
     ProjectOverviewModule,
-    InvitationModule
+    InvitationModule,
   ],
   providers: [
     ProjectNegotiationService
