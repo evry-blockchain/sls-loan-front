@@ -127,4 +127,6 @@ module.exports = LoanRequest => {
     returns: {type: 'object', root: true}
   });
 
+  //TODO: add delete
+
 };

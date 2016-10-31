@@ -1,6 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-var config = JSON.parse(fs.readFileSync(path.join(__dirname, '/../mycreds.json'), 'utf8'));
+
+var creds_name = process.env.MYCREDS || '/../mycreds.json';
+
+var creds_file = path.join(__dirname, creds_name);
+
+var config = JSON.parse(fs.readFileSync(creds_file, 'utf8'));
 
 // // ==================================
 // // configure ibc-js sdk
@@ -23,7 +28,7 @@ var options = {
     unzip_dir: 'loan-blockchain-master',                                        //name/path to folder that contains the chaincode you want to deploy (path relative to unzipped root)
     git_url: 'https://github.com/evry-blockchain/loan-blockchain',             //git https URL. should point to the desired chaincode repo AND directory
 
-    deployed_name: "6081c3b8b532804d0f0761ad586934e60721034373f5378ee52bc65bbc12ef94599c91fcda6b711533484ebca099380cdc79f29bc0461181763b48023c992283"
+    deployed_name: "6a196e76cfa7f4bcd5c66c669ba3c253a7f16712eeb2ede5dc47e62094c54674394418845d378025d886ffef040d21d281b77568d347c3ad4592bd70216a5674"
   }
 };
 
