@@ -57,11 +57,13 @@ export class SendInvitationComponent implements OnInit {
     this.invitation['arrangerBankID'] = this.project['arrangerBankID'];
     this.invitation['loanRequestID'] = this.project['loanRequestID'];
 
-    this.projectService.getLoanInvitationByProjectId(this.project['loanRequestID']).subscribe(data => {
+    this.projectService.saveLoanInvitation(this.invitation).mergeMap(() => {
+      return this.projectService.getLoanInvitationCount()
+    }).subscribe(data => {
       let invitations = [];
       this.companies.forEach(company => {
         let negotiation = {
-          "loanInvitationID":  data[0]['loanInvitationID'],
+          "loanInvitationID":  +data['count'] + 1,
           "participantBankID": company['participantKey'],
           "amount": "2000",
           "negotiationStatus": 'Pending',

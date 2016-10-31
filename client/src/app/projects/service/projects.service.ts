@@ -175,4 +175,8 @@ export class ProjectsService {
     return this.http.get(`${this.apiEndpoint}/LoanInvitations/`);
   }
 
+  getLoanInvitationCount() {
+    return this.http.get(`${this.apiEndpoint}/LoanInvitations/count`);
+  }
+
 }
