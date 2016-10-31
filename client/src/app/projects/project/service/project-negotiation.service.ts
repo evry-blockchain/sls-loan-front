@@ -4,7 +4,7 @@
 
 import { Injectable, Inject } from '@angular/core';
 import { ApiGateway } from "../../../api-gateway.service";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 
 @Injectable()
 export class ProjectNegotiationService {

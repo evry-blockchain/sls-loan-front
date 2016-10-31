@@ -40,6 +40,14 @@ export class OverviewInvitationStatusComponent implements OnInit {
         negotiation['bankName'] = this.participantsService.getParticipantName(negotiation['participantBankID'], participants);
         return negotiation;
       }).scan((acc, value) => {
+        var elem = acc.find(elem => {
+          return elem['loanNegotiationID'] === value['loanNegotiationID']
+        })
+
+        if (!!elem) {
+          return acc;
+        }
+
         return <any[]>acc.concat(value);
     }, [])
       .subscribe((negotiations) => {
@@ -49,18 +57,17 @@ export class OverviewInvitationStatusComponent implements OnInit {
     this.route.parent.params.subscribe(data => {
       let id = +data['id'];
 
-      this.projectService.getLoanInvitationByProjectId(id).mergeMap((invitations) => {
-        var filter = {
-          filter: {
-            loanInvitationID: invitations[0]['loanInvitationID']
-          }
-        };
-        return this.negotiationService.query(filter);
-      }).take(1).subscribe(data => {
-        console.log(data);
-      })
+      this.projectService.getLoanInvitationByProjectId(id).subscribe((invitations) => {
+        invitations.forEach((invitation) => {
+          var filter = {
+            filter: {
+              loanInvitationID: invitation['loanInvitationID']
+            }
+          };
+          return this.negotiationService.query(filter);
+        });
+      });
     });
-
-
   }
 }
+
