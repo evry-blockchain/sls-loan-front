@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-var creds_name = process.env.MYCREDS || '/../mycreds.json';
+var creds_name = process.env.MYCREDS ? '/../' + process.env.MYCREDS : '/../mycreds.json';
 
 var creds_file = path.join(__dirname, creds_name);
 
