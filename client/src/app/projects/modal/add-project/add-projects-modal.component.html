@@ -41,7 +41,7 @@
           <div *ngSwitchCase="true">
             <div class="row">
               <div class="offset-md-1 col-md-5">
-                <button type="button"  class="btn btn-success btn-block"><span>Terminate</span></button>
+                <button type="button"  class="btn btn-success btn-block" (click)="showTerminateModal()"><span>Terminate</span></button>
               </div>
               <div class="col-md-5">
                 <button type="submit" class="btn btn-danger btn-block"><span>Update</span></button>

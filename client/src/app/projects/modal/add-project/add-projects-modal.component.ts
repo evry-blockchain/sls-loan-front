@@ -37,12 +37,11 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
 
 
   @Input() isUpdateMode;
-
+  @Output() showTerminateModall = new EventEmitter();
   public borrowers = [];
   public title;
   public project = {};
   private projectObs;
-
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
@@ -98,7 +97,11 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
       });
     }
   }
+  showTerminateModal() {
+    this.showTerminateModall.emit('')
+    this.lgModal.hide();
 
+  }
   ngOnDestroy(): void {
     if(!!this.createService) {
       this.createService.unsubscribe();

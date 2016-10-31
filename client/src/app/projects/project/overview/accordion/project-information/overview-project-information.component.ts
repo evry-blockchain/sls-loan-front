@@ -37,5 +37,20 @@ export class OverviewProjectInformationComponent implements OnInit {
       this.project = project;
     });
   }
+  showTerminateModal(modal) {
+    modal.show();
+  }
 
+  finishProject(modal) {
+    this.project.status = 'Finished';
+    this.projectService.update(this.project).subscribe(data => {
+
+    });
+    modal.hide();
+  }
+
+  deleteProject(modal) {
+
+    modal.hide();
+  }
 }

@@ -48,6 +48,31 @@
 <button class="btn offset-md-4 mt-3 col-md-4 btn-danger edit-btn" (click)="editModal.show()">EDIT</button>
 
 <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <add-project-modal [isUpdateMode]="true" [lgModal]="editModal"></add-project-modal>
+  <add-project-modal [isUpdateMode]="true" [lgModal]="editModal" (showTerminateModall)="showTerminateModal(replyModal)"></add-project-modal>
+</div>
+
+<div bsModal #replyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="margin-top: 15%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-circle" (click)="replyModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title h3 text-md-center">What do you want to do with this project?</h4>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <button class="btn btn-block btn-success offset-md-1 col-md-4 pull-left" style=" line-height: 4vh" (click)="finishProject(replyModal)"><span style="color: white;">I't finished save it</span></button>
+          <button  class="btn btn-block btn-danger offset-md-7 col-md-4" style=" line-height: 4vh">
+          <span style="color: white" (click)="deleteProject(replyModal)">
+          Delete everything
+          </span>
+
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
