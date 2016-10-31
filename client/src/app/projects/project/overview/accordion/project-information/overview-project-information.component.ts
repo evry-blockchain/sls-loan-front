@@ -42,7 +42,7 @@ export class OverviewProjectInformationComponent implements OnInit {
   }
 
   finishProject(modal) {
-    this.project.status = 'Finished';
+    this.project['status'] = 'Finished';
     this.projectService.update(this.project).subscribe(data => {
 
     });
