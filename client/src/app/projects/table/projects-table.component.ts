@@ -16,7 +16,7 @@ import { Observable } from "rxjs";
 })
 export class ProjectsTableComponent implements OnInit {
 
-  public projects;
+  public projects = [];
 
   constructor(private router: Router,
               private projectService: ProjectsService,
@@ -24,12 +24,15 @@ export class ProjectsTableComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
-    this.projects = this.userService.user$
+    this.userService.user$
       .mergeMap(user => {
         if (Object.keys(user).length === 0 && user.constructor === Object) {
           return Observable.from([])
         }
-      return this.projectService.query(user['participantKey']);
+
+        return this.projectService.query(user['participantKey']);
+    }).subscribe(data => {
+      this.projects = data;
     })
   }
 

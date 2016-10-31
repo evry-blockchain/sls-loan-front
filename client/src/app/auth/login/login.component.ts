@@ -9,6 +9,7 @@ import {Login} from "../model/login.model";
 import {Router} from "@angular/router";
 
 import 'rxjs/add/operator/catch';
+import { UserService } from "../../user/user.service";
 
 @Component({
   selector: 'login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
 
   }
 
@@ -41,7 +43,16 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.login(<Login> this.loginForm.getRawValue()).subscribe(() => {
+      this.authService.auth().subscribe((data) => {
+        this.userService.loginUser(data[0]);
+        this.authService.isLoggedIn$.next(true);
         this.router.navigate(['/projects']);
+      }, (error) => {
+        console.log(error);
+        this.authService.logout();
+      });
+
+
     }, (data) => {
       this.wrongCredentials = true;
     });
