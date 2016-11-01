@@ -24,6 +24,7 @@ rimraf('.tmp', () => {
 
   //deploy here
   exec(`slc deploy -s sls-loan-node http://vagrant:oUVJ7ipL9U@195.250.62.${port}:8701`);
+  exec(`slc ctl -C http://vagrant:oUVJ7ipL9U@195.250.62.${port}:8701 env-set sls-loan-node MYCREDS=mycreds${port}.json`);
 
   console.log('Done');
 });
