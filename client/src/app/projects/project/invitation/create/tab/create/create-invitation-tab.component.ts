@@ -37,7 +37,17 @@ export class CreateInvitationTabComponent implements OnInit {
     });
 
     this.projectsService.invitation$.take(1).subscribe((data) => {
-      this.invitationForm.patchValue(data);
+
+      if(Object.keys(data).length === 0) {
+        this.route.parent.parent.parent.params.subscribe(data => {
+          let id = +data['id'];
+          this.projectsService.getLoanInvitationByProjectId(id).subscribe(data => {
+            this.invitationForm.patchValue(data.shift());
+          });
+        });
+      } else {
+        this.invitationForm.patchValue(data);
+      }
     })
   }
 
