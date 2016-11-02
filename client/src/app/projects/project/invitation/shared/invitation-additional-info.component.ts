@@ -13,11 +13,11 @@ import { Input } from '@angular/core';
 })
 export class InvitationAdditionalInformationComponent implements OnInit {
   @Input() invitation;
-  
+
   @Input() useClass;
-  
+
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
 }
