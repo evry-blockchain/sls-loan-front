@@ -1,6 +1,7 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
+
 module.exports = Util => {
   Util.beforeRemote('*', (context, unused, next) => {
     beforeRemote(context, (userInstance) => {
@@ -16,6 +17,34 @@ module.exports = Util => {
   Util.getBankId = cb => {
     user.cc.query.getBankId([], user.username, (err, data) => {
       cb(err, data);
+    }, ['bankid']);
+  };
+
+  Util.getNegotiationByBankAndProject = (bankId, projectId, cb) => {
+    var requests, negotiations, invitations;
+    user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
+      requests = JSON.parse(data);
+
+      user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
+        negotiations = JSON.parse(data);
+
+        user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
+          invitations = JSON.parse(data);
+
+          var request = requests.filter(item => item.LoanRequestID == projectId)[0];
+
+          var requestInvitations = invitations.filter(item => item.LoanRequestID = request.LoanRequestID);
+
+          requestInvitations.forEach(invitation => {
+            invitation.negotiations = negotiations.filter(negotiation => {
+              return negotiation.LoanInvitationID == invitation.LoanInvitationID && negotiation.ParticipantBankID == bankId
+            });
+          });
+
+          cb(null, requestInvitations.filter(item => item.negotiations.length == 1)[0].negotiations[0]);
+
+        }, ['bankid']);
+      }, ['bankid']);
     }, ['bankid']);
   };
 
@@ -82,6 +111,15 @@ module.exports = Util => {
       verb: 'get'
     },
     accepts: {arg: 'id', type: 'string', required: true},
+    returns: {type: 'object', root: true}
+  });
+
+  Util.remoteMethod('getNegotiationByBankAndProject', {
+    http: {
+      path: '/negotiationByBankAndProject/:bankId/:projectId',
+      verb: 'get'
+    },
+    accepts: [{arg: 'bankId', type: 'string', required: true}, {arg: 'projectId', type: 'string', required: true}],
     returns: {type: 'object', root: true}
   })
 };

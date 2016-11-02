@@ -28,21 +28,40 @@ module.exports = LoanInvitation => {
   };
 
   LoanInvitation.add = (loanInvitation, cb)=> {
-    user.cc.invoke.addLoanInvitation([
-      loanInvitation.borrowerID,
-      loanInvitation.arrangerBankID,
-      loanInvitation.loanRequestID,
-      loanInvitation.loanTerm,
-      loanInvitation.amount,
-      loanInvitation.interestRate,
-      loanInvitation.info,
-      loanInvitation.status,
-      loanInvitation.assets,
-      loanInvitation.convenants
-    ], user.username, (err, data) => {
-      cb(err, data);
-    }, ['bankid']);
-
+    if (loanInvitation.loanInvitationID) {
+      user.cc.invoke.updateLoanInvitation([
+        loanInvitation.loanInvitationID,
+        loanInvitation.borrowerID,
+        loanInvitation.arrangerBankID,
+        loanInvitation.loanSharesAmount,
+        loanInvitation.projectRevenue,
+        loanInvitation.projectName,
+        loanInvitation.projectInformation,
+        loanInvitation.company,
+        loanInvitation.website,
+        loanInvitation.contactPersonName,
+        loanInvitation.contactPersonSurname,
+        loanInvitation.requestDate,
+        loanInvitation.status
+      ], user.username, (err, data) => {
+        cb(err, data);
+      }, ['bankid']);
+    } else {
+      user.cc.invoke.addLoanInvitation([
+        loanInvitation.borrowerID,
+        loanInvitation.arrangerBankID,
+        loanInvitation.loanRequestID,
+        loanInvitation.loanTerm,
+        loanInvitation.amount,
+        loanInvitation.interestRate,
+        loanInvitation.info,
+        loanInvitation.status,
+        loanInvitation.assets,
+        loanInvitation.convenants
+      ], user.username, (err, data) => {
+        cb(err, data);
+      }, ['bankid']);
+    }
   };
   LoanInvitation.update = (loanInvitation, cb)=> {
     user.cc.invoke.updateLoanInvitation([
