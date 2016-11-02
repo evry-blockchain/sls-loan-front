@@ -1,11 +1,11 @@
 /**
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
-import { Injectable, Inject } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from "rxjs";
-import { ApiGateway } from "../../api-gateway.service";
-import { UserService } from "../../user/user.service";
-import { Project } from "../project/model/project.model";
+import {Injectable, Inject} from '@angular/core';
+import {Observable, Subject, BehaviorSubject} from "rxjs";
+import {ApiGateway} from "../../api-gateway.service";
+import {UserService} from "../../user/user.service";
+import {Project} from "../project/model/project.model";
 
 @Injectable()
 export class ProjectsService {
@@ -44,37 +44,25 @@ export class ProjectsService {
 
   query(id) {
 
-    let filter = {
-      filter: {
-        participantBankID: id
-      }
-    };
-
-    let projectsFilter = {
-      filter: {
-        arrangerBankID: id
-      }
-    };
+    // let filter = {
+    //   filter: {
+    //     participantBankID: id
+    //   }
+    // };
+    //
+    // let projectsFilter = {
+    //   filter: {
+    //     arrangerBankID: id
+    //   }
+    // };
 
     // let projectsSource = this.http.get(this.requestMapping, projectsFilter);
 
-    return this.http.get(`${this.apiEndpoint}/LoanNegotiations`, filter)
+    return this.http.get(`${this.apiEndpoint}/Utils/projectsForBank/${id}`)
       .mergeMap((data) => {
         return Observable.from(data);
-      }).mergeMap(negotiation => {
-      let filter = {
-        filter: {
-          loanRequestID: negotiation['loanInvitationID']
-        }
-      };
-      return this.http.get(this.requestMapping, filter).mergeMap((projects) => {
-        return Observable.from(projects)
-      });
-    }).merge(this.http.get(this.requestMapping, projectsFilter)
-        .mergeMap((projects) => {
-          return Observable.from(projects);
-        }))
-      .merge(this.addProjectSource)
+      })
+
       .combineLatest(this.userService.user$)
       .map(([project, user]) => {
         project['role'] = this.userService.getRole(project['arrangerBankID'], user);
@@ -134,7 +122,7 @@ export class ProjectsService {
         this.projectSource.next(data);
       });
 
-    return  obs
+    return obs
   }
 
   public getProjectCount() {
@@ -159,7 +147,7 @@ export class ProjectsService {
   }
 
   getInvitation(id): Observable<any> {
-    return this.http.get(`${this.apiEndpoint}/LoanInvitations/${id}`);
+    return this.http.get(`${this.apiEndpoint}/LoanInvitations`);
   }
 
   getLoanInvitationByProjectId(id) {
@@ -167,7 +155,7 @@ export class ProjectsService {
       filter: {
         loanRequestID: id
       }
-    }
+    };
     return this.http.get(`${this.apiEndpoint}/LoanInvitations/`, filter)
   }
 

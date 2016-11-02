@@ -1,9 +1,9 @@
 <section class="payments">
   <div class="container-fluid">
     <div class="row">
-      <h3 style="color: white" class="offset-md-1 col-md-3">MY PROJECTS</h3>
+      <h3 style="color: white" class="offset-md-1 col-md-3">MY PROJECTS - {{user.participantName}}</h3>
       <div class="offset-md-6 col-md-1" style="margin-top: 9.12890625%">
-        <button class="my-settings pull-right" (click)="userSettings.show()"></button>
+        <button class="my-settings pull-right" disabled="disabled" (click)="userSettings.show()"></button>
       </div>
     </div>
     <projects-table></projects-table>

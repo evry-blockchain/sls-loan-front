@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { ProjectsService } from "./service/projects.service";
+import {UserService} from "../user/user.service";
 
 @Component({
   selector: 'projects',
@@ -15,12 +16,14 @@ import { ProjectsService } from "./service/projects.service";
 })
 export class ProjectsComponent implements OnInit {
 
-
-  constructor() { }
+  user = {};
+  constructor(private userService: UserService) {}
 
 
   ngOnInit() {
-
+    this.userService.user$.subscribe(data => {
+      this.user = data;
+    })
   }
 
 

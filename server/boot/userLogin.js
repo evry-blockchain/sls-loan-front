@@ -27,7 +27,7 @@ module.exports = function (app) {
       if (err) {
         res.status(401).json({"error": err});
       } else {
-        ibc.register(0, userCredentials.username, userCredentials.password, 3, (regErr) => {
+        ibc.register(0, userCredentials.username, userCredentials.password, 1, (regErr) => {
           if(regErr) {
             res.status(regErr.code).json(regErr.details);
           } else {
