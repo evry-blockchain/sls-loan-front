@@ -62,7 +62,7 @@ export class ProjectsService {
       .mergeMap((data) => {
         return Observable.from(data);
       })
-
+      .merge(this.addProjectSource)
       .combineLatest(this.userService.user$)
       .map(([project, user]) => {
         project['role'] = this.userService.getRole(project['arrangerBankID'], user);
