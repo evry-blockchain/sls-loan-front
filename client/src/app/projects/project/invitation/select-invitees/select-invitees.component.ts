@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { ProjectsService } from "../../../service/projects.service";
-import { ParticipantService } from "../../../../participants/service/participants.service";
-import { Observable } from "rxjs";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {ProjectsService} from "../../../service/projects.service";
+import {ParticipantService} from "../../../../participants/service/participants.service";
+import {ProjectNegotiationService} from '../../service/project-negotiation.service';
+import {Observable} from "rxjs";
 
 
 @Component({
-    selector: 'select-invitees-component',
-    styleUrls: ['select-invitees.component.scss'],
-    templateUrl: 'select-invitees.template.html'
+  selector: 'select-invitees-component',
+  styleUrls: ['select-invitees.component.scss'],
+  templateUrl: 'select-invitees.template.html'
 })
 
 export class SelectInviteesComponent implements OnInit {
@@ -17,10 +18,10 @@ export class SelectInviteesComponent implements OnInit {
 
   participants$;
 
-  public model: any;
+  public mo : any;
 
 
-  search = (text$: Observable<any>)  => {
+  search = (text$: Observable<any>) => {
     return text$
       .debounceTime(200)
       .distinctUntilChanged()
@@ -34,12 +35,14 @@ export class SelectInviteesComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private projectsService: ProjectsService,
-              private participantService: ParticipantService) {}
+              private participantService: ParticipantService,
+              private projectNegotiationService: ProjectNegotiationService) {
+  }
 
   participants;
 
   formatter = (result: string) => {
-   return ''
+    return ''
   };
 
 
@@ -51,10 +54,32 @@ export class SelectInviteesComponent implements OnInit {
     this.projectsService.selectedInvitees$
       .subscribe((invitees) => {
         this.selectedInvitees = invitees;
-    });
+      });
 
     this.participants$ = this.participantService.participants$;
-    }
+
+    this.projectsService.invitation$.subscribe((data: any[]) => {
+      let filter = {
+        filter: {
+          loanInvitationID: data['loanInvitationID']
+        }
+      };
+      if(Object.keys(data).length > 0) {
+        this.projectNegotiationService.getSpecificNegotiation(filter).subscribe(data => {
+          this.participants$.subscribe(participants => {
+            participants.forEach(participant => {
+              data.forEach(negotiation => {
+                if (negotiation['participantBankID'] == participant['participantKey']) {
+                  this.addSelectedInvitee(participant);
+                }
+              });
+            });
+          });
+        });
+      }
+    })
+
+  }
 
   nextTab(noInviteeModal) {
     if (this.selectedInvitees.length === 0) {

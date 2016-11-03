@@ -26,7 +26,6 @@ export class SelectInviteesPartnerComponent implements OnInit {
 
 
   selectUnselectPartner() {
-
     if (!this.partner.selected) {
       this.selectInvitee.emit(this.partner);
     } else {

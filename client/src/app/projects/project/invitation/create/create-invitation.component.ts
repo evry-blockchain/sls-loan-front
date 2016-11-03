@@ -26,6 +26,7 @@ export class CreateInvitationComponent implements OnInit {
     this.route.parent.parent.params.subscribe(data => {
       let id = +data['id'];
       this.projectService.get(id).take(1);
+
     });
   }
 }
