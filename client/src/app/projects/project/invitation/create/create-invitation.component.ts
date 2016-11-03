@@ -3,9 +3,9 @@
  */
 
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from "@angular/router";
-import { ProjectsService } from "../../../service/projects.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router, Params} from "@angular/router";
+import {ProjectsService} from "../../../service/projects.service";
 
 @Component({
   selector: 'create-invitation',
@@ -18,15 +18,14 @@ export class CreateInvitationComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private projectService: ProjectsService ) { }
+              private projectService: ProjectsService) {
+  }
 
   ngOnInit() {
 
     this.route.parent.parent.params.subscribe(data => {
       let id = +data['id'];
-      this.projectService.get(id).take(1).subscribe(data => {
-
-      });
+      this.projectService.get(id).take(1);
     });
   }
 }

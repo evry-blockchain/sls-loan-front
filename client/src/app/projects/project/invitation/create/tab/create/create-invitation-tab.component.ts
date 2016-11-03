@@ -3,13 +3,12 @@
  */
 
 
-
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
-import { ProjectsService } from "../../../../../service/projects.service";
-import { ParticipantService } from "../../../../../../participants/service/participants.service";
-import { Observable } from "rxjs";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from "@angular/router";
+import {ProjectsService} from "../../../../../service/projects.service";
+import {ParticipantService} from "../../../../../../participants/service/participants.service";
+import {Observable} from "rxjs";
+import {FormGroup, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'create-invitation-tab',
@@ -26,15 +25,18 @@ export class CreateInvitationTabComponent implements OnInit {
               private route: ActivatedRoute,
               private projectsService: ProjectsService,
               private participantService: ParticipantService,
-              private builder: FormBuilder) { }
+              private builder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.createForm();
 
     this.projectsService.project$
-     .subscribe((project) => {
+      .subscribe((project) => {
         this.project = project;
-    });
+      });
+
+
 
     this.projectsService.invitation$.take(1).subscribe((data) => {
 
@@ -60,9 +62,17 @@ export class CreateInvitationTabComponent implements OnInit {
 
   private createForm() {
     this.invitationForm = this.builder.group({
+      loanInvitationID: [''],
+      arrangerBankID: [''],
+      borrowerID: [''],
+      loanRequestID: [''],
+      loanTerm: [''],
+      amount: [''],
+      interestRate: [''],
+      info: [''],
+      status: [''],
       assets: [''],
-      convenants: [''],
-      additionalInfo: ['']
+      convenants: ['']
     });
 
     this.invitationForm.valueChanges.subscribe(data => {

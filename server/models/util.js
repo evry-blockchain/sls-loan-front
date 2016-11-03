@@ -40,8 +40,8 @@ module.exports = Util => {
               return negotiation.LoanInvitationID == invitation.LoanInvitationID && negotiation.ParticipantBankID == bankId
             });
           });
-
-          cb(null, requestInvitations.filter(item => item.negotiations.length == 1)[0].negotiations[0]);
+          var invitationWithNegotiations = requestInvitations.filter(item => item.negotiations.length == 1)[0];
+          cb(null, invitationWithNegotiations ? invitationWithNegotiations.negotiations[0]: {});
 
         }, ['bankid']);
       }, ['bankid']);

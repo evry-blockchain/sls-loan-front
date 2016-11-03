@@ -167,4 +167,12 @@ export class ProjectsService {
     return this.http.get(`${this.apiEndpoint}/LoanInvitations/count`);
   }
 
+  getAndUpdateCurrentProjectInvitation(id) {
+    var obs = this.getLoanInvitationByProjectId(id);
+    obs.subscribe(data => {
+      this.invitationSource.next(data.shift());
+    });
+    return obs;
+  }
+
 }

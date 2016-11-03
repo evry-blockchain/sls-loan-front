@@ -63,7 +63,7 @@ export class SendInvitationComponent implements OnInit {
       let invitations = [];
       this.companies.forEach(company => {
         let negotiation = {
-          "loanInvitationID":  +data['count'] + 1,
+          "loanInvitationID":  this.invitation['loanInvitationID']? this.invitation['loanInvitationID'] : +data['count'] + 1,
           "participantBankID": company['participantKey'],
           "amount": "2000",
           "negotiationStatus": 'Pending',

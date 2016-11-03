@@ -38,7 +38,10 @@ export class ProjectNegotiationService {
 
 
   getSpecificNegotiation(filter) {
-    console.log('here');
     return this.http.get(`${this.apiEndpoint}/LoanNegotiations`, filter)
+  }
+
+  getNegotiationForProjectAndBank(bankId, projectId) {
+    return this.http.get(`${this.apiEndpoint}/Utils/negotiationByBankAndProject/${bankId}/${projectId}`);
   }
 }

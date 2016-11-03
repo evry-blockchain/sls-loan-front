@@ -27,17 +27,30 @@ module.exports = LoanNegotiation => {
   };
 
   LoanNegotiation.add = (loanNegotiation, cb)=> {
-    console.log(loanNegotiation);
-     user.cc.invoke.addLoanNegotiation([
-       loanNegotiation.loanInvitationID,
-       loanNegotiation.participantBankID,
-       loanNegotiation.amount,
-       loanNegotiation.negotiationStatus,
-       loanNegotiation.participantBankComment,
-       loanNegotiation.date
-     ], user.username, (err, data) => {
-       cb(err, data);
-     }, ['bankid']);
+    if(loanNegotiation.loanNegotiationID) {
+      user.cc.invoke.updateLoanNegotiation([
+        loanNegotiation.loanNegotiationID,
+        loanNegotiation.loanInvitationID,
+        loanNegotiation.participantBankID,
+        loanNegotiation.amount,
+        loanNegotiation.negotiationStatus,
+        loanNegotiation.participantBankComment,
+        loanNegotiation.date
+      ], user.username, (err, data) => {
+        cb(err, data);
+      }, ['bankid']);
+    } else {
+      user.cc.invoke.addLoanNegotiation([
+        loanNegotiation.loanInvitationID,
+        loanNegotiation.participantBankID,
+        loanNegotiation.amount,
+        loanNegotiation.negotiationStatus,
+        loanNegotiation.participantBankComment,
+        loanNegotiation.date
+      ], user.username, (err, data) => {
+        cb(err, data);
+      }, ['bankid']);
+    }
   };
 
   LoanNegotiation.update = (loanNegotiation, cb)=> {

@@ -31,25 +31,24 @@ module.exports = LoanInvitation => {
     if (loanInvitation.loanInvitationID) {
       user.cc.invoke.updateLoanInvitation([
         loanInvitation.loanInvitationID,
-        loanInvitation.borrowerID,
         loanInvitation.arrangerBankID,
-        loanInvitation.loanSharesAmount,
-        loanInvitation.projectRevenue,
-        loanInvitation.projectName,
-        loanInvitation.projectInformation,
-        loanInvitation.company,
-        loanInvitation.website,
-        loanInvitation.contactPersonName,
-        loanInvitation.contactPersonSurname,
-        loanInvitation.requestDate,
-        loanInvitation.status
+        loanInvitation.borrowerID,
+        loanInvitation.loanRequestID,
+        loanInvitation.loanTerm,
+        loanInvitation.amount,
+        loanInvitation.interestRate,
+        loanInvitation.info,
+        loanInvitation.status,
+        loanInvitation.assets,
+        loanInvitation.convenants
       ], user.username, (err, data) => {
         cb(err, data);
       }, ['bankid']);
     } else {
+
       user.cc.invoke.addLoanInvitation([
-        loanInvitation.borrowerID,
         loanInvitation.arrangerBankID,
+        loanInvitation.borrowerID,
         loanInvitation.loanRequestID,
         loanInvitation.loanTerm,
         loanInvitation.amount,
@@ -66,18 +65,16 @@ module.exports = LoanInvitation => {
   LoanInvitation.update = (loanInvitation, cb)=> {
     user.cc.invoke.updateLoanInvitation([
       loanInvitation.loanInvitationID,
-      loanInvitation.borrowerID,
       loanInvitation.arrangerBankID,
-      loanInvitation.loanSharesAmount,
-      loanInvitation.projectRevenue,
-      loanInvitation.projectName,
-      loanInvitation.projectInformation,
-      loanInvitation.company,
-      loanInvitation.website,
-      loanInvitation.contactPersonName,
-      loanInvitation.contactPersonSurname,
-      loanInvitation.requestDate,
-      loanInvitation.status
+      loanInvitation.borrowerID,
+      loanInvitation.loanRequestID,
+      loanInvitation.loanTerm,
+      loanInvitation.amount,
+      loanInvitation.interestRate,
+      loanInvitation.info,
+      loanInvitation.status,
+      loanInvitation.assets,
+      loanInvitation.convenants
     ], user.username, (err, data) => {
       cb(err, data);
     }, ['bankid']);

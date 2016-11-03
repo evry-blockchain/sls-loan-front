@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ColumnMode, TableOptions } from "angular2-data-table";
-import { InvitationService } from "../../../invitation/service/invitation.service";
-import { ProjectNegotiationService } from "../../../service/project-negotiation.service";
-import { Observable } from "rxjs";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ProjectsService } from "../../../../service/projects.service";
-import { ParticipantService } from "../../../../../participants/service/participants.service";
+import {Component, OnInit} from '@angular/core';
+import {ColumnMode, TableOptions} from "angular2-data-table";
+import {InvitationService} from "../../../invitation/service/invitation.service";
+import {ProjectNegotiationService} from "../../../service/project-negotiation.service";
+import {Observable} from "rxjs";
+import {Router, ActivatedRoute} from "@angular/router";
+import {ProjectsService} from "../../../../service/projects.service";
+import {ParticipantService} from "../../../../../participants/service/participants.service";
 
 @Component({
   selector: 'overview-invitation-status',
@@ -22,12 +22,14 @@ export class OverviewInvitationStatusComponent implements OnInit {
     footerHeight: 0,
     rowHeight: 'auto'
   });
+
   constructor(private invitationService: InvitationService,
               private negotiationService: ProjectNegotiationService,
               private participantsService: ParticipantService,
               private router: Router,
               private route: ActivatedRoute,
-              private projectService: ProjectsService) { }
+              private projectService: ProjectsService) {
+  }
 
   ngOnInit() {
 
@@ -40,15 +42,15 @@ export class OverviewInvitationStatusComponent implements OnInit {
         negotiation['bankName'] = this.participantsService.getParticipantName(negotiation['participantBankID'], participants);
         return negotiation;
       }).scan((acc, value) => {
-        var elem = acc.find(elem => {
-          return elem['loanNegotiationID'] === value['loanNegotiationID']
-        })
+      var elem = acc.find(elem => {
+        return elem['loanNegotiationID'] === value['loanNegotiationID']
+      })
 
-        if (!!elem) {
-          return acc;
-        }
+      if (!!elem) {
+        return acc;
+      }
 
-        return <any[]>acc.concat(value);
+      return <any[]>acc.concat(value);
     }, [])
       .subscribe((negotiations) => {
         this.rows = negotiations;
@@ -58,14 +60,13 @@ export class OverviewInvitationStatusComponent implements OnInit {
       let id = +data['id'];
 
       this.projectService.getLoanInvitationByProjectId(id).subscribe((invitations) => {
-        invitations.forEach((invitation) => {
-          var filter = {
-            filter: {
-              loanInvitationID: invitation['loanInvitationID']
-            }
-          };
-          return this.negotiationService.query(filter);
-        });
+        let invitation = invitations.shift();
+        var filter = {
+          filter: {
+            loanInvitationID: invitation['loanInvitationID']
+          }
+        };
+        return this.negotiationService.query(filter);
       });
     });
   }
