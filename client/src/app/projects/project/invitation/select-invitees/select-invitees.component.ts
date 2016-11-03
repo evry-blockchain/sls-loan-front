@@ -69,7 +69,8 @@ export class SelectInviteesComponent implements OnInit {
           this.participants$.subscribe(participants => {
             participants.forEach(participant => {
               data.forEach(negotiation => {
-                if (negotiation['participantBankID'] == participant['participantKey']) {
+                if (negotiation['participantBankID'] == participant['participantKey'] && this.selectedInvitees.indexOf(participant) === -1) {
+                  participant.negotiation = negotiation;
                   this.addSelectedInvitee(participant);
                 }
               });

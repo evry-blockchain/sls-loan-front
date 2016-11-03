@@ -1,6 +1,7 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
+import prepareSingleData from '../utils/prepare-single-data';
 
 module.exports = Util => {
   Util.beforeRemote('*', (context, unused, next) => {
@@ -22,8 +23,6 @@ module.exports = Util => {
 
   Util.getNegotiationByBankAndProject = (bankId, projectId, cb) => {
     var requests, negotiations, invitations;
-    user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
-      requests = JSON.parse(data);
 
       user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
         negotiations = JSON.parse(data);
@@ -31,21 +30,17 @@ module.exports = Util => {
         user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
           invitations = JSON.parse(data);
 
-          var request = requests.filter(item => item.LoanRequestID == projectId)[0];
-
-          var requestInvitations = invitations.filter(item => item.LoanRequestID = request.LoanRequestID);
-
+          var requestInvitations = invitations.filter(item => item.LoanRequestID == projectId);
           requestInvitations.forEach(invitation => {
             invitation.negotiations = negotiations.filter(negotiation => {
               return negotiation.LoanInvitationID == invitation.LoanInvitationID && negotiation.ParticipantBankID == bankId
             });
           });
-          var invitationWithNegotiations = requestInvitations.filter(item => item.negotiations.length == 1)[0];
-          cb(null, invitationWithNegotiations ? invitationWithNegotiations.negotiations[0]: {});
+
+          cb(null, prepareSingleData(JSON.stringify([requestInvitations[0] && requestInvitations[0].negotiations ? requestInvitations[0].negotiations[0]: {}])));
 
         }, ['bankid']);
       }, ['bankid']);
-    }, ['bankid']);
   };
 
   Util.getProjectsForBank = (id, cb) => {
@@ -75,7 +70,7 @@ module.exports = Util => {
           //where invited
           bankInvitations.forEach(item => {
             requests.forEach(request => {
-              if(request.LoanRequestID == item.LoanRequestID) {
+              if(request.LoanRequestID == item.LoanRequestID && result.indexOf(request) == -1) {
                 result.push(request);
               }
             });
@@ -83,7 +78,7 @@ module.exports = Util => {
 
           //where arranger
           requests.forEach(item => {
-            if(item.ArrangerBankID == id) {
+            if(item.ArrangerBankID == id && result.indexOf(item) == -1) {
               result.push(item);
             }
           });

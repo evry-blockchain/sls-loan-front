@@ -44,6 +44,7 @@ export class SendInvitationComponent implements OnInit {
     });
 
     this.projectService.selectedInvitees$.subscribe(data => {
+      console.log(data);
       this.companies = data;
     });
 
@@ -62,15 +63,20 @@ export class SendInvitationComponent implements OnInit {
     }).subscribe(data => {
       let invitations = [];
       this.companies.forEach(company => {
-        let negotiation = {
-          "loanInvitationID":  this.invitation['loanInvitationID']? this.invitation['loanInvitationID'] : +data['count'] + 1,
-          "participantBankID": company['participantKey'],
-          "amount": "2000",
-          "negotiationStatus": 'Pending',
-          'participantBankComment': '123',
-          'date': '14-16-2018'
-        };
-        invitations.push(this.negotiationService.saveLoanNegotiation(negotiation));
+
+        if(!company.negotiation) {
+          let negotiation = {
+            "loanInvitationID":  this.invitation['loanInvitationID']? this.invitation['loanInvitationID'] : +data['count'] + 1,
+            "participantBankID": company['participantKey'],
+            "amount": "2000",
+            "negotiationStatus": 'Pending',
+            'participantBankComment': '123',
+            'date': '14-16-2018'
+          };
+
+          invitations.push(this.negotiationService.saveLoanNegotiation(negotiation));
+        }
+
       });
 
       Observable.forkJoin(invitations).subscribe(() => {

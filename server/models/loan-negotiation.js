@@ -1,6 +1,7 @@
 var user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
+import prepareSingleData from '../utils/prepare-single-data';
 
 module.exports = LoanNegotiation => {
   LoanNegotiation.beforeRemote('*', (context, unused, next) => {
@@ -54,6 +55,7 @@ module.exports = LoanNegotiation => {
   };
 
   LoanNegotiation.update = (loanNegotiation, cb)=> {
+    console.log(loanNegotiation);
     user.cc.invoke.updateLoanNegotiation([
       loanNegotiation.loanNegotiationID,
       loanNegotiation.loanInvitationID,
