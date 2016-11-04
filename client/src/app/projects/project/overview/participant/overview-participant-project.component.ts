@@ -30,6 +30,7 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
       .combineLatest(this.participantService.participants$)
       .map(([project, participants]) => {
         project['borrower'] = this.participantService.getParticipantName(project['borrowerID'], participants);
+        project['arranger'] = this.participantService.getParticipantName(project['arrangerBankID'], participants);
         return project;
       }).subscribe((project) => {
       this.project = project;

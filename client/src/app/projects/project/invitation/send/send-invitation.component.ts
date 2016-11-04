@@ -69,7 +69,7 @@ export class SendInvitationComponent implements OnInit {
             "loanInvitationID":  this.invitation['loanInvitationID']? this.invitation['loanInvitationID'] : +data['count'] + 1,
             "participantBankID": company['participantKey'],
             "amount": "2000",
-            "negotiationStatus": 'Pending',
+            "negotiationStatus": 'INVITED',
             'participantBankComment': '123',
             'date': '14-16-2018'
           };

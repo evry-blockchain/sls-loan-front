@@ -36,7 +36,6 @@ export class ProjectNegotiationService {
     return this.http.post(`${this.apiEndpoint}/LoanNegotiations`, negotiation)
   }
 
-
   getSpecificNegotiation(filter) {
     return this.http.get(`${this.apiEndpoint}/LoanNegotiations`, filter)
   }
