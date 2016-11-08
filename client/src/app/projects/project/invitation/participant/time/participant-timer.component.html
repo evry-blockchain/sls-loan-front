@@ -8,7 +8,10 @@
 
   </div>
   <div class="offset-md-4 col-md-4">
-    <button class="btn btn-block" style="background-color: #84a6b6;line-height: 300%" (click)="replyModal.show()"><span style="color: white" class="h3">Reply</span></button>
+    <button *ngIf="negotiation.negotiationStatus === 'INVITED'" class="btn btn-block" style="background-color: #84a6b6;line-height: 300%" (click)="replyModal.show()">
+      <span style="color: white" class="h3">Reply</span>
+    </button>
+    <span *ngIf="negotiation.negotiationStatus !== 'INVITED'" style="color: black" class="h3">You've already replied with a message: {{negotiation.participantBankComment}}</span>
   </div>
 </div>
 
