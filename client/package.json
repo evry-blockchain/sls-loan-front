@@ -22,6 +22,7 @@
     "start": "npm run server",
     "start:hmr": "npm run server -- --hot",
     "deploy73": "node build-and-deploy.js 73",
+    "deploy76": "node build-and-deploy.js 76",
     "deploy68": "node build-and-deploy.js 68"
   },
   "dependencies": {

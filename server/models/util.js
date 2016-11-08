@@ -43,6 +43,28 @@ module.exports = Util => {
       }, ['bankid']);
   };
 
+  Util.getNegotiationsByProject = (projectId, cb) => {
+    var negotiations, invitations;
+
+    user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
+      negotiations = JSON.parse(data);
+
+      user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
+        invitations = JSON.parse(data);
+
+        var requestInvitations = invitations.filter(item => item.LoanRequestID == projectId);
+        requestInvitations.forEach(invitation => {
+          invitation.negotiations = negotiations.filter(negotiation => {
+            return negotiation.LoanInvitationID == invitation.LoanInvitationID;
+          });
+        });
+
+        cb(null, prepareListData(JSON.stringify(requestInvitations[0] && requestInvitations[0].negotiations ? requestInvitations[0].negotiations: [])));
+
+      }, ['bankid']);
+    }, ['bankid']);
+  } ;
+
   Util.getProjectsForBank = (id, cb) => {
     var requests, negotiations, invitations;
     var result = [];
@@ -116,5 +138,14 @@ module.exports = Util => {
     },
     accepts: [{arg: 'bankId', type: 'string', required: true}, {arg: 'projectId', type: 'string', required: true}],
     returns: {type: 'object', root: true}
-  })
+  });
+
+  Util.remoteMethod('getNegotiationsByProject', {
+    http: {
+      path: '/negotiationsByProject/:projectId',
+      verb: 'get'
+    },
+    accepts: [{arg: 'projectId', type: 'string', required: true}],
+    returns: {type: 'object', root: true}
+  });
 };

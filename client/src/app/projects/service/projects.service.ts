@@ -6,6 +6,8 @@ import {Observable, Subject, BehaviorSubject} from "rxjs";
 import {ApiGateway} from "../../api-gateway.service";
 import {UserService} from "../../user/user.service";
 import {Project} from "../project/model/project.model";
+import {ProjectNegotiationService} from '../project/service/project-negotiation.service';
+
 
 @Injectable()
 export class ProjectsService {
@@ -38,6 +40,7 @@ export class ProjectsService {
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint,
+              private projectNegotiationService: ProjectNegotiationService,
               private userService: UserService) {
     this.requestMapping = `${this.apiEndpoint}/LoanRequests`;
   }
@@ -66,6 +69,19 @@ export class ProjectsService {
       .combineLatest(this.userService.user$)
       .map(([project, user]) => {
         project['role'] = this.userService.getRole(project['arrangerBankID'], user);
+        if (project['role'] == 'Participant Bank') {
+          this.projectNegotiationService.getNegotiationForProjectAndBank(user['participantKey'], project['loanRequestID']).subscribe(data => {
+            project['negotiation'] = data;
+          });
+        }
+
+        if (project['status'] == 'Negotiation Started') {
+          this.projectNegotiationService.getNegotiationsForProject(project['loanRequestID'])
+            .subscribe(data => {
+              project['acceptedInvitationsCount'] = data.filter(item => item.negotiationStatus == 'INTERESTED').length;
+            });
+        }
+        console.log(project['acceptedInvitationsCount']);
         return project;
       })
       .scan((accum: any[], x) => {

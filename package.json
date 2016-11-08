@@ -10,6 +10,7 @@
     "build": "babel server -d dist",
     "start-dev": "nodemon server/server.js --exec babel-node",
     "deploy73": "node build-and-deploy.js 73",
+    "deploy76": "node build-and-deploy.js 76",
     "deploy68": "node build-and-deploy.js 68"
   },
   "dependencies": {

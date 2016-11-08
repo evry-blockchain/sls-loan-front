@@ -43,4 +43,8 @@ export class ProjectNegotiationService {
   getNegotiationForProjectAndBank(bankId, projectId) {
     return this.http.get(`${this.apiEndpoint}/Utils/negotiationByBankAndProject/${bankId}/${projectId}`);
   }
+
+  getNegotiationsForProject(projectId) {
+    return this.http.get(`${this.apiEndpoint}/Utils/negotiationsByProject/${projectId}`);
+  }
 }
