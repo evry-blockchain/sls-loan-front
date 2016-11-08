@@ -14,28 +14,28 @@ export class ParticipantService {
 
   private partners = [
     {
-      name: 'Bank of Associates & Companies LTD',
-      image: 'https://media.glassdoor.com/sql/23198/dnb-nor-squarelogo-1448458669964.png'
+      name: 'Nationwide Building Society',
+      image: 'img/bankLogos/nationwide.png'
     },
     {
-      name: 'Bank of America',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
+      name: 'Barclays',
+      image: 'img/bankLogos/barklays.jpg'
     },
     {
-      name: 'Connected Collborators Bank',
-      image: 'http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/64/wellsfargo-2-icon.png'
+      name: 'JPMorgan Chase & Co',
+      image: 'img/bankLogos/jp.jpg'
     },
     {
-      name: 'Bank of Paper, Wilson & Bluemine LTD',
-      image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
+      name: 'Mizuho Bank, Ltd.',
+      image: 'img/bankLogos/mizuho.png'
     },
     {
-      name: 'Bank of Associates & Companies LTD',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/64/bank-of-america-icon.png'
+      name: 'SpareBank 1 SR-BANK',
+      image: 'img/bankLogos/sparebank.jpg'
     },
     {
-      name: 'Bank of America',
-      image: 'http://www.megaicons.net/static/img/icons_sizes/40/110/48/bank-of-america-icon.png'
+      name: 'DNB ASA',
+      image: 'img/bankLogos/dnb.jpg'
     },
     {
       name: 'Connected Collborators Bank',
@@ -48,8 +48,11 @@ export class ParticipantService {
   ];
 
   public participants$ = this.participantsSource.asObservable().map((participants) => {
-    participants.forEach((participant, index) => {
-      participant.image = !!this.partners[index] ? this.partners[index]['image'] : this.partners[1]['image'];
+    let found;
+    participants.forEach((participant) => {
+      found = this.partners.filter(item => item.name == participant['participantName'])[0];
+      participant.image = found ? found['image'] : this.partners[0]['image'];
+      console.log(participant.image);
     });
     return participants;
   });

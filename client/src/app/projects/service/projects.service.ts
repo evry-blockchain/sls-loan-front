@@ -81,7 +81,6 @@ export class ProjectsService {
               project['acceptedInvitationsCount'] = data.filter(item => item.negotiationStatus == 'INTERESTED').length;
             });
         }
-        console.log(project['acceptedInvitationsCount']);
         return project;
       })
       .scan((accum: any[], x) => {
@@ -117,7 +116,6 @@ export class ProjectsService {
         return this.getProjectCount();
       })
       .do((countLength) => {
-        console.log(countLength);
         project.status = "Draft";
         project.loanRequestID = (+countLength['count'] + 1).toString();
         this.addProjectSource.next(project);
