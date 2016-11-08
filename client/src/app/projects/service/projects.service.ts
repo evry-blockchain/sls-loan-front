@@ -73,14 +73,15 @@ export class ProjectsService {
           this.projectNegotiationService.getNegotiationForProjectAndBank(user['participantKey'], project['loanRequestID']).subscribe(data => {
             project['negotiation'] = data;
           });
+        } else {
+          if (project['status'] == 'Negotiation Started') {
+            this.projectNegotiationService.getNegotiationsForProject(project['loanRequestID'])
+              .subscribe(data => {
+                project['acceptedInvitationsCount'] = data.filter(item => item.negotiationStatus == 'INTERESTED').length;
+              });
+          }
         }
 
-        if (project['status'] == 'Negotiation Started') {
-          this.projectNegotiationService.getNegotiationsForProject(project['loanRequestID'])
-            .subscribe(data => {
-              project['acceptedInvitationsCount'] = data.filter(item => item.negotiationStatus == 'INTERESTED').length;
-            });
-        }
         return project;
       })
       .scan((accum: any[], x) => {
