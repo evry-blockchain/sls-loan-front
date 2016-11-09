@@ -70,7 +70,7 @@ export class SendInvitationComponent implements OnInit {
             "participantBankID": company['participantKey'],
             "amount": "2000",
             "negotiationStatus": 'INVITED',
-            'participantBankComment': '123',
+            'participantBankComment': '',
             'date': '14-16-2018'
           };
 
