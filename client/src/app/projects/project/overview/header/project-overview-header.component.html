@@ -6,6 +6,10 @@
     </div>
   </div>
   <div class="image">
+    <div class="name-and-role">
+      <h6 class="project-name">{{project.projectName}}</h6>
+      <h6 class="role">{{(isBankOwner ? 'Arranger' : 'Participant' | async)}}</h6>
+    </div>
     <img width="250" height="169" src="img/background_header.png" />
   </div>
 </header>

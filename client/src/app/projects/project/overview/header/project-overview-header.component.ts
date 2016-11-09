@@ -3,6 +3,7 @@
  */
 
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ProjectsService } from "../../../service/projects.service";
 import { Input } from "@angular/core";
 
 @Component({
@@ -13,7 +14,9 @@ import { Input } from "@angular/core";
 export class ProjectOverviewHeaderComponent implements OnInit, OnChanges {
   @Input() isBankOwner;
 
-  constructor() { }
+  project = {};
+
+  constructor(private projectService: ProjectsService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(!changes['isBankOwner']) {
@@ -22,6 +25,9 @@ export class ProjectOverviewHeaderComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.projectService.project$.subscribe(project => {
+      this.project = project;
+    })
   }
 
 }

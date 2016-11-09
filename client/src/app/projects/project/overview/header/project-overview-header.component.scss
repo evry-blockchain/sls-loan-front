@@ -8,4 +8,15 @@ header {
   &.bank-owner {
     background-color: $color-blue-grey;
   }
+
+  .image {
+    .name-and-role {
+      position: absolute;
+      top: 38px;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
 }
