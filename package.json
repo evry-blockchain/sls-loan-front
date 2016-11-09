@@ -11,6 +11,11 @@
     "start-dev": "nodemon server/server.js --exec babel-node",
     "deploy73": "node build-and-deploy.js 73",
     "deploy76": "node build-and-deploy.js 76",
+    "deploy77": "node build-and-deploy.js 77",
+    "deploy78": "node build-and-deploy.js 78",
+    "deploy79": "node build-and-deploy.js 79",
+    "deploy80": "node build-and-deploy.js 80",
+    "deploy81": "node build-and-deploy.js 81",
     "deploy68": "node build-and-deploy.js 68"
   },
   "dependencies": {

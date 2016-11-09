@@ -1,11 +1,7 @@
 require('shelljs/global');
 var rimraf = require('rimraf');
 var port = process.argv.slice(2)[0];
-var credsMap = {
-  '76': 'blockchain:oUVJ7ipL9U',
-  '68': 'vagrant:oUVJ7ipL9U',
-  '73': 'vagrant:oUVJ7ipL9U'
-};
+var credsMap = require('./creds.map');
 
 var creds = credsMap[port];
 

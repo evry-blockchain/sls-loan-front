@@ -1,11 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 
-var creds_name = process.env.MYCREDS ? '/../' + process.env.MYCREDS : '/../mycreds.json';
+var credsName = process.env.MYCREDS ? '/../' + process.env.MYCREDS : '/../mycreds.json';
+var credsFile = path.join(__dirname, credsName);
 
-var creds_file = path.join(__dirname, creds_name);
+var fileContents;
+try {
+  fileContents = fs.readFileSync(credsFile, 'utf8');
+} catch (err) {
+  fileContents = fs.readFileSync(path.join(__dirname, '/../mycreds.json'), 'utf8')
+}
 
-var config = JSON.parse(fs.readFileSync(creds_file, 'utf8'));
+var config = JSON.parse(fileContents);
 
 // // ==================================
 // // configure ibc-js sdk
