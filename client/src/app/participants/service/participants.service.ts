@@ -52,7 +52,6 @@ export class ParticipantService {
     participants.forEach((participant) => {
       found = this.partners.filter(item => item.name == participant['participantName'])[0];
       participant.image = found ? found['image'] : this.partners[0]['image'];
-      console.log(participant.image);
     });
     return participants;
   });

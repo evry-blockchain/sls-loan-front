@@ -11,6 +11,12 @@
 @import '~ng2-toasty/style-bootstrap.css';
 @import './forms';
 
+@import './misc';
+
+body {
+  overflow-y: scroll;
+}
+
 .container-fluid {
   .main {
     padding-left: 0;
@@ -19,12 +25,20 @@
 }
 
 section {
-  .section-content, .section-head {
+  .section-content {
     padding: 0 30px 20px;
   }
 
   .section-head {
     padding: 40px 30px;
+
+    &.with-subhead {
+      padding-bottom: 0;
+    }
+  }
+
+  .section-subhead {
+    padding: 10px 30px 20px;
   }
 
   .accordion-toggle {

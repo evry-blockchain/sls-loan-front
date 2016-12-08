@@ -1,32 +1,32 @@
 {
-  "chaincodeName": "a7707dd83f10764f1491cd3aa7d0f3fef401a2be6ce3f1afb963d649dba5550437842bd5dcf859229911f9cf2a4db5b62222c723963c49cb49ba9b8be3f87796",
+  "chaincodeName": "a69b33079f229d38376d7337402aad662086ebbc38f7aee8dc547a209b39dd543cb0d22c3bcb1eef3e0088e626d2be38dfe74715a7f5bb5193bd9734cf12c5bf",
   "ibm-blockchain-5-prod": [
     {
       "credentials": {
         "peers": [
           {
-            "discovery_host": "195.250.62.68",
+            "discovery_host": "195.250.62.76",
             "discovery_port": "7050",
-            "api_host": "195.250.62.68",
+            "api_host": "195.250.62.76",
             "api_port_tls": "433",
             "api_port": "7050",
             "type": "peer",
-            "network_id": "195.250.62.68",
+            "network_id": "195.250.62.76",
             "container_id": "bPQualueIzyu/9zRA6eUXGgfEjQ3VfdoQn3tNyjhZ1k=",
             "id": "vp1",
-            "api_url": "http://195.250.62.68:7050"
+            "api_url": "http://195.250.62.76:7050"
           }
         ],
         "ca": {
           "13f12279-5f98-4c7a-b476-9be108606f74_ca": {
-            "url": "195.250.62.68:7050",
-            "discovery_host": "195.250.62.68",
+            "url": "195.250.62.76:7050",
+            "discovery_host": "195.250.62.76",
             "discovery_port": 7050,
-            "api_host": "195.250.62.68",
+            "api_host": "195.250.62.76",
             "api_port_tls": 7050,
             "api_port": 443,
             "type": "ca",
-            "network_id": "195.250.62.68",
+            "network_id": "195.250.62.76",
             "container_id": "4d4dec8459deaa676b98bbec9dba623a4eeb37234a0c7b1f786e0a7347fe4336"
           }
         },

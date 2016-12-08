@@ -1,0 +1,46 @@
+@import "../../../../style/app.variables";
+
+.component {
+  .content {
+    border: 5px solid;
+    border-color: $color-blue-grey;
+  }
+
+  .footer {
+    background-color: $color-blue-grey;
+  }
+
+  /deep/ .panel-default {
+    position: relative;
+  }
+
+  .section-content, .section-head {
+    border-bottom: 5px solid $color-blue-grey;
+    background-color: white;
+  }
+
+  .section-content {
+    /deep/ .search {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      button {
+        background-color: $color-blue-grey;
+        border-color: $color-blue-grey;
+      }
+    }
+  }
+
+  .section-head, .section-content {
+    &.last {
+      border-bottom: none;
+    }
+  }
+
+  .panel-open {
+    .section-head {
+      border: none;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<div class="row" *ngFor="let paragraph of paragraphs;">
+  <div class="col-md-1 paragraph-number">
+    <strong>{{paragraph.paragraphNumber}}</strong>
+  </div>
+  <div class="col-md-11">
+    <p>{{paragraph.text}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 center-content">
+    <button class="edit-button btn btn-success btn-lg" (click)="editModal.show()">EDIT</button>
+  </div>
+</div>
+
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <edit-terms-paragraph-modal [modal]="editModal"></edit-terms-paragraph-modal>
+</div>
+

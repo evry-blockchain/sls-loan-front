@@ -1,21 +1,26 @@
 @import '../../../style/variables';
+
 $height: 42px;
 .search {
   padding-top: 34px;
   padding-right: 48px;
   float: right;
+
   input {
     height: $height;
-    text-align:center;
+    text-align: center;
   }
+
   button {
     height: $height;
     width: 40px;
     background-color: $dark-blue;
     border-color: $dark-blue;
     margin-left: 15px;
+    vertical-align: top;
+
     i {
-      position:relative;
+      position: relative;
       right: 200%;
       color: #d8d8d8;
       top: -6px; /* 50% - 3/4 of icon height */

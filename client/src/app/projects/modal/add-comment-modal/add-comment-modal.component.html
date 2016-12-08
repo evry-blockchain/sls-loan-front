@@ -1,0 +1,32 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="modal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">Add comment</h4>
+    </div>
+    <div class="modal-body">
+      <label for="paragraphNumber">Paragraph</label>
+      <div class="form-group">
+        <select type="text" class="form-control" id="paragraphNumber"
+                [(ngModel)]="selectedParagraph" >
+          <option value="null">Select paragraph</option>
+          <option *ngFor="let obj of paragraphs" [ngValue]="obj">{{obj.paragraphNumber}}</option>
+        </select>
+      </div>
+
+      <label for="paragraph-text">Edit</label>
+      <div class="form-group">
+          <textarea class="form-control" id="paragraph-text"
+                    rows="10"
+                    [(ngModel)]="commentText">
+          </textarea>
+      </div>
+
+    </div>
+    <div class="modal-footer center-content">
+      <button type="submit" class="btn edit-button">SAVE</button>
+    </div>
+  </div>
+</div>

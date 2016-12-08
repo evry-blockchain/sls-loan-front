@@ -30,8 +30,8 @@ var options = {
     // zip_url: 'https://gitlab.com/revichnr/SLS/repository/archive.zip?ref=master', //http/https of a link to download zip
     // unzip_dir: 'SLS-master-a2fbb6b24c41bbbc9c5d3c5e0fab62d0e26ea4e0',                                        //name/path to folder that contains the chaincode you want to deploy (path relative to unzipped root)
     // git_url: 'https://gitlab.com/revichnr/SLS/repository',             //git https URL. should point to the desired chaincode repo AND directory
-    zip_url: 'https://github.com/evry-blockchain/loan-blockchain/archive/master.zip', //http/https of a link to download zip
-    unzip_dir: 'loan-blockchain-master',                                        //name/path to folder that contains the chaincode you want to deploy (path relative to unzipped root)
+    zip_url: 'https://github.com/evry-blockchain/loan-blockchain/archive/e516b3f7d1a3bd8796e5e79f48d140176c5337e8.zip', //http/https of a link to download zip
+    unzip_dir: 'loan-blockchain-e516b3f7d1a3bd8796e5e79f48d140176c5337e8',                                        //name/path to folder that contains the chaincode you want to deploy (path relative to unzipped root)
     git_url: 'https://github.com/evry-blockchain/loan-blockchain',             //git https URL. should point to the desired chaincode repo AND directory
 
     deployed_name: config.chaincodeName

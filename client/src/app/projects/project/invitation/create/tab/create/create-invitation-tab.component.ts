@@ -43,10 +43,9 @@ export class CreateInvitationTabComponent implements OnInit {
     });
 
 
-
     this.projectsService.invitation$.take(1).subscribe((data) => {
 
-      if(Object.keys(data).length === 0) {
+      if (Object.keys(data).length === 0) {
         this.route.parent.parent.parent.params.subscribe(data => {
           let id = +data['id'];
           this.projectsService.getLoanInvitationByProjectId(id).subscribe(data => {
@@ -81,9 +80,13 @@ export class CreateInvitationTabComponent implements OnInit {
       convenants: ['']
     });
 
-    this.invitationForm.valueChanges.subscribe(data => {
-      this.projectsService.updateInvitation(data);
-    })
+    this.invitationForm.valueChanges.subscribe((data) => {
+      this.projectsService.invitation$.take(1).subscribe((invitation) => {
+        // let c = {...invitation, data}; TODO: when available
+        let c = Object.assign({}, invitation, data);
+        this.projectsService.updateInvitation(c);
+      });
+    });
   }
 
 }

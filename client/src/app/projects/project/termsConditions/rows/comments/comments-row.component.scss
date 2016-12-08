@@ -1,0 +1,52 @@
+@import 'app.variables';
+.comments {
+  margin-bottom: 50px;
+}
+.comment-container {
+  margin-left: 15px;
+  margin-bottom: 15px;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background: $color-light_navy;
+    left: -13px;
+    top: 5px;
+  }
+}
+
+.paragraph-number {
+  color: $color-light_navy;
+}
+
+.comment-date {
+  color: $color-warm-grey;
+}
+
+.comment-user-bank {
+  color: $color-greyish-brown;
+}
+
+.comment-text {
+  color: $color-greyish-brown;
+  font-size: 0.8rem;
+}
+
+.comment-header {
+  * {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.add-btn {
+  background: $color-bluey-grey;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.75rem 10rem;
+  border: none;
+}

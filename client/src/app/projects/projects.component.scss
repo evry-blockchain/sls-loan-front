@@ -9,9 +9,11 @@
   .my-settings {
     padding: 0;
     border: 0;
-    background: url(assets/projectSettings/drawable-mdpi/my_settings.png);
+    color: #fff;
     width: 30px;
     height: 30px;
+    cursor: pointer;
+    font-size: 16px;
   }
   .add-btn {
     padding: 0;
@@ -27,7 +29,7 @@
     .my-settings {
       padding: 0;
       border: 0;
-      background: url(assets/projectSettings/drawable-hdpi/my_settings.png);
+      //background: url(assets/projectSettings/drawable-hdpi/my_settings.png);
       width: 45px;
       height: 45px;
       //#607D8B

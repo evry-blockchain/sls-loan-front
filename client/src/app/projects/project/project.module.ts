@@ -10,6 +10,7 @@ import { PaymentsModule } from "./payments/payments.module";
 import { ChatModule } from "./chat/chat.module";
 import { ProjectOverviewModule } from "./overview/project-overview.module";
 import { InvitationModule } from "./invitation/invitation.module";
+import { TermsConditionsModule } from "./termsConditions/terms-conditions.module";
 import { ProjectNegotiationService } from "./service/project-negotiation.service";
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ProjectNegotiationService } from "./service/project-negotiation.service
     ChatModule,
     ProjectOverviewModule,
     InvitationModule,
+    TermsConditionsModule
   ],
   providers: [
     ProjectNegotiationService

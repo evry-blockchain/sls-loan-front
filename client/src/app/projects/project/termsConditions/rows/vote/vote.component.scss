@@ -1,0 +1,36 @@
+.tabs {
+  margin: 50px -30px -20px;
+
+  .tabs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    li {
+      flex: 1;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      background: #efeff0;
+
+      a {
+        color: #9b9b9b;
+      }
+
+      &.active {
+        background: #eb3c51;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.form-inline {
+  input {
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,46 @@
+<div class="row" [hidden]="selectedTab == 'status'">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-5">
+        <label for="paragraphNumber">Paragraph</label>
+        <div class="form-group">
+          <select type="text" class="form-control" id="paragraphNumber"
+                  [(ngModel)]="selectedParagraph">
+            <option value="null">Select paragraph</option>
+            <option *ngFor="let obj of paragraphs" [ngValue]="obj">{{obj.paragraphNumber}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 offset-1">
+        <label for="voteWithin">Vote within</label>
+        <div class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" id="voteWithin">
+            <input type="text" class="form-control" aria-labelledby="voteWithin">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <label for="voteProposal">Text</label>
+    <div class="form-group">
+      <textarea class="form-control" name="" id="voteProposal" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+</div>
+<div class="row" [hidden]="selectedTab == 'new'">
+
+</div>
+
+<div class="tabs">
+  <ul class="tabs-list">
+    <li [ngClass]="{'active': selectedTab == 'new'}">
+      <a href="" (click)="selectedTab = 'new'; $event.preventDefault()">New proposal</a>
+    </li>
+    <li [ngClass]="{'active': selectedTab == 'status'}">
+      <a href="" (click)="selectedTab = 'status'; $event.preventDefault()">Status</a>
+    </li>
+  </ul>
+</div>
+
