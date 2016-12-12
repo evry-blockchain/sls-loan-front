@@ -4,7 +4,7 @@
 
 
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, Params} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ProjectsService} from "../../../service/projects.service";
 
 @Component({
@@ -17,7 +17,6 @@ export class CreateInvitationComponent implements OnInit {
   project;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
               private projectService: ProjectsService) {
   }
 
@@ -26,7 +25,6 @@ export class CreateInvitationComponent implements OnInit {
     this.route.parent.parent.params.subscribe(data => {
       let id = +data['id'];
       this.projectService.get(id).take(1);
-
     });
   }
 }

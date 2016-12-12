@@ -17,8 +17,9 @@ export class SelectInviteesComponent implements OnInit {
   selectedInvitees;
 
   participants$;
+  partners = [];
 
-  public mo : any;
+  public mo: any;
 
 
   search = (text$: Observable<any>) => {
@@ -55,16 +56,42 @@ export class SelectInviteesComponent implements OnInit {
       .subscribe((invitees) => {
         this.selectedInvitees = invitees;
       });
-
     this.participants$ = this.participantService.participants$;
 
-    this.projectsService.invitation$.subscribe((data: any[]) => {
+    this.participantService.participants$
+      .mergeMap((data) => {
+        return Observable.from(<any[]> data)
+      })
+      .combineLatest(this.projectsService.selectedInvitees$)
+      .map(([participant, selectedInvitees]) => {
+        if (participant['participantKey'] && selectedInvitees.find(item => item['participantKey'] == participant['participantKey'])) {
+          participant['selected'] = true;
+        }
+        return participant;
+      })
+      .scan((acc, item) => {
+        let elem = acc.find(elem => {
+          return elem['participantKey'] === item['participantKey']
+        });
+
+        if (!!elem) {
+          return acc;
+        }
+        return <any[]>acc.concat(item);
+      }, [])
+      .subscribe((participants) => {
+        this.partners = participants;
+      });
+
+    this.route.parent.parent.params.subscribe(data => {
+      let id = +data['id'];
       let filter = {
         filter: {
-          loanInvitationID: data['loanInvitationID']
+          loanRequestID: id
         }
       };
-      if(Object.keys(data).length > 0) {
+
+      if (id) {
         this.projectNegotiationService.getSpecificNegotiation(filter).subscribe(data => {
           this.participants$.subscribe(participants => {
             participants.forEach(participant => {
@@ -78,6 +105,14 @@ export class SelectInviteesComponent implements OnInit {
           });
         });
       }
+    });
+
+    this.projectsService.project$.subscribe((data: any[]) => {
+      let filter = {
+        filter: {
+          loanRequestID: data['loanRequestID']
+        }
+      };
     })
 
   }

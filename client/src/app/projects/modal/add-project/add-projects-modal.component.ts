@@ -8,6 +8,7 @@ import { ProjectsService } from "../../service/projects.service";
 import { ParticipantService } from "../../../participants/service/participants.service";
 import { UserService } from "../../../user/user.service";
 import { Project } from "../../project/model/project.model";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'add-project-modal',
@@ -27,7 +28,8 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectsService,
               private participantService: ParticipantService,
-              private userService: UserService) {
+              private userService: UserService,
+              private datePipe: DatePipe) {
     userService.user$.subscribe(data => {
       this.user = data
     })
@@ -70,29 +72,29 @@ export class AddProjectModalComponent implements OnInit, OnDestroy {
     }
 
     if (this.isUpdateMode) {
-      var newProject = Object.assign({}, this.project, this.projectForm.getRawValue());
+      let newProject = Object.assign({}, this.project, this.projectForm.getRawValue());
       this.projectService.update(newProject).subscribe(() => {
         this.lgModal.hide();
       });
     } else {
       let newProject = this.projectForm.getRawValue();
       newProject['arrangerBankID'] = this.user['participantKey'];
+      newProject['requestDate'] = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
       this.projectService.create(<Project>newProject)
-        .mergeMap(() => {
-          return this.projectService.getProjectCount()
-        })
-        .mergeMap((id) => {
-          var loanInvitation = {
-            loanRequestID: +id['count'] + 1,
-            arrangerBankID: this.user['participantKey']
-          };
-          return this.projectService.saveLoanInvitation(loanInvitation);
-        })
+        // .mergeMap(() => {
+        //   return this.projectService.getProjectCount()
+        // })
+        // .mergeMap((id) => {
+        //   var loanInvitation = {
+        //     loanRequestID: +id['count'] + 1,
+        //     arrangerBankID: this.user['participantKey']
+        //   };
+        //   return this.projectService.saveLoanInvitation(loanInvitation);
+        // })
         .subscribe(() => {
-
-          this.projectService.queryInvitations().subscribe((data) => {
-            console.log(data);
-          })
+          // this.projectService.queryInvitations().subscribe((data) => {
+          //   console.log(data);
+          // })
         this.lgModal.hide();
       });
     }

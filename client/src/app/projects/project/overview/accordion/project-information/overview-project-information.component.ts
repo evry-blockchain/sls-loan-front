@@ -34,7 +34,6 @@ export class OverviewProjectInformationComponent implements OnInit {
         project['arranger'] = this.participantService.getParticipantName(project['arrangerBankID'], participants);
         return project;
       }).subscribe((project) => {
-        console.log('project', project);
       this.project = project;
     });
   }

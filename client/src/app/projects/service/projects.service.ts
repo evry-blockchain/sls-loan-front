@@ -148,6 +148,10 @@ export class ProjectsService {
     this.invitationSource.next(data);
   }
 
+  updateProject(data) {
+    this.projectSource.next(data);
+  }
+
   saveLoanInvitation(invitation) {
     return this.http.post(`${this.apiEndpoint}/LoanInvitations`, invitation);
   }

@@ -31,7 +31,7 @@ module.exports = LoanNegotiation => {
     if(loanNegotiation.loanNegotiationID) {
       user.cc.invoke.updateLoanNegotiation([
         loanNegotiation.loanNegotiationID,
-        loanNegotiation.loanInvitationID,
+        loanNegotiation.loanRequestID,
         loanNegotiation.participantBankID,
         loanNegotiation.amount,
         loanNegotiation.negotiationStatus,
@@ -42,7 +42,7 @@ module.exports = LoanNegotiation => {
       }, ['bankid']);
     } else {
       user.cc.invoke.addLoanNegotiation([
-        loanNegotiation.loanInvitationID,
+        loanNegotiation.loanRequestID,
         loanNegotiation.participantBankID,
         loanNegotiation.amount,
         loanNegotiation.negotiationStatus,
@@ -55,10 +55,9 @@ module.exports = LoanNegotiation => {
   };
 
   LoanNegotiation.update = (loanNegotiation, cb)=> {
-    console.log(loanNegotiation);
     user.cc.invoke.updateLoanNegotiation([
       loanNegotiation.loanNegotiationID,
-      loanNegotiation.loanInvitationID,
+      loanNegotiation.loanRequestID,
       loanNegotiation.participantBankID,
       loanNegotiation.amount,
       loanNegotiation.negotiationStatus,

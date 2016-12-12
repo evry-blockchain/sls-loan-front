@@ -19,7 +19,12 @@
     "contactPersonName": "string",
     "contactPersonSurname": "string",
     "requestDate": "string",
-    "status": "string"
+    "status": "string",
+    "marketAndIndustry": "string",
+    "loanTerm": "string",
+    "assets": "string",
+    "convenants": "string",
+    "interestRate": "string"
   },
   "validations": [],
   "relations": {},

@@ -1,0 +1,19 @@
+{
+  "name": "LoanTermProposal",
+  "plural": "LoanTermProposals",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "loanTermProposalID": { "type": "string", "id": "true" },
+    "loanTermID": "string",
+    "loanTermProposalText": "string",
+    "loanTermProposalExpTime": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

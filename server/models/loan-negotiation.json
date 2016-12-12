@@ -8,7 +8,7 @@
   },
   "properties": {
     "loanNegotiationID": { "type": "string", "id": "true" },
-    "loanInvitationID": "string",
+    "loanRequestID": "string",
     "participantBankID": "string",
     "amount": "string",
     "negotiationStatus": "string",

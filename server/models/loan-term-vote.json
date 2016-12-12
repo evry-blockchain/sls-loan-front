@@ -1,0 +1,19 @@
+{
+  "name": "LoanTermVote",
+  "plural": "LoanTermVotes",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "loanTermVoteID": { "type": "string", "id": "true" },
+    "loanTermProposalID": "string",
+    "bankID": "string",
+    "loanTermVoteStatus": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

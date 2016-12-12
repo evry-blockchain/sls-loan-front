@@ -21,8 +21,7 @@ export class CreateInvitationTabComponent implements OnInit {
 
   invitationForm: FormGroup;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private projectsService: ProjectsService,
               private participantService: ParticipantService,
               private builder: FormBuilder) {
@@ -43,13 +42,12 @@ export class CreateInvitationTabComponent implements OnInit {
     });
 
 
-    this.projectsService.invitation$.take(1).subscribe((data) => {
-
+    this.projectsService.project$.take(1).subscribe((data) => {
       if (Object.keys(data).length === 0) {
         this.route.parent.parent.parent.params.subscribe(data => {
           let id = +data['id'];
-          this.projectsService.getLoanInvitationByProjectId(id).subscribe(data => {
-            var x = data.shift();
+          this.projectsService.get(id).subscribe(data => {
+            let x = data.shift();
             this.invitationForm.patchValue(x);
           });
         });
@@ -67,10 +65,9 @@ export class CreateInvitationTabComponent implements OnInit {
 
   private createForm() {
     this.invitationForm = this.builder.group({
-      loanInvitationID: [''],
+      loanRequestID: [''],
       arrangerBankID: [''],
       borrowerID: [''],
-      loanRequestID: [''],
       loanTerm: [''],
       amount: [''],
       interestRate: [''],
@@ -81,10 +78,10 @@ export class CreateInvitationTabComponent implements OnInit {
     });
 
     this.invitationForm.valueChanges.subscribe((data) => {
-      this.projectsService.invitation$.take(1).subscribe((invitation) => {
-        // let c = {...invitation, data}; TODO: when available
-        let c = Object.assign({}, invitation, data);
-        this.projectsService.updateInvitation(c);
+      this.projectsService.project$.take(1).subscribe((project) => {
+        // let c = {...project, data}; TODO: when available
+        let c = Object.assign({}, project, data);
+        this.projectsService.updateProject(c);
       });
     });
   }

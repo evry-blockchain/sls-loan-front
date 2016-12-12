@@ -48,7 +48,11 @@ module.exports = LoanRequest => {
       loanRequest.contactPersonSurname,
       loanRequest.requestDate,
       loanRequest.status = 'Draft',
-      loanRequest.marketAndIndustry
+      loanRequest.marketAndIndustry,
+      loanRequest.loanTerm,
+      loanRequest.assets,
+      loanRequest.convenants,
+      loanRequest.interestRate
     ], user.username, (err, data) => {
       cb(err, data);
     }, ['bankid']);
@@ -69,7 +73,11 @@ module.exports = LoanRequest => {
       loanRequest.contactPersonSurname,
       loanRequest.requestDate,
       loanRequest.status,
-      loanRequest.marketAndIndustry
+      loanRequest.marketAndIndustry,
+      loanRequest.loanTerm,
+      loanRequest.assets,
+      loanRequest.convenants,
+      loanRequest.interestRate
     ], user.username, (err, data) => {
       cb(err, data);
     }, ['bankid']);

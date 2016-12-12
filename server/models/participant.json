@@ -7,7 +7,7 @@
     "validateUpsert": false
   },
   "properties": {
-    "participantKey": { "type": "string",  "id": "true" },
+    "participantID": { "type": "string",  "id": "true" },
     "participantName": { "type": "string" },
     "participantType": { "type": "string" }
   },

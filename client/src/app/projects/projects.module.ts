@@ -16,6 +16,7 @@ import {AddUserSettingsModalComponent} from "./modal/add-user-settings/add-user-
 import {ProjectModule} from "./project/project.module";
 import {SelectModule} from "angular2-select";
 import {ProjectsSharedModule} from "./shared/project-shared.module";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   imports: [projectsRouting, SharedModule, ReactiveFormsModule, ModalModule, ProjectModule, SelectModule, ProjectsSharedModule],
@@ -24,7 +25,7 @@ import {ProjectsSharedModule} from "./shared/project-shared.module";
     ProjectsTableRowComponent,
     AddUserSettingsModalComponent
   ],
-  providers: [ProjectsService]
+  providers: [ProjectsService, DatePipe]
 })
 export class ProjectsModule {
 }

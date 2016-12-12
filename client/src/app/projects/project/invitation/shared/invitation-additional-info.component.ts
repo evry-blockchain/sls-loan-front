@@ -12,7 +12,7 @@ import { Input } from '@angular/core';
   styleUrls: ['./shared.component.scss']
 })
 export class InvitationAdditionalInformationComponent implements OnInit {
-  @Input() invitation;
+  @Input() project;
 
   @Input() useClass;
 

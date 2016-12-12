@@ -28,5 +28,4 @@ const routes: Routes = [{
   ]
 }];
 
-// export const projectRouting = RouterModule.forChild(routes);
 export const projectRouting = RouterModule.forChild(routes);

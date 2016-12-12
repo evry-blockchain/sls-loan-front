@@ -28,16 +28,17 @@ export class ProjectOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.route.parent.params.subscribe(data => {
-      var id = +data['id'];
+      let id = +data['id'];
       this.isBankOwner = this.projectService.get(id).combineLatest(this.userService.user$)
         .map(([project, user]) => {
           return project['arrangerBankID'] === user['participantKey'];
-        })
+        });
     });
 
-    this.hasResponded = this.projectService.project$
+    this.hasResponded = this.projectService.project$.take(1)
       .combineLatest(this.userService.user$)
       .flatMap(([project, user]) => {
+      console.log(project);
         return this.projectNegotiationService.getNegotiationForProjectAndBank(user['participantKey'], project['loanRequestID']);
       })
       .combineLatest(this.isBankOwner).subscribe(([data, owner]) => {

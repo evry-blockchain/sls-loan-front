@@ -1,0 +1,20 @@
+{
+  "name": "LoanTermComment",
+  "plural": "LoanTermComments",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "loanTermCommentID": { "type": "string", "id": "true" },
+    "loanTermID": "string",
+    "userID": "string",
+    "bankID": "string",
+    "commentText": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -17,4 +17,9 @@ export class Project {
   contactPersonSurname: string;
   requestDate: string;
   status: string;
+  marketAndIndustry: string;
+  loanTerm: string;
+  assets: string;
+  convenants: string;
+  interestRate: string;
 }

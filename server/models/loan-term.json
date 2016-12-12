@@ -1,0 +1,20 @@
+{
+  "name": "LoanTerm",
+  "plural": "LoanTerms",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "loanTermID": { "type": "string", "id": "true" },
+    "loanRequestID": "string",
+    "paragraphNumber": "string",
+    "text": "string",
+    "loanTermStatus": "string"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

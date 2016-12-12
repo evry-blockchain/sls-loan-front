@@ -18,24 +18,9 @@
     </div>
   </div>
 
-
-    <div *ngFor="let partner of (participants$ | async)">
+    <div *ngFor="let partner of (partners)">
       <select-invitees-partner (selectInvitee)="addSelectedInvitee($event)" (unselectInvitee)="removeSelectedInvitee($event)" [partner]="partner"></select-invitees-partner>
     </div>
-
-
-    <!--<ul>-->
-    <!---->
-        <!--<li *ngFor="let partner of partners" class="col-md-12" style="background-color: white">-->
-            <!--{{partner}}-->
-        <!--</li>-->
-    <!--</ul>-->
-
-    <!--<div class="col-md-6 offset-md-3">-->
-        <!--<div class="invitation-review-holder">-->
-            <!--<button class="btn btn-default btn-lg">Review</button>-->
-        <!--</div>-->
-    <!--</div>-->
 </div>
 
 

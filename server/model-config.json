@@ -53,5 +53,25 @@
   "Util": {
     "dataSource": null,
     "public": true
+  },
+  "LoanTerm": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanTermComment": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanTermProposal": {
+    "dataSource": null,
+    "public": true
+  },
+  "LoanTermVote": {
+    "dataSource": null,
+    "public": true
+  },
+  "ParticipantUser": {
+    "dataSource": null,
+    "public": true
   }
 }

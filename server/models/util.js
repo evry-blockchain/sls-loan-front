@@ -22,77 +22,48 @@ module.exports = Util => {
   };
 
   Util.getNegotiationByBankAndProject = (bankId, projectId, cb) => {
-    var requests, negotiations, invitations;
-
-      user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
-        negotiations = JSON.parse(data);
-
-        user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
-          invitations = JSON.parse(data);
-
-          var requestInvitations = invitations.filter(item => item.LoanRequestID == projectId);
-          requestInvitations.forEach(invitation => {
-            invitation.negotiations = negotiations.filter(negotiation => {
-              return negotiation.LoanInvitationID == invitation.LoanInvitationID && negotiation.ParticipantBankID == bankId
-            });
-          });
-
-          cb(null, prepareSingleData(JSON.stringify([requestInvitations[0] && requestInvitations[0].negotiations ? requestInvitations[0].negotiations[0]: {}])));
-
-        }, ['bankid']);
-      }, ['bankid']);
-  };
-
-  Util.getNegotiationsByProject = (projectId, cb) => {
-    var negotiations, invitations;
+    let negotiations;
 
     user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
       negotiations = JSON.parse(data);
 
-      user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
-        invitations = JSON.parse(data);
+      negotiations = negotiations.filter(negotiation => {
+        return negotiation.LoanRequestID == projectId && negotiation.ParticipantBankID == bankId
+      });
 
-        var requestInvitations = invitations.filter(item => item.LoanRequestID == projectId);
-        requestInvitations.forEach(invitation => {
-          invitation.negotiations = negotiations.filter(negotiation => {
-            return negotiation.LoanInvitationID == invitation.LoanInvitationID;
-          });
-        });
-
-        cb(null, prepareListData(JSON.stringify(requestInvitations[0] && requestInvitations[0].negotiations ? requestInvitations[0].negotiations: [])));
-
-      }, ['bankid']);
+      cb(null, prepareSingleData(JSON.stringify([negotiations[0] ? negotiations[0] : {}])));
     }, ['bankid']);
-  } ;
+  };
+
+  Util.getNegotiationsByProject = (projectId, cb) => {
+    let negotiations;
+
+    user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
+      negotiations = JSON.parse(data);
+
+      negotiations = negotiations.filter(negotiation => negotiation.LoanRequestID == projectId);
+
+      cb(null, prepareListData(JSON.stringify(negotiations)));
+    }, ['bankid']);
+  };
 
   Util.getProjectsForBank = (id, cb) => {
-    var requests, negotiations, invitations;
-    var result = [];
+    let requests, negotiations;
+    let result = [];
     user.cc.query.getLoanRequestsList([], user.username, (err, data) => {
       requests = JSON.parse(data);
 
       user.cc.query.getLoanNegotiationsList([], user.username, (err, data) => {
         negotiations = JSON.parse(data);
 
-        user.cc.query.getLoanInvitationsList([], user.username, (err, data) => {
-          invitations = JSON.parse(data);
-
-          var bankNegotiations = negotiations.filter(item => {
+        let bankNegotiations = negotiations.filter(item => {
             return item.ParticipantBankID == id;
           });
 
-          var bankInvitations = [];
-
-          bankNegotiations.forEach(item => {
-            bankInvitations.push(invitations.filter(invitation => {
-              return invitation.LoanInvitationID == item.LoanInvitationID;
-            })[0]);
-          });
-
           //where invited
-          bankInvitations.forEach(item => {
+          bankNegotiations.forEach(item => {
             requests.forEach(request => {
-              if(request.LoanRequestID == item.LoanRequestID && result.indexOf(request) == -1) {
+              if (request.LoanRequestID == item.LoanRequestID && result.indexOf(request) == -1) {
                 result.push(request);
               }
             });
@@ -100,15 +71,15 @@ module.exports = Util => {
 
           //where arranger
           requests.forEach(item => {
-            if(item.ArrangerBankID == id && result.indexOf(item) == -1) {
+            if (item.ArrangerBankID == id && result.indexOf(item) == -1) {
               result.push(item);
             }
           });
 
-          var cbData = prepareListData(JSON.stringify(result));
+          let cbData = prepareListData(JSON.stringify(result));
+          console.log(cbData);
           cb(null, cbData);
 
-        }, ['bankid']);
       }, ['bankid']);
     }, ['bankid']);
 
