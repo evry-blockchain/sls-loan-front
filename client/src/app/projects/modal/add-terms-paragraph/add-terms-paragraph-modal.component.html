@@ -1,0 +1,32 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="modal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">Add Terms & Conditions paragraph</h4>
+    </div>
+    <form [formGroup]="addParagraphForm" (ngSubmit)="save()">
+      <div class="modal-body">
+        <label for="paragraphNumber">Paragraph number</label>
+        <div class="form-group">
+          <input type="text" class="form-control" id="paragraphNumber"
+                 formControlName="paragraphNumber">
+        </div>
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || addParagraphForm.controls.paragraphNumber.touched) && !!addParagraphForm.controls.paragraphNumber.errors">Paragraph number is required</div>
+        <label for="paragraph-text">Text</label>
+        <div class="form-group">
+          <textarea class="form-control" id="paragraph-text"
+                    rows="10"
+                    formControlName="loanTermText">
+          </textarea>
+        </div>
+        <div class="form-control-feedback error-message" *ngIf="(isFormSubmitted || addParagraphForm.controls.loanTermText.touched) && !!addParagraphForm.controls.loanTermText.errors">Paragraph text is required</div>
+      </div>
+      <div class="modal-footer center-content">
+        <button type="submit" class="btn edit-button">SAVE</button>
+      </div>
+    </form>
+  </div>
+
+</div>

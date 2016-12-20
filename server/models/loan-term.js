@@ -16,13 +16,13 @@ module.exports = LoanTerm => {
   });
 
   LoanTerm.getList = (filter, cb) => {
-    user.cc.query.getLoanTermsList([], user.username, (err, data) => {
+    user.cc.query.getLoanTermList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
     }, ['bankid']);
   };
 
   LoanTerm.count = cb => {
-    user.cc.query.getLoanTermsQuantity([], user.username, (err, data) => {
+    user.cc.query.getLoanTermQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
     }, ['bankid']);
   };
@@ -33,7 +33,7 @@ module.exports = LoanTerm => {
         loanTerm.loanTermID,
         loanTerm.loanRequestID,
         loanTerm.paragraphNumber,
-        loanTerm.text,
+        loanTerm.loanTermText,
         loanTerm.loanTermStatus
       ], user.username, (err, data) => {
         cb(err, data);
@@ -42,7 +42,7 @@ module.exports = LoanTerm => {
       user.cc.invoke.addLoanTerm([
         loanTerm.loanRequestID,
         loanTerm.paragraphNumber,
-        loanTerm.text,
+        loanTerm.loanTermText,
         loanTerm.loanTermStatus
       ], user.username, (err, data) => {
         cb(err, data);
@@ -55,7 +55,7 @@ module.exports = LoanTerm => {
       loanTerm.loanTermID,
       loanTerm.loanRequestID,
       loanTerm.paragraphNumber,
-      loanTerm.text,
+      loanTerm.loanTermText,
       loanTerm.loanTermStatus
     ], user.username, (err, data) => {
       cb(err, data);
@@ -83,6 +83,14 @@ module.exports = LoanTerm => {
     http: {
       path: '/',
       verb: 'post'
+    },
+    accepts: {arg: 'data', type: 'LoanTerm', http: {source: 'body'}},
+    returns: {type: 'object', root: true}
+  });
+  LoanTerm.remoteMethod('update', {
+    http: {
+      path: '/',
+      verb: 'put'
     },
     accepts: {arg: 'data', type: 'LoanTerm', http: {source: 'body'}},
     returns: {type: 'object', root: true}

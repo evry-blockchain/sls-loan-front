@@ -3,16 +3,16 @@
  */
 
 
-import { Component, OnInit } from '@angular/core';
-import { ProjectsService } from "../../../service/projects.service";
-import { UserService } from "../../../../user/user.service";
-import { ActivatedRoute, Router, Params } from "@angular/router";
-import { ProjectNegotiationService } from "../../service/project-negotiation.service";
+import {Component, OnInit} from '@angular/core';
+import {ProjectsService} from "../../../service/projects.service";
+import {UserService} from "../../../../user/user.service";
+import {ActivatedRoute, Router, Params} from "@angular/router";
+import {ProjectNegotiationService} from "../../service/project-negotiation.service";
 
 @Component({
   selector: 'participant-invitation',
   templateUrl: './participant-invitation.component.html',
-  styleUrls: [ './participant-invitation.component.scss' ],
+  styleUrls: ['./participant-invitation.component.scss'],
   host: {
     'style': 'background-color: red'
   }
@@ -22,11 +22,13 @@ export class ParticipantInvitationComponent implements OnInit {
   project = {};
   invitation = {};
   negotiation = {};
+
   constructor(private projectsService: ProjectsService,
               private route: ActivatedRoute,
               private negotiationService: ProjectNegotiationService,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.route.parent.parent.params.subscribe(data => {
@@ -36,14 +38,11 @@ export class ParticipantInvitationComponent implements OnInit {
         this.project = project
       });
 
-      this.projectsService.getLoanInvitationByProjectId(id).subscribe(invitations => {
-        this.invitation = invitations.shift();
 
-        this.userService.user$.subscribe(data => {
-          this.negotiationService.getNegotiationForProjectAndBank(data['participantKey'], id).subscribe((data: any[]) => {
-            this.negotiation = data;
-          });
-        })
+      this.userService.user$.subscribe(data => {
+        this.negotiationService.getNegotiationForProjectAndBank(data['participantKey'], id).subscribe((data: any[]) => {
+          this.negotiation = data;
+        });
       });
 
     });

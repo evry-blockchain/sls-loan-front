@@ -29,7 +29,7 @@ export class ProjectOverviewComponent implements OnInit {
   ngOnInit() {
     this.route.parent.params.subscribe(data => {
       let id = +data['id'];
-      this.isBankOwner = this.projectService.get(id).combineLatest(this.userService.user$)
+      this.isBankOwner = this.projectService.project$.combineLatest(this.userService.user$)
         .map(([project, user]) => {
           return project['arrangerBankID'] === user['participantKey'];
         });
@@ -37,8 +37,7 @@ export class ProjectOverviewComponent implements OnInit {
 
     this.hasResponded = this.projectService.project$.take(1)
       .combineLatest(this.userService.user$)
-      .flatMap(([project, user]) => {
-      console.log(project);
+      .mergeMap(([project, user]) => {
         return this.projectNegotiationService.getNegotiationForProjectAndBank(user['participantKey'], project['loanRequestID']);
       })
       .combineLatest(this.isBankOwner).subscribe(([data, owner]) => {

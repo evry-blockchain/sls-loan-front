@@ -15,6 +15,8 @@ import {SharedModule} from "../../../shared/shared.module";
 import {EditTermsParagraphModalComponent} from "../../modal/edit-terms-paragraph/edit-terms-paragraph-modal.component";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {AddCommentModalComponent} from "../../modal/add-comment-modal/add-comment-modal.component";
+import {TermsConditionsService} from "../../service/terms-conditions.service";
+import {AddTermsParagraphModalComponent} from "../../modal/add-terms-paragraph/add-terms-paragraph-modal.component";
 
 @NgModule({
   imports: [
@@ -33,8 +35,10 @@ import {AddCommentModalComponent} from "../../modal/add-comment-modal/add-commen
     CommentsRowComponent,
     TermsConditionsRowComponent,
     EditTermsParagraphModalComponent,
-    AddCommentModalComponent
+    AddCommentModalComponent,
+    AddTermsParagraphModalComponent
   ],
+  providers: [TermsConditionsService]
 })
 export class TermsConditionsModule {
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {TermsConditionsService} from "../../../../service/terms-conditions.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'comments-row',
@@ -6,29 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['comments-row.component.scss']
 })
 export class CommentsRowComponent implements OnInit {
-  constructor() { }
-  private comments: Array<Object>;
+  @Input() paragraphs;
+
+  constructor(private termsService: TermsConditionsService) { }
+  private comments: Observable<any>;
   private timeLeft:string;
+
   ngOnInit() {
+
+    this.comments = this.termsService.commentsForCurrentProject$;
     this.timeLeft = '01:04:30';
-
-    this.comments = [
-      {
-        paragraphNumber: 1,
-        userName: 'Eric Andersson',
-        bankName: 'INC Bank',
-        date: '07.10.16',
-        text: 'The changes to the addendum 4.6 in Convenants might be an issue for us.'
-      },
-      {
-        paragraphNumber: 2,
-        userName: 'Eric Andersson',
-        bankName: 'INC Bank',
-        date: '07.10.16',
-        text: 'Hi, we are very much interested, but we would like to ask more about the the project’s supporters and financial partners.'
-      }
-    ];
-
   }
 
   addComment() {

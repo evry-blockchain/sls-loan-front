@@ -1,18 +1,28 @@
-<div class="row" *ngFor="let paragraph of paragraphs;">
+<div class="row" *ngFor="let paragraph of paragraphs | async;">
   <div class="col-md-1 paragraph-number">
     <strong>{{paragraph.paragraphNumber}}</strong>
   </div>
   <div class="col-md-11">
-    <p>{{paragraph.text}}</p>
+    <p>{{paragraph.loanTermText}}</p>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="(paragraphs.length | async) == 0">
   <div class="col-md-12 center-content">
-    <button class="edit-button btn btn-success btn-lg" (click)="editModal.show()">EDIT</button>
+    <p>No terms paragraphs added yet.</p>
+  </div>
+</div>
+<div class="row" *ngIf="isProjectOwner | async">
+  <div class="col-md-12 center-content">
+    <button class="edit-button btn btn-success btn-lg" *ngIf="(paragraphs.length | async) != 0" (click)="editModal.show()">EDIT</button>
+    <button class="edit-button btn btn-success btn-lg" (click)="addModal.show()">ADD PARAGRAPH</button>
   </div>
 </div>
 
 <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <edit-terms-paragraph-modal [modal]="editModal"></edit-terms-paragraph-modal>
+  <edit-terms-paragraph-modal [modal]="editModal" [paragraphs]="paragraphs | async"></edit-terms-paragraph-modal>
+</div>
+
+<div bsModal #addModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <add-terms-paragraph-modal [modal]="addModal"></add-terms-paragraph-modal>
 </div>
 

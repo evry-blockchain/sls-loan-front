@@ -6,21 +6,24 @@
       </button>
       <h4 class="modal-title">Add comment</h4>
     </div>
+    <form [formGroup]="addCommentForm" (ngSubmit)="save()">
     <div class="modal-body">
-      <label for="paragraphNumber">Paragraph</label>
+      <label for="loanTermID">Paragraph</label>
       <div class="form-group">
-        <select type="text" class="form-control" id="paragraphNumber"
-                [(ngModel)]="selectedParagraph" >
+        <select type="text" class="form-control"
+                id="loanTermID"
+                formControlName="loanTermID">
           <option value="null">Select paragraph</option>
-          <option *ngFor="let obj of paragraphs" [ngValue]="obj">{{obj.paragraphNumber}}</option>
+          <option *ngFor="let paragraph of paragraphs | async" [ngValue]="paragraph.loanTermID">{{paragraph.paragraphNumber}}</option>
         </select>
       </div>
 
-      <label for="paragraph-text">Edit</label>
+      <label for="commentText">Comment text</label>
       <div class="form-group">
-          <textarea class="form-control" id="paragraph-text"
+          <textarea class="form-control"
                     rows="10"
-                    [(ngModel)]="commentText">
+                    id="commentText"
+                    formControlName="commentText">
           </textarea>
       </div>
 
@@ -28,5 +31,6 @@
     <div class="modal-footer center-content">
       <button type="submit" class="btn edit-button">SAVE</button>
     </div>
+    </form>
   </div>
 </div>

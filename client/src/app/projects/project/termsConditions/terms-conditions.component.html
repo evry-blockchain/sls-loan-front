@@ -2,13 +2,13 @@
   <terms-conditions-header></terms-conditions-header>
   <section class="content">
     <accordion [closeOthers]="true">
-      <accordion-group #groupTerms >
+      <accordion-group #groupTerms [isOpen]="true">
         <div accordion-heading class="terms-conditions-with-search">
           <h4 class="section-head">Terms & conditions</h4>
         </div>
         <div class="section-content">
           <my-search [hidden]="!groupTerms.isOpen"></my-search>
-          <terms-conditions-row></terms-conditions-row>
+          <terms-conditions-row [paragraphs]="paragraphs"></terms-conditions-row>
         </div>
       </accordion-group>
       <accordion-group #groupComments>
@@ -17,10 +17,10 @@
         </div>
         <div class="section-content">
           <my-search [hidden]="!groupComments.isOpen"></my-search>
-          <comments-row></comments-row>
+          <comments-row [paragraphs]="paragraphs"></comments-row>
         </div>
       </accordion-group>
-      <accordion-group #groupVote [isOpen]="true">
+      <accordion-group #groupVote>
         <div accordion-heading>
           <h4 class="section-head with-subhead last">Vote</h4>
           <h6 class="section-subhead">Propose changes to the Terms & Conditions</h6>

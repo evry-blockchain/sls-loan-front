@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from "../../../service/projects.service";
 import { ParticipantService } from "../../../../participants/service/participants.service";
@@ -11,7 +9,7 @@ import { ParticipantService } from "../../../../participants/service/participant
 })
 export class OverviewParticipantProjectInformationComponent implements OnInit {
 
-  public project;
+  public project = {};
   public pieChartLabels:string[] = ["My shares", 'Other Shares'];
   public pieChartData:number[] = [180, 370];
   public pieChartType:string = 'pie';
@@ -25,7 +23,6 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
               private participantService: ParticipantService) { }
 
   ngOnInit() {
-
     this.projectService.project$
       .combineLatest(this.participantService.participants$)
       .map(([project, participants]) => {

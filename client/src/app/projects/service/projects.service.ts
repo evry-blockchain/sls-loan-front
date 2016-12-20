@@ -11,12 +11,10 @@ import {ProjectNegotiationService} from '../project/service/project-negotiation.
 
 @Injectable()
 export class ProjectsService {
-
-
   private projectsSource;
   private addProjectSource = new Subject();
   private requestMapping: string;
-  private projectSource = new BehaviorSubject([]);
+  private projectSource = new BehaviorSubject({});
   private invitationSource = new BehaviorSubject({});
   private selectedInviteeSource = new BehaviorSubject([]);
   private deleteInviteeSource = new Subject();
@@ -35,7 +33,7 @@ export class ProjectsService {
     } else {
       return acc.concat(v);
     }
-  }, []).publishReplay(1);
+    }, []).publishReplay(1);
 
 
   constructor(private http: ApiGateway,
@@ -132,12 +130,10 @@ export class ProjectsService {
   }
 
   update(data) {
-    var obs = this.http.put(`${this.requestMapping}`, data)
+    return this.http.put(`${this.requestMapping}`, data)
       .do(() => {
         this.projectSource.next(data);
       });
-
-    return obs
   }
 
   public getProjectCount() {

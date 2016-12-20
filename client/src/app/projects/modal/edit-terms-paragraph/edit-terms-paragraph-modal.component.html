@@ -21,13 +21,12 @@
         <div class="form-group">
           <textarea class="form-control" id="paragraph-text"
                     rows="10"
-                    [(ngModel)]="selectedParagraph.text">
+                    [(ngModel)]="selectedParagraph.loanTermText">
           </textarea>
         </div>
-
       </div>
       <div class="modal-footer center-content">
-        <button type="submit" class="btn edit-button">SAVE</button>
+        <button type="submit" class="btn edit-button" (click)="save()">SAVE</button>
       </div>
   </div>
 </div>

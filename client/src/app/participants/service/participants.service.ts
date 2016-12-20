@@ -66,8 +66,8 @@ export class ParticipantService {
   query(): Observable<any> {
     var query = this.http.get(this.requestMapping).share();
 
-    query.subscribe((projects) => {
-      this.participantsSource.next(projects);
+    query.subscribe((participants) => {
+      this.participantsSource.next(participants);
     });
 
     return query;

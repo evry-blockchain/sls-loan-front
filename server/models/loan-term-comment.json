@@ -9,6 +9,7 @@
   "properties": {
     "loanTermCommentID": { "type": "string", "id": "true" },
     "loanTermID": "string",
+    "loanTermParentID": "string",
     "userID": "string",
     "bankID": "string",
     "commentText": "string"

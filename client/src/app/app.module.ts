@@ -27,6 +27,7 @@ import { WaitingSpinnerService } from "./utils/waitingSpinner/waitingSpinnerServ
 import { ParticipantService } from "./participants/service/participants.service";
 import { UserService } from "./user/user.service";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {UtilsService} from "./projects/service/utils.service";
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
       WaitingSpinnerService,
       ParticipantService,
       UserService,
+      UtilsService,
       { provide: 'ApiEndpoint', useValue: '/api'},
     ],
     bootstrap: [AppComponent]

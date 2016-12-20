@@ -10,7 +10,7 @@
     "loanTermID": { "type": "string", "id": "true" },
     "loanRequestID": "string",
     "paragraphNumber": "string",
-    "text": "string",
+    "loanTermText": "string",
     "loanTermStatus": "string"
   },
   "validations": [],

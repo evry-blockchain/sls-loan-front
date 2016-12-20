@@ -1,12 +1,18 @@
 <div class="comments">
-  <div class="row comment-container" *ngFor="let comment of comments;">
+  <div class="row comment-container" *ngFor="let comment of comments | async;">
     <div class="col-md-12 comment-header">
       <strong class="paragraph-number">PARAGRAPH {{comment.paragraphNumber}}</strong>
       <span class="comment-user-bank">{{comment.userName}} - {{comment.bankName}}</span> <span class="comment-date"> {{comment.date}}</span>
     </div>
     <div class="col-md-12"><span class="comment-text">{{comment.text}}</span></div>
   </div>
+  <div class="row" *ngIf="!(comments.length | async)">
+    <div class="col-md-12 center-content">
+      No comments yet added to any paragraphs.
+    </div>
+  </div>
 </div>
+
 <div class="row">
   <div class="col-md-12 center-content">
     <button class="btn btn-lg add-btn" (click)="commentModal.show()">
@@ -16,5 +22,5 @@
 </div>
 
 <div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <add-comment-modal [modal]="commentModal"></add-comment-modal>
+  <add-comment-modal [modal]="commentModal" [paragraphs]="paragraphs"></add-comment-modal>
 </div>

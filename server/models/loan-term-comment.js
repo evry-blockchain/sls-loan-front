@@ -16,7 +16,7 @@ module.exports = LoanTermComment => {
   });
 
   LoanTermComment.getList = (filter, cb) => {
-    user.cc.query.getLoanTermCommentsList([], user.username, (err, data) => {
+    user.cc.query.getLoanTermCommentList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
     }, ['bankid']);
   };
@@ -31,6 +31,7 @@ module.exports = LoanTermComment => {
     if (loanTermComment.loanTermCommentID) {
       user.cc.invoke.updateLoanTermComment([
         loanTermComment.loanTermCommentID,
+        loanTermComment.loanTermParentID,
         loanTermComment.loanTermID,
         loanTermComment.userID,
         loanTermComment.bankID,
@@ -40,6 +41,7 @@ module.exports = LoanTermComment => {
       }, ['bankid']);
     } else {
       user.cc.invoke.addLoanTermComment([
+        loanTermComment.loanTermParentID,
         loanTermComment.loanTermID,
         loanTermComment.userID,
         loanTermComment.bankID,
@@ -53,6 +55,7 @@ module.exports = LoanTermComment => {
   LoanTermComment.update = (loanShare, cb) => {
     user.cc.invoke.updateLoanTermComment([
       loanTermComment.loanTermCommentID,
+      loanTermComment.loanTermParentID,
       loanTermComment.loanTermID,
       loanTermComment.userID,
       loanTermComment.bankID,
@@ -60,6 +63,23 @@ module.exports = LoanTermComment => {
     ], user.username, (err, data) => {
       cb(err, data);
     }, ['bankid']);
+  };
+
+  LoanTermComment.commentsByProject = (projectID, cb) => {
+    user.cc.query.getLoanTermList([], user.username, (err, terms) => {
+      const projectTermIDs = JSON.parse(terms).filter(item => item.LoanRequestID == projectID).map(item => item.LoanTermID);
+      user.cc.query.getLoanTermCommentList([], user.username, (err, comments) => {
+        let commentsParsed;
+
+        try {
+          commentsParsed = JSON.parse(comments);
+        } catch(e) {
+          commentsParsed = [];
+        }
+        cb(err, prepareListData(JSON.stringify(commentsParsed.filter(item => projectTermIDs.indexOf(item.LoanTermID) !== -1))));
+      }, ['bankid']);
+    }, ['bankid']);
+
   };
 
   LoanTermComment.remoteMethod('getList', {
@@ -86,5 +106,14 @@ module.exports = LoanTermComment => {
     },
     accepts: {arg: 'data', type: 'LoanTermComment', http: {source: 'body'}},
     returns: {type: 'object', root: true}
+  });
+
+  LoanTermComment.remoteMethod('commentsByProject', {
+    http: {
+      path: '/commentsByProject/:projectID',
+      verb: 'get'
+    },
+    accepts: {arg: 'projectID', type: 'string', required: true},
+    returns: {type: 'LoanTermComment', root: true}
   });
 };
