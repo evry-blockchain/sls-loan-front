@@ -1,12 +1,16 @@
 <div class="comments">
   <div class="row comment-container" *ngFor="let comment of comments | async;">
     <div class="col-md-12 comment-header">
-      <strong class="paragraph-number">PARAGRAPH {{comment.paragraphNumber}}</strong>
-      <span class="comment-user-bank">{{comment.userName}} - {{comment.bankName}}</span> <span class="comment-date"> {{comment.date}}</span>
+      <strong class="paragraph-number">PARAGRAPH {{comment.paragraph.paragraphNumber}}</strong>
+      <span class="comment-user-bank">{{comment.participant.participantName}}</span> <span class="comment-date"> {{comment.loanTermCommentDate | date: 'medium'}}</span>
     </div>
-    <div class="col-md-12"><span class="comment-text">{{comment.text}}</span></div>
+    <div class="col-md-12"><span class="comment-text">{{comment.commentText}}</span></div>
+
+    <div class="child-comments" *ngIf="(comment.comments | async)">
+
+    </div>
   </div>
-  <div class="row" *ngIf="!(comments.length | async)">
+  <div class="row" *ngIf="!(comments | async)">
     <div class="col-md-12 center-content">
       No comments yet added to any paragraphs.
     </div>

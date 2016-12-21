@@ -6,14 +6,14 @@
     <p>{{paragraph.loanTermText}}</p>
   </div>
 </div>
-<div class="row" *ngIf="(paragraphs.length | async) == 0">
+<div class="row" *ngIf="!(paragraphs| async)">
   <div class="col-md-12 center-content">
     <p>No terms paragraphs added yet.</p>
   </div>
 </div>
 <div class="row" *ngIf="isProjectOwner | async">
   <div class="col-md-12 center-content">
-    <button class="edit-button btn btn-success btn-lg" *ngIf="(paragraphs.length | async) != 0" (click)="editModal.show()">EDIT</button>
+    <button class="edit-button btn btn-success btn-lg" *ngIf="(paragraphs | async)" (click)="editModal.show()">EDIT</button>
     <button class="edit-button btn btn-success btn-lg" (click)="addModal.show()">ADD PARAGRAPH</button>
   </div>
 </div>

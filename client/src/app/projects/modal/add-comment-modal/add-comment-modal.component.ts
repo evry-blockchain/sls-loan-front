@@ -2,7 +2,6 @@ import {Component, OnInit, Input} from '@angular/core';
 import {TermsConditionsService} from "../../service/terms-conditions.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../user/user.service";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'add-comment-modal',
@@ -45,6 +44,8 @@ export class AddCommentModalComponent implements OnInit {
     newComment['bankID'] = this.user['participantKey'];
     newComment['loanTermParentID'] = null;
     newComment['userID'] = this.user['participantKey'];
+    newComment['commentDate'] = new Date();
+
     this.termsService.addComment(newComment)
       .subscribe(() => {
         this.modal.hide();

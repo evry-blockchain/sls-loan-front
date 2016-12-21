@@ -35,7 +35,8 @@ module.exports = LoanTermComment => {
         loanTermComment.loanTermID,
         loanTermComment.userID,
         loanTermComment.bankID,
-        loanTermComment.commentText
+        loanTermComment.commentText,
+        new Date()
       ], user.username, (err, data) => {
         cb(err, data);
       }, ['bankid']);
@@ -45,7 +46,8 @@ module.exports = LoanTermComment => {
         loanTermComment.loanTermID,
         loanTermComment.userID,
         loanTermComment.bankID,
-        loanTermComment.commentText
+        loanTermComment.commentText,
+        new Date()
       ], user.username, (err, data) => {
         cb(err, data);
       }, ['bankid']);
@@ -59,7 +61,8 @@ module.exports = LoanTermComment => {
       loanTermComment.loanTermID,
       loanTermComment.userID,
       loanTermComment.bankID,
-      loanTermComment.commentText
+      loanTermComment.commentText,
+      new Date()
     ], user.username, (err, data) => {
       cb(err, data);
     }, ['bankid']);
@@ -67,7 +70,14 @@ module.exports = LoanTermComment => {
 
   LoanTermComment.commentsByProject = (projectID, cb) => {
     user.cc.query.getLoanTermList([], user.username, (err, terms) => {
-      const projectTermIDs = JSON.parse(terms).filter(item => item.LoanRequestID == projectID).map(item => item.LoanTermID);
+      let projectTermIDs;
+      try {
+        projectTermIDs = JSON.parse(terms).filter(item => item.LoanRequestID == projectID).map(item => item.LoanTermID);
+      } catch(e) {
+        cb(err, []);
+        return;
+      }
+
       user.cc.query.getLoanTermCommentList([], user.username, (err, comments) => {
         let commentsParsed;
 

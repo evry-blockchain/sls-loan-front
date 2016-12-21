@@ -10,13 +10,16 @@ import {Observable} from "rxjs";
 export class CommentsRowComponent implements OnInit {
   @Input() paragraphs;
 
-  constructor(private termsService: TermsConditionsService) { }
+  constructor(private termsService: TermsConditionsService) {
+  }
+
   private comments: Observable<any>;
-  private timeLeft:string;
+  private timeLeft: string;
 
   ngOnInit() {
 
     this.comments = this.termsService.commentsForCurrentProject$;
+
     this.timeLeft = '01:04:30';
   }
 

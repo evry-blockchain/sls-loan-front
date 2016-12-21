@@ -3,6 +3,7 @@ import {BehaviorSubject, Subject, Observable} from "rxjs";
 import {ApiGateway} from "../../api-gateway.service";
 import {ProjectsService} from "./projects.service";
 import {UtilsService} from "./utils.service";
+import {ParticipantService} from "../../participants/service/participants.service";
 
 @Injectable()
 export class TermsConditionsService {
@@ -21,23 +22,48 @@ export class TermsConditionsService {
   // public commentsForCurrentProject$ = this.commentsSource.asObservable();
 
 
-  public commentsForCurrentProject$ = this.commentsSource.mergeMap(data => Observable.from(data))
-    .merge(this.addCommentsSource)
-    .scan((acc: any[], el) => {
-      return [...acc, el]
-    }, []);
-
   public termsConditionsForCurrentProject$ = this.termsConditionsForProjectSource.mergeMap(data => Observable.from(data))
     .merge(this.addTermsSource)
     .scan((acc: any[], el) => {
       return [...acc, el];
     }, []);
 
+  public commentsForCurrentProject$ = this.commentsSource.mergeMap(data => Observable.from(data))
+    .merge(this.addCommentsSource)
+    .withLatestFrom(this.termsConditionsForCurrentProject$)
+    .map(([item, terms]) => {
+      let correspondingTerm = terms.filter(term => term['loanTermID'] == item['loanTermID'])[0];
+      item['paragraph'] = correspondingTerm || {};
+      return item;
+    })
+    .withLatestFrom(this.participantService.participants$)
+    .map(([item, participants]) => {
+      let participant = participants.filter(part => part['participantKey'] == item['bankID'])[0];
+      item['participant'] = participant || {};
+      return item;
+    })
+    .map(item => {
+      if (typeof item['loanTermCommentDate'] == 'string') {
+        item['loanTermCommentDate'] = new Date(item['loanTermCommentDate']);
+      }
+
+      if(item['loanTermCommentDate'] == 'Invalid Date') {
+        item['loanTermCommentDate'] = new Date();
+      }
+      return item;
+    })
+    .scan((acc: any[], el) => {
+      return [...acc, el]
+    }, []);
+
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint,
-              private projectsService: ProjectsService) {
+              private projectsService: ProjectsService,
+              private participantService: ParticipantService) {
 
     this.requestMapping = `${this.apiEndpoint}/LoanTerms`;
+
+    this.participantService.query();
 
     this.projectsService.project$
       .switchMap(data => {
@@ -64,7 +90,11 @@ export class TermsConditionsService {
         }
       })
       .map(data => {
-        return data.map(item => item.comments = data.filter(comment => comment['parentLoanTermCommentID'] == item.loanTermCommentID));
+        data = data.map(item => {
+          item.comments = data.filter(comment => comment['parentLoanTermCommentID'] == item['loanTermCommentID']);
+          return item;
+        });
+        return data;
       })
       .subscribe(data => {
         this.commentsSource.next(data);
