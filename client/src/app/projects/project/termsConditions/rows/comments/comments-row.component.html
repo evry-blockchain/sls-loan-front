@@ -3,12 +3,21 @@
     <div class="col-md-12 comment-header">
       <strong class="paragraph-number">PARAGRAPH {{comment.paragraph.paragraphNumber}}</strong>
       <span class="comment-user-bank">{{comment.participant.participantName}}</span> <span class="comment-date"> {{comment.loanTermCommentDate | date: 'medium'}}</span>
+      <span class="reply" (click)="comment.showCommentBox = !comment.showCommentBox">Reply</span>
     </div>
     <div class="col-md-12"><span class="comment-text">{{comment.commentText}}</span></div>
 
-    <div class="child-comments" *ngIf="(comment.comments | async)">
-
+    <div class="child-comments" *ngIf="!!(comment.comments)">
+      <div class="row comment-container" *ngFor="let childComment of comment.comments">
+        <div class="col-md-12">
+          <div class="col-md-12 comment-header">
+            <span class="comment-user-bank">{{childComment.participant.participantName}}</span> <span class="comment-date"> {{childComment.loanTermCommentDate | date: 'medium'}}</span>
+          </div>
+          <div class="col-md-12"><span class="comment-text">{{childComment.commentText}}</span></div>
+        </div>
+      </div>
     </div>
+    <app-comment-box class="col-md-12" (commentSaved)="addReply($event, comment)" [hidden]="!comment.showCommentBox"></app-comment-box>
   </div>
   <div class="row" *ngIf="!(comments | async)">
     <div class="col-md-12 center-content">

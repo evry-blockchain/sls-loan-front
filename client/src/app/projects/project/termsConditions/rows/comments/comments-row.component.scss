@@ -1,12 +1,17 @@
 @import 'app.variables';
+
 .comments {
   margin-bottom: 50px;
 }
+
 .comment-container {
   margin-left: 15px;
   margin-bottom: 15px;
   position: relative;
-  cursor: pointer;
+
+  .reply {
+    cursor: pointer;
+  }
 
   &:before {
     content: '';
@@ -50,4 +55,8 @@
   font-weight: bold;
   padding: 0.75rem 10rem;
   border: none;
+}
+
+.child-comments {
+  margin: 10px 0 0 14px;
 }

@@ -31,6 +31,7 @@ export class AddCommentModalComponent implements OnInit {
     });
   }
 
+  //TODO refactor to dumb component
   save() {
     if (!this.addCommentForm.valid) {
       this.isFormSubmitted = true;

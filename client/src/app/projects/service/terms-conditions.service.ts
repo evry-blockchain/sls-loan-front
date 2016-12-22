@@ -52,8 +52,15 @@ export class TermsConditionsService {
       }
       return item;
     })
+    .filter(item => item['parentLoanTermCommentID'] == '')
     .scan((acc: any[], el) => {
-      return [...acc, el]
+      return [...acc, el].sort((a: any, b: any) => {
+
+        let left    = Number(new Date(a['loanTermCommentDate']));
+        let right   = Number(new Date(b['loanTermCommentDate']));
+
+        return  right - left;
+      })
     }, []);
 
   constructor(private http: ApiGateway,
