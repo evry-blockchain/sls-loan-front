@@ -2,7 +2,6 @@ import {Component, OnInit, Input} from '@angular/core';
 import {TermsConditionsService} from "../../../../service/terms-conditions.service";
 import {Observable} from "rxjs";
 import {UserService} from "../../../../../user/user.service";
-import {OrderByDate} from "../../../../../utils/orderByDatePipe/orderByDatePipe";
 
 @Component({
   selector: 'comments-row',
