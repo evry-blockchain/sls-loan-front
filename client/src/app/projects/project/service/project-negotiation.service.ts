@@ -2,20 +2,27 @@
  * Created by Oleksandr.Khymenko on 19.10.2016.
  */
 
-import { Injectable, Inject } from '@angular/core';
-import { ApiGateway } from "../../../api-gateway.service";
-import { Subject, Observable } from "rxjs";
+import {Injectable, Inject} from '@angular/core';
+import {ApiGateway} from "../../../api-gateway.service";
+import {Subject, Observable, BehaviorSubject} from "rxjs";
 
 @Injectable()
 export class ProjectNegotiationService {
   private negotiationSource = new Subject();
   private requestMapping: string;
+  private negotiationsForProjectSource = new BehaviorSubject([]);
 
   public negotiations$ = this.negotiationSource.asObservable();
+  public negotiationsForProject$ = this.negotiationsForProjectSource
+    .mergeMap(data => Observable.from(data))
+    .scan((acc: any[], el) => {
+      return [...acc, el];
+    }, []);
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
     this.requestMapping = `${this.apiEndpoint}`
+
   }
 
   query(filter) {
@@ -45,6 +52,10 @@ export class ProjectNegotiationService {
   }
 
   getNegotiationsForProject(projectId) {
-    return this.http.get(`${this.apiEndpoint}/Utils/negotiationsByProject/${projectId}`);
+    let obs = this.http.get(`${this.apiEndpoint}/Utils/negotiationsByProject/${projectId}`);
+    obs.subscribe(data => {
+      this.negotiationsForProjectSource.next(data);
+    });
+    return obs;
   }
 }

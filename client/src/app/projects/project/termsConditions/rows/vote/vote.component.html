@@ -1,22 +1,27 @@
-<div class="row" [hidden]="selectedTab == 'status'">
+<form [formGroup]="voteForm" (ngSubmit)="save()" class="row" [hidden]="selectedTab == 'status'">
   <div class="col-md-12">
     <div class="row">
       <div class="col-md-5">
-        <label for="paragraphNumber">Paragraph</label>
+        <label for="loanTermID">Paragraph</label>
         <div class="form-group">
-          <select type="text" class="form-control" id="paragraphNumber"
-                  [(ngModel)]="selectedParagraph">
-            <option value="null">Select paragraph</option>
-            <option *ngFor="let obj of paragraphs" [ngValue]="obj">{{obj.paragraphNumber}}</option>
-          </select>
+          <div class="form-group">
+            <select type="text" class="form-control"
+                    id="loanTermID"
+                    formControlName="loanTermID">
+              <option value="null">Select paragraph</option>
+              <option *ngFor="let paragraph of paragraphs | async" [ngValue]="paragraph.loanTermID">
+                {{paragraph.paragraphNumber}}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="col-md-4 offset-1">
         <label for="voteWithin">Vote within</label>
         <div class="form-inline">
           <div class="form-group">
-            <input type="text" class="form-control" id="voteWithin">
-            <input type="text" class="form-control" aria-labelledby="voteWithin">
+            <input type="text" class="form-control" id="voteWithin" placeholder="dd/mm/yyyy" formControlName="loanTermProposalExpDate">
+            <input type="text" class="form-control" aria-labelledby="voteWithin" placeholder="00:00" formControlName="loanTermProposalExpTime">
           </div>
         </div>
       </div>
@@ -25,10 +30,15 @@
   <div class="col-md-10">
     <label for="voteProposal">Text</label>
     <div class="form-group">
-      <textarea class="form-control" name="" id="voteProposal" cols="30" rows="10"></textarea>
+      <textarea class="form-control" name="" id="voteProposal" formControlName="loanTermProposalText" cols="30"
+                rows="10"></textarea>
     </div>
   </div>
-</div>
+  <div class="col-md-12 center-content">
+    <button class="btn btn-lg add-btn">SEND TO VOTING</button>
+  </div>
+</form>
+
 <div class="row" [hidden]="selectedTab == 'new'">
 
 </div>

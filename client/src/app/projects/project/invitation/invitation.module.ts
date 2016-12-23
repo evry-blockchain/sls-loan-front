@@ -21,6 +21,7 @@ import { ParticipantInvitationTimerComponent } from "./participant/time/particip
 import { SelectInviteesPartnerComponent } from "./select-invitees/partner/select-invitees-partner.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ProjectsService} from "../../service/projects.service";
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
     ],
     exports: [
-    ]
+    ],
+  providers: [ProjectsService]
 })
 
 export class InvitationModule {

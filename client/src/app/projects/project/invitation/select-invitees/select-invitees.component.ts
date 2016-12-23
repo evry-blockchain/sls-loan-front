@@ -83,14 +83,16 @@ export class SelectInviteesComponent implements OnInit {
         this.partners = participants;
       });
 
-    this.route.parent.parent.params.subscribe(data => {
+    
+    this.route.parent.parent.parent.params.subscribe(data => {
+
       let id = +data['id'];
       let filter = {
         filter: {
           loanRequestID: id
         }
       };
-
+      //TODO refactor to mergeMap
       if (id) {
         this.projectNegotiationService.getSpecificNegotiation(filter).subscribe(data => {
           this.participants$.subscribe(participants => {
@@ -106,15 +108,6 @@ export class SelectInviteesComponent implements OnInit {
         });
       }
     });
-
-    this.projectsService.project$.subscribe((data: any[]) => {
-      let filter = {
-        filter: {
-          loanRequestID: data['loanRequestID']
-        }
-      };
-    })
-
   }
 
   nextTab(noInviteeModal) {

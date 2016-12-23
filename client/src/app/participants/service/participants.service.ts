@@ -3,9 +3,9 @@
  */
 
 
-import { Injectable, Inject } from '@angular/core';
-import { ApiGateway } from "../../api-gateway.service";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import {Injectable, Inject} from '@angular/core';
+import {ApiGateway} from "../../api-gateway.service";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 @Injectable()
 export class ParticipantService {
@@ -47,14 +47,14 @@ export class ParticipantService {
     }
   ];
 
-  public participants$ = this.participantsSource.asObservable().map((participants) => {
+  public participants$ = this.participantsSource.asObservable().mergeMap(data => Observable.from(data)).map((participant) => {
     let found;
-    participants.forEach((participant) => {
-      found = this.partners.filter(item => item.name == participant['participantName'])[0];
-      participant.image = found ? found['image'] : this.partners[0]['image'];
-    });
-    return participants;
-  });
+    found = this.partners.filter(item => item.name == participant['participantName'])[0];
+    participant.image = found ? found['image'] : this.partners[0]['image'];
+    return participant;
+  }).scan((acc: any[], el) => {
+    return [...acc, el];
+  }, []);
 
   public requestMapping;
 
@@ -74,7 +74,7 @@ export class ParticipantService {
   }
 
   getParticipantName(id, participants) {
-    var obj =  participants.find((item) => {
+    var obj = participants.find((item) => {
       return item['participantKey'] === id;
     })
     return !!obj ? obj['participantName'] : '';

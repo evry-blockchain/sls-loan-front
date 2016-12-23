@@ -71,7 +71,7 @@ export class CreateInvitationTabComponent implements OnInit {
       loanTerm: [''],
       amount: [''],
       interestRate: [''],
-      info: [''],
+      projectInformation: [''],
       status: [''],
       assets: [''],
       convenants: ['']

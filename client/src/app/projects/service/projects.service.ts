@@ -6,7 +6,7 @@ import {Observable, Subject, BehaviorSubject} from "rxjs";
 import {ApiGateway} from "../../api-gateway.service";
 import {UserService} from "../../user/user.service";
 import {Project} from "../project/model/project.model";
-import {ProjectNegotiationService} from '../project/service/project-negotiation.service';
+import {ProjectNegotiationService} from "../project/service/project-negotiation.service";
 
 
 @Injectable()
@@ -180,6 +180,10 @@ export class ProjectsService {
 
   getLoanInvitationCount() {
     return this.http.get(`${this.apiEndpoint}/LoanInvitations/count`);
+  }
+
+  getInviteesForCurrentProject(participants) {
+    console.log(participants);
   }
 
 }
