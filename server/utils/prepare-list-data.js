@@ -2,7 +2,7 @@ module.exports = function(data, filter) {
   if(data === ']' || data === 'null' || data === null) {
     return JSON.parse("[]")
   } else {
-    var result = JSON.parse(data).map((item) => {
+    var result = JSON.parse(data.replace(/\n/g, '\\n')).map((item) => {
       var temp = {};
       for (var i in item) {
         temp[i.charAt(0).toLowerCase() + i.slice(1)] = item[i];

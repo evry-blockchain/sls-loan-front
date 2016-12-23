@@ -1,9 +1,9 @@
 require('shelljs/global');
-var rimraf = require('rimraf');
-var port = process.argv.slice(2)[0];
-var credsMap = require('./creds.map');
+let rimraf = require('rimraf');
+let port = process.argv.slice(2)[0];
+let credsMap = require('./creds.map');
 
-var creds = credsMap[port];
+let creds = credsMap[port];
 
 console.log('Removing tmp and client dist folders...');
 
