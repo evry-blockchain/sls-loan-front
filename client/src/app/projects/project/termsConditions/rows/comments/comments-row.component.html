@@ -11,13 +11,15 @@
       <div class="row comment-container" *ngFor="let childComment of comment.comments">
         <div class="col-md-12">
           <div class="col-md-12 comment-header">
-            <span class="comment-user-bank">{{childComment.participant.participantName}}</span> <span class="comment-date"> {{childComment.loanTermCommentDate | date: 'medium'}}</span>
+            <span class="comment-user-bank">{{childComment.participant.participantName}}</span> <span
+            class="comment-date"> {{childComment.loanTermCommentDate | date: 'medium'}}</span>
           </div>
           <div class="col-md-12"><span class="comment-text">{{childComment.commentText}}</span></div>
         </div>
       </div>
     </div>
-    <app-comment-box class="col-md-12" (commentSaved)="addReply($event, comment)" [hidden]="!comment.showCommentBox"></app-comment-box>
+    <app-comment-box class="col-md-12" (commentSaved)="addReply($event, comment)"
+                     [hidden]="!comment.showCommentBox"></app-comment-box>
   </div>
   <div class="row" *ngIf="!(comments | async)">
     <div class="col-md-12 center-content">
@@ -27,13 +29,17 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12 center-content">
+  <div class="col-md-12 center-content" *ngIf="!!(paragraphs | async)">
     <button class="btn btn-lg add-btn" (click)="commentModal.show()">
       ADD COMMENT
     </button>
   </div>
+  <div class="col-md-12 center-content" *ngIf="!(paragraphs | async)">
+    <p>No paragraphs yet added, you cannot comment on anything</p>
+  </div>
 </div>
 
-<div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
   <add-comment-modal [modal]="commentModal" [paragraphs]="paragraphs"></add-comment-modal>
 </div>
