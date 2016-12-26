@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProjectsService} from "../../../service/projects.service";
 import {ParticipantService} from "../../../../participants/service/participants.service";
@@ -13,13 +13,10 @@ import {Observable} from "rxjs";
 })
 
 export class SelectInviteesComponent implements OnInit {
-
+  negotiations;
   selectedInvitees;
-
   participants$;
   partners = [];
-
-  public mo: any;
 
 
   search = (text$: Observable<any>) => {
@@ -42,7 +39,7 @@ export class SelectInviteesComponent implements OnInit {
 
   participants;
 
-  formatter = (result: string) => {
+  formatter = () => {
     return ''
   };
 
@@ -83,31 +80,29 @@ export class SelectInviteesComponent implements OnInit {
         this.partners = participants;
       });
 
-    
-    this.route.parent.parent.parent.params.subscribe(data => {
 
-      let id = +data['id'];
-      let filter = {
-        filter: {
-          loanRequestID: id
+
+    this.route.parent.parent.parent.params.mergeMap(data => {
+      return this.projectNegotiationService.getNegotiationsForProject(data['id']);
+    }).mergeMap(negotiations => {
+      this.negotiations = negotiations;
+      return this.participants$;
+    }).mergeMap((data: any[]) => {
+      return Observable.from(data);
+    }).scan((acc: any[], participant) => {
+      let found = this.negotiations.length && this.negotiations.find(item => item['participantBankID'] == participant['participantKey']);
+      if (found && acc.indexOf(participant) === -1) {
+        participant['negotiation'] = found;
+        if (this.selectedInvitees.indexOf(participant) === -1) {
+          this.addSelectedInvitee(participant)
         }
-      };
-      //TODO refactor to mergeMap
-      if (id) {
-        this.projectNegotiationService.getSpecificNegotiation(filter).subscribe(data => {
-          this.participants$.subscribe(participants => {
-            participants.forEach(participant => {
-              data.forEach(negotiation => {
-                if (negotiation['participantBankID'] == participant['participantKey'] && this.selectedInvitees.indexOf(participant) === -1) {
-                  participant.negotiation = negotiation;
-                  this.addSelectedInvitee(participant);
-                }
-              });
-            });
-          });
-        });
+        return <any[]>acc.concat(participant);
       }
-    });
+      return acc;
+    }, [])
+      .subscribe(() => {
+        // console.log(data);
+      });
   }
 
   nextTab(noInviteeModal) {

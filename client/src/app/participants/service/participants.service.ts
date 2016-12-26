@@ -5,7 +5,7 @@
 
 import {Injectable, Inject} from '@angular/core';
 import {ApiGateway} from "../../api-gateway.service";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable()
 export class ParticipantService {
@@ -64,7 +64,7 @@ export class ParticipantService {
   }
 
   query(): Observable<any> {
-    var query = this.http.get(this.requestMapping).share();
+    let query = this.http.get(this.requestMapping).share();
 
     query.subscribe((participants) => {
       this.participantsSource.next(participants);
@@ -74,9 +74,9 @@ export class ParticipantService {
   }
 
   getParticipantName(id, participants) {
-    var obj = participants.find((item) => {
+    let obj = participants.find((item) => {
       return item['participantKey'] === id;
-    })
+    });
     return !!obj ? obj['participantName'] : '';
   }
 }
