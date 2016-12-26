@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import * as moment from 'moment/moment';
+import {TermsConditionsService} from "../../../../service/terms-conditions.service";
 
 @Component({
   selector: 'vote-row',
@@ -11,55 +12,45 @@ export class VoteRowComponent implements OnInit {
   @Input() paragraphs;
 
   private selectedTab: string = 'new';
-  private voteForm;
+  private proposalForm;
+  private proposals;
   private isFormSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private termsService: TermsConditionsService) {
   }
 
   ngOnInit() {
-    this.voteForm = this.formBuilder.group({
+    this.proposalForm = this.formBuilder.group({
       loanTermID: ['', Validators.required],
       loanTermProposalText: ['', Validators.required],
       loanTermProposalExpTime: '',
       loanTermProposalExpDate: ['', Validators.required]
     });
+
+    this.proposals = this.termsService.proposalsForCurrentProject$;
   }
 
   save() {
-    if (!this.voteForm.valid) {
+    if (!this.proposalForm.valid) {
       this.isFormSubmitted = true;
-      Object.keys(this.voteForm.controls).forEach((data) => {
-        this.voteForm.controls[data].markAsTouched();
+      Object.keys(this.proposalForm.controls).forEach((data) => {
+        this.proposalForm.controls[data].markAsTouched();
       });
       return;
     }
 
-    let newVote = this.voteForm.getRawValue();
-    let dateString = newVote['loanTermProposalExpDate'] + newVote['loanTermProposalExpTime'];
+    let newProposal = this.proposalForm.getRawValue();
+    let dateString = newProposal['loanTermProposalExpDate'] + newProposal['loanTermProposalExpTime'];
     let momented = moment(dateString, "DD/MM/YYYYHH:mm");
-    if(momented['isValid']) {
-      newVote['loanTermProposalExpTime'] = momented.toString();
+    if (momented['isValid']) {
+      newProposal['loanTermProposalExpTime'] = momented.toString();
+      newProposal['paragraphNumber'] = this.paragraphs.find(item => item['loanTermID'] == newProposal['loanTermID'])['paragraphNumber'];
       //go on
     }
 
-    // this.projectService.create(newVote)
-    // .mergeMap(() => {
-    //   return this.projectService.getProjectCount()
-    // })
-    // .mergeMap((id) => {
-    //   var loanInvitation = {
-    //     loanRequestID: +id['count'] + 1,
-    //     arrangerBankID: this.user['participantKey']
-    //   };
-    //   return this.projectService.saveLoanInvitation(loanInvitation);
-    // })
-    //   .subscribe(() => {
-    // this.projectService.queryInvitations().subscribe((data) => {
-    //   console.log(data);
-    // })
-    // this.lgModal.hide();
-    // });
+    this.termsService.createProposal(newProposal)
+      .subscribe(() => {
+        this.selectedTab = 'status';
+      });
   }
-
 }

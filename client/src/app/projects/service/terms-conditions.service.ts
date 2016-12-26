@@ -2,14 +2,14 @@ import {Injectable, Inject} from "@angular/core";
 import {BehaviorSubject, Subject, Observable} from "rxjs";
 import {ApiGateway} from "../../api-gateway.service";
 import {ProjectsService} from "./projects.service";
-import {UtilsService} from "./utils.service";
 import {ParticipantService} from "../../participants/service/participants.service";
 
 @Injectable()
 export class TermsConditionsService {
-  private termsConditionsSource = new BehaviorSubject([]);
 
   private addTermsSource = new Subject();
+
+  private addProposalSource = new Subject();
 
   private addCommentsSource = new Subject();
 
@@ -19,8 +19,15 @@ export class TermsConditionsService {
 
   private commentsSource = new BehaviorSubject([]);
 
+  private proposalsForCurrentProjectSource = new BehaviorSubject([]);
   // public commentsForCurrentProject$ = this.commentsSource.asObservable();
 
+
+  public proposalsForCurrentProject$ = this.proposalsForCurrentProjectSource.mergeMap(data => Observable.from(data))
+    .merge(this.addProposalSource)
+    .scan((acc: any[], el) => {
+      return [...acc, el];
+    }, []);
 
   public termsConditionsForCurrentProject$ = this.termsConditionsForProjectSource.mergeMap(data => Observable.from(data))
     .merge(this.addTermsSource)
@@ -47,7 +54,7 @@ export class TermsConditionsService {
         item['loanTermCommentDate'] = new Date(item['loanTermCommentDate']);
       }
 
-      if(item['loanTermCommentDate'] == 'Invalid Date') {
+      if (item['loanTermCommentDate'] == 'Invalid Date') {
         item['loanTermCommentDate'] = new Date();
       }
       return item;
@@ -56,10 +63,10 @@ export class TermsConditionsService {
     .scan((acc: any[], el) => {
       return [...acc, el].sort((a: any, b: any) => {
 
-        let left    = Number(new Date(a['loanTermCommentDate']));
-        let right   = Number(new Date(b['loanTermCommentDate']));
+        let left = Number(new Date(a['loanTermCommentDate']));
+        let right = Number(new Date(b['loanTermCommentDate']));
 
-        return  right - left;
+        return right - left;
       })
     }, []);
 
@@ -106,17 +113,37 @@ export class TermsConditionsService {
       .subscribe(data => {
         this.commentsSource.next(data);
       });
+
+    this.projectsService.project$
+      .switchMap(data => {
+        if (data['loanRequestID']) {
+          return this.getProposalsForProject(data['loanRequestID']);
+        } else {
+          return Observable.from([]);
+        }
+      })
+      .mergeMap(data => Observable.from(data))
+      .map(item => {
+        item['votes'] = this.getVotesForProposal(item['loanTermProposalID']);
+        return item;
+      })
+      .scan((acc: any[], el) => {
+        return [...acc, el]
+      }, [])
+      .subscribe(data => {
+        this.proposalsForCurrentProjectSource.next(data);
+      });
   }
 
   query(filter) {
     return this.http.get(this.requestMapping, filter);
   }
 
-  get(id) {
+  get() {
 
   }
 
-  delete(id) {
+  deleteTerm() {
 
   }
 
@@ -153,12 +180,27 @@ export class TermsConditionsService {
     return this.http.get(`${this.apiEndpoint}/LoanTermComments/commentsByProject/${projectID}`);
   }
 
+  getProposalsForProject(projectID) {
+    return this.http.get(`${this.apiEndpoint}/LoanTermProposals/proposalsByProject/${projectID}`);
+  }
+
   addComment(comment) {
     return this.http.post(`${this.apiEndpoint}/LoanTermComments/`, comment)
-      .do((countLength) => {
-        // comment.loanTermCommentID = (+countLength + 1).toString();
+      .do(() => {
         this.addCommentsSource.next(comment);
       });
+  }
+
+  createProposal(proposal) {
+    let obs = this.http.post(`${this.apiEndpoint}/LoanTermProposals/`, proposal);
+    obs.subscribe((data) => {
+      this.addProposalSource.next(data);
+    });
+    return obs;
+  }
+
+  getVotesForProposal(proposalID) {
+    return this.http.get(`${this.apiEndpoint}/LoanTermVotes/votesForProposal/${proposalID}`);
   }
 
 

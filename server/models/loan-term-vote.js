@@ -1,4 +1,4 @@
-var user;
+let user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
 
@@ -24,6 +24,15 @@ module.exports = LoanTermVote => {
   LoanTermVote.count = cb => {
     user.cc.query.getLoanTermVotesQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
+    }, ['bankid']);
+  };
+
+  LoanTermVote.votesForProposal = (proposalID, cb) => {
+    let filter = {
+        loanTermProposalID: proposalID
+    };
+    user.cc.query.getLoanTermVotesList([], user.username, (err, data) => {
+      cb(err, prepareListData(data, filter));
     }, ['bankid']);
   };
 
@@ -83,5 +92,14 @@ module.exports = LoanTermVote => {
     },
     accepts: {arg: 'data', type: 'LoanTermVote', http: {source: 'body'}},
     returns: {type: 'object', root: true}
+  });
+
+  LoanTermVote.remoteMethod('votesForProposal', {
+    http: {
+      path: '/votesForProposal/:proposalID',
+      verb: 'get'
+    },
+    accepts: {arg: 'proposalID', type: 'string', required: true},
+    returns: {type: 'LoanTermVote', root: true}
   });
 };

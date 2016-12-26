@@ -1,4 +1,4 @@
-var user;
+let user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
 
@@ -59,6 +59,29 @@ module.exports = LoanTermProposal => {
     }, ['bankid']);
   };
 
+  LoanTermProposal.proposalsByProject = (projectID, cb) => {
+    user.cc.query.getLoanTermList([], user.username, (err, terms) => {
+      let projectTermIDs;
+      try {
+        projectTermIDs = JSON.parse(terms).filter(item => item.LoanRequestID == projectID).map(item => item.LoanTermID);
+      } catch(e) {
+        cb(err, []);
+        return;
+      }
+
+      user.cc.query.getLoanTermProposalList([], user.username, (err, comments) => {
+        let proposalsParsed;
+
+        try {
+          proposalsParsed = JSON.parse(comments);
+        } catch(e) {
+          proposalsParsed = [];
+        }
+        cb(err, prepareListData(JSON.stringify(proposalsParsed.filter(item => projectTermIDs.indexOf(item.LoanTermID) !== -1))));
+      }, ['bankid']);
+    }, ['bankid']);
+  };
+
   LoanTermProposal.remoteMethod('getList', {
     http: {
       path: '/',
@@ -83,5 +106,14 @@ module.exports = LoanTermProposal => {
     },
     accepts: {arg: 'data', type: 'LoanTermProposal', http: {source: 'body'}},
     returns: {type: 'object', root: true}
+  });
+
+  LoanTermProposal.remoteMethod('proposalsByProject', {
+    http: {
+      path: '/proposalsByProject/:projectID',
+      verb: 'get'
+    },
+    accepts: {arg: 'projectID', type: 'string', required: true},
+    returns: {type: 'LoanTermProposal', root: true}
   });
 };

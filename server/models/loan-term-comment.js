@@ -1,4 +1,4 @@
-var user;
+let user;
 import beforeRemote from '../utils/cc-before-remote-init';
 import prepareListData from '../utils/prepare-list-data';
 
@@ -89,7 +89,6 @@ module.exports = LoanTermComment => {
         cb(err, prepareListData(JSON.stringify(commentsParsed.filter(item => projectTermIDs.indexOf(item.LoanTermID) !== -1))));
       }, ['bankid']);
     }, ['bankid']);
-
   };
 
   LoanTermComment.remoteMethod('getList', {
