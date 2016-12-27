@@ -22,7 +22,6 @@ export class TermsConditionsService {
   private proposalsForCurrentProjectSource = new BehaviorSubject([]);
   // public commentsForCurrentProject$ = this.commentsSource.asObservable();
 
-
   public proposalsForCurrentProject$ = this.proposalsForCurrentProjectSource.mergeMap(data => Observable.from(data))
     .merge(this.addProposalSource)
     .scan((acc: any[], el) => {
@@ -124,7 +123,9 @@ export class TermsConditionsService {
       })
       .mergeMap(data => Observable.from(data))
       .map(item => {
-        item['votes'] = this.getVotesForProposal(item['loanTermProposalID']);
+        this.getVotesForProposal(item['loanTermProposalID']).subscribe(data => {
+          item['votes'] = data;
+        });
         return item;
       })
       .scan((acc: any[], el) => {
@@ -192,11 +193,10 @@ export class TermsConditionsService {
   }
 
   createProposal(proposal) {
-    let obs = this.http.post(`${this.apiEndpoint}/LoanTermProposals/`, proposal);
-    obs.subscribe((data) => {
-      this.addProposalSource.next(data);
-    });
-    return obs;
+    return this.http.post(`${this.apiEndpoint}/LoanTermProposals/`, proposal)
+      .do((proposal) => {
+        this.addProposalSource.next(proposal);
+      });
   }
 
   getVotesForProposal(proposalID) {

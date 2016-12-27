@@ -8,8 +8,9 @@
   },
   "properties": {
     "loanTermProposalID": { "type": "string", "id": "true" },
-    "loanTermID": "string",
     "loanTermProposalText": "string",
+    "paragraphNumber": "string",
+    "loanTermID": "string",
     "loanTermProposalExpTime": "string"
   },
   "validations": [],

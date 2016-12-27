@@ -14,6 +14,7 @@ export class VoteRowComponent implements OnInit {
   private selectedTab: string = 'new';
   private proposalForm;
   private proposals;
+  private paragraphsData;
   private isFormSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, private termsService: TermsConditionsService) {
@@ -27,7 +28,12 @@ export class VoteRowComponent implements OnInit {
       loanTermProposalExpDate: ['', Validators.required]
     });
 
-    this.proposals = this.termsService.proposalsForCurrentProject$;
+    this.termsService.proposalsForCurrentProject$.subscribe(data => {
+      console.log(data);
+    });
+    this.paragraphs.subscribe(data => {
+      this.paragraphsData = data;
+    });
   }
 
   save() {
@@ -42,15 +48,14 @@ export class VoteRowComponent implements OnInit {
     let newProposal = this.proposalForm.getRawValue();
     let dateString = newProposal['loanTermProposalExpDate'] + newProposal['loanTermProposalExpTime'];
     let momented = moment(dateString, "DD/MM/YYYYHH:mm");
-    if (momented['isValid']) {
-      newProposal['loanTermProposalExpTime'] = momented.toString();
-      newProposal['paragraphNumber'] = this.paragraphs.find(item => item['loanTermID'] == newProposal['loanTermID'])['paragraphNumber'];
-      //go on
-    }
 
-    this.termsService.createProposal(newProposal)
-      .subscribe(() => {
-        this.selectedTab = 'status';
-      });
+    if (momented['isValid']()) {
+      newProposal['loanTermProposalExpTime'] = momented.toString();
+      newProposal['paragraphNumber'] = this.paragraphsData.find(item => item['loanTermID'] == newProposal['loanTermID'])['paragraphNumber'];
+      this.termsService.createProposal(newProposal)
+        .subscribe(() => {
+          this.selectedTab = 'status';
+        });
+    }
   }
 }

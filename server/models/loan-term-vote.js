@@ -16,13 +16,13 @@ module.exports = LoanTermVote => {
   });
 
   LoanTermVote.getList = (filter, cb) => {
-    user.cc.query.getLoanTermVotesList([], user.username, (err, data) => {
+    user.cc.query.getLoanTermVoteList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
     }, ['bankid']);
   };
 
   LoanTermVote.count = cb => {
-    user.cc.query.getLoanTermVotesQuantity([], user.username, (err, data) => {
+    user.cc.query.getLoanTermVoteQuantity([], user.username, (err, data) => {
       cb(err, JSON.parse(data));
     }, ['bankid']);
   };
@@ -31,7 +31,7 @@ module.exports = LoanTermVote => {
     let filter = {
         loanTermProposalID: proposalID
     };
-    user.cc.query.getLoanTermVotesList([], user.username, (err, data) => {
+    user.cc.query.getLoanTermVoteList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
     }, ['bankid']);
   };

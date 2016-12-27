@@ -72,7 +72,7 @@ module.exports = LoanTermComment => {
     user.cc.query.getLoanTermList([], user.username, (err, terms) => {
       let projectTermIDs;
       try {
-        projectTermIDs = JSON.parse(terms).filter(item => item.LoanRequestID == projectID).map(item => item.LoanTermID);
+        projectTermIDs = JSON.parse(terms.replace(/\n/g, '\\n')).filter(item => item.LoanRequestID == projectID).map(item => item.LoanTermID);
       } catch(e) {
         cb(err, []);
         return;
