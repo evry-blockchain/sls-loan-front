@@ -203,5 +203,7 @@ export class TermsConditionsService {
     return this.http.get(`${this.apiEndpoint}/LoanTermVotes/votesForProposal/${proposalID}`);
   }
 
-
+  addVote(vote) {
+    return this.http.post(`${this.apiEndpoint}/LoanTermVotes`, vote);
+  }
 }

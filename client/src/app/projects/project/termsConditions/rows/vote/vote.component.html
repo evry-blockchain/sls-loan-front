@@ -1,48 +1,108 @@
-<form [formGroup]="proposalForm" (ngSubmit)="save()" class="row" [hidden]="selectedTab == 'status'">
-  <div class="col-md-12">
-    <div class="row">
-      <div class="col-md-5">
-        <label for="loanTermID">Paragraph</label>
-        <div class="form-group">
-          <div class="form-group">
-            <select type="text" class="form-control"
-                    id="loanTermID"
-                    formControlName="loanTermID">
-              <option value="null">Select paragraph</option>
-              <option *ngFor="let paragraph of paragraphs | async" [ngValue]="paragraph.loanTermID">
-                {{paragraph.paragraphNumber}}
-              </option>
-            </select>
-          </div>
+<div [hidden]="selectedTab == 'status'">
+  <div class="row proposal-row" *ngFor="let proposal of (proposals | async)"
+       [ngClass]="{'voted': haveAlreadyVoted(proposal), 'new': !haveAlreadyVoted(proposal)}">
+    <div class="col-md-2 center-content">
+      <div class="proposal-date" *ngIf="!haveAlreadyVoted(proposal)">
+        <div class="proposal-date-bubble" *ngIf="proposalOpen(proposal)">
+          {{proposal.loanTermProposalExpTime | date: 'dd/MM/yyyy'}}
+          <br/>
+          {{proposal.loanTermProposalExpTime | date: 'hh:mm'}}
+        </div>
+        <div class="proposal-date-bubble" *ngIf="!proposalOpen(proposal)">Voting closed</div>
+      </div>
+      <div class="voted-status" *ngIf="haveAlreadyVoted(proposal)">
+        <div class="voted-bubble accepted" *ngIf="proposalAccepted(proposal)">
+          <i class="fa fa-check"></i>
+          <br/>
+          Accepted
+        </div>
+        <div class="voted-bubble rejected" *ngIf="proposalRejected(proposal)">
+          <i class="fa fa-times"></i>
+          <br/>
+          Rejected
         </div>
       </div>
-      <div class="col-md-4 offset-1">
-        <label for="voteWithin">Vote within</label>
-        <div class="form-inline">
+    </div>
+    <div class="col-md-8">
+      <h4>Paragraph: {{proposal.paragraph.paragraphNumber}}</h4>
+      <span>{{proposal.loanTermProposalText}}</span>
+    </div>
+    <div class="col-md-2" *ngIf="!haveAlreadyVoted(proposal)">
+      <button class="btn btn-success" (click)="acceptProposal(proposal)"><i class="fa fa-check"></i> Accept</button>
+      <button class="btn btn-danger" (click)="declineProposal(proposal)"><i class="fa fa-times"></i> Reject</button>
+    </div>
+  </div>
+  <form [formGroup]="proposalForm" (ngSubmit)="save()" class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-5">
+          <label for="loanTermID">Paragraph</label>
           <div class="form-group">
-            <input type="text" class="form-control" id="voteWithin" placeholder="dd/mm/yyyy" formControlName="loanTermProposalExpDate">
-            <input type="text" class="form-control" aria-labelledby="voteWithin" placeholder="00:00" formControlName="loanTermProposalExpTime">
+            <div class="form-group">
+              <select type="text" class="form-control"
+                      id="loanTermID"
+                      formControlName="loanTermID">
+                <option value="null">Select paragraph</option>
+                <option *ngFor="let paragraph of paragraphs | async" [ngValue]="paragraph.loanTermID">
+                  {{paragraph.paragraphNumber}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 offset-1">
+          <label for="voteWithin">Vote within</label>
+          <div class="form-inline">
+            <div class="form-group">
+              <input type="text" class="form-control" id="voteWithin" placeholder="dd/mm/yyyy"
+                     formControlName="loanTermProposalExpDate">
+              <input type="text" class="form-control" aria-labelledby="voteWithin" placeholder="00:00"
+                     formControlName="loanTermProposalExpTime">
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-10">
-    <label for="voteProposal">Text</label>
-    <div class="form-group">
+    <div class="col-md-10">
+      <label for="voteProposal">Text</label>
+      <div class="form-group">
       <textarea class="form-control" name="" id="voteProposal" formControlName="loanTermProposalText" cols="30"
                 rows="10"></textarea>
+      </div>
     </div>
-  </div>
-  <div class="col-md-12 center-content">
-    <button class="btn btn-lg add-btn">SEND TO VOTING</button>
-  </div>
-</form>
-
-<div class="row" [hidden]="selectedTab == 'new'">
-
+    <div class="col-md-12 center-content">
+      <button class="btn btn-lg add-btn">SEND TO VOTING</button>
+    </div>
+  </form>
 </div>
 
+<div [hidden]="selectedTab == 'new'">
+  <div class="row vote-status-header" *ngIf="!!(proposals | async);">
+    <div class="col-md-3">Paragraph</div>
+    <div class="col-md-7">Result</div>
+    <div class="col-md-2 center-content">Voting ends</div>
+  </div>
+  <div class="row vote-status-row" *ngFor="let proposal of (proposals | async);">
+    <div class="col-md-3">
+      <div><h6>{{proposal.paragraph.paragraphNumber}}</h6></div>
+      <div>{{proposal.loanTermProposalText}}</div>
+    </div>
+    <div class="col-md-7">
+      <div *ngIf="!(proposal.votes && proposal.votes.length)">No votes on this proposal yet</div>
+      <div *ngIf="!!(proposal.votes && proposal.votes.length)">Vote status here</div>
+    </div>
+    <div class="col-md-2 center-content">
+      <div>{{proposal.loanTermProposalExpTime | date: 'dd/MM/yyyy'}}</div>
+      <div>{{proposal.loanTermProposalExpTime | date: 'hh:mm'}}</div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!(proposals | async);">
+    <div class="col-md-12 center-content">
+      No proposals yet added for voting
+    </div>
+  </div>
+</div>
 <div class="tabs">
   <ul class="tabs-list">
     <li [ngClass]="{'active': selectedTab == 'new'}">
@@ -53,4 +113,3 @@
     </li>
   </ul>
 </div>
-
