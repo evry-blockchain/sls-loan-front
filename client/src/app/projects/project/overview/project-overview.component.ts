@@ -37,7 +37,7 @@ export class ProjectOverviewComponent implements OnInit {
 
     this.hasResponded = this.projectService.project$.take(1)
       .combineLatest(this.userService.user$)
-      .mergeMap(([project, user]) => {
+      .switchMap(([project, user]) => {
         return this.projectNegotiationService.getNegotiationForProjectAndBank(user['participantKey'], project['loanRequestID']);
       })
       .combineLatest(this.isBankOwner).subscribe(([data, owner]) => {

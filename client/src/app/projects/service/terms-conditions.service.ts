@@ -123,8 +123,9 @@ export class TermsConditionsService {
       })
       .mergeMap(data => Observable.from(data))
       .map(item => {
+        item['votes'] = new BehaviorSubject([]);
         this.getVotesForProposal(item['loanTermProposalID']).subscribe(data => {
-          item['votes'] = data;
+          item['votes'].next(data);
         });
         return item;
       })

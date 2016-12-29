@@ -96,4 +96,22 @@
     margin-top: 40px;
   }
 }
+.progress {
+  margin-bottom:0;
+  height: 2rem;
 
+  .progress-bar {
+    background: $color-white-two;
+    display: inline-block;
+    height:100%;
+    font-size: 0;
+
+    &.progress-bar-success {
+      background: $color-bluey-grey;
+    }
+
+    &.progress-bar-danger {
+      background: $color-darkish-pink;
+    }
+  }
+}

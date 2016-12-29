@@ -47,7 +47,7 @@ export class CreateInvitationTabComponent implements OnInit {
         this.route.parent.parent.parent.params.subscribe(data => {
           let id = +data['id'];
           this.projectsService.get(id).subscribe(data => {
-            let x = data.shift();
+            let x = data;
             this.invitationForm.patchValue(x);
           });
         });
