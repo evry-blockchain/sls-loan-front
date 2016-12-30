@@ -56,17 +56,18 @@ export class SelectInviteesComponent implements OnInit {
     this.participants$ = this.participantService.participants$;
 
     this.participantService.participants$
-      .mergeMap((data) => {
-        return Observable.from(<any[]> data)
-      })
       .combineLatest(this.projectsService.selectedInvitees$)
-      .map(([participant, selectedInvitees]) => {
-        if (participant['participantKey'] && selectedInvitees.find(item => item['participantKey'] == participant['participantKey'])) {
-          participant['selected'] = true;
-        }
-        return participant;
-      })
-      .scan((acc, item) => {
+      .map(([participants, selectedInvitees]) => {
+        participants = participants.map(participant => {
+          if (participant['participantKey'] && selectedInvitees.find(item => item['participantKey'] == participant['participantKey'])) {
+            participant['selected'] = true;
+          }
+          return participant;
+        });
+
+        return participants;
+      }).mergeMap(data => Observable.from(data))
+      .scan((acc: any[], item) => {
         let elem = acc.find(elem => {
           return elem['participantKey'] === item['participantKey']
         });
@@ -79,7 +80,6 @@ export class SelectInviteesComponent implements OnInit {
       .subscribe((participants) => {
         this.partners = participants;
       });
-
 
 
     this.route.parent.parent.parent.params.mergeMap(data => {
