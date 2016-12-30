@@ -2,7 +2,7 @@
   <div class="row proposal-row" *ngFor="let proposal of (proposals$ | async)"
        [ngClass]="{'voted': haveAlreadyVoted(proposal) | async, 'new': !(haveAlreadyVoted(proposal) | async)}">
     <div class="col-md-2 center-content">
-      <div class="proposal-date" *ngIf="!haveAlreadyVoted(proposal)">
+      <div class="proposal-date" *ngIf="!(haveAlreadyVoted(proposal) | async)">
         <div class="proposal-date-bubble" *ngIf="proposalOpen(proposal)">
           {{proposal.loanTermProposalExpTime | date: 'dd/MM/yyyy'}}
           <br/>

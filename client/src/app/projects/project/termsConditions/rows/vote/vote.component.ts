@@ -22,6 +22,7 @@ export class VoteRowComponent implements OnInit {
   private proposals$: Observable<any>;
   private negotiations$: Observable<any>;
   private user: Object;
+  private project: Object;
   private paragraphsData: any[];
   private isFormSubmitted = false;
 
@@ -38,14 +39,24 @@ export class VoteRowComponent implements OnInit {
       this.user = data;
     });
 
-    this.projectsService.project$.subscribe(data => {
-      let id = +data['loanRequestID'];
-      if (!data) {
-        this.negotiations$ = Observable.from([]);
-        return;
-      }
-      this.negotiations$ = this.projectNegotiationService.getNegotiationsForProject(id);
+    this.negotiations$ = this.projectsService.project$.flatMap(project => {
+      this.project = project;
+      return this.projectNegotiationService.getNegotiationsForProject(project['loanRequestID']);
     });
+    // this.projectsService.project$.subscribe(data => {
+    //   let id = +data['loanRequestID'];
+    //   if (isNaN(id)) {
+    //     let obs = Observable.from([{}]);
+    //
+    //     this.negotiations$ = obs;
+    //     obs.subscribe(() => {
+    //       // console.log('No project yet', item);
+    //     });
+    //   } else {
+    //     this.negotiations$ = ;
+    //     console.log(this.negotiations$);
+    //   }
+    // });
 
 
     this.proposalForm = this.formBuilder.group({
@@ -69,7 +80,6 @@ export class VoteRowComponent implements OnInit {
         let totalProjectParticipantsCount = negotiations.length + 1;
         proposal['acceptedPercentage'] = 0;
         proposal['rejectedPercentage'] = 0;
-
         //TODO Dmytro: Maybe refactor, dunno
         proposal['votes'].subscribe(data => {
           let accepted = data.filter(item => item['loanTermVoteStatus'] == 'Accepted' && item['bankID'] !== '').length;
@@ -82,6 +92,11 @@ export class VoteRowComponent implements OnInit {
         return proposal;
       })
       .scan((acc: any[], el) => {
+        let elem = acc.find(item => item == el);
+
+        if(!!elem) {
+          return acc;
+        }
         return [...acc, el];
       }, [])
       .share();
@@ -107,15 +122,19 @@ export class VoteRowComponent implements OnInit {
     if (momented['isValid']()) {
       newProposal['loanTermProposalExpTime'] = momented.toString();
       newProposal['paragraphNumber'] = this.paragraphsData.find(item => item['loanTermID'] == newProposal['loanTermID'])['paragraphNumber'];
+      newProposal['votes'] = Observable.from([]);
+
+
       this.termsService.createProposal(newProposal)
         .subscribe(() => {
           this.selectedTab = 'status';
+          this.proposalForm.reset();
         });
     }
   }
 
   proposalOpen(proposal) {
-    return moment(proposal['loanTermProposalExpTime']) > moment(new Date);
+    return moment(proposal['loanTermProposalExpTime']) > moment(new Date());
   }
 
   acceptProposal(proposal) {
@@ -129,7 +148,6 @@ export class VoteRowComponent implements OnInit {
         local.push(vote);
         proposal['votes'].next(local);
       });
-      // proposal['votes'].push(vote);
     });
   }
 
