@@ -19,7 +19,6 @@ module.exports = Account => {
     user.cc.query.getAccountsList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
     }, ['bankid']);
-
   };
 
   Account.count = cb => {

@@ -27,7 +27,7 @@
       <h4>Paragraph: {{proposal.paragraph.paragraphNumber}}</h4>
       <span>{{proposal.loanTermProposalText}}</span>
     </div>
-    <div class="col-md-2" *ngIf="!(haveAlreadyVoted(proposal) | async)">
+    <div class="col-md-2" *ngIf="(!(haveAlreadyVoted(proposal) | async) && proposalOpen(proposal))">
       <button class="btn btn-success" (click)="acceptProposal(proposal)"><i class="fa fa-check"></i> Accept</button>
       <button class="btn btn-danger" (click)="declineProposal(proposal)"><i class="fa fa-times"></i> Reject</button>
     </div>

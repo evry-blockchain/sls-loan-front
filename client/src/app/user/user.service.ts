@@ -1,9 +1,10 @@
 /**
  * Created by Oleksandr.Khymenko on 20.10.2016.
  */
-import { Injectable } from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { User } from "./model/user.model";
+import {ApiGateway} from "../api-gateway.service";
 
 @Injectable()
 export class UserService {
@@ -11,7 +12,7 @@ export class UserService {
 
   user$ = this.userSource.asObservable();
 
-  constructor() {}
+  constructor(private http: ApiGateway, @Inject('ApiEndpoint') private apiEndpoint) {}
 
 
   public getRole(id, user) {
@@ -23,7 +24,17 @@ export class UserService {
   }
 
   loginUser(user: User) {
-    this.userSource.next(user)
+    this.http.get(`${this.apiEndpoint}/utils/userId`).subscribe(data => {
+      user.userId = data;
+      this.http.get(`${this.apiEndpoint}/participantUsers`, {
+        filter: {
+          userID: data
+        }
+      }).subscribe(data => {
+        user.userName = data['userName'];
+      });
+      this.userSource.next(user)
+    });
   }
 
 }

@@ -16,7 +16,7 @@ module.exports = ParticipantUser => {
   });
 
   ParticipantUser.getList = (filter, cb) => {
-    user.cc.query.getUsersList([], user.username, (err, data) => {
+    user.cc.query.getUserList([], user.username, (err, data) => {
       cb(err, prepareListData(data, filter));
     }, ['bankid']);
   };

@@ -21,6 +21,12 @@ module.exports = Util => {
     }, ['bankid']);
   };
 
+  Util.getUserId = cb => {
+    user.cc.query.getUserId([], user.username, (err, data) => {
+      cb(err, data);
+    }, ['userid']);
+  };
+
   Util.getNegotiationByBankAndProject = (bankId, projectId, cb) => {
     let negotiations;
 
@@ -88,6 +94,14 @@ module.exports = Util => {
   Util.remoteMethod('getBankId', {
     http: {
       path: '/bankId',
+      verb: 'get'
+    },
+    returns: {type: 'number', root: true}
+  });
+
+  Util.remoteMethod('getUserId', {
+    http: {
+      path: '/userId',
       verb: 'get'
     },
     returns: {type: 'number', root: true}

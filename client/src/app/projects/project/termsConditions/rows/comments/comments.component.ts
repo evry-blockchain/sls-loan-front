@@ -35,7 +35,7 @@ export class CommentsRowComponent implements OnInit {
   addReply(commentText, parent) {
     let comment = {};
     comment['bankID'] = this.user['participantKey'];
-    comment['userID'] = this.user['participantKey'];
+    comment['userID'] = this.user['userId'];
     comment['loanTermCommentDate'] = new Date();
     comment['commentText'] = commentText;
     comment['loanTermParentID'] = parent['loanTermCommentID'];
