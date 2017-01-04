@@ -195,7 +195,7 @@ export class TermsConditionsService {
 
   createProposal(proposal) {
     return this.http.post(`${this.apiEndpoint}/LoanTermProposals/`, proposal)
-      .do((proposal) => {
+      .do(() => {
         this.addProposalSource.next(proposal);
       });
   }

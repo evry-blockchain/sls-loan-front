@@ -39,25 +39,12 @@ export class VoteRowComponent implements OnInit {
       this.user = data;
     });
 
-    this.negotiations$ = this.projectsService.project$.flatMap(project => {
+    this.projectsService.project$.flatMap(project => {
       this.project = project;
       return this.projectNegotiationService.getNegotiationsForProject(project['loanRequestID']);
-    });
-    // this.projectsService.project$.subscribe(data => {
-    //   let id = +data['loanRequestID'];
-    //   if (isNaN(id)) {
-    //     let obs = Observable.from([{}]);
-    //
-    //     this.negotiations$ = obs;
-    //     obs.subscribe(() => {
-    //       // console.log('No project yet', item);
-    //     });
-    //   } else {
-    //     this.negotiations$ = ;
-    //     console.log(this.negotiations$);
-    //   }
-    // });
+    }).subscribe();
 
+    this.negotiations$ = this.projectNegotiationService.negotiationsForProject$;
 
     this.proposalForm = this.formBuilder.group({
       loanTermID: ['', Validators.required],
@@ -75,18 +62,19 @@ export class VoteRowComponent implements OnInit {
         proposal['paragraph'] = paragraphs.find(item => item['loanTermID'] == proposal['loanTermID']);
         return proposal;
       })
-      .combineLatest(this.negotiations$)
-      .map(([proposal, negotiations]) => {
-        let totalProjectParticipantsCount = negotiations.length + 1;
+      .map(proposal => {
         proposal['acceptedPercentage'] = 0;
         proposal['rejectedPercentage'] = 0;
         //TODO Dmytro: Maybe refactor, dunno
-        proposal['votes'].subscribe(data => {
-          let accepted = data.filter(item => item['loanTermVoteStatus'] == 'Accepted' && item['bankID'] !== '').length;
-          let rejected = data.filter(item => item['loanTermVoteStatus'] == 'Rejected' && item['bankID'] !== '').length;
-          proposal['acceptedPercentage'] = accepted / totalProjectParticipantsCount * 100;
-          proposal['rejectedPercentage'] = rejected / totalProjectParticipantsCount * 100;
-          proposal['notRespondedPercentage'] = (totalProjectParticipantsCount - accepted - rejected) / totalProjectParticipantsCount * 100;
+        proposal['votes'].subscribe(votes => {
+          this.negotiations$.subscribe(negotiations => {
+            let totalProjectParticipantsCount = negotiations.length + 1;
+            let accepted = votes.filter(item => item['loanTermVoteStatus'] == 'Accepted' && item['bankID'] !== '').length;
+            let rejected = votes.filter(item => item['loanTermVoteStatus'] == 'Rejected' && item['bankID'] !== '').length;
+            proposal['acceptedPercentage'] = accepted / totalProjectParticipantsCount * 100;
+            proposal['rejectedPercentage'] = rejected / totalProjectParticipantsCount * 100;
+            proposal['notRespondedPercentage'] = (totalProjectParticipantsCount - accepted - rejected) / totalProjectParticipantsCount * 100;
+          });
         });
 
         return proposal;
@@ -157,7 +145,11 @@ export class VoteRowComponent implements OnInit {
     vote['loanTermVoteStatus'] = 'Rejected';
     vote['bankID'] = this.user['participantKey'];
     this.termsService.addVote(vote).subscribe(() => {
-      proposal['votes'].push(vote);
+      proposal['votes'].take(1).subscribe(data => {
+        let local = data;
+        local.push(vote);
+        proposal['votes'].next(local);
+      });
     });
   }
 
