@@ -17,9 +17,6 @@ export class TermsConditionsService {
 
   private termsConditionsForProjectSource = new BehaviorSubject([]);
 
-  private commentsSource = new BehaviorSubject([]);
-
-  private proposalsForCurrentProjectSource = new ReplaySubject(1);
   // public commentsForCurrentProject$ = this.commentsSource.asObservable();
 
   public proposalsForCurrentProject$;
@@ -30,40 +27,7 @@ export class TermsConditionsService {
       return [...acc, el];
     }, []);
 
-  public commentsForCurrentProject$ = this.commentsSource.mergeMap(data => Observable.from(data))
-    .merge(this.addCommentsSource)
-    .withLatestFrom(this.termsConditionsForCurrentProject$)
-    .map(([item, terms]) => {
-      let correspondingTerm = terms.filter(term => term['loanTermID'] == item['loanTermID'])[0];
-      item['paragraph'] = correspondingTerm || {};
-      return item;
-    })
-    .withLatestFrom(this.participantService.participants$)
-    .map(([item, participants]) => {
-      let participant = participants.filter(part => part['participantKey'] == item['bankID'])[0];
-      item['participant'] = participant || {};
-      return item;
-    })
-    .map(item => {
-      if (typeof item['loanTermCommentDate'] == 'string') {
-        item['loanTermCommentDate'] = new Date(item['loanTermCommentDate']);
-      }
-
-      if (item['loanTermCommentDate'] == 'Invalid Date') {
-        item['loanTermCommentDate'] = new Date();
-      }
-      return item;
-    })
-    .filter(item => item['parentLoanTermCommentID'] == '' || item['parentLoanTermCommentID'] == null)
-    .scan((acc: any[], el) => {
-      return [...acc, el].sort((a: any, b: any) => {
-
-        let left = Number(new Date(a['loanTermCommentDate']));
-        let right = Number(new Date(b['loanTermCommentDate']));
-
-        return right - left;
-      })
-    }, []);
+  public commentsForCurrentProject$;
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint,
@@ -90,7 +54,7 @@ export class TermsConditionsService {
         this.termsConditionsForProjectSource.next(data);
       });
 
-    this.projectsService.project$
+    this.commentsForCurrentProject$ = this.projectsService.project$
       .switchMap(data => {
         if (data['loanRequestID']) {
           return this.getTermCommentsForProject(data['loanRequestID']);
@@ -105,9 +69,40 @@ export class TermsConditionsService {
         });
         return data;
       })
-      .subscribe(data => {
-        this.commentsSource.next(data);
-      });
+      .mergeMap(data => Observable.from(data))
+      .merge(this.addCommentsSource)
+      .withLatestFrom(this.termsConditionsForCurrentProject$)
+      .map(([item, terms]) => {
+        let correspondingTerm = terms.filter(term => term['loanTermID'] == item['loanTermID'])[0];
+        item['paragraph'] = correspondingTerm || {};
+        return item;
+      })
+      .withLatestFrom(this.participantService.participants$)
+      .map(([item, participants]) => {
+        let participant = participants.filter(part => part['participantKey'] == item['bankID'])[0];
+        item['participant'] = participant || {};
+        return item;
+      })
+      .map(item => {
+        if (typeof item['loanTermCommentDate'] == 'string') {
+          item['loanTermCommentDate'] = new Date(item['loanTermCommentDate']);
+        }
+
+        if (item['loanTermCommentDate'] == 'Invalid Date') {
+          item['loanTermCommentDate'] = new Date();
+        }
+        return item;
+      })
+      .filter(item => item['parentLoanTermCommentID'] == '' || item['parentLoanTermCommentID'] == null)
+      .scan((acc: any[], el) => {
+        return [...acc, el].sort((a: any, b: any) => {
+
+          let left = Number(new Date(a['loanTermCommentDate']));
+          let right = Number(new Date(b['loanTermCommentDate']));
+
+          return right - left;
+        })
+      }, []).share();
 
     this.proposalsForCurrentProject$ = this.projectsService.project$
       .switchMap(data => {

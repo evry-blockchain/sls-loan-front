@@ -17,7 +17,7 @@ export class ProjectNegotiationService {
     .mergeMap(data => Observable.from(data))
     .scan((acc: any[], el) => {
       return [...acc, el];
-    }, []);
+    }, []).share();
 
   constructor(private http: ApiGateway,
               @Inject('ApiEndpoint') private apiEndpoint) {
