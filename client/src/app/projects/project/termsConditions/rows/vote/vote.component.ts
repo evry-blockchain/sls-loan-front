@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import * as moment from 'moment/moment';
 import {TermsConditionsService} from "../../../../service/terms-conditions.service";
@@ -14,12 +14,12 @@ import {ProjectNegotiationService} from "../../../service/project-negotiation.se
   styleUrls: ['vote.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VoteRowComponent implements OnInit {
+export class VoteRowComponent implements OnInit, OnDestroy {
   @Input() paragraphs;
 
   private selectedTab: string = 'new';
   private proposalForm: FormGroup;
-  private proposals$: Observable<any>;
+  private proposals$;
   private negotiations$: Observable<any>;
   private user: Object;
   private project: Object;
@@ -57,17 +57,15 @@ export class VoteRowComponent implements OnInit {
       .mergeMap(data => {
         return Observable.from(data)
       })
-      .combineLatest(this.paragraphs)
-      .map(([proposal, paragraphs]) => {
+      .withLatestFrom(this.paragraphs)
+      .map(([proposal, paragraphs])=> {
         proposal['paragraph'] = paragraphs.find(item => item['loanTermID'] == proposal['loanTermID']);
-        return proposal;
-      })
-      .map(proposal => {
+
         proposal['acceptedPercentage'] = 0;
         proposal['rejectedPercentage'] = 0;
         //TODO Dmytro: Maybe refactor, dunno
         proposal['votes'].subscribe(votes => {
-          this.negotiations$.subscribe(negotiations => {
+          this.negotiations$.take(1).subscribe(negotiations => {
             let totalProjectParticipantsCount = negotiations.length + 1;
             let accepted = votes.filter(item => item['loanTermVoteStatus'] == 'Accepted' && item['bankID'] !== '').length;
             let rejected = votes.filter(item => item['loanTermVoteStatus'] == 'Rejected' && item['bankID'] !== '').length;
@@ -80,14 +78,13 @@ export class VoteRowComponent implements OnInit {
         return proposal;
       })
       .scan((acc: any[], el) => {
-        let elem = acc.find(item => item == el);
+        let elem = acc.find(item => item['loanTermProposalID'] == el['loanTermProposalID']);
 
-        if(!!elem) {
+        if (!!elem) {
           return acc;
         }
         return [...acc, el];
-      }, [])
-      .share();
+      }, []);
 
     this.paragraphs.subscribe(data => {
       this.paragraphsData = data;
@@ -173,6 +170,11 @@ export class VoteRowComponent implements OnInit {
   proposalRejected(proposal) {
     return this._votesScanner(item => item['bankID'] == this.user['participantKey']
     && item['loanTermVoteStatus'] == 'Rejected')(proposal['votes']);
+  }
+
+  ngOnDestroy() {
+    console.log('Vote component destroyed!');
+    console.log(this.proposals$);
   }
 
 }

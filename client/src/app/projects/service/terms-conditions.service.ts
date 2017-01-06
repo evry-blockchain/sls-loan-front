@@ -1,5 +1,5 @@
 import {Injectable, Inject} from "@angular/core";
-import {BehaviorSubject, Subject, Observable} from "rxjs";
+import {BehaviorSubject, Subject, Observable, ReplaySubject} from "rxjs";
 import {ApiGateway} from "../../api-gateway.service";
 import {ProjectsService} from "./projects.service";
 import {ParticipantService} from "../../participants/service/participants.service";
@@ -19,14 +19,10 @@ export class TermsConditionsService {
 
   private commentsSource = new BehaviorSubject([]);
 
-  private proposalsForCurrentProjectSource = new BehaviorSubject([]);
+  private proposalsForCurrentProjectSource = new ReplaySubject(1);
   // public commentsForCurrentProject$ = this.commentsSource.asObservable();
 
-  public proposalsForCurrentProject$ = this.proposalsForCurrentProjectSource.mergeMap(data => Observable.from(data))
-    .merge(this.addProposalSource)
-    .scan((acc: any[], el) => {
-      return [...acc, el];
-    }, []);
+  public proposalsForCurrentProject$;
 
   public termsConditionsForCurrentProject$ = this.termsConditionsForProjectSource.mergeMap(data => Observable.from(data))
     .merge(this.addTermsSource)
@@ -58,7 +54,7 @@ export class TermsConditionsService {
       }
       return item;
     })
-    .filter(item => item['parentLoanTermCommentID'] == '')
+    .filter(item => item['parentLoanTermCommentID'] == '' || item['parentLoanTermCommentID'] == null)
     .scan((acc: any[], el) => {
       return [...acc, el].sort((a: any, b: any) => {
 
@@ -113,7 +109,7 @@ export class TermsConditionsService {
         this.commentsSource.next(data);
       });
 
-    this.projectsService.project$
+    this.proposalsForCurrentProject$ = this.projectsService.project$
       .switchMap(data => {
         if (data['loanRequestID']) {
           return this.getProposalsForProject(data['loanRequestID']);
@@ -129,12 +125,10 @@ export class TermsConditionsService {
         });
         return item;
       })
+      .merge(this.addProposalSource)
       .scan((acc: any[], el) => {
         return [...acc, el]
-      }, [])
-      .subscribe(data => {
-        this.proposalsForCurrentProjectSource.next(data);
-      });
+      }, []).share();
   }
 
   query(filter) {
