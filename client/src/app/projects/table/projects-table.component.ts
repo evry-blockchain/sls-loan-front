@@ -1,7 +1,7 @@
 /**
  * Created by Oleksandr.Khymenko on 06.10.2016.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
 import {ProjectsService} from "../service/projects.service";
 import {Project} from "../project/model/project.model";
@@ -15,7 +15,7 @@ import {Observable} from "rxjs";
   templateUrl: 'projects-table.component.html',
   styleUrls: ['./projects-table.component.scss']
 })
-export class ProjectsTableComponent implements OnInit {
+export class ProjectsTableComponent implements OnInit, OnDestroy {
 
   public projects = [];
 
@@ -27,12 +27,13 @@ export class ProjectsTableComponent implements OnInit {
 
   ngOnInit() {
     this.userService.user$
-      .mergeMap(user => {
+      .switchMap(user => {
         if (Object.keys(user).length === 0 && user.constructor === Object) {
           return Observable.from([])
         }
         return this.projectService.query(user['participantKey']);
       })
+      .distinctUntilChanged()
       .subscribe(data => {
         this.projects = data;
       });
@@ -41,6 +42,10 @@ export class ProjectsTableComponent implements OnInit {
 
   goToProject(id) {
     this.router.navigate(['/projects', id]);
+  }
+
+  ngOnDestroy() {
+    this.projects = [];
   }
 
 }
