@@ -1,4 +1,4 @@
-<section class="payments-table">
+<section class="payments-table row">
   <div class="offset-md-1 col-md-10">
     <datatable
       class='material striped overview-datatable'
@@ -10,7 +10,6 @@
         </template>
       </datatable-column>
       <datatable-column name="Status" prop="negotiationStatus">
-
         <template let-row="row" let-value="value">
           <div [ngSwitch]="value">
             <div *ngSwitchCase="'INTERESTED'">
@@ -42,7 +41,19 @@
           {{value}}
         </template>
       </datatable-column>
+      <datatable-column name="Amount">
+          <template let-value="value">
+            <span *ngIf="editingAmounts == false">{{value}}</span>
+            <span *ngIf="editingAmounts == true">
+              <input type="text" class="form-control" value="{{value}}" />
+            </span>
+          </template>
+      </datatable-column>
     </datatable>
+  </div>
+  <div class="col-md-1" *ngIf="isBankOwner">
+    <button class="btn btn-default" *ngIf="editingAmounts == false" (click)="editAmounts()">Edit Shares</button>
+    <button class="btn btn-primary" *ngIf="editingAmounts == true" (click)="saveAmounts()">Save</button>
   </div>
 </section>
 <button class="btn offset-md-4 col-md-4 btn-success send-invitation-btn mt-3" [routerLink]="['../invitation/create']"><span>SEND MORE INVITATIONS </span></button>

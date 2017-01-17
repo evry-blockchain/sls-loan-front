@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {ColumnMode, TableOptions} from "angular2-data-table";
 import {InvitationService} from "../../../invitation/service/invitation.service";
 import {ProjectNegotiationService} from "../../../service/project-negotiation.service";
@@ -13,6 +13,8 @@ import {ParticipantService} from "../../../../../participants/service/participan
   styleUrls: ['./overview-invitation-status.component.scss']
 })
 export class OverviewInvitationStatusComponent implements OnInit {
+  @Input() isBankOwner;
+  private editingAmounts = false;
 
   rows = [];
 
@@ -42,9 +44,9 @@ export class OverviewInvitationStatusComponent implements OnInit {
         negotiation['bankName'] = this.participantsService.getParticipantName(negotiation['participantBankID'], participants);
         return negotiation;
       }).scan((acc, value) => {
-      var elem = acc.find(elem => {
+      let elem = acc.find(elem => {
         return elem['loanNegotiationID'] === value['loanNegotiationID']
-      })
+      });
 
       if (!!elem) {
         return acc;
@@ -66,6 +68,15 @@ export class OverviewInvitationStatusComponent implements OnInit {
       };
       return this.negotiationService.query(filter);
     });
+  }
+  editAmounts() {
+    console.log('editing amounts!');
+    this.editingAmounts = true;
+  }
+
+  saveAmounts() {
+    console.log('editing amounts!');
+    this.editingAmounts = false;
   }
 }
 

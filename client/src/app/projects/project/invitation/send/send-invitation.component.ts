@@ -60,7 +60,7 @@ export class SendInvitationComponent implements OnInit {
           let negotiation = {
             "loanRequestID": this.project['loanRequestID'],
             "participantBankID": company['participantKey'],
-            "amount": "2000",
+            "amount": "",
             "negotiationStatus": 'INVITED',
             'participantBankComment': '',
             'date': date
