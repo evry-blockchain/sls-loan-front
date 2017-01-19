@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {Router, ActivatedRoute} from "@angular/router";
 import {ProjectsService} from "../../../../service/projects.service";
 import {ParticipantService} from "../../../../../participants/service/participants.service";
+import {ToastOptions, ToastData, ToastyService} from "ng2-toasty";
 
 @Component({
   selector: 'overview-invitation-status',
@@ -25,7 +26,8 @@ export class OverviewInvitationStatusComponent implements OnInit {
     rowHeight: 'auto'
   });
 
-  constructor(private invitationService: InvitationService,
+  constructor(private toastyService: ToastyService,
+              private invitationService: InvitationService,
               private negotiationService: ProjectNegotiationService,
               private participantsService: ParticipantService,
               private router: Router,
@@ -70,13 +72,39 @@ export class OverviewInvitationStatusComponent implements OnInit {
     });
   }
   editAmounts() {
-    console.log('editing amounts!');
     this.editingAmounts = true;
   }
 
   saveAmounts() {
-    console.log('editing amounts!');
+    let negotiationsSaving = [];
+    this.rows.forEach(item => {
+      negotiationsSaving.push(this.negotiationService.saveLoanNegotiation(item));
+    });
+
+    Observable.forkJoin(negotiationsSaving).subscribe(() => {
+
+      let toastOptions: ToastOptions = {
+        title: "Success",
+        msg: "Amounts updated!",
+        showClose: true,
+        timeout: 10000,
+        theme: 'default',
+        onAdd: (toast: ToastData) => {
+        },
+        onRemove: function (toast: ToastData) {
+        }
+      };
+
+      this.toastyService.success(toastOptions);
+      //Add event emitter to push values to the top
+    });
+
+
     this.editingAmounts = false;
+  }
+
+  updateValue(event, cell, cellValue, row) {
+    this.rows[row.$$index][cell] = event.target.value;
   }
 }
 
