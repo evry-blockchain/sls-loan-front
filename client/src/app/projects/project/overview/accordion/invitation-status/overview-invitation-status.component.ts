@@ -18,6 +18,7 @@ export class OverviewInvitationStatusComponent implements OnInit {
   private editingAmounts = false;
 
   rows = [];
+  filter = {};
 
   options = new TableOptions({
     columnMode: ColumnMode.force,
@@ -63,12 +64,12 @@ export class OverviewInvitationStatusComponent implements OnInit {
     this.route.parent.params.subscribe(data => {
       let id = +data['id'];
 
-      let filter = {
+      this.filter = {
         filter: {
           loanRequestID: id
         }
       };
-      return this.negotiationService.query(filter);
+      return this.negotiationService.query(this.filter);
     });
   }
   editAmounts() {
@@ -97,8 +98,11 @@ export class OverviewInvitationStatusComponent implements OnInit {
 
       this.toastyService.success(toastOptions);
       //Add event emitter to push values to the top
+
+
     });
 
+    this.negotiationService.query(this.filter);
 
     this.editingAmounts = false;
   }

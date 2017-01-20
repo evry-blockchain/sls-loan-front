@@ -15,16 +15,21 @@
     </div>
 
     <div class="progress" style="height: 40px;">
-      <div class="progress-bar progress-bar-warning"
+      <div
+        *ngIf="barStats.acceptedPercentage > 0"
+        [ngStyle]="{width: barStats.acceptedPercentage+'%'}"
+        class="progress-bar progress-bar-warning"
            style="background: #113d57;
-           width:40%;
            display: flex;
            font-size: large;
             justify-content: center" role="progressbar">
         <span style="align-self: center;">Committed</span>
 
       </div>
-      <div class="progress-bar progress-bar-danger" role="progressbar" style="width:50%; background-color: #a3c0c0;
+      <div
+        *ngIf="barStats.interestedPercentage > 0"
+        [ngStyle]="{width: barStats.interestedPercentage+'%'}"
+        class="progress-bar progress-bar-danger" role="progressbar" style="background-color: #a3c0c0;
        display: flex;
        font-size: large;
        justify-content: center">
@@ -32,8 +37,9 @@
 
       </div>
       <div class="progress-bar progress-bar-success" role="progressbar"
-           style="width:10%;
-            font-size: large;
+           *ngIf="barStats.leftPercentage > 0"
+           [ngStyle]="{width: barStats.leftPercentage+'%'}"
+           style="font-size: large;
             background-color: #d8d8d8;
             display: flex;
             justify-content: center">
