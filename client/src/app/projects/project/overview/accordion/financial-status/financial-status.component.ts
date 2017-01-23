@@ -3,6 +3,7 @@ import {ParticipantService} from "../../../../../participants/service/participan
 import {ProjectNegotiationService} from "../../../service/project-negotiation.service";
 import {Observable} from "rxjs";
 import {ProjectsService} from "../../../../service/projects.service";
+import * as _ from "lodash";
 
 @Component({
   selector: 'overview-financial-status',
@@ -40,7 +41,6 @@ export class OverviewFinancialStatusComponent implements OnInit {
 
         if (this.pieChartLabels.indexOf(negotiation['bankName']) === -1) {
           this.pieChartLabels.push(negotiation['bankName']);
-          this.pieChartData.push(negotiation['amount']);
         }
 
         return negotiation;
@@ -57,6 +57,11 @@ export class OverviewFinancialStatusComponent implements OnInit {
       }, []);
 
     localNegotiations$.subscribe(negotiations => {
+      let localChartData = negotiations.map(item => item['amount']);
+      if (!_.isEqual(localChartData, this.pieChartData)) {
+        this.pieChartData = localChartData;
+      }
+
       this.rows = negotiations;
     });
 
@@ -77,15 +82,14 @@ export class OverviewFinancialStatusComponent implements OnInit {
         return acc;
       }, 0);
 
-      stats['left'] = stats['totalAmount'] - stats['accepted'] + stats['interested'];
+      stats['left'] = stats['totalAmount'] - stats['accepted'] - stats['interested'];
 
-      stats['acceptedPercentage'] = stats['accepted']/stats['totalAmount']*100;
-      stats['interestedPercentage'] = stats['interested']/stats['totalAmount']*100;
-      stats['leftPercentage'] = stats['left']/stats['totalAmount']*100;
+      stats['acceptedPercentage'] = stats['accepted'] / stats['totalAmount'] * 100;
+      stats['interestedPercentage'] = stats['interested'] / stats['totalAmount'] * 100;
+      stats['leftPercentage'] = stats['left'] / stats['totalAmount'] * 100;
 
       return stats;
     }).subscribe(data => {
-      console.log(data);
       this.barStats = data;
     });
   }

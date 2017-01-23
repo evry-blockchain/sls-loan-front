@@ -99,7 +99,7 @@ export class OverviewInvitationStatusComponent implements OnInit {
       this.toastyService.success(toastOptions);
       //Add event emitter to push values to the top
 
-
+      this.negotiationService.sourceUpdate(this.rows);
     });
 
     this.negotiationService.query(this.filter);
