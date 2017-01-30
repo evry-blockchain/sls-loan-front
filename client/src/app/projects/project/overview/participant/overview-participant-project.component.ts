@@ -1,9 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProjectsService} from "../../../service/projects.service";
 import {ParticipantService} from "../../../../participants/service/participants.service";
 import {ProjectNegotiationService} from "../../service/project-negotiation.service";
 import {Observable} from "rxjs";
 import {UserService} from "../../../../user/user.service";
+import * as _ from "lodash";
 
 @Component({
   selector: 'overview-participant-project-information',
@@ -16,16 +17,15 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
   public projectForNegotiation = {};
   public pieChartLabels: string[] = ["My shares", 'Other Shares'];
   public pieChartData: number[] = [];
-  public pieChartType: string = 'pie';
-  private negotiation = {};
-  private negotiation$;
-  public barChartOptions = {
+  public chartType: string = 'pie';
+  public chartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
     maintainAspectRatio: false,
   };
 
-  // private negotiations;
+  private negotiation = {};
+  private negotiation$;
 
   constructor(private projectService: ProjectsService,
               private participantService: ParticipantService,
@@ -57,8 +57,16 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
 
       return this.negotiation$;
     }).subscribe(negotiation => {
-      this.pieChartData[0] = +negotiation['amount']
-      this.pieChartData[1] = parseFloat(this.projectForNegotiation['loanSharesAmount'].replace(/[a-z A-Z]/g, ''));
+      //this here is needed for chart-refresh, we need to reference to a new array each time we update the data
+      let chartData = [];
+      if(typeof negotiation['amount'] !== 'undefined') {
+        chartData.push(+negotiation['amount']);
+        chartData.push(parseFloat(this.projectForNegotiation['loanSharesAmount'].replace(/[a-z A-Z]/g, '')));
+      }
+      if(!_.isEqual(chartData, this.pieChartData)) {
+        this.pieChartData = chartData;
+      }
+
       negotiation['amount'] = +negotiation['amount'];
       this.negotiation = negotiation;
     })
