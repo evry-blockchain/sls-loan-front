@@ -71,7 +71,6 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
       this.negotiation = negotiation;
     })
 
-
   }
 
 }
