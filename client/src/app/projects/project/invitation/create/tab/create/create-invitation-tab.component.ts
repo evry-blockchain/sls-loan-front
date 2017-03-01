@@ -77,7 +77,7 @@ export class CreateInvitationTabComponent implements OnInit {
       convenants: ['']
     });
 
-    this.invitationForm.valueChanges.subscribe((data) => {
+    this.invitationForm.valueChanges.debounceTime(1000).subscribe((data) => {
       this.projectsService.project$.take(1).subscribe((project) => {
         // let c = {...project, data}; TODO: when available
         let c = Object.assign({}, project, data);
