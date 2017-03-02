@@ -74,7 +74,10 @@ export class SendInvitationComponent implements OnInit {
         this.companies.forEach((company) => {
           this.projectService.removeInvitee(company);
         });
-        this.router.navigate(['../../../overview'], {relativeTo: this.route});
+        setTimeout(() => {
+          this.router.navigate(['../../../overview'], {relativeTo: this.route});
+        }, 2000);
+
       });
 
       let toastOptions: ToastOptions = {
