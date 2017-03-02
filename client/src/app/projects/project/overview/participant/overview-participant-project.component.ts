@@ -45,7 +45,7 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
       this.project = project;
     });
 
-    this.projectService.project$.mergeMap(data => {
+    this.projectService.project$.take(1).mergeMap(data => {
       this.projectForNegotiation = data;
       return this.userService.user$;
     }).mergeMap(user => {
@@ -61,7 +61,7 @@ export class OverviewParticipantProjectInformationComponent implements OnInit {
       let chartData = [];
       if(typeof negotiation['amount'] !== 'undefined') {
         chartData.push(+negotiation['amount']);
-        chartData.push(parseFloat(this.projectForNegotiation['loanSharesAmount'].replace(/[a-z A-Z]/g, '')));
+        chartData.push(parseFloat(this.projectForNegotiation['loanSharesAmount'].replace(/[a-z A-Z]/g, '')) - +negotiation['amount']);
       }
       if(!_.isEqual(chartData, this.pieChartData)) {
         this.pieChartData = chartData;
