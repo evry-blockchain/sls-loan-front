@@ -31,7 +31,7 @@ export class ParticipantService {
     },
     {
       name: 'SpareBank 1 SR-BANK',
-      image: 'img/bankLogos/sparebank.jpg'
+      image: 'img/bankLogos/sp-sr-bank.png'
     },
     {
       name: 'DNB ASA',
@@ -44,6 +44,22 @@ export class ParticipantService {
     {
       name: 'Bank of Paper, Wilson & Bluemine LTD',
       image: 'https://www.cebglobal.com/blogs/files/2014/01/PNCIcon-150x150.jpg'
+    },
+    {
+      name: 'Skandinaviska Enskilda Banken AB',
+      image: 'img/bankLogos/seb.png'
+    },
+    {
+      name: 'SpareBank 1 Hedmark',
+      image: 'img/bankLogos/sp-hedmark.jpg'
+    },
+    {
+      name: 'SpareBank 1 Modum',
+      image: 'img/bankLogos/sp-modum.jpg'
+    },
+    {
+      name: 'SpareBank 1 Nord-Norge',
+      image: 'img/bankLogos/sp-nordnorge.jpg'
     }
   ];
 
